@@ -1,1 +1,0 @@
-org.springframework.boot.diagnostics.FailureAnalyzer=com.wildbeeslabs.sensiblemetrics.supersolr.handler.DefaultFailureAnalyzer
