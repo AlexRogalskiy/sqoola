@@ -25,7 +25,7 @@ THE SOFTWARE.
 <configuration debug="false" scan="true">
 
     <property name="LOG_PATH" value="${LOG_TEMP:-${java.io.tmpdir:-/tmp}}"/>
-    <property name="LOG_HOME" value="${LOG_PATH}/logs"/>
+    <property name="LOG_ARCHIVE" value="${LOG_PATH}/logs"/>
 
     <!-- file audit appender configurations -->
     <property name="FILE_AUDIT_NAME" value="application"/>
