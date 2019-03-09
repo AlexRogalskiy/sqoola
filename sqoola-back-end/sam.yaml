@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS Serverless Spring Boot API - com.wildbeeslabs.api.cascoder.common::cascoder-common
+Globals:
+  Api:
+    EndpointConfiguration: REGIONAL
+
+Resources:
+  CascoderCommonFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.wildbeeslabs.api.cascoder.common.handler.StreamLambdaHandler::handleRequest
+      Runtime: java8
+      CodeUri: target/cascoder-common-1.0-SNAPSHOT.jar
+      MemorySize: 512
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 30
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+
+Outputs:
+  CascoderCommonApi:
+    Description: URLConstraint for application
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
+    Export:
+      Name: CascoderCommonApi
