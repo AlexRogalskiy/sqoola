@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.util.Locale;
 
@@ -49,7 +50,7 @@ public class AppConfig {
     }
 
     @Bean
-    public ObjectMapper customObjectMapper() {
+    public ObjectMapper jsonObjectMapper() {
         final ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setDefaultMergeable(Boolean.TRUE);
         objectMapper.setLocale(Locale.getDefault());
@@ -70,5 +71,13 @@ public class AppConfig {
         objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
         //objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         return objectMapper;
+    }
+
+    @Bean
+    public ObjectMapper jacksonObjectMapper() {
+        final Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+        builder.indentOutput(true);
+        builder.autoDetectFields(true);
+        return builder.build();
     }
 }

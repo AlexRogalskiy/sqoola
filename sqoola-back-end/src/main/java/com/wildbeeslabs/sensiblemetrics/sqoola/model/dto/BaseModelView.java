@@ -24,6 +24,7 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -49,8 +50,9 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JacksonXmlRootElement(localName = ExposableBaseModelView.VIEW_ID)
+@JacksonXmlRootElement(localName = ExposableBaseModelView.VIEW_ID, namespace="io.sqoola")
 @ApiModel(value = ExposableBaseModelView.VIEW_ID, description = "All details about document")
 public abstract class BaseModelView<ID extends Serializable> extends AuditModelView implements ExposableBaseModelView {
 

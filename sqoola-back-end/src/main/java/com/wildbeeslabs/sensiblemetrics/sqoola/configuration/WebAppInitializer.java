@@ -21,25 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service;
+package com.wildbeeslabs.sensiblemetrics.sqoola.configuration;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-/**
- * {@link UserDetailsService} service declaration
- */
-public interface AuthUserService extends UserDetailsService {
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-    /**
-     * Default service ID
-     */
-    String SERVICE_ID = "authUserService";
-    /**
-     * Default role delimiter
-     */
-    String DEFAULT_ROLE_DELIMITER = "_";
-    /**
-     * Default role prefix
-     */
-    String DEFAULT_ROLE_PREFIX = "ROLE";
-}
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{WebMvcConfig.class};
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return null;
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+} 

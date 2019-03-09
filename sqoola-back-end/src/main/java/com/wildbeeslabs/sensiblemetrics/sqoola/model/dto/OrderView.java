@@ -55,7 +55,7 @@ import static com.wildbeeslabs.sensiblemetrics.sqoola.model.dto.interfaces.Expos
     TITLE_FIELD_NAME,
     DESCRIPTION_FIELD_NAME
 }, alphabetic = true)
-@JacksonXmlRootElement(localName = ExposableOrderView.VIEW_ID)
+@JacksonXmlRootElement(localName = ExposableOrderView.VIEW_ID, namespace="io.sqoola")
 @ApiModel(value = ExposableOrderView.VIEW_ID, description = "All details about order document")
 public class OrderView extends BaseModelView<String> implements ExposableOrderView {
 

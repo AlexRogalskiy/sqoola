@@ -35,7 +35,7 @@ public interface AccountService extends BaseService<Account, Long> {
     /**
      * Default service ID
      */
-    String SERVICE_ID = "AccountService";
+    String SERVICE_ID = "accountService";
 
     Optional<Account> findByUsername(final String username);
 }

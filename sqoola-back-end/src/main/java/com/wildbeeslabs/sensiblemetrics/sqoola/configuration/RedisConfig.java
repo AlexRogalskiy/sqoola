@@ -57,7 +57,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     private Environment env;
 
     @Autowired
-    private ObjectMapper customObjectMapper;
+    private ObjectMapper jsonObjectMapper;
 
     @Bean
     @Override
@@ -77,7 +77,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     public StringRedisTemplate redisTemplate() {
         final StringRedisTemplate template = new StringRedisTemplate(jedisConnectionFactory());
         final Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
-        jackson2JsonRedisSerializer.setObjectMapper(customObjectMapper);
+        jackson2JsonRedisSerializer.setObjectMapper(jsonObjectMapper);
         template.setEnableTransactionSupport(true);
         template.setValueSerializer(jackson2JsonRedisSerializer);
         template.afterPropertiesSet();

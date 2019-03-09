@@ -30,6 +30,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -61,6 +64,29 @@ public class WebMvcConfig implements WebMvcConfigurer {
         resourceBundleMessageSource.setUseCodeAsDefaultMessage(true);
         resourceBundleMessageSource.setFallbackToSystemLocale(true);
         return resourceBundleMessageSource;
+    }
+
+    @Bean
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+        final MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+        mappingJackson2HttpMessageConverter.setPrettyPrint(true);
+        mappingJackson2HttpMessageConverter.setPrefixJson(true);
+        mappingJackson2HttpMessageConverter.setDefaultCharset(StandardCharsets.UTF_8);
+        return mappingJackson2HttpMessageConverter;
+    }
+
+    @Bean
+    public MappingJackson2XmlHttpMessageConverter mappingJackson2XmlHttpMessageConverter() {
+        final MappingJackson2XmlHttpMessageConverter mappingJackson2XmlHttpMessageConverter = new MappingJackson2XmlHttpMessageConverter();
+        mappingJackson2XmlHttpMessageConverter.setPrettyPrint(true);
+        mappingJackson2XmlHttpMessageConverter.setDefaultCharset(StandardCharsets.UTF_8);
+        return mappingJackson2XmlHttpMessageConverter;
+    }
+
+    @Override
+    public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
+        converters.add(mappingJackson2HttpMessageConverter());
+        converters.add(mappingJackson2XmlHttpMessageConverter());
     }
 
     @Override

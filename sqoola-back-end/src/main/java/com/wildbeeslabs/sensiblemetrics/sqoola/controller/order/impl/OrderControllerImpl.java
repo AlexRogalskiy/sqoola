@@ -23,14 +23,13 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.controller.order.impl;
 
+import com.wildbeeslabs.sensiblemetrics.sqoola.controller.impl.BaseModelControllerImpl;
 import com.wildbeeslabs.sensiblemetrics.sqoola.controller.order.OrderController;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Order;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dto.OrderView;
-import com.wildbeeslabs.sensiblemetrics.supersolr.controller.impl.BaseDocumentSearchControllerImpl;
 import com.wildbeeslabs.sensiblemetrics.supersolr.controller.order.OrderSearchController;
 import com.wildbeeslabs.sensiblemetrics.supersolr.exception.EmptyContentException;
 import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableOrder;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.service.OrderSearchService;
 import io.swagger.annotations.*;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -74,6 +73,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
             })
     })
 @Secured("ROLE_MANAGER")
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class OrderControllerImpl extends BaseModelControllerImpl<Order, OrderView, String> implements OrderController {
 
     @Autowired

@@ -27,6 +27,7 @@ import com.wildbeeslabs.sensiblemetrics.sqoola.security.SecurityAccessDeniedHand
 import com.wildbeeslabs.sensiblemetrics.sqoola.security.SecurityAuditorAwareHandler;
 import com.wildbeeslabs.sensiblemetrics.sqoola.security.SecurityAuthenticationEntryPoint;
 import com.wildbeeslabs.sensiblemetrics.sqoola.security.SecurityAuthenticationSuccessHandler;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -60,6 +61,9 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 //@ImportResource({ "classpath:spring-security.config.xml" })
 @Order(SecurityProperties.BASIC_AUTH_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private AuthUserService authUserService;
 
     @Bean
     @Override
@@ -119,6 +123,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //            .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("MANAGER").and()
             .headers().cacheControl().disable().and()
             .csrf().disable();
+
+//        http.csrf().disable()
+//            .authorizeRequests()
+//            .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
+//            .and().httpBasic().realmName("MY APP REALM")
+//            .authenticationEntryPoint(authenticationEntryPoint());
     }
 
     @Bean
@@ -132,6 +142,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
+    }
+
+    @Autowired
+    public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(authUserService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

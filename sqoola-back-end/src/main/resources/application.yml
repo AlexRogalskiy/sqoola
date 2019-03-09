@@ -7,6 +7,7 @@ springfox:
     swagger:
       v2:
         path: classpath:securityDefinition.json
+
 spring:
   cache:
     type: CAFFEINE
@@ -25,12 +26,15 @@ spring:
     database: POSTGRESQL
     properties:
       hibernate:
+        id:
+          new_generator_mappings: true
         cache:
           use_query_cache: false
           use_second_level_cache: false
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         ddl-auto: none
+        format_sql: true
         jdbc:
           lob:
             non_contextual_creation: true
@@ -56,12 +60,14 @@ spring:
     test-on-connect: true
     test-on-return: true
     test-while-idle: true
+
 hibernate:
   connection:
     charSet:UTF-8
     characterEncoding:UTF-8
   hbm2ddl:
     auto: create-drop
+
 logging:
   config: classpath:logback.xml
   file: logs/application.log
@@ -70,10 +76,12 @@ logging:
     org.springframework: DEBUG
     org.springframework.web: DEBUG
     org.hibernate: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     com.wildbeeslabs.sensiblemetrics.sqoola: DEBUG
   pattern:
     console: "%d{HH:mm:ss.SSS} [%highlight(%-5.5level)] %cyan(%-56.56logger{56}) - %msg \\(%F:%L\\)#%M%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
 server:
   email: dev@sqoola.com
   port: 8080
@@ -93,6 +101,7 @@ server:
     enabled: false
     key-store: classpath:main.jks
     key-password: secret
+
 management:
   info:
     git:
@@ -107,8 +116,10 @@ spring:
     label: © 2019 Powered by Sqoola
   main:
     banner-mode: "off"
+
 server:
   email: prod@sqoola.com
+
 logging:
   file: logs/prod_app.log
   level:
@@ -142,24 +153,11 @@ spring:
     banner-mode: "console"
   jmx:
     enabled: false
-server:
-  email: local@test.com
-logging:
-  file: logs/dev_app.log
-  level:
-    ROOT: WARN
-    org.springframework: WARN
-    org.springframework.web: WARN
-    org.hibernate: WARN
-    com.wildbeeslabs.sensiblemetrics.sqoola: WARN
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-sqoola:
   datasource:
     driver: org.postgresql.Driver
     #driver-class-name:  org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/sqoola_db
+    type: com.zaxxer.hikari.HikariDataSource
     username: postgres
     password: postgres
     dialect: org.hibernate.dialect.PostgreSQL9Dialect
@@ -206,6 +204,18 @@ sqoola:
     initialPoolSize: 10
     maxIdleTime: 180000
     testConnectionOnCheckin: true
+    hikari:
+      dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+      registerMbeans: true
+      poolName: HIKARI_CP
+      minimumIdle: 5
+      maximumPoolSize: 25
+      idleTimeout: 30000
+      connectionTimeout: 20000
+      maxLifetime: 1200000
+      isolateInternalQueries: true
+      autoCommit: true
+      #leakDetectionThreshold: 60000
     hibernate:
       connection:
         characterEncoding: UTF-8
@@ -216,15 +226,6 @@ sqoola:
         poolSize: 50
         autocommit: true
         releaseMode: on_close
-      hikari:
-        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
-        registerMbeans: true
-        poolName: HIKARI_CP
-        minimumIdle: 5
-        maximumPoolSize: 25
-        idleTimeout: 30000
-        isolateInternalQueries: true
-        #leakDetectionThreshold: 60000
       dialect: org.hibernate.dialect.PostgreSQL9Dialect
       currentSessionContextClass: org.hibernate.context.internal.ThreadLocalSessionContext #org.hibernate.context.ManagedSessionContext
       hbm2ddl:
@@ -233,8 +234,8 @@ sqoola:
         importFiles: dml.sql
       ejb.namingStrategy: org.hibernate.cfg.ImprovedNamingStrategy
       archive.autodetection: class,hbm
-      showSql: true
-      formatSql: true
+      show_sql: true
+      format_sql: true
       useSqlComments: true
       maxFetchDepth: 3
       defaultBatchFetchSize: 30
@@ -242,7 +243,7 @@ sqoola:
       enable_lazy_load_no_trans: true
       globallyQuotedIdentifiers: false
       id:
-        newGeneratorMappings: true
+        new_generator_mappings: true
       transaction:
         flush_before_completion: true
         autoCloseSession: true
@@ -299,3 +300,18 @@ sqoola:
     validation:
       location: classpath:constraints
       timeout: 3600
+
+server:
+  email: local@test.com
+
+logging:
+  file: logs/dev_app.log
+  level:
+    ROOT: WARN
+    org.springframework: WARN
+    org.springframework.web: WARN
+    org.hibernate: WARN
+    com.wildbeeslabs.sensiblemetrics.sqoola: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

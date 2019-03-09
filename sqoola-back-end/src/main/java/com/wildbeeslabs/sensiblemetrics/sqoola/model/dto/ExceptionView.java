@@ -60,7 +60,7 @@ import static com.wildbeeslabs.sensiblemetrics.sqoola.utility.DateUtils.DEFAULT_
     MESSAGE_FIELD_NAME,
     TIMESTAMP_FIELD_NAME
 }, alphabetic = true)
-@JacksonXmlRootElement(localName = ExposableExceptionView.VIEW_ID)
+@JacksonXmlRootElement(localName = ExposableExceptionView.VIEW_ID, namespace="io.sqoola")
 @ApiModel(value = ExposableExceptionView.VIEW_ID, description = "All details about exception document")
 public class ExceptionView implements ExposableExceptionView, Serializable {
 

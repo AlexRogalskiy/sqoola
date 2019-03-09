@@ -60,7 +60,7 @@ import static com.wildbeeslabs.sensiblemetrics.sqoola.utility.DateUtils.DEFAULT_
     allowGetters = true,
     ignoreUnknown = true
 )
-@JacksonXmlRootElement(localName = ExposableAuditModelView.VIEW_ID)
+@JacksonXmlRootElement(localName = ExposableAuditModelView.VIEW_ID, namespace="io.sqoola")
 @ApiModel(value = ExposableAuditModelView.VIEW_ID, description = "All audit details about document")
 public abstract class AuditModelView implements ExposableAuditModelView, Serializable {
 

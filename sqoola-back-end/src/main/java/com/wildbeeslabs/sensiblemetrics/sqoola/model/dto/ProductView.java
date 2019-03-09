@@ -74,7 +74,7 @@ import static com.wildbeeslabs.sensiblemetrics.sqoola.model.dto.interfaces.Expos
     CATEGORIES_FIELD_NAME,
     MAIN_CATEGORIES_FIELD_NAME
 }, alphabetic = true)
-@JacksonXmlRootElement(localName = ExposableProductView.VIEW_ID)
+@JacksonXmlRootElement(localName = ExposableProductView.VIEW_ID, namespace="io.sqoola")
 @ApiModel(value = ExposableProductView.VIEW_ID, description = "All details about product document")
 public class ProductView extends BaseModelView<String> implements ExposableProductView {
 
