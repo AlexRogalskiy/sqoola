@@ -54,7 +54,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.StringUtils.getString;
+import static com.wildbeeslabs.sensiblemetrics.sqoola.common.utility.StringUtils.getString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsNull.nullValue;

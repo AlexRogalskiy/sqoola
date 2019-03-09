@@ -262,6 +262,14 @@ public class CategorySearchControllerImplTest extends BaseTest {
             .andExpect(status().isUnauthorized());
     }
 
+    @Test
+    @DisplayName("Test unauthorized access")
+    public void accessSecuredResourceUnauthenticatedThenRedirectsToLogin() throws Exception {
+        this.mockMvc.perform(get("/hello"))
+            .andExpect(status().is3xxRedirection())
+            .andExpect(redirectedUrlPattern("**/login"));
+    }
+
     @SuppressWarnings("unchecked")
     private List<Category> getSampleData() {
         if (getCategoryService().find("01").isPresent()) {

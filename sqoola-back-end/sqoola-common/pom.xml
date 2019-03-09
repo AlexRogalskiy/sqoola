@@ -674,6 +674,8 @@
                         <version>3.0.1</version>
                         <configuration>
                             <additionalJOption>-Xdoclint:none</additionalJOption>
+                            <useStandardDocletOptions>true</useStandardDocletOptions>
+                            <overview>${project.basedir}/src/main/javadoc/overview.html</overview>
                         </configuration>
                         <executions>
                             <execution>

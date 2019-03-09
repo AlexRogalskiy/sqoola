@@ -112,10 +112,10 @@
         <url>http://www.wildbeeslabs.com/</url>
     </organization>
 
-    <!--<ciManagement>
-    <system>Jenkins</system>
-    <url>https://rest.ci.cloudbees.com/</url>
-</ciManagement>-->
+    <ciManagement>
+        <system>Travis-ci</system>
+        <url>https://travis-ci.com/AlexRogalskiy/sqoola</url>
+    </ciManagement>
 
     <reporting>
         <outputDirectory>${project.build.directory}/release</outputDirectory>
@@ -208,6 +208,26 @@
                             <version>7.0</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <configuration>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <plugin>
@@ -367,6 +387,7 @@
                             <spring.profiles.active>${active.profile}</spring.profiles.active>
                         </systemPropertyVariables>
                         <skipTests>${unit-tests.skip}</skipTests>
+                        <forkCount>${surefire.forkNumber}</forkCount>
                         <excludes>
                             <exclude>${integration-tests}</exclude>
                         </excludes>
@@ -405,6 +426,44 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <executions>
+                        <execution>
+                            <id>attach-artifacts</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>attach-artifact</goal>
+                            </goals>
+                            <configuration>
+                                <artifacts>
+                                    <artifact>
+                                        <file>${project.build.directory}/${project.artifactId}-${project.version}.jar
+                                        </file>
+                                        <type>jar</type>
+                                    </artifact>
+                                    <artifact>
+                                        <file>
+                                            ${project.build.directory}/${project.artifactId}-${project.version}-javadoc.jar
+                                        </file>
+                                        <type>jar</type>
+                                        <classifier>javadoc</classifier>
+                                    </artifact>
+                                    <artifact>
+                                        <file>
+                                            ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar
+                                        </file>
+                                        <type>jar</type>
+                                        <classifier>sources</classifier>
+                                    </artifact>
+                                </artifacts>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
                     <version>1.6.7</version>
@@ -432,7 +491,7 @@
                                 <includeScope>compile</includeScope>
                                 <excludeScope>test</excludeScope>
                                 <overWriteReleases>false</overWriteReleases>
-                                <overWriteSnapshots>true</overWriteSnapshots>
+                                <overWriteSnapshots>false</overWriteSnapshots>
                                 <overWriteIfNewer>true</overWriteIfNewer>
                             </configuration>
                         </execution>
@@ -621,6 +680,28 @@
                                 <outputDirectory>${project.build.directory}</outputDirectory>
                                 <skipCache>true</skipCache>
                             </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Test plugins -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.2</version>
+                    <executions>
+                        <execution>
+                            <id>default-prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>
@@ -841,6 +922,19 @@
             </releases>
         </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <modules>
         <module>sqoola-common</module>
