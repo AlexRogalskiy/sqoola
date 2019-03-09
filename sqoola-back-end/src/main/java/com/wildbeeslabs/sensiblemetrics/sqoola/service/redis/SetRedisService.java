@@ -21,24 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.redis;
 
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import java.io.Serializable;
+import java.util.Set;
 
 /**
- * Sqoola application loader
+ * {@link Set} redis service declaration
+ *
+ * @param <T> type of cache item
  */
-@SpringBootApplication(scanBasePackages = {"com.wildbeeslabs.sensiblemetrics.sqoola"}, exclude = {ErrorMvcAutoConfiguration.class})
-@EnableBatchProcessing
-@EnableSwagger2
-public class SqoolaAppLoader extends SpringBootServletInitializer {
+public interface SetRedisService<T extends Serializable> extends BaseRedisService<T> {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SqoolaAppLoader.class, args);
-    }
+    /**
+     * Default service ID
+     */
+    String SERVICE_ID = "setRedisService";
+
+    void add(final String key, final T... items);
+
+    Set<T> getAll(final String key);
+
+    long count(final String key);
+
+    long remove(final String key, final T... items);
 }

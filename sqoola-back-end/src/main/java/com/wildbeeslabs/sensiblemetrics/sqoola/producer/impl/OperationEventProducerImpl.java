@@ -1,7 +1,7 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.producer.impl;
 
-import com.dinamexoft.carol.triggers.producers.EventProducer;
-import com.dinamexoft.carol.triggers.producers.OperationEventProducer;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.EventProducer;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.OperationEventProducer;
 
 public abstract class OperationEventProducerImpl<E> implements OperationEventProducer<E> {
 

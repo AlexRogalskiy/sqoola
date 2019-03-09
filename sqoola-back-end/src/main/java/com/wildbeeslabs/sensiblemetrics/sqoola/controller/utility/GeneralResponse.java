@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.controller.wrapper;
+package com.wildbeeslabs.sensiblemetrics.sqoola.controller.utility;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,59 +32,37 @@ import lombok.*;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 /**
- * Search result entity
- *
- * @param <T> type of search item key
+ * Search response entity
  */
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 @ToString
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JacksonXmlRootElement(localName = "result")
-public class GeneralResult<T extends Serializable> {
+@JacksonXmlRootElement(localName = "response")
+public class GeneralResponse implements Serializable {
 
     /**
-     * Default search item {@code T}
+     * Default explicit serialVersionUID for interoperability
      */
-    @NonNull
-    @JacksonXmlProperty(localName = "item")
+    private static final long serialVersionUID = -6023846553910995788L;
+
     @JsonProperty("item")
-    private T item;
-
-    /**
-     * Default error message list {@link List}
-     */
-    @Getter
-    @JsonProperty("error")
     @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "errors")
-    private final Collection<String> errors = new ArrayList<>();
+    @JacksonXmlProperty(localName = "items")
+    private Collection<? extends GeneralResult<?>> items;
 
     /**
-     * Default {@link GeneralResult} constructor by input parameters
+     * Returns binary flag based on errors in items {@link List}
      *
-     * @param key          - initial input search item key {@code T}
-     * @param errorMessage - initial input error message
+     * @return true - if items {@link List} contains errors, false - otherwise
      */
-    public GeneralResult(final T key, final String errorMessage) {
-        this(key);
-        addError(errorMessage);
-    }
-
-    public boolean isSuccess() {
-        return CollectionUtils.isEmpty(getErrors());
-    }
-
-    public void addError(final String errorMessage) {
-        if (Objects.nonNull(errorMessage)) {
-            this.getErrors().add(errorMessage);
-        }
+    public boolean hasErrors() {
+        return CollectionUtils.isEmpty(getItems()) || getItems().stream().anyMatch(r -> !r.isSuccess());
     }
 }

@@ -25,7 +25,7 @@ package com.wildbeeslabs.sensiblemetrics.sqoola.controller.product.impl;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.wildbeeslabs.sensiblemetrics.sqoola.controller.wrapper.GeneralResult;
+import com.wildbeeslabs.sensiblemetrics.sqoola.controller.utility.GeneralResult;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Product;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dto.ProductView;
 import lombok.Data;

@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service.impl;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.repository.BaseJpaRepository;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.BaseService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.BaseDaoService;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * {@link BaseService} service implementation
+ * {@link BaseDaoService} service implementation
  *
  * @param <E>  type of model
  * @param <ID> type of model identifier {@link Serializable}
@@ -46,7 +46,7 @@ import java.util.Optional;
 @EqualsAndHashCode
 @ToString
 @Transactional
-public abstract class BaseServiceImpl<E, ID extends Serializable> implements BaseService<E, ID> {
+public abstract class BaseDaoServiceImpl<E, ID extends Serializable> implements BaseDaoService<E, ID> {
 
     @PersistenceContext
     private EntityManager entityManager;

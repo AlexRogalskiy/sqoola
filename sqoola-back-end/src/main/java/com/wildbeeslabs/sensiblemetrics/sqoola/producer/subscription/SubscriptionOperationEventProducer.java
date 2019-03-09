@@ -1,7 +1,7 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.producer.subscription;
 
-import com.dinamexoft.carol.triggers.messages.subscription.SubscriptionOperationEvent;
-import com.dinamexoft.carol.triggers.producers.OperationEventProducer;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.OperationEventProducer;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.event.SubscriptionOperationEvent;
 
 public interface SubscriptionOperationEventProducer extends OperationEventProducer<SubscriptionOperationEvent> {
 

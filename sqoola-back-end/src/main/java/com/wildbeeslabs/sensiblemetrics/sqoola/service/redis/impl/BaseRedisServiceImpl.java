@@ -21,29 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.redis.impl;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.BaseModel;
-import org.hibernate.Criteria;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.redis.BaseRedisService;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
 /**
- * {@link BaseModel} service declaration
+ * Base redis service implementation
  *
- * @param <E>  type of base model {@link BaseModel}
- * @param <ID> type of base document identifier {@link Serializable}
+ * @param <T> type of base item
  */
-public interface BaseModelService<E extends BaseModel<ID>, ID extends Serializable> extends AuditModelService<E, ID> {
-
-    void saveOrUpdate(final E target, final Class<? extends E> clazz);
-
-    Page<? extends E> findByQuery(final String collection, final Query query);
-
-    Page<? extends E> findByQueryAndCriteria(final String collection, final Criteria criteria, final Pageable pageable);
-
-    Page<? extends E> findByQueryAndCriteria(final String collection, final String queryString, final Criteria criteria, final Pageable pageable);
+@Slf4j
+@EqualsAndHashCode
+@ToString
+@Transactional
+public class BaseRedisServiceImpl<T extends Serializable> implements BaseRedisService<T> {
 }

@@ -21,42 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.controller.wrapper;
+package com.wildbeeslabs.sensiblemetrics.sqoola.model.redis;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import lombok.*;
-import org.apache.commons.collections.CollectionUtils;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import java.util.Collection;
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * Search response entity
+ * Cache item
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JacksonXmlRootElement(localName = "response")
-public class GeneralResponse {
-
-    @JsonProperty("item")
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "items")
-    private Collection<? extends GeneralResult<?>> items;
+public class CacheItem<T extends Serializable> implements Serializable {
 
     /**
-     * Returns binary flag based on errors in items {@link List}
-     *
-     * @return true - if items {@link List} contains errors, false - otherwise
+     * Default explicit serialVersionUID for interoperability
      */
-    public boolean hasErrors() {
-        return CollectionUtils.isEmpty(getItems()) || getItems().stream().anyMatch(r -> !r.isSuccess());
-    }
+    private static final long serialVersionUID = -3688162541657765670L;
+
+    /**
+     * Default cache item value
+     */
+    private T item;
 }

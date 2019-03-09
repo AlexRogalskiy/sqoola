@@ -1,9 +1,9 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.producer.impl.subscription;
 
-import com.dinamexoft.carol.triggers.messages.subscription.SubscriptionOperationEvent;
-import com.dinamexoft.carol.triggers.producers.EventProducer;
-import com.dinamexoft.carol.triggers.producers.impl.OperationEventProducerImpl;
-import com.dinamexoft.carol.triggers.producers.subscription.SubscriptionOperationEventProducer;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.EventProducer;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.event.SubscriptionOperationEvent;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.impl.OperationEventProducerImpl;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.subscription.SubscriptionOperationEventProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

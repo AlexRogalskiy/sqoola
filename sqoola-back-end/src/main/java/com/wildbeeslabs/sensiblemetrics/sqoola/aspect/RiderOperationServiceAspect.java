@@ -17,22 +17,22 @@ public class RiderOperationServiceAspect {
      */
     public static final String COMPONENT_ID = "riderOperationServiceAspect";
 
-    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.rider.period.RiderOperationPeriodServiceImpl.*(..))")
+    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.rider.period.RiderOperationPeriodServiceImpl.*(..))")
     public void riderOperationPeriodBeforeAdvice(final JoinPoint joinPoint) {
         log.info(String.format("RiderOperationServiceAspect: processing model={%s} by method={%s} with args={%s}", joinPoint.getTarget(), joinPoint.getSignature(), joinPoint.getArgs()));
     }
 
-    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.rider.period.RiderOperationPeriodServiceImpl.*(..))")
+    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.rider.period.RiderOperationPeriodServiceImpl.*(..))")
     public void riderOperationPeriodAfterAdvice(final JoinPoint joinPoint) {
         log.info(String.format("RiderOperationServiceAspect: model={%s} has been processed", joinPoint.getTarget()));
     }
 
-    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.rider.RiderOperationServiceImpl.*(..))")
+    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.rider.RiderOperationServiceImpl.*(..))")
     public void riderOperationBeforeAdvice(final JoinPoint joinPoint) {
         log.info(String.format("RiderOperationServiceAspect: processing model={%s} by method={%s} with args={%s}", joinPoint.getTarget(), joinPoint.getSignature(), joinPoint.getArgs()));
     }
 
-    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.rider.RiderOperationServiceImpl.*(..))")
+    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.rider.RiderOperationServiceImpl.*(..))")
     public void riderOperationAfterAdvice(final JoinPoint joinPoint) {
         log.info(String.format("RiderOperationServiceAspect: model={%s} has been processed", joinPoint.getTarget()));
     }

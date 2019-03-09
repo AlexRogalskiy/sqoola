@@ -21,21 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.redis;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Account;
-
-import java.util.Optional;
+import java.io.Serializable;
 
 /**
- * {@link Account} service declaration
+ * Base redis service declaration
+ *
+ * @param <T> type of cache item
  */
-public interface AccountService extends BaseService<Account, Long> {
-
-    /**
-     * Default service ID
-     */
-    String SERVICE_ID = "accountService";
-
-    Optional<Account> findByUsername(final String username);
+public interface BaseRedisService<T extends Serializable> {
 }

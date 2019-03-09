@@ -27,8 +27,8 @@ import com.wildbeeslabs.sensiblemetrics.sqoola.controller.BaseModelController;
 import com.wildbeeslabs.sensiblemetrics.sqoola.exception.ResourceNotFoundException;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.BaseModel;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dto.BaseModelView;
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.utils.OffsetPageRequest;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.BaseModelService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.utility.OffsetPageRequest;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.BaseModelDaoService;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -113,9 +113,9 @@ public abstract class BaseModelControllerImpl<E extends BaseModel<ID>, T extends
     }
 
     /**
-     * Returns {@link BaseModelService} service
+     * Returns {@link BaseModelDaoService} service
      *
-     * @return {@link BaseModelService} service
+     * @return {@link BaseModelDaoService} service
      */
-    protected abstract BaseModelService<E, ID> getService();
+    protected abstract BaseModelDaoService<E, ID> getService();
 }

@@ -23,7 +23,7 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.controller.product.impl;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.controller.wrapper.GeneralRequest;
+import com.wildbeeslabs.sensiblemetrics.sqoola.controller.utility.GeneralRequest;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

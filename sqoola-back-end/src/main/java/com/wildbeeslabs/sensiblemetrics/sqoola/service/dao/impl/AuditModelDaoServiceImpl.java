@@ -21,25 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.AuditModel;
+import com.wildbeeslabs.sensiblemetrics.sqoola.repository.AuditModelRepository;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.AuditModelDaoService;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.Serializable;
 
 /**
- * {@link UserDetailsService} service declaration
+ * {@link AuditModelDaoService} service implementation
+ *
+ * @param <E>  type of audit model {@link AuditModel}
+ * @param <ID> type of audit model identifier {@link Serializable}
  */
-public interface AuthUserService extends UserDetailsService {
+@Slf4j
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@Transactional
+public abstract class AuditModelDaoServiceImpl<E extends AuditModel, ID extends Serializable> extends BaseServiceImpl<E, ID> implements AuditModelDaoService<E, ID> {
 
-    /**
-     * Default service ID
-     */
-    String SERVICE_ID = "authUserService";
-    /**
-     * Default role delimiter
-     */
-    String DEFAULT_ROLE_DELIMITER = "_";
-    /**
-     * Default role prefix
-     */
-    String DEFAULT_ROLE_PREFIX = "ROLE";
+    protected abstract AuditModelRepository<E, ID> getRepository();
 }

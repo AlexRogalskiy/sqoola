@@ -17,22 +17,22 @@ public class SubscriptionOperationServiceAspect {
      */
     public static final String COMPONENT_ID = "subscriptionOperationServiceAspect";
 
-    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.subscription.period.SubscriptionOperationPeriodServiceImpl.*(..))")
+    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.subscription.period.SubscriptionOperationPeriodServiceImpl.*(..))")
     public void subscriptionOperationPeriodBeforeAdvice(final JoinPoint joinPoint) {
         log.info(String.format("SubscriptionOperationServiceAspect: processing model={%s} by method={%s} with args={%s}", joinPoint.getTarget(), joinPoint.getSignature(), joinPoint.getArgs()));
     }
 
-    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.subscription.period.SubscriptionOperationPeriodServiceImpl.*(..))")
+    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.subscription.period.SubscriptionOperationPeriodServiceImpl.*(..))")
     public void subscriptionOperationPeriodAfterAdvice(final JoinPoint joinPoint) {
         log.info(String.format("SubscriptionOperationServiceAspect: model={%s} has been processed", joinPoint.getTarget()));
     }
 
-    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.subscription.SubscriptionOperationServiceImpl.*(..))")
+    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.subscription.SubscriptionOperationServiceImpl.*(..))")
     public void subscriptionOperationBeforeAdvice(final JoinPoint joinPoint) {
         log.info(String.format("SubscriptionOperationServiceAspect: processing model={%s} by method={%s} with args={%s}", joinPoint.getTarget(), joinPoint.getSignature(), joinPoint.getArgs()));
     }
 
-    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.subscription.SubscriptionOperationServiceImpl.*(..))")
+    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.subscription.SubscriptionOperationServiceImpl.*(..))")
     public void subscriptionOperationAfterAdvice(final JoinPoint joinPoint) {
         log.info(String.format("SubscriptionOperationServiceAspect: model={%s} has been processed", joinPoint.getTarget()));
     }

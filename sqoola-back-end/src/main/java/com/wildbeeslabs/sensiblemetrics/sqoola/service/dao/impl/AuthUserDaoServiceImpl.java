@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service.impl;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Account;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Role;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.AccountService;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.AuthUserService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.AccountDaoService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.AuthUserDaoService;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -46,17 +46,17 @@ import java.util.Objects;
 import static com.wildbeeslabs.sensiblemetrics.sqoola.utility.StringUtils.getStringByDelimiter;
 
 /**
- * {@link AuthUserService} service implementation
+ * {@link AuthUserDaoService} service implementation
  */
 @Slf4j
 @EqualsAndHashCode
 @ToString
-@Service(AuthUserService.SERVICE_ID)
+@Service(AuthUserDaoService.SERVICE_ID)
 @Transactional
-public class AuthUserDetailsServiceImpl implements AuthUserService {
+public class AuthUserDaoServiceImpl implements AuthUserDaoService {
 
     @Autowired
-    private AccountService userService;
+    private AccountDaoService userService;
 
     @Override
     @Transactional(readOnly = true)

@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service.impl;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.BaseModel;
 import com.wildbeeslabs.sensiblemetrics.sqoola.repository.BaseModelRepository;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.BaseModelService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.BaseModelDaoService;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * {@link BaseModelService} service implementation
+ * {@link BaseModelDaoService} service implementation
  *
  * @param <E>  type of base model {@link BaseModel}
  * @param <ID> type of base model identifier {@link Serializable}
@@ -44,7 +44,7 @@ import java.util.Objects;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Transactional
-public abstract class BaseModelServiceImpl<E extends BaseModel<ID>, ID extends Serializable> extends AuditModelServiceImpl<E, ID> implements BaseModelService<E, ID> {
+public abstract class BaseModelDaoServiceImpl<E extends BaseModel<ID>, ID extends Serializable> extends AuditModelServiceImpl<E, ID> implements BaseModelDaoService<E, ID> {
 
     @Override
     public void saveOrUpdate(final E target, final Class<? extends E> clazz) {

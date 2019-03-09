@@ -21,19 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.controller.category.impl;
+package com.wildbeeslabs.sensiblemetrics.sqoola.controller.utility;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.controller.utility.GeneralRequest;
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Category;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 /**
- * {@link Category} request entity
+ * Search request entity
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
-public class CategoryRequest extends GeneralRequest {
+@EqualsAndHashCode
+@ToString
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JacksonXmlRootElement(localName = "request")
+public class GeneralRequest implements Serializable {
+
+    /**
+     * Default explicit serialVersionUID for interoperability
+     */
+    private static final long serialVersionUID = 279018649486308175L;
+
+    @JsonProperty("item")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "items")
+    private Collection<ResultKey> items;
+
+    @JacksonXmlProperty(localName = "keywords")
+    @JsonProperty("keywords")
+    private Collection<String> keywords;
+
+    @JacksonXmlProperty(localName = "page")
+    @JsonProperty("page")
+    int page;
 }

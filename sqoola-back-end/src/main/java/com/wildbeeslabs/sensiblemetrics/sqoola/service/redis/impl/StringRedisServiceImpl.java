@@ -21,36 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.redis.impl;
 
-import java.io.Serializable;
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
 
 /**
- * Base service declaration
- *
- * @param <E>  type of document
- * @param <ID> type of document identifier {@link Serializable}
+ * {@link String} redis service implementation
  */
-public interface BaseService<E, ID extends Serializable> {
+@Service(StringRedisService.SERVICE_ID)
+public class StringRedisServiceImpl implements StringRedisService {
 
-    Iterable<? extends E> findAll();
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
-    Iterable<? extends E> findAll(final Iterable<ID> ids);
+    @Override
+    public void add(final String key, final String item) {
+        this.stringRedisTemplate.opsForValue().setIfAbsent(key, item);
+    }
 
-    Optional<E> find(final ID id);
+    @Override
+    public void update(final String key, final String item) {
+        this.stringRedisTemplate.opsForValue().set(key, item);
+    }
 
-    <S extends E> S save(final S entity);
+    @Override
+    public String get(final String key) {
+        return this.stringRedisTemplate.opsForValue().get(key);
+    }
 
-    //void saveAll(final Iterable<? extends E> target);
-
-    boolean exists(final ID id);
-
-    <S extends E> Iterable<S> save(final Iterable<S> entities);
-
-    void delete(final E target);
-
-    void deleteAll(final Iterable<? extends E> target);
-
-    void deleteAll();
+    @Override
+    public void remove(final String key) {
+        this.stringRedisTemplate.delete(key);
+    }
 }

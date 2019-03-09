@@ -21,23 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service;
-
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.AuditModel;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.redis;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 /**
- * {@link AuditModel} service declaration
+ * {@link Map} redis service declaration
  *
- * @param <E>  type of audit document {@link AuditModel}
- * @param <ID> type of audit document identifier {@link Serializable}
+ * @param <T> type of cache item
  */
-public interface AuditModelService<E extends AuditModel, ID extends Serializable> extends BaseService<E, ID> {
+public interface HashRedisService<T extends Serializable, ID extends Serializable> extends BaseRedisService<T> {
 
-    List<? extends E> findByCreatedBetween(final Date dateFrom, final Date dateTo);
+    /**
+     * Default service ID
+     */
+    String SERVICE_ID = "hashRedisService";
 
-    List<? extends E> findByChangedBetween(final Date dateFrom, final Date dateTo);
+    void add(final String key, final T item);
+
+    void update(final String key, final T item);
+
+    T get(final String key, final ID id);
+
+    long count(final String key);
+
+    Map<ID, T> getAll(final String key);
+
+    long remove(final String key, final ID... ids);
 }

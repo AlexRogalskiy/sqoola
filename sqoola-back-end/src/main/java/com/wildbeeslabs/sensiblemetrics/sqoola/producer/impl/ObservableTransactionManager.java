@@ -1,6 +1,6 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.producer.impl;
 
-import com.dinamexoft.carol.triggers.producers.TransactionObserver;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.TransactionObserver;
 import org.springframework.orm.jpa.JpaTransactionManager;
 
 import javax.persistence.EntityManagerFactory;

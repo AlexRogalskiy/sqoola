@@ -21,24 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.dao;
 
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * Sqoola application loader
+ * {@link UserDetailsService} service declaration
  */
-@SpringBootApplication(scanBasePackages = {"com.wildbeeslabs.sensiblemetrics.sqoola"}, exclude = {ErrorMvcAutoConfiguration.class})
-@EnableBatchProcessing
-@EnableSwagger2
-public class SqoolaAppLoader extends SpringBootServletInitializer {
+public interface AuthUserDaoService extends UserDetailsService {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SqoolaAppLoader.class, args);
-    }
+    /**
+     * Default service ID
+     */
+    String SERVICE_ID = "authUserService";
+    /**
+     * Default role delimiter
+     */
+    String DEFAULT_ROLE_DELIMITER = "_";
+    /**
+     * Default role prefix
+     */
+    String DEFAULT_ROLE_PREFIX = "ROLE";
 }

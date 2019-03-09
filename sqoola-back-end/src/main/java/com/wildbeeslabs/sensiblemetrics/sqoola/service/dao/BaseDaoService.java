@@ -21,24 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.dao;
 
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import java.io.Serializable;
+import java.util.Optional;
 
 /**
- * Sqoola application loader
+ * Base service declaration
+ *
+ * @param <E>  type of document
+ * @param <ID> type of document identifier {@link Serializable}
  */
-@SpringBootApplication(scanBasePackages = {"com.wildbeeslabs.sensiblemetrics.sqoola"}, exclude = {ErrorMvcAutoConfiguration.class})
-@EnableBatchProcessing
-@EnableSwagger2
-public class SqoolaAppLoader extends SpringBootServletInitializer {
+public interface BaseDaoService<E, ID extends Serializable> {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SqoolaAppLoader.class, args);
-    }
+    Iterable<? extends E> findAll();
+
+    Iterable<? extends E> findAll(final Iterable<ID> ids);
+
+    Optional<E> find(final ID id);
+
+    <S extends E> S save(final S entity);
+
+    //void saveAll(final Iterable<? extends E> target);
+
+    boolean exists(final ID id);
+
+    <S extends E> Iterable<S> save(final Iterable<S> entities);
+
+    void delete(final E target);
+
+    void deleteAll(final Iterable<? extends E> target);
+
+    void deleteAll();
 }

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.model.utils;
+package com.wildbeeslabs.sensiblemetrics.sqoola.model.utility;
 
 import lombok.*;
 import org.springframework.data.domain.Pageable;

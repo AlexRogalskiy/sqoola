@@ -21,24 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola;
+package com.wildbeeslabs.sensiblemetrics.sqoola.controller.utility;
 
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import lombok.*;
+
+import java.io.Serializable;
 
 /**
- * Sqoola application loader
+ * Search key entity
  */
-@SpringBootApplication(scanBasePackages = {"com.wildbeeslabs.sensiblemetrics.sqoola"}, exclude = {ErrorMvcAutoConfiguration.class})
-@EnableBatchProcessing
-@EnableSwagger2
-public class SqoolaAppLoader extends SpringBootServletInitializer {
+@Data
+@AllArgsConstructor(staticName = "of")
+@EqualsAndHashCode
+@ToString
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JacksonXmlRootElement(localName = "key")
+public class ResultKey implements Serializable {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SqoolaAppLoader.class, args);
-    }
+    /**
+     * Default explicit serialVersionUID for interoperability
+     */
+    private static final long serialVersionUID = -2761481783742372926L;
+
+    @Getter
+    @JacksonXmlProperty(localName = "term")
+    @JsonProperty("term")
+    private String term;
+
+    @Getter
+    @JacksonXmlProperty(localName = "description")
+    @JsonProperty("description")
+    private String description;
 }

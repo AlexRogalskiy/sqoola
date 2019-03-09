@@ -21,40 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service.impl;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.redis.impl;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Account;
-import com.wildbeeslabs.sensiblemetrics.sqoola.repository.AccountRepository;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.AccountService;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.redis.CacheItem;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import javax.annotation.Resource;
+import java.util.Set;
 
 /**
- * {@link AccountService} service implementation
+ * {@link Set} redis service implementation
  */
-@Slf4j
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
-@Service(AccountService.SERVICE_ID)
-@Transactional
-public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implements AccountService {
+@Service(SetRedisService.SERVICE_ID)
+public class SetRedisServiceImpl extends BaseRedisServiceImpl<CacheItem<?>> implements SetRedisService<CacheItem<?>> {
 
-    @Autowired
-    private AccountRepository userRepository;
+    @Resource(name = "redisTemplate")
+    private SetOperations<String, CacheItem<?>> itemSetOperations;
 
     @Override
-    @Transactional(readOnly = true)
-    public Optional<Account> findByUsername(final String username) {
-        return getRepository().findByUsername(username);
+    public void add(final String key, final CacheItem<?>... items) {
+        this.itemSetOperations.add(key, items);
     }
 
-    protected AccountRepository getRepository() {
-        return this.userRepository;
+    @Override
+    public Set<CacheItem<?>> getAll(final String key) {
+        return this.itemSetOperations.members(key);
     }
-}
+
+    @Override
+    public long count(final String key) {
+        return this.itemSetOperations.size(key);
+    }
+
+    @Override
+    public long remove(final String key, final CacheItem<?>... items) {
+        return this.itemSetOperations.remove(key, items);
+    }
+} 

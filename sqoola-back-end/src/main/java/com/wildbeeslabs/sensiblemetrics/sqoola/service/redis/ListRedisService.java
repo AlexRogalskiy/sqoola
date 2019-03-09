@@ -21,39 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.controller.wrapper;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.redis;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * Search request entity
+ * {@link List} redis service declaration
+ *
+ * @param <T> type of cache item
  */
-@Data
-@EqualsAndHashCode
-@ToString
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JacksonXmlRootElement(localName = "request")
-public class GeneralRequest {
+public interface ListRedisService<T extends Serializable> extends BaseRedisService<T> {
 
-    @JsonProperty("item")
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "items")
-    private Collection<ResultKey> items;
+    /**
+     * Default service ID
+     */
+    String SERVICE_ID = "listRedisService";
 
-    @JacksonXmlProperty(localName = "keywords")
-    @JsonProperty("keywords")
-    private Collection<String> keywords;
+    void addBefore(final String key, final T item);
 
-    @JacksonXmlProperty(localName = "page")
-    @JsonProperty("page")
-    int page;
+    void addAfter(final String key, final T item);
+
+    long count(final String key);
+
+    T getAt(final String key, final long index);
+
+    void remove(final String key, final T item);
 }

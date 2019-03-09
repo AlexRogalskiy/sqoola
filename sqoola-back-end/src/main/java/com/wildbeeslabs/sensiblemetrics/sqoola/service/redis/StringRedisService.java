@@ -21,29 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.service.impl;
-
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.AuditModel;
-import com.wildbeeslabs.sensiblemetrics.sqoola.repository.AuditModelRepository;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.AuditModelService;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.io.Serializable;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.redis;
 
 /**
- * {@link AuditModelService} service implementation
- *
- * @param <E>  type of audit model {@link AuditModel}
- * @param <ID> type of audit model identifier {@link Serializable}
+ * {@link String} redis service declaration
  */
-@Slf4j
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
-@Transactional
-public abstract class AuditModelServiceImpl<E extends AuditModel, ID extends Serializable> extends BaseServiceImpl<E, ID> implements AuditModelService<E, ID> {
+public interface StringRedisService extends BaseRedisService<String> {
 
-    protected abstract AuditModelRepository<E, ID> getRepository();
+    /**
+     * Default service ID
+     */
+    String SERVICE_ID = "stringRedisService";
+
+    void add(final String key, final String item);
+
+    void update(final String key, final String item);
+
+    String get(final String key);
+
+    void remove(final String key);
 }

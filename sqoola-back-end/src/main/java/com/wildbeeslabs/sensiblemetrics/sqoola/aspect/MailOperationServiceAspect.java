@@ -17,22 +17,22 @@ public class MailOperationServiceAspect {
      */
     public static final String COMPONENT_ID = "mailOperationServiceAspect";
 
-    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.mail.period.MailOperationPeriodServiceImpl.*(..))")
+    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.mail.period.MailOperationPeriodServiceImpl.*(..))")
     public void mailOperationPeriodBeforeAdvice(final JoinPoint joinPoint) {
         log.info(String.format("MailOperationServiceAspect: processing model={%s} by method={%s} with args={%s}", joinPoint.getTarget(), joinPoint.getSignature(), joinPoint.getArgs()));
     }
 
-    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.mail.period.MailOperationPeriodServiceImpl.*(..))")
+    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.mail.period.MailOperationPeriodServiceImpl.*(..))")
     public void mailOperationPeriodAfterAdvice(final JoinPoint joinPoint) {
         log.info(String.format("MailOperationServiceAspect: model={%s} has been processed", joinPoint.getTarget()));
     }
 
-    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.mail.MailOperationServiceImpl.*(..))")
+    @Before(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.mail.MailOperationServiceImpl.*(..))")
     public void mailOperationBeforeAdvice(final JoinPoint joinPoint) {
         log.info(String.format("MailOperationServiceAspect: processing model={%s} by method={%s} with args={%s}", joinPoint.getTarget(), joinPoint.getSignature(), joinPoint.getArgs()));
     }
 
-    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.impl.mail.MailOperationServiceImpl.*(..))")
+    @After(value = "execution(* com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl.mail.MailOperationServiceImpl.*(..))")
     public void mailOperationAfterAdvice(final JoinPoint joinPoint) {
         log.info(String.format("MailOperationServiceAspect: model={%s} has been processed", joinPoint.getTarget()));
     }

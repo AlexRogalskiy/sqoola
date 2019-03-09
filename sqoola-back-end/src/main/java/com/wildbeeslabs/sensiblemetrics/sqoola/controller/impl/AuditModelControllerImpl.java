@@ -26,7 +26,7 @@ package com.wildbeeslabs.sensiblemetrics.sqoola.controller.impl;
 import com.wildbeeslabs.sensiblemetrics.sqoola.controller.AuditModelController;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.AuditModel;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dto.AuditModelView;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.AuditModelService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.AuditModelDaoService;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -65,9 +65,9 @@ public abstract class AuditModelControllerImpl<E extends AuditModel, T extends A
     }
 
     /**
-     * Returns {@link AuditModelService} service
+     * Returns {@link AuditModelDaoService} service
      *
-     * @return {@link AuditModelService} service
+     * @return {@link AuditModelDaoService} service
      */
-    protected abstract AuditModelService<E, ID> getService();
+    protected abstract AuditModelDaoService<E, ID> getService();
 }

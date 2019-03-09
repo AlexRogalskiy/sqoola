@@ -25,6 +25,8 @@ package com.wildbeeslabs.sensiblemetrics.sqoola.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wildbeeslabs.sensiblemetrics.sqoola.configuration.properties.RedisConfigProperties;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.redis.CacheItem;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.redis.HashCacheItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -37,6 +39,7 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -77,14 +80,38 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     @Bean
-    public StringRedisTemplate redisTemplate() {
-        final StringRedisTemplate template = new StringRedisTemplate(jedisConnectionFactory());
+    public StringRedisTemplate stringRedisTemplate() {
+        final StringRedisTemplate redisTemplate = new StringRedisTemplate(jedisConnectionFactory());
         final Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         jackson2JsonRedisSerializer.setObjectMapper(jsonObjectMapper);
-        template.setEnableTransactionSupport(true);
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        template.afterPropertiesSet();
-        return template;
+        redisTemplate.setEnableTransactionSupport(true);
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    }
+
+    @Bean
+    public RedisTemplate<String, CacheItem<?>> redisTemplate() {
+        final RedisTemplate<String, CacheItem<?>> redisTemplate = new RedisTemplate<>();
+        final Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
+        jackson2JsonRedisSerializer.setObjectMapper(jsonObjectMapper);
+        redisTemplate.setConnectionFactory(jedisConnectionFactory());
+        redisTemplate.setEnableTransactionSupport(true);
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    }
+
+    @Bean
+    public RedisTemplate<String, HashCacheItem<?, ?>> hashRedisTemplate() {
+        final RedisTemplate<String, HashCacheItem<?, ?>> redisTemplate = new RedisTemplate<>();
+        final Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
+        jackson2JsonRedisSerializer.setObjectMapper(jsonObjectMapper);
+        redisTemplate.setConnectionFactory(jedisConnectionFactory());
+        redisTemplate.setEnableTransactionSupport(true);
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
     }
 
     @Bean

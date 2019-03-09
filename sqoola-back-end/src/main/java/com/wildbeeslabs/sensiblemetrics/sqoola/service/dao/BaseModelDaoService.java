@@ -21,39 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.controller.wrapper;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.dao;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import lombok.*;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.BaseModel;
+import org.hibernate.Criteria;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 
 import java.io.Serializable;
 
 /**
- * Search key entity
+ * {@link BaseModel} service declaration
+ *
+ * @param <E>  type of base model {@link BaseModel}
+ * @param <ID> type of base document identifier {@link Serializable}
  */
-@Data
-@AllArgsConstructor(staticName = "of")
-@EqualsAndHashCode
-@ToString
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JacksonXmlRootElement(localName = "key")
-public class ResultKey implements Serializable {
+public interface BaseModelDaoService<E extends BaseModel<ID>, ID extends Serializable> extends AuditModelDaoService<E, ID> {
 
-    /**
-     * Default explicit serialVersionUID for interoperability
-     */
-    private static final long serialVersionUID = -2761481783742372926L;
+    void saveOrUpdate(final E target, final Class<? extends E> clazz);
 
-    @Getter
-    @JacksonXmlProperty(localName = "term")
-    @JsonProperty("term")
-    private String term;
+    Page<? extends E> findByQuery(final String collection, final Query query);
 
-    @Getter
-    @JacksonXmlProperty(localName = "description")
-    @JsonProperty("description")
-    private String description;
+    Page<? extends E> findByQueryAndCriteria(final String collection, final Criteria criteria, final Pageable pageable);
+
+    Page<? extends E> findByQueryAndCriteria(final String collection, final String queryString, final Criteria criteria, final Pageable pageable);
 }

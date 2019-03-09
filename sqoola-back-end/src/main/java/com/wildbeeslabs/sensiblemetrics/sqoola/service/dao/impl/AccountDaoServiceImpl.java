@@ -21,19 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola.controller.category.impl;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.impl;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.controller.utility.GeneralRequest;
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Category;
-import lombok.Data;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.Account;
+import com.wildbeeslabs.sensiblemetrics.sqoola.repository.AccountRepository;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.AccountDaoService;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
- * {@link Category} request entity
+ * {@link AccountDaoService} service implementation
  */
-@Data
+@Slf4j
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CategoryRequest extends GeneralRequest {
+@Service(AccountDaoService.SERVICE_ID)
+@Transactional
+public class AccountDaoServiceImpl extends BaseServiceImpl<Account, Long> implements AccountDaoService {
+
+    @Autowired
+    private AccountRepository userRepository;
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Account> findByUsername(final String username) {
+        return getRepository().findByUsername(username);
+    }
+
+    protected AccountRepository getRepository() {
+        return this.userRepository;
+    }
 }

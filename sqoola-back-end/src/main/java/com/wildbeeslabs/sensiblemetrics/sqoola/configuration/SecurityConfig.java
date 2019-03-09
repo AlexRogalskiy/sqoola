@@ -27,7 +27,7 @@ import com.wildbeeslabs.sensiblemetrics.sqoola.security.SecurityAccessDeniedHand
 import com.wildbeeslabs.sensiblemetrics.sqoola.security.SecurityAuditorAwareHandler;
 import com.wildbeeslabs.sensiblemetrics.sqoola.security.SecurityAuthenticationEntryPoint;
 import com.wildbeeslabs.sensiblemetrics.sqoola.security.SecurityAuthenticationSuccessHandler;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.AuthUserService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.AuthUserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -63,7 +63,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AuthUserService authUserService;
+    private AuthUserDaoService authUserService;
 
     @Bean
     @Override

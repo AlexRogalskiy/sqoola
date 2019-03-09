@@ -21,24 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.sensiblemetrics.sqoola;
+package com.wildbeeslabs.sensiblemetrics.sqoola.service.dao;
 
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.AuditModel;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
- * Sqoola application loader
+ * {@link AuditModel} service declaration
+ *
+ * @param <E>  type of audit document {@link AuditModel}
+ * @param <ID> type of audit document identifier {@link Serializable}
  */
-@SpringBootApplication(scanBasePackages = {"com.wildbeeslabs.sensiblemetrics.sqoola"}, exclude = {ErrorMvcAutoConfiguration.class})
-@EnableBatchProcessing
-@EnableSwagger2
-public class SqoolaAppLoader extends SpringBootServletInitializer {
+public interface AuditModelDaoService<E extends AuditModel, ID extends Serializable> extends BaseDaoService<E, ID> {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SqoolaAppLoader.class, args);
-    }
+    List<? extends E> findByCreatedBetween(final Date dateFrom, final Date dateTo);
+
+    List<? extends E> findByChangedBetween(final Date dateFrom, final Date dateTo);
 }

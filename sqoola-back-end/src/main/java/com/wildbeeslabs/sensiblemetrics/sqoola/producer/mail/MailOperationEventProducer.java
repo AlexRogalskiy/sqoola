@@ -1,7 +1,7 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.producer.mail;
 
-import com.dinamexoft.carol.triggers.messages.mail.MailOperationEvent;
-import com.dinamexoft.carol.triggers.producers.OperationEventProducer;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.OperationEventProducer;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.event.MailOperationEvent;
 
 public interface MailOperationEventProducer extends OperationEventProducer<MailOperationEvent> {
 

@@ -27,7 +27,7 @@ import com.google.common.collect.Lists;
 import com.wildbeeslabs.sensiblemetrics.sqoola.controller.BaseController;
 import com.wildbeeslabs.sensiblemetrics.sqoola.exception.EmptyContentException;
 import com.wildbeeslabs.sensiblemetrics.sqoola.exception.ResourceNotFoundException;
-import com.wildbeeslabs.sensiblemetrics.sqoola.service.BaseService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.service.dao.BaseDaoService;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -159,9 +159,9 @@ public abstract class BaseControllerImpl<E, T, ID extends Serializable> implemen
     }
 
     /**
-     * Returns {@link BaseService} service
+     * Returns {@link BaseDaoService} service
      *
-     * @return {@link BaseService} service
+     * @return {@link BaseDaoService} service
      */
-    protected abstract BaseService<E, ID> getService();
+    protected abstract BaseDaoService<E, ID> getService();
 }

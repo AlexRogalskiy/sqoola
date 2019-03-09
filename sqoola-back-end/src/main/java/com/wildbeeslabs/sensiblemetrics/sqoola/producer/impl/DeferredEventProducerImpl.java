@@ -1,8 +1,6 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.producer.impl;
 
-import com.dinamexoft.carol.triggers.producers.DeferredEventProducer;
-import org.apache.camel.Produce;
-import org.apache.camel.ProducerTemplate;
+import com.wildbeeslabs.sensiblemetrics.sqoola.producer.DeferredEventProducer;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,8 +12,8 @@ import java.util.Objects;
  */
 public class DeferredEventProducerImpl<E, T> implements DeferredEventProducer<E, T> {
 
-    @Produce
-    private ProducerTemplate producerTemplate;
+//    @Produce
+//    private ProducerTemplate producerTemplate;
 
     private String uri;
 
@@ -41,7 +39,7 @@ public class DeferredEventProducerImpl<E, T> implements DeferredEventProducer<E,
         this.deferredEvents.remove();
         if (Objects.nonNull(deferredEvents)) {
             for (final E event : deferredEvents) {
-                this.producerTemplate.sendBody(this.uri, event);
+                //this.producerTemplate.sendBody(this.uri, event);
             }
         }
     }
