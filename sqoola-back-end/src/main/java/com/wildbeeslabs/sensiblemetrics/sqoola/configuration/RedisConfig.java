@@ -33,6 +33,8 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -43,6 +45,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPoolConfig;
 
 import javax.annotation.PreDestroy;
+import java.time.Duration;
 
 /**
  * Redis configuration
@@ -109,11 +112,30 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
     public RedisSentinelConfiguration sentinelConfig() {
-        return new RedisSentinelConfiguration()
+        final RedisSentinelConfiguration configuration = new RedisSentinelConfiguration()
             .master(env.getRequiredProperty("sqoola.redis.master"))
             .sentinel(env.getRequiredProperty("sqoola.redis.hosts.host1"), env.getRequiredProperty("sqoola.redis.hosts.port1", Integer.class))
             .sentinel(env.getRequiredProperty("sqoola.redis.hosts.host2"), env.getRequiredProperty("sqoola.redis.hosts.port2", Integer.class))
             .sentinel(env.getRequiredProperty("sqoola.redis.hosts.host3"), env.getRequiredProperty("sqoola.redis.hosts.port3", Integer.class));
+        configuration.setPassword("sqoola.redis.password");
+        return configuration;
+    }
+
+    @Bean
+    public RedisCacheManager cacheManager() {
+        final RedisCacheManager rcm = RedisCacheManager.builder(jedisConnectionFactory())
+            .cacheDefaults(cacheConfiguration())
+            .transactionAware()
+            .build();
+        return rcm;
+    }
+
+    @Bean
+    public RedisCacheConfiguration cacheConfiguration() {
+        final RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
+            .entryTtl(Duration.ofSeconds(600))
+            .disableCachingNullValues();
+        return cacheConfig;
     }
 
     @PreDestroy

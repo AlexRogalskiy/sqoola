@@ -10,7 +10,11 @@ springfox:
 
 spring:
   cache:
-    type: CAFFEINE
+    type: REDIS
+    redis:
+      use-key-prefix: true
+      time-to-live: 600000
+        cache-null-values: false
     cache-names: search_query_result
     caffeine:
       spec: maximumSize=70000,expireAfterAccess=300s
@@ -20,6 +24,8 @@ spring:
     job:
       enabled: false
   jpa:
+    repositories:
+      enabled: true
     show-sql: true
     open-in-view: false
     generate-ddl: false
@@ -47,19 +53,20 @@ spring:
     check-location: false
     baselineOnMigrate: true
     schemas: public
-  tomcat:
-    default-auto-commit: false
-    max-active: 200
-    max-idle: 200
-    min-idle: 10
-    initial-size: 10
-    max-wait: 5000
-    validation-query: SELECT 1;
-    validation-query-timeout: 1000
-    test-on-borrow: false
-    test-on-connect: true
-    test-on-return: true
-    test-while-idle: true
+  datasource:
+    tomcat:
+      default-auto-commit: false
+      max-active: 50
+      max-idle: 20
+      min-idle: 15
+      initial-size: 10
+      max-wait: 20000
+      validation-query: SELECT 1;
+      validation-query-timeout: 1000
+      test-on-borrow: false
+      test-on-connect: true
+      test-on-return: true
+      test-while-idle: true
 
 hibernate:
   connection:
@@ -78,6 +85,7 @@ logging:
     org.hibernate: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     com.wildbeeslabs.sensiblemetrics.sqoola: DEBUG
+    org.springframework.boot.autoconfigure.security: INFO
   pattern:
     console: "%d{HH:mm:ss.SSS} [%highlight(%-5.5level)] %cyan(%-56.56logger{56}) - %msg \\(%F:%L\\)#%M%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
@@ -279,13 +287,21 @@ spring:
       search:
         exclusiveIndexUse: true
         luceneVersion: LATEST
-  jedis:
-    maxIdle: 50
-    maxWaitMillis: 3000
-    maxTotal: 200
-    testOnBorrow: true
   redis:
+    jedis:
+      pool:
+        maxIdle: 7
+        minIdle: 2
+        maxActive: 7
+        maxWaitMillis: 3000
+        maxTotal: 200
+        testOnBorrow: true
     master: localhost
+    password:
+    key-prefix:
+    cache-null-values: false
+    time-to-live: 600000
+    use-key-prefix: true
     hosts:
       - host: localhost
         port: 26379
