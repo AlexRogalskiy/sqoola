@@ -23,6 +23,8 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.configuration;
 
+import com.wildbeeslabs.sensiblemetrics.sqoola.executors.TransactionalAsyncTaskExecutor;
+import com.wildbeeslabs.sensiblemetrics.sqoola.executors.impl.DelegatedTransactionalAsyncTaskExecutor;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.SessionFactory;
@@ -49,6 +51,7 @@ import org.springframework.orm.jpa.persistenceunit.PersistenceUnitManager;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -81,6 +84,26 @@ public class DBConfig {
      */
     public static final String DEFAULT_REPOSITORY_PACKAGE = "com.wildbeeslabs.sensiblemetrics.sqoola.repository";
     public static final String DEFAULT_MODEL_PACKAGE = "com.wildbeeslabs.sensiblemetrics.sqoola.model";
+    /**
+     * Default task executor thread prefix
+     */
+    public static final String DEFAULT_TASK_EXECUTOR_THREAD_NAME_PREFIX = "Triggers";
+    /**
+     * Default task executor thread group name
+     */
+    public static final String DEFAULT_TASK_EXECUTOR_THREAD_GROUP_NAME = "Trigger group";
+    /**
+     * Default task executor pool size
+     */
+    public static final int DEFAULT_EXECUTOR_POOL_SIZE = 10;
+    /**
+     * Default task executor max pool size
+     */
+    public static final int DEFAULT_EXECUTOR_MAX_POOL_SIZE = 20;
+    /**
+     * Default task executor queue size
+     */
+    public static final int DEFAULT_EXECUTOR_QUEUE_SIZE = 100 * 1000;
     /**
      * Default persistence unit name
      */
@@ -230,6 +253,39 @@ public class DBConfig {
         final HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(sessionFactory);
         return txManager;
+    }
+
+//    /**
+//     * Returns platform transaction manager instance {@link PlatformTransactionManager}
+//     *
+//     * @param entityManagerFactory - initial local container entity manager factory instance {@link LocalContainerEntityManagerFactoryBean}
+//     * @param observers            - initial collection of observers {@link TransactionObserver}
+//     * @return platform transaction manager {@link PlatformTransactionManager}
+//     */
+//    @Bean
+//    @ConditionalOnMissingBean({PlatformTransactionManager.class})
+//    public PlatformTransactionManager transactionManager(final LocalContainerEntityManagerFactoryBean entityManagerFactory, final List<TransactionObserver<Object>> observers) {
+//        final EntityManagerFactory factory = entityManagerFactory.getObject();
+//        return new ObservableTransactionManager<>(factory, observers);
+//    }
+
+    /**
+     * Returns transactional task executor instance {@link TransactionalAsyncTaskExecutor}
+     *
+     * @param transactionManager - initial transaction manager {@link PlatformTransactionManager}
+     * @return transactional task executor {@link TransactionalAsyncTaskExecutor}
+     */
+    @Bean
+    public TransactionalAsyncTaskExecutor transactionalAsyncTaskExecutor(final PlatformTransactionManager transactionManager) {
+        final ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setThreadNamePrefix(DEFAULT_TASK_EXECUTOR_THREAD_NAME_PREFIX);
+        threadPoolTaskExecutor.setThreadGroupName(DEFAULT_TASK_EXECUTOR_THREAD_GROUP_NAME);
+        threadPoolTaskExecutor.setCorePoolSize(DEFAULT_EXECUTOR_POOL_SIZE);
+        threadPoolTaskExecutor.setMaxPoolSize(DEFAULT_EXECUTOR_MAX_POOL_SIZE);
+        threadPoolTaskExecutor.setQueueCapacity(DEFAULT_EXECUTOR_QUEUE_SIZE);
+        threadPoolTaskExecutor.setWaitForTasksToCompleteOnShutdown(true);
+        threadPoolTaskExecutor.afterPropertiesSet();
+        return new DelegatedTransactionalAsyncTaskExecutor(transactionManager, threadPoolTaskExecutor);
     }
 
     @Bean

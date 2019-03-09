@@ -23,7 +23,7 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.model.constraint;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.constraint.validator.ChronologicalDatesConstraint;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.constraint.validator.ChronologicalDatesValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -37,7 +37,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)
 @ReportAsSingleViolation
-@Constraint(validatedBy = {ChronologicalDatesConstraint.class})
+@Constraint(validatedBy = {ChronologicalDatesValidator.class})
 public @interface ChronologicalDates {
 
     String message() default "{com.wildbeeslabs.sensiblemetrics.sqoola.model.constraint.ChronologicalDates.message}";

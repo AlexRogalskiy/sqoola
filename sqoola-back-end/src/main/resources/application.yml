@@ -239,16 +239,16 @@ sqoola:
       maxFetchDepth: 3
       defaultBatchFetchSize: 30
       generateStatistics: false
-      enableLazyLoadNoTrans: true
+      enable_lazy_load_no_trans: true
       globallyQuotedIdentifiers: false
       id:
         newGeneratorMappings: true
       transaction:
-        flushBeforeCompletion: true
+        flush_before_completion: true
         autoCloseSession: true
       event:
         merge:
-          entityCopyObserver: allow
+          entity_copy_observer: allow
       bytecode:
         useReflectionOptimizer: false
       temp:

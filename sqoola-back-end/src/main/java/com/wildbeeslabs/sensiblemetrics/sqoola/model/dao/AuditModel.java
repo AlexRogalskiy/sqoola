@@ -24,6 +24,7 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.model.dao;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.constraint.ChronologicalDates;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.interfaces.Auditable;
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.interfaces.PersistableAuditModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,7 +38,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 import java.util.Date;
 
 import static com.wildbeeslabs.sensiblemetrics.sqoola.utility.DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT;
@@ -54,7 +54,7 @@ import static com.wildbeeslabs.sensiblemetrics.sqoola.utility.DateUtils.DEFAULT_
 @MappedSuperclass
 @ChronologicalDates
 @EntityListeners(AuditingEntityListener.class)
-public abstract class AuditModel implements PersistableAuditModel, Serializable {
+public abstract class AuditModel implements PersistableAuditModel, Auditable {
 
     /**
      * Default explicit serialVersionUID for interoperability

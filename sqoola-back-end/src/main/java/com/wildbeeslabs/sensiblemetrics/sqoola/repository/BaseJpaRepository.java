@@ -27,6 +27,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * Base JPA repository declaration {@link JpaRepository}
@@ -36,4 +37,6 @@ import java.io.Serializable;
  */
 @NoRepositoryBean
 public interface BaseJpaRepository<E, ID extends Serializable> extends JpaRepository<E, ID> {
+
+    Optional<E> findById(final ID id);
 }

@@ -24,10 +24,12 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.model.dao;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.interfaces.PersistableBaseModel;
+import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.interfaces.Versionable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -44,7 +46,7 @@ import java.util.Objects;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @MappedSuperclass
-public abstract class BaseModel<ID extends Serializable> extends AuditModel implements PersistableBaseModel, Persistable<ID> {
+public abstract class BaseModel<ID extends Serializable> extends AuditModel implements PersistableBaseModel, Persistable<ID>, Versionable<Long> {
 
     /**
      * Default explicit serialVersionUID for interoperability
@@ -61,6 +63,12 @@ public abstract class BaseModel<ID extends Serializable> extends AuditModel impl
 //    )
     @Column(name = ID_FIELD_NAME, unique = true, nullable = false)
     private ID id;
+
+    //@Version
+    @ColumnDefault("0")
+    @Column(name = "version", insertable = false, updatable = false)
+    //@Generated(GenerationTime.ALWAYS)
+    private Long version;
 
     @Override
     public boolean isNew() {

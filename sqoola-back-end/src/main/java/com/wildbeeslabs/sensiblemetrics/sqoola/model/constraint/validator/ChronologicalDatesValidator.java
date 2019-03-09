@@ -36,7 +36,7 @@ import java.util.Objects;
  * @version 1.0.0
  * @since 2017-08-08
  */
-public class ChronologicalDatesConstraint implements ConstraintValidator<ChronologicalDates, BaseModel<?>> {
+public class ChronologicalDatesValidator implements ConstraintValidator<ChronologicalDates, BaseModel<?>> {
 
     @Override
     public void initialize(final ChronologicalDates constraintAnnotation) {
