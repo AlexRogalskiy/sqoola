@@ -69,8 +69,8 @@ import java.util.UUID;
 @EnableTransactionManagement
 @EnableJpaRepositories(
     basePackages = {
-        "com.wildbeeslabs.sensiblemetrics.sqoola.model",
-        "com.wildbeeslabs.sensiblemetrics.sqoola.repository"
+        "com.wildbeeslabs.sensiblemetrics.sqoola.common.model",
+        "com.wildbeeslabs.sensiblemetrics.sqoola.common.repository"
     }
 )
 @PropertySources({

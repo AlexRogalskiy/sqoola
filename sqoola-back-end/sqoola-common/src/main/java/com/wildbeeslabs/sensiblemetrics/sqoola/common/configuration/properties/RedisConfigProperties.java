@@ -46,10 +46,18 @@ import java.util.Map;
 public class RedisConfigProperties {
 
     /**
-     * Default master host
+     * Default cache master host
      */
     private String master;
-    
+    /**
+     * Default cache entry time-to-live
+     */
+    private Integer ttl;
+    /**
+     * Default cache password
+     */
+    private String password;
+
     /**
      * Default collection of slave hosts
      */

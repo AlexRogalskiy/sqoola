@@ -23,11 +23,11 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.configuration;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao.AuthUserDaoService;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.security.SecurityAccessDeniedHandler;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.security.SecurityAuditorAwareHandler;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.security.SecurityAuthenticationEntryPoint;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.security.SecurityAuthenticationSuccessHandler;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao.AuthUserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;

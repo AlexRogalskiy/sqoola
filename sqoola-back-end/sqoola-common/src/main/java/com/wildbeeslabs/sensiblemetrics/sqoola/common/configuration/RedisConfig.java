@@ -150,7 +150,8 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
     public RedisCacheManager cacheManager() {
-        final RedisCacheManager rcm = RedisCacheManager.builder(jedisConnectionFactory())
+        final RedisCacheManager rcm = RedisCacheManager
+            .builder(jedisConnectionFactory())
             .cacheDefaults(cacheConfiguration())
             .transactionAware()
             .build();
@@ -159,8 +160,10 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
     public RedisCacheConfiguration cacheConfiguration() {
-        final RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
-            .entryTtl(Duration.ofSeconds(600))
+        final RedisCacheConfiguration cacheConfig = RedisCacheConfiguration
+            .defaultCacheConfig()
+            .entryTtl(Duration.ofSeconds(env.getRequiredProperty("sqoola.redis.ttl", Integer.class)))
+            .prefixKeysWith(env.getRequiredProperty("sqoola.redis.prefix"))
             .disableCachingNullValues();
         return cacheConfig;
     }

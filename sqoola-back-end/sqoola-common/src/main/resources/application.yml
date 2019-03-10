@@ -13,8 +13,9 @@ spring:
     type: REDIS
     redis:
       use-key-prefix: true
+      key-prefix: sqoola:common
       time-to-live: 600000
-        cache-null-values: false
+      cache-null-values: false
     cache-names: search_query_result
     caffeine:
       spec: maximumSize=70000,expireAfterAccess=300s
