@@ -29,6 +29,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -56,6 +58,12 @@ public abstract class BaseDaoServiceImpl<E, ID extends Serializable> implements 
     public Iterable<E> findAll() {
         log.info("Fetching all target entities");
         return getRepository().findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<E> findAll(final Pageable pageable) {
+        return getRepository().findAll(pageable);
     }
 
     @Override
@@ -104,7 +112,7 @@ public abstract class BaseDaoServiceImpl<E, ID extends Serializable> implements 
     @Override
     @Transactional(readOnly = true)
     public boolean exists(final ID id) {
-        return find(id).isPresent();
+        return getRepository().existsById(id);
     }
 
     protected EntityManager getEntityManager() {

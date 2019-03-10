@@ -23,6 +23,9 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.io.Serializable;
 import java.util.Optional;
 
@@ -32,17 +35,21 @@ import java.util.Optional;
  * @param <E>  type of document
  * @param <ID> type of document identifier {@link Serializable}
  */
-public interface BaseDaoService<E, ID extends Serializable> {
+public interface BaseDaoService<E extends Serializable, ID extends Serializable> {
 
     Iterable<? extends E> findAll();
 
     Iterable<? extends E> findAll(final Iterable<ID> ids);
+
+    Page<E> findAll(final Pageable pageable);
 
     Optional<E> find(final ID id);
 
     <S extends E> S save(final S entity);
 
     //void saveAll(final Iterable<? extends E> target);
+
+    //void saveOrUpdate(final E target, final Class<? extends E> clazz);
 
     boolean exists(final ID id);
 

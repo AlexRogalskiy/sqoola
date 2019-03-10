@@ -15,4 +15,6 @@ module com.wildbeeslabs.sensiblemetrics.ansifancy {
     requires spring.batch.core;
     requires springfox.swagger2;
     requires spring.boot;
+    requires spring.tx;
+    requires spring.data.commons;
 }

@@ -28,6 +28,7 @@ import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.AuditModel;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * {@link AuditModel} service declaration
@@ -37,7 +38,49 @@ import java.util.List;
  */
 public interface AuditModelDaoService<E extends AuditModel, ID extends Serializable> extends BaseDaoService<E, ID> {
 
-    List<? extends E> findByCreatedBetween(final Date dateFrom, final Date dateTo);
+    /**
+     * Get list of entities {@link AuditModel} created by user / owner name
+     *
+     * @param createdBy - user / owner name of created entities
+     * @return list of entities {@link AuditModel} in concurrent container
+     * {@link CompletableFuture}
+     */
+    default CompletableFuture<List<? extends E>> findByCreatedBy(final String createdBy) {
+        return getRepository().findByCreatedBy(createdBy);
+    }
 
-    List<? extends E> findByChangedBetween(final Date dateFrom, final Date dateTo);
+    /**
+     * Get list of entities {@link AuditModel} modified by user / owner name
+     *
+     * @param modifiedBy - user / owner name of modified entities
+     * @return list of entities {@link AuditModel} in concurrent container
+     * {@link CompletableFuture}
+     */
+    default CompletableFuture<List<? extends E>> findByModifiedBy(final String modifiedBy) {
+        return getRepository().findByModifiedBy(modifiedBy);
+    }
+
+    /**
+     * Get list of entities {@link AuditModel} created within requested period
+     *
+     * @param dateFrom - start date of requested period (excluding)
+     * @param dateTo   - end date of requested period (including)
+     * @return list of entities {@link AuditModel} in concurrent container
+     * {@link CompletableFuture}
+     */
+    default CompletableFuture<List<? extends E>> findByCreatedAtBetween(final Date dateFrom, final Date dateTo) {
+        return getRepository().findByCreatedAtBetween(dateFrom, dateTo);
+    }
+
+    /**
+     * Get list of entities {@link AuditModel} created within requested period
+     *
+     * @param dateFrom - start date of requested period (excluding)
+     * @param dateTo   - end date of requested period (including)
+     * @return list of entities {@link AuditModel} in concurrent container
+     * {@link CompletableFuture}
+     */
+    default CompletableFuture<List<? extends E>> findByModifiedAtBetween(final Date dateFrom, final Date dateTo) {
+        return getRepository().findByModifiedAtBetween(dateFrom, dateTo);
+    }
 }

@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2019 WildBees Labs, Inc.
+ * Copyright 2017 WildBees Labs.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,20 +23,28 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.BaseModel;
-
 import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * {@link BaseModel} service declaration
+ * {@link Tag} service declaration
  *
- * @param <E>  type of base model {@link BaseModel}
- * @param <ID> type of base document identifier {@link Serializable}
+ * @param <E>
+ * @param <ID>
+ * @author Alex
+ * @version 1.0.0
+ * @since 2017-08-08
  */
-public interface BaseModelDaoService<E extends BaseModel<ID>, ID extends Serializable> extends AuditModelDaoService<E, ID> {
+public interface TagDaoService<E extends Tag, ID extends Serializable> extends BaseModelDaoService<E, ID> {
 
-    Optional<? extends E> findByPrefix(final String prefix);
-
-    List<? extends E> findByDictionary(final BaseDictionaryInfoEntity dictionary);
+    /**
+     * Get tag entities {@code T} by tag name
+     *
+     * @param name - tag name
+     * @return tag entities {@code T} in optional container
+     * {@link Optional}
+     */
+    default Optional<? extends E> findByName(final String name) {
+        return getRepository().findByName(name);
+    }
 }
