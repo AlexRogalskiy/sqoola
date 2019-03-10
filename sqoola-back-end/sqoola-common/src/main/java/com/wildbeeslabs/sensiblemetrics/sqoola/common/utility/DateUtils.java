@@ -27,15 +27,13 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * Custom date utilities implementation
@@ -47,7 +45,7 @@ public class DateUtils {
     /**
      * Default date format locale
      */
-    public static final String DEFAULT_DATE_FORMAT_LOCALE = "de_DE";
+    public static final String DEFAULT_DATE_FORMAT_LOCALE = "en_GB";
     /**
      * Default date format pattern
      */
@@ -64,6 +62,10 @@ public class DateUtils {
      * Default time pattern
      */
     public static final String DEFAULT_TIME_PATTERN = "h:mm a";
+    /**
+     * Default time zone pattern
+     */
+    public static final String DEFAULT_TIMEZONE_PATTERN = Calendar.getInstance().getTimeZone().getID();
 
     public static Integer getDaysDiff(final Date startDate, final Date endDate) {
         if (Objects.isNull(startDate) || Objects.isNull(endDate)) {
@@ -175,5 +177,37 @@ public class DateUtils {
 
     public static Date toUTCDate(final String date, final String dateFormat) {
         return toDate(date, dateFormat, Locale.getDefault(), TimeZone.getTimeZone("UTC"));
+    }
+
+    public static Date strToDate(final String str) {
+        return strToDate(str, DEFAULT_TIMEZONE_PATTERN);
+    }
+
+    public static Date strToDate(final String str, final String timezone) {
+        return strToDate(str, timezone, DEFAULT_DATE_FORMAT_PATTERN);
+    }
+
+    public static Date strToDate(final String str, final String timezone, final String format) {
+        try {
+            final DateFormat df = new SimpleDateFormat(format);
+            df.setTimeZone(TimeZone.getTimeZone(timezone));
+            return df.parse(str);
+        } catch (ParseException ex) {
+            return null;
+        }
+    }
+
+    public static String dateToStr(final Date date) {
+        return dateToStr(date, DEFAULT_TIMEZONE_PATTERN);
+    }
+
+    public static String dateToStr(final Date date, final String timezone) {
+        return dateToStr(date, timezone, DEFAULT_DATE_FORMAT_PATTERN);
+    }
+
+    public static String dateToStr(final Date date, final String timezone, final String format) {
+        final DateFormat df = new SimpleDateFormat(format);
+        df.setTimeZone(TimeZone.getTimeZone(timezone));
+        return df.format(date);
     }
 }

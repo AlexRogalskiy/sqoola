@@ -25,13 +25,12 @@ package com.wildbeeslabs.sensiblemetrics.sqoola.common.utility;
 
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import javax.sql.DataSource;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -40,6 +39,16 @@ import java.util.stream.Collectors;
 @Slf4j
 @UtilityClass
 public class QueryUtils {
+
+    public Properties load(final DataSource dataSource) {
+        final Properties properties = new Properties();
+        final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        List<Map<String, Object>> configs = jdbcTemplate.queryForList("select config_key, config_value from config_params");
+        configs.forEach((config) -> {
+            properties.setProperty(String.valueOf(config.get("config_key")), String.valueOf(config.get("config_value")));
+        });
+        return properties;
+    }
 
     @SuppressWarnings("unchecked")
     public static List<String[]> executeNativeQueryWithCastCheck(final String statement, final EntityManager em) {
