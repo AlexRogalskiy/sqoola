@@ -90,13 +90,13 @@ logging:
   config: classpath:logback.xml
   file: logs/application.log
   level:
-    root: DEBUG
+    ROOT: DEBUG
     org.springframework: DEBUG
     org.springframework.web: DEBUG
     org.hibernate: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicBinder: DEBUG
     com.wildbeeslabs.sensiblemetrics.sqoola: DEBUG
-    org.springframework.boot.autoconfigure.security: INFO
+    org.springframework.boot.autoconfigure.security: DEBUG
   pattern:
     console: "%d{HH:mm:ss.SSS} [%highlight(%-5.5level)] %cyan(%-56.56logger{56}) - %msg \\(%F:%L\\)#%M%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
@@ -149,7 +149,9 @@ logging:
     org.springframework: WARN
     org.springframework.web: WARN
     org.hibernate: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
     com.wildbeeslabs.sensiblemetrics.sqoola: WARN
+    org.springframework.boot.autoconfigure.security: WARN
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
@@ -271,7 +273,7 @@ spring:
         new_generator_mappings: true
       transaction:
         flush_before_completion: true
-        autoCloseSession: true
+        auto_close_session: true
       event:
         merge:
           entity_copy_observer: allow
@@ -304,6 +306,21 @@ spring:
       search:
         exclusiveIndexUse: true
         luceneVersion: LATEST
+        default:
+          worker:
+            execution: async
+          directoryProvider: filesystem
+          indexBase: ${java.io.tmpdir}/.lucene
+          indexpath: ${java.io.tmpdir}/.lucene/indexes
+          indexmanager: near-real-time
+          chunk_size: 128000
+          metadata_cachename: LuceneIndexesMetadataOWR1
+          data_cachename: LuceneIndexesDataOWR1
+          locking_cachename: LuceneIndexesLockingOWR1
+          exclusive_index_use: true
+          batch:
+            mergeFactor: 10
+            maxBufferedDocs: 10
   redis:
     jedis:
       pool:
@@ -344,7 +361,9 @@ logging:
     org.springframework: WARN
     org.springframework.web: WARN
     org.hibernate: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
     com.wildbeeslabs.sensiblemetrics.sqoola: WARN
+    org.springframework.boot.autoconfigure.security: WARN
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
