@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: "local"
+    active: "dev"
 ---
 springfox:
   documentation:
@@ -121,6 +121,8 @@ server:
     enabled: false
     key-store: classpath:main.jks
     key-password: secret
+  hystrix:
+    command.default.execution.timeout.enabled: false
 
 management:
   info:
@@ -141,7 +143,7 @@ server:
   email: prod@sqoola.com
 
 logging:
-  file: logs/prod_app.log
+  file: logs/application_prod.log
   level:
     ROOT: WARN
     org.springframework: WARN
@@ -153,7 +155,7 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 ---
 spring:
-  profiles: local, default
+  profiles: dev, default
   resources:
     static-locations: classpath:/templates
   application:
@@ -333,10 +335,10 @@ spring:
       timeout: 3600
 
 server:
-  email: local@test.com
+  email: dev@sqoola.com
 
 logging:
-  file: logs/dev_app.log
+  file: logs/application_dev.log
   level:
     ROOT: WARN
     org.springframework: WARN
