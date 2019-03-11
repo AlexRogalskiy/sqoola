@@ -9,6 +9,16 @@ springfox:
         path: classpath:securityDefinition.json
 
 spring:
+  messages:
+    encoding: UTF-8
+  mvc:
+    static-path-pattern: /resources/**
+    favicon:
+      enabled: true
+  security:
+    user:
+      name: admin
+      password: admin
   cache:
     type: REDIS
     redis:
@@ -90,6 +100,7 @@ logging:
   pattern:
     console: "%d{HH:mm:ss.SSS} [%highlight(%-5.5level)] %cyan(%-56.56logger{56}) - %msg \\(%F:%L\\)#%M%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  path: logs
 
 server:
   email: dev@sqoola.com

@@ -129,6 +129,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //            .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
 //            .and().httpBasic().realmName("MY APP REALM")
 //            .authenticationEntryPoint(authenticationEntryPoint());
+
+//        http.authorizeRequests()
+//            .antMatchers("/app/secure/**").hasAnyRole("ADMIN","USER")
+//            .and().formLogin()  //login configuration
+//            .loginPage("/app/login")
+//            .loginProcessingUrl("/app-login")
+//            .usernameParameter("app_username")
+//            .passwordParameter("app_password")
+//            .defaultSuccessUrl("/app/secure/article-details")
+//            .and().logout()    //logout configuration
+//            .logoutUrl("/app-logout")
+//            .logoutSuccessUrl("/app/login")
+//            .and().exceptionHandling() //exception handling configuration
+//            .accessDeniedPage("/app/error");
     }
 
     @Bean
