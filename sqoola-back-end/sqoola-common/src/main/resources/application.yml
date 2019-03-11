@@ -161,6 +161,9 @@ spring:
     label: © 2019 Powered by Sqoola
   devtools:
     restart:
+      additional-paths: files
+      exclude: static/**,templates/**
+      trigger-file: apptrigger.txt
       log-condition-evaluation-delta: false
       enabled: true
     livereload:
