@@ -29,6 +29,7 @@ import com.wildbeeslabs.sensiblemetrics.sqoola.common.security.SecurityAuthentic
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.security.SecurityAuthenticationSuccessHandler;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao.AuthUserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
@@ -49,6 +50,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 /**
  * Web security configuration {@link WebSecurityConfigurerAdapter}
@@ -64,6 +66,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthUserDaoService authUserService;
+
+    @Autowired
+    @Qualifier("persistentTokenRepository")
+    private PersistentTokenRepository persistentTokenRepository;
 
     @Bean
     @Override
@@ -144,6 +150,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //            .and().exceptionHandling() //exception handling configuration
 //            .accessDeniedPage("/app/error");
     }
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
+//            .and()
+//            .authorizeRequests().antMatchers("/login**").permitAll()
+//            .and()
+//            .formLogin().loginPage("/login").loginProcessingUrl("/loginAction").permitAll()
+//            .and()
+//            .logout().logoutSuccessUrl("/login").permitAll()
+//            .and()
+//            .rememberMe().rememberMeParameter("remember-me")
+//            .tokenRepository(persistentTokenRepository).userDetailsService(authUserService)
+//            .and()
+//            .csrf().disable();
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

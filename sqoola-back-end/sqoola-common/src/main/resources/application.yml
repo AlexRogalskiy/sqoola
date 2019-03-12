@@ -183,7 +183,9 @@ spring:
   datasource:
     driver: org.postgresql.Driver
     #driver-class-name:  org.postgresql.Driver
+    #com.p6spy.engine.spy.P6SpyDriver
     url: jdbc:postgresql://localhost:5432/sqoola_db
+    #jdbc:p6spy:postgresql://localhost:5432/sqoola_db
     type: com.zaxxer.hikari.HikariDataSource
     username: postgres
     password: postgres
@@ -298,18 +300,21 @@ spring:
       #        useQueryCache: true
       #        configurationResourceName: /ehcache.xml
       c3p0:
-        minSize: 10
-        maxSize: 25
+        min_size: 10
+        max_size: 25
         timeout: 500
-        maxStatements: 50
-        idleTestPeriod: 2000
+        max_statements: 50
+        idle_test_period: 2000
+        acquire_increment: 1
       search:
         exclusiveIndexUse: true
         luceneVersion: LATEST
         default:
           worker:
             execution: async
-          directoryProvider: filesystem
+          directory_provider: filesystem
+          indexwriter:
+            infostream: true
           indexBase: ${java.io.tmpdir}/.lucene
           indexpath: ${java.io.tmpdir}/.lucene/indexes
           indexmanager: near-real-time

@@ -113,22 +113,32 @@ THE SOFTWARE.
     </appender>
 
     <logger name="ROOT" level="WARN"/>
+
     <logger name="org.springframework" level="WARN"/>
+    <Logger name="org.springframework.core" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE_AUDIT"/>
+    </Logger>
     <logger name="org.springframework.boot" level="WARN"/>
     <logger name="org.springframework.transaction" level="WARN"/>
     <logger name="org.springframework.web.servlet.mvc" level="WARN"/>
-    <logger name="org.hibernate" level="DEBUG"/>
 
+    <logger name="org.hibernate" level="DEBUG"/>
+    <Logger name="org.hibernate.search" level="TRACE" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </Logger>
     <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
         <appender-ref ref="FILE_AUDIT"/>
     </logger>
     <logger name="org.hibernate.type" level="TRACE" additivity="false">
         <appender-ref ref="FILE_AUDIT"/>
     </logger>
-    <logger name="com.wildbeeslabs.sensiblemetrics.sqoola" level="DEBUG" additivity="false">
+    <Logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
         <appender-ref ref="FILE_AUDIT"/>
-    </logger>
-    <logger name="audit" level="DEBUG" additivity="false">
+    </Logger>
+
+    <logger name="com.wildbeeslabs.sensiblemetrics.sqoola.common" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_AUDIT"/>
     </logger>
 
