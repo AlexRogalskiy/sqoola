@@ -114,6 +114,11 @@ public class DBConfig {
      * Default domain name prefix
      */
     public static final String DEFAULT_DOMAIN_NAME_PREFIX = "domain_";
+    /**
+     * Default hibernate property names
+     */
+    public static final String EJB_NAMING_STRATEGY = "hibernate.ejb.naming_strategy";
+    public static final String TEMP_USE_JDBC_METADATA_DEFAULTS = "hibernate.temp.use_jdbc_metadata_defaults";
 
     @Autowired
     private Environment env;
@@ -317,39 +322,39 @@ public class DBConfig {
     @Bean
     public Properties jpaProperties() {
         final Properties jpaProperties = new Properties();
-        // connection properties
-        //jpaProperties.put("hibernate.connection.provider_class", env.getRequiredProperty("sqoola.datasource.hibernate.connection.providerClass"));
-        jpaProperties.put("hibernate.connection.pool_size", env.getRequiredProperty("sqoola.datasource.hibernate.connection.poolSize"));
-        jpaProperties.put("hibernate.connection.autocommit", env.getRequiredProperty("sqoola.datasource.hibernate.connection.autocommit"));
-        jpaProperties.put("hibernate.connection.release_mode", env.getRequiredProperty("sqoola.datasource.hibernate.connection.releaseMode"));
+        // hibernate connection properties
+        //jpaProperties.put(CONNECTION_PROVIDER, env.getRequiredProperty("sqoola.datasource.hibernate.connection.providerClass"));
+        jpaProperties.put(POOL_SIZE, env.getRequiredProperty("sqoola.datasource.hibernate.connection.poolSize"));
+        jpaProperties.put(AUTOCOMMIT, env.getRequiredProperty("sqoola.datasource.hibernate.connection.autocommit"));
+        jpaProperties.put(RELEASE_CONNECTIONS, env.getRequiredProperty("sqoola.datasource.hibernate.connection.releaseMode"));
         jpaProperties.put("hibernate.connection.useUnicode", env.getRequiredProperty("sqoola.datasource.hibernate.connection.useUnicode"));
         jpaProperties.put("hibernate.connection.charSet", env.getRequiredProperty("sqoola.datasource.hibernate.connection.charSet"));
         jpaProperties.put("hibernate.connection.characterEncoding", env.getRequiredProperty("sqoola.datasource.hibernate.connection.characterEncoding"));
 
-        // general properties
-        jpaProperties.put("hibernate.dialect", env.getRequiredProperty("sqoola.datasource.hibernate.dialect"));
-        jpaProperties.put("hibernate.current_session_context_class", env.getRequiredProperty("sqoola.datasource.hibernate.currentSessionContextClass"));
+        // hibernate general properties
+        jpaProperties.put(DIALECT, env.getRequiredProperty("sqoola.datasource.hibernate.dialect"));
+        jpaProperties.put(CURRENT_SESSION_CONTEXT_CLASS, env.getRequiredProperty("sqoola.datasource.hibernate.currentSessionContextClass"));
         jpaProperties.put(HBM2DDL_AUTO, env.getRequiredProperty("sqoola.datasource.hibernate.hbm2ddl.auto"));
-        jpaProperties.put("hibernate.hbm2ddl.import_files", env.getRequiredProperty("sqoola.datasource.hibernate.hbm2ddl.importFiles"));
-        jpaProperties.put("hibernate.ejb.naming_strategy", env.getRequiredProperty("sqoola.datasource.hibernate.ejb.namingStrategy"));
+        jpaProperties.put(HBM2DDL_IMPORT_FILES, env.getRequiredProperty("sqoola.datasource.hibernate.hbm2ddl.importFiles"));
+        jpaProperties.put(EJB_NAMING_STRATEGY, env.getRequiredProperty("sqoola.datasource.hibernate.ejb.namingStrategy"));
         jpaProperties.put(SHOW_SQL, env.getRequiredProperty("sqoola.datasource.hibernate.showSql"));
-        jpaProperties.put("hibernate.format_sql", env.getRequiredProperty("sqoola.datasource.hibernate.formatSql"));
-        jpaProperties.put("hibernate.use_sql_comments", env.getRequiredProperty("sqoola.datasource.hibernate.useSqlComments"));
-        jpaProperties.put("hibernate.enable_lazy_load_no_trans", env.getRequiredProperty("sqoola.datasource.hibernate.enableLazyLoadNoTrans"));
-        jpaProperties.put("hibernate.max_fetch_depth", env.getRequiredProperty("sqoola.datasource.hibernate.maxFetchDepth"));
-        jpaProperties.put("hibernate.default_batch_fetch_size", env.getRequiredProperty("sqoola.datasource.hibernate.defaultBatchFetchSize"));
-        jpaProperties.put("hibernate.generate_statistics", env.getRequiredProperty("sqoola.datasource.hibernate.generateStatistics"));
-        jpaProperties.put("hibernate.globally_quoted_identifiers", env.getRequiredProperty("sqoola.datasource.hibernate.globallyQuotedIdentifiers"));
-        jpaProperties.put("hibernate.id.new_generator_mappings", env.getRequiredProperty("sqoola.datasource.hibernate.id.newGeneratorMappings"));
-        jpaProperties.put("hibernate.transaction.flush_before_completion", env.getRequiredProperty("sqoola.datasource.hibernate.transaction.flushBeforeCompletion"));
-        jpaProperties.put("hibernate.transaction.auto_close_session", env.getRequiredProperty("sqoola.datasource.hibernate.transaction.autoCloseSession"));
-        jpaProperties.put("hibernate.getString.merge.entity_copy_observer", env.getRequiredProperty("sqoola.datasource.hibernate.event.merge.entityCopyObserver"));
-        jpaProperties.put("hibernate.bytecode.use_reflection_optimizer", env.getRequiredProperty("sqoola.datasource.hibernate.bytecode.useReflectionOptimizer"));
-        jpaProperties.put("hibernate.temp.use_jdbc_metadata_defaults", env.getRequiredProperty("sqoola.datasource.hibernate.temp.useJdbcMetadataDefaults"));
-        //jpaProperties.put("hibernate.multi_tenant_connection_provider", env.getRequiredProperty("sqoola.datasource.hibernate.multiTenantConnectionProvider"));
-        //jpaProperties.put("hibernate.multiTenancy", env.getRequiredProperty("sqoola.datasource.hibernate.multiTenancy"));
+        jpaProperties.put(FORMAT_SQL, env.getRequiredProperty("sqoola.datasource.hibernate.formatSql"));
+        jpaProperties.put(USE_SQL_COMMENTS, env.getRequiredProperty("sqoola.datasource.hibernate.useSqlComments"));
+        jpaProperties.put(ENABLE_LAZY_LOAD_NO_TRANS, env.getRequiredProperty("sqoola.datasource.hibernate.enableLazyLoadNoTrans"));
+        jpaProperties.put(MAX_FETCH_DEPTH, env.getRequiredProperty("sqoola.datasource.hibernate.maxFetchDepth"));
+        jpaProperties.put(DEFAULT_BATCH_FETCH_SIZE, env.getRequiredProperty("sqoola.datasource.hibernate.defaultBatchFetchSize"));
+        jpaProperties.put(GENERATE_STATISTICS, env.getRequiredProperty("sqoola.datasource.hibernate.generateStatistics"));
+        jpaProperties.put(GLOBALLY_QUOTED_IDENTIFIERS, env.getRequiredProperty("sqoola.datasource.hibernate.globallyQuotedIdentifiers"));
+        jpaProperties.put(USE_NEW_ID_GENERATOR_MAPPINGS, env.getRequiredProperty("sqoola.datasource.hibernate.id.newGeneratorMappings"));
+        jpaProperties.put(FLUSH_BEFORE_COMPLETION, env.getRequiredProperty("sqoola.datasource.hibernate.transaction.flushBeforeCompletion"));
+        jpaProperties.put(AUTO_CLOSE_SESSION, env.getRequiredProperty("sqoola.datasource.hibernate.transaction.autoCloseSession"));
+        jpaProperties.put(MERGE_ENTITY_COPY_OBSERVER, env.getRequiredProperty("sqoola.datasource.hibernate.event.merge.entityCopyObserver"));
+        jpaProperties.put(USE_REFLECTION_OPTIMIZER, env.getRequiredProperty("sqoola.datasource.hibernate.bytecode.useReflectionOptimizer"));
+        jpaProperties.put(MULTI_TENANT_CONNECTION_PROVIDER, env.getRequiredProperty("sqoola.datasource.hibernate.temp.useJdbcMetadataDefaults"));
+        //jpaProperties.put(MULTI_TENANT_CONNECTION_PROVIDER, env.getRequiredProperty("sqoola.datasource.hibernate.multiTenantConnectionProvider"));
+        //jpaProperties.put(MULTI_TENANT, env.getRequiredProperty("sqoola.datasource.hibernate.multiTenancy"));
 
-        // cache properties
+        // hibernate cache properties
         //jpaProperties.put("hibernate.cache.ehcache.missing_cache_strategy", env.getRequiredProperty("sqoola.datasource.hibernate.cache.ehcache.missingCacheStrategy"));
         //jpaProperties.put("hibernate.cache.region.factory_class", env.getRequiredProperty("sqoola.datasource.hibernate.cache.region.factoryClass"));
         //jpaProperties.put("hibernate.cache.use_second_level_cache", env.getRequiredProperty("sqoola.datasource.hibernate.cache.useSecondLevelCache"));
@@ -357,7 +362,7 @@ public class DBConfig {
         //jpaProperties.put("hibernate.cache.use_query_cache", env.getRequiredProperty("sqoola.datasource.hibernate.cache.useQueryCache"));
         //jpaProperties.put("net.sf.ehcache.configurationResourceName", env.getRequiredProperty("sqoola.datasource.hibernate.cache.configurationResourceName"));
 
-        // search properties
+        // hibernate search properties
         jpaProperties.put("hibernate.search.exclusive_index_use", env.getRequiredProperty("sqoola.datasource.hibernate.search.exclusiveIndexUse"));
         jpaProperties.put("hibernate.search.lucene_version", env.getRequiredProperty("sqoola.datasource.hibernate.search.luceneVersion"));
         //jpaProperties.put("hibernate.search.default.worker.execution", env.getRequiredProperty("sqoola.datasource.hibernate.search.default.worker.execution"));
@@ -373,14 +378,14 @@ public class DBConfig {
         //jpaProperties.put("hibernate.search.default.batch.max_buffered_docs", env.getRequiredProperty("sqoola.datasource.hibernate.search.default.batch.maxBufferedDocs"));
         //jpaProperties.put("hibernate.search.default.indexwriter.infostream", env.getRequiredProperty("sqoola.datasource.hibernate.search.default.indexwriter.infostream"));
 
-        // fetch/batch properties
-        jpaProperties.put("hibernate.jdbc.fetch_size", env.getRequiredProperty("sqoola.datasource.hibernate.jdbc.fetchSize"));
-        jpaProperties.put("hibernate.jdbc.batch_size", env.getRequiredProperty("sqoola.datasource.hibernate.jdbc.batchSize"));
-        jpaProperties.put("hibernate.jdbc.batch_versioned_data", env.getRequiredProperty("sqoola.datasource.hibernate.jdbc.batchVersionedData"));
-        jpaProperties.put("hibernate.order_inserts", env.getRequiredProperty("sqoola.datasource.hibernate.orderInserts"));
-        jpaProperties.put("hibernate.order_updates", env.getRequiredProperty("sqoola.datasource.hibernate.orderUpdates"));
+        // hibernate fetch/batch properties
+        jpaProperties.put(STATEMENT_FETCH_SIZE, env.getRequiredProperty("sqoola.datasource.hibernate.jdbc.fetchSize"));
+        jpaProperties.put(BATCH_VERSIONED_DATA, env.getRequiredProperty("sqoola.datasource.hibernate.jdbc.batchSize"));
+        jpaProperties.put(ORDER_INSERTS, env.getRequiredProperty("sqoola.datasource.hibernate.jdbc.batchVersionedData"));
+        jpaProperties.put(ORDER_INSERTS, env.getRequiredProperty("sqoola.datasource.hibernate.orderInserts"));
+        jpaProperties.put(ORDER_UPDATES, env.getRequiredProperty("sqoola.datasource.hibernate.orderUpdates"));
 
-        // connection pool properties
+        // hikari connection pool properties
         jpaProperties.put(C3P0_MIN_SIZE, env.getRequiredProperty("sqoola.datasource.hibernate.c3p0.minSize"));
         jpaProperties.put(C3P0_MAX_SIZE, env.getRequiredProperty("sqoola.datasource.hibernate.c3p0.maxSize"));
         jpaProperties.put(C3P0_TIMEOUT, env.getRequiredProperty("sqoola.datasource.hibernate.c3p0.timeout"));
@@ -388,7 +393,7 @@ public class DBConfig {
         jpaProperties.put(C3P0_IDLE_TEST_PERIOD, env.getRequiredProperty("sqoola.datasource.hibernate.c3p0.idleTestPeriod"));
         jpaProperties.put(C3P0_ACQUIRE_INCREMENT, env.getRequiredProperty("sqoola.datasource.hibernate.c3p0.acquireIncrement"));
 
-        // native properties
+        // hibernate native properties
         jpaProperties.setProperty("org.hibernate.SQL", "true");
         jpaProperties.setProperty("org.hibernate.type", "true");
         return jpaProperties;

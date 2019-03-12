@@ -243,6 +243,9 @@ spring:
       autoCommit: true
       #leakDetectionThreshold: 60000
     hibernate:
+      validator:
+        apply_to_ddl: false
+        autoregister_listeners: false
       connection:
         characterEncoding: UTF-8
         charSet: UTF-8
@@ -258,7 +261,8 @@ spring:
         auto: create-drop
         defaultSchema:
         importFiles: dml.sql
-      ejb.namingStrategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ejb:
+        namingStrategy: org.hibernate.cfg.ImprovedNamingStrategy
       archive.autodetection: class,hbm
       show_sql: true
       format_sql: true
@@ -267,12 +271,13 @@ spring:
       defaultBatchFetchSize: 30
       generateStatistics: false
       enable_lazy_load_no_trans: true
-      globallyQuotedIdentifiers: false
+      globally_quoted_identifiers: false
       id:
         new_generator_mappings: true
       transaction:
         flush_before_completion: true
         auto_close_session: true
+        #manager_lookup_class: org.hibernate.transaction.TransactionManagerLookup
       event:
         merge:
           entity_copy_observer: allow
@@ -372,3 +377,21 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+---
+javers:
+  mappingStyle: FIELD
+  algorithm: SIMPLE
+  commitIdGenerator: synchronized_sequence
+  prettyPrint: true
+  typeSafeValues: false
+  newObjectSnapshot: false
+  packagesToScan:
+  auditableAspectEnabled: true
+  springDataAuditableRepositoryAspectEnabled: true
+  sqlSchema: javers
+  sqlSchemaManagementEnabled: true
+  prettyPrintDateFormats:
+    localDateTime: "dd MMM yyyy, HH:mm:ss"
+    zonedDateTime: "dd MMM yyyy, HH:mm:ssZ"
+    localDate: "dd MMM yyyy"
+    localTime: "HH:mm:ss"

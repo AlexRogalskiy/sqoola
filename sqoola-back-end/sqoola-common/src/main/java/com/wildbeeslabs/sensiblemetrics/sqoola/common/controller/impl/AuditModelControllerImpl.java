@@ -23,17 +23,20 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.controller.impl;
 
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.controller.AuditModelController;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.AuditModel;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dto.AuditModelView;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao.AuditModelDaoService;
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.controller.AuditModelController;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.LocalDate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
 
@@ -48,7 +51,30 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public abstract class AuditModelControllerImpl<E extends AuditModel, T extends AuditModelView, ID extends Serializable> extends BaseControllerImpl<E, T, ID> implements AuditModelController<E, T, ID> {
+@RestController
+@RequestMapping(value = "/audit")
+public class AuditModelControllerImpl<E extends AuditModel, T extends AuditModelView, ID extends Serializable> extends BaseControllerImpl<E, T, ID> implements AuditModelController<E, T, ID> {
+
+    private final Javers javers;
+
+    @Autowired
+    public AuditModelControllerImpl(final Javers javers) {
+        this.javers = javers;
+    }
+
+    @RequestMapping("/person")
+    public String getPersonChanges() {
+        final QueryBuilder jqlQuery = QueryBuilder.byClass(Person.class);
+        final List<Change> changes = javers.findChanges(jqlQuery.build());
+        return javers.getJsonConverter().toJson(changes);
+    }
+
+    protected List<Map<String,Object>> getAllLeadHistory(String leadId) throws ClassNotFoundException{
+        QueryBuilder jqlQuery = QueryBuilder.byInstanceId(leadId, Lead.class);
+        List<CdoSnapshot> changes = javers.findSnapshots(jqlQuery.build());
+        changes.sort((o1, o2) -> -1 * (int) o1.getVersion() - (int) o2.getVersion());
+        return commonUtil.getHistoryMap(changes);
+    }
 
     /**
      * Returns {@link HttpHeaders} response headers by input parameters

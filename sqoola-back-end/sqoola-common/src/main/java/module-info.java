@@ -43,4 +43,5 @@ module com.wildbeeslabs.sensiblemetrics.ansifancy {
     requires spring.context.support;
     requires jackson.annotations;
     requires com.fasterxml.jackson.core;
+    requires rt;
 }
