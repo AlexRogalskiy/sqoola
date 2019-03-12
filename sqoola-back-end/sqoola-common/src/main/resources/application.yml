@@ -79,13 +79,6 @@ spring:
       test-on-return: true
       test-while-idle: true
 
-hibernate:
-  connection:
-    charSet:UTF-8
-    characterEncoding:UTF-8
-  hbm2ddl:
-    auto: create-drop
-
 logging:
   config: classpath:logback.xml
   file: logs/application.log
@@ -94,6 +87,9 @@ logging:
     org.springframework: DEBUG
     org.springframework.web: DEBUG
     org.hibernate: DEBUG
+    org.hibernate.search: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: DEBUG
     com.wildbeeslabs.sensiblemetrics.sqoola: DEBUG
     org.springframework.boot.autoconfigure.security: DEBUG
@@ -149,6 +145,9 @@ logging:
     org.springframework: WARN
     org.springframework.web: WARN
     org.hibernate: WARN
+    org.hibernate.search: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type: WARN
     org.hibernate.type.descriptor.sql.BasicBinder: WARN
     com.wildbeeslabs.sensiblemetrics.sqoola: WARN
     org.springframework.boot.autoconfigure.security: WARN
@@ -181,11 +180,9 @@ spring:
   jmx:
     enabled: false
   datasource:
-    driver: org.postgresql.Driver
+    driver: com.p6spy.engine.spy.P6SpyDriver
     #driver-class-name:  org.postgresql.Driver
-    #com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:postgresql://localhost:5432/sqoola_db
-    #jdbc:p6spy:postgresql://localhost:5432/sqoola_db
+    url: jdbc:p6spy:postgresql://localhost:5432/sqoola_db
     type: com.zaxxer.hikari.HikariDataSource
     username: postgres
     password: postgres
@@ -366,6 +363,9 @@ logging:
     org.springframework: WARN
     org.springframework.web: WARN
     org.hibernate: WARN
+    org.hibernate.search: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type: WARN
     org.hibernate.type.descriptor.sql.BasicBinder: WARN
     com.wildbeeslabs.sensiblemetrics.sqoola: WARN
     org.springframework.boot.autoconfigure.security: WARN
