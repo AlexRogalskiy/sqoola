@@ -388,7 +388,7 @@ javers:
   packagesToScan:
   auditableAspectEnabled: true
   springDataAuditableRepositoryAspectEnabled: true
-  sqlSchema: javers
+  sqlSchema:
   sqlSchemaManagementEnabled: true
   prettyPrintDateFormats:
     localDateTime: "dd MMM yyyy, HH:mm:ss"
