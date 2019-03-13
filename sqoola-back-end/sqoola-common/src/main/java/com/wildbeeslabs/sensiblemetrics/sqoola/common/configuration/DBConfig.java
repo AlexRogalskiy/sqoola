@@ -119,6 +119,9 @@ public class DBConfig {
      */
     public static final String EJB_NAMING_STRATEGY = "hibernate.ejb.naming_strategy";
     public static final String TEMP_USE_JDBC_METADATA_DEFAULTS = "hibernate.temp.use_jdbc_metadata_defaults";
+    public static final String USE_UNICODE = "hibernate.connection.useUnicode";
+    public static final String CHARSET = "hibernate.connection.charSet";
+    public static final String CHARACTER_ENCODING = "hibernate.connection.characterEncoding";
 
     @Autowired
     private Environment env;
@@ -324,12 +327,12 @@ public class DBConfig {
         final Properties jpaProperties = new Properties();
         // hibernate connection properties
         //jpaProperties.put(CONNECTION_PROVIDER, env.getRequiredProperty("sqoola.datasource.hibernate.connection.providerClass"));
+        //jpaProperties.put(RELEASE_CONNECTIONS, env.getRequiredProperty("sqoola.datasource.hibernate.connection.releaseMode"));
         jpaProperties.put(POOL_SIZE, env.getRequiredProperty("sqoola.datasource.hibernate.connection.poolSize"));
         jpaProperties.put(AUTOCOMMIT, env.getRequiredProperty("sqoola.datasource.hibernate.connection.autocommit"));
-        jpaProperties.put(RELEASE_CONNECTIONS, env.getRequiredProperty("sqoola.datasource.hibernate.connection.releaseMode"));
-        jpaProperties.put("hibernate.connection.useUnicode", env.getRequiredProperty("sqoola.datasource.hibernate.connection.useUnicode"));
-        jpaProperties.put("hibernate.connection.charSet", env.getRequiredProperty("sqoola.datasource.hibernate.connection.charSet"));
-        jpaProperties.put("hibernate.connection.characterEncoding", env.getRequiredProperty("sqoola.datasource.hibernate.connection.characterEncoding"));
+        jpaProperties.put(USE_UNICODE, env.getRequiredProperty("sqoola.datasource.hibernate.connection.useUnicode"));
+        jpaProperties.put(CHARSET, env.getRequiredProperty("sqoola.datasource.hibernate.connection.charSet"));
+        jpaProperties.put(CHARACTER_ENCODING, env.getRequiredProperty("sqoola.datasource.hibernate.connection.characterEncoding"));
 
         // hibernate general properties
         jpaProperties.put(DIALECT, env.getRequiredProperty("sqoola.datasource.hibernate.dialect"));
@@ -350,7 +353,7 @@ public class DBConfig {
         jpaProperties.put(AUTO_CLOSE_SESSION, env.getRequiredProperty("sqoola.datasource.hibernate.transaction.autoCloseSession"));
         jpaProperties.put(MERGE_ENTITY_COPY_OBSERVER, env.getRequiredProperty("sqoola.datasource.hibernate.event.merge.entityCopyObserver"));
         jpaProperties.put(USE_REFLECTION_OPTIMIZER, env.getRequiredProperty("sqoola.datasource.hibernate.bytecode.useReflectionOptimizer"));
-        jpaProperties.put(MULTI_TENANT_CONNECTION_PROVIDER, env.getRequiredProperty("sqoola.datasource.hibernate.temp.useJdbcMetadataDefaults"));
+        jpaProperties.put(TEMP_USE_JDBC_METADATA_DEFAULTS, env.getRequiredProperty("sqoola.datasource.hibernate.temp.useJdbcMetadataDefaults"));
         //jpaProperties.put(MULTI_TENANT_CONNECTION_PROVIDER, env.getRequiredProperty("sqoola.datasource.hibernate.multiTenantConnectionProvider"));
         //jpaProperties.put(MULTI_TENANT, env.getRequiredProperty("sqoola.datasource.hibernate.multiTenancy"));
 
@@ -360,6 +363,7 @@ public class DBConfig {
         //jpaProperties.put("hibernate.cache.use_second_level_cache", env.getRequiredProperty("sqoola.datasource.hibernate.cache.useSecondLevelCache"));
         //jpaProperties.put("hibernate.cache.use_structured_entries", env.getRequiredProperty("sqoola.datasource.hibernate.cache.useStructuredEntries"));
         //jpaProperties.put("hibernate.cache.use_query_cache", env.getRequiredProperty("sqoola.datasource.hibernate.cache.useQueryCache"));
+        //jpaProperties.put(DEFAULT_CACHE_CONCURRENCY_STRATEGY, env.getRequiredProperty("sqoola.datasource.hibernate.cache.defaultCacheConcurrencyStrategy"));
         //jpaProperties.put("net.sf.ehcache.configurationResourceName", env.getRequiredProperty("sqoola.datasource.hibernate.cache.configurationResourceName"));
 
         // hibernate search properties

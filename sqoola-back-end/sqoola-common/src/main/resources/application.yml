@@ -297,6 +297,7 @@ spring:
       #        ehcache.missingCacheStrategy: create
       #        region:
       #          factoryClass: org.hibernate.cache.ehcache.EhCacheRegionFactory
+      #        defaultCacheConcurrencyStrategy: TRANSACTIONAL
       #        useSecondLevelCache: true
       #        useStructuredEntries: true
       #        useQueryCache: true
