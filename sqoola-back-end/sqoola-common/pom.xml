@@ -809,6 +809,16 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>3.0.1</version>
                         <configuration>
+                            <doctitle>${project.name} API Reference (${project.version})</doctitle>
+                            <windowtitle>${project.name} API Reference (${project.version})</windowtitle>
+                            <locale>en_US</locale>
+                            <linksource>true</linksource>
+                            <notimestamp>true</notimestamp>
+                            <quiet>true</quiet>
+                            <docencoding>UTF-8</docencoding>
+                            <version>false</version>
+                            <author>true</author>
+                            <keywords>true</keywords>
                             <additionalJOption>-Xdoclint:none</additionalJOption>
                             <useStandardDocletOptions>true</useStandardDocletOptions>
                             <overview>${project.basedir}/src/main/javadoc/overview.html</overview>
