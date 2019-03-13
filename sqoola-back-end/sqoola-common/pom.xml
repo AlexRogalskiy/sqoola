@@ -841,6 +841,41 @@
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <version>2.9</version>
+                        <configuration>
+                            <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+                            <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>index</report>
+                                    <report>dependencies</report>
+                                    <report>issue-tracking</report>
+                                    <report>license</report>
+                                    <report>mailing-list</report>
+                                    <report>modules</report>
+                                    <report>project-team</report>
+                                    <report>plugin-management</report>
+                                    <report>plugins</report>
+                                    <report>scm</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jxr-plugin</artifactId>
+                        <version>2.5</version>
+                        <configuration>
+                            <linkJavadoc>true</linkJavadoc>
+                            <docTitle>${project.name} Source Xref (${project.version})</docTitle>
+                            <windowTitle>${project.name} Source Xref (${project.version})</windowTitle>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>3.0.1</version>
                         <reportSets>
