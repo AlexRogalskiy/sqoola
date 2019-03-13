@@ -396,3 +396,10 @@ javers:
     zonedDateTime: "dd MMM yyyy, HH:mm:ssZ"
     localDate: "dd MMM yyyy"
     localTime: "HH:mm:ss"
+---
+ribbon:
+  ConnectTimeout: 250
+  ReadTimeout: 1000
+#  OkToRetryOnAllOperations: true
+#  MaxAutoRetriesNextServer: 2
+#  MaxAutoRetries: 2

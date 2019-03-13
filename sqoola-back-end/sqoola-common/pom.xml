@@ -535,7 +535,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Swagger library dependencies -->c3p0
+        <!-- Swagger library dependencies -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
