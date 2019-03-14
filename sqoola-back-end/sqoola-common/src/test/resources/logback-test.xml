@@ -92,40 +92,45 @@ THE SOFTWARE.
 
     <logger name="ROOT" level="DEBUG"/>
 
+    <!-- Log spring framework -->
     <logger name="org.springframework" level="WARN"/>
-    <Logger name="org.springframework.core" level="DEBUG" additivity="false">
+    <logger name="org.springframework.core" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_AUDIT"/>
-    </Logger>
+    </logger>
     <logger name="org.springframework.boot" level="WARN"/>
     <logger name="org.springframework.transaction" level="WARN"/>
     <logger name="org.springframework.web.servlet.mvc" level="WARN"/>
 
+    <!-- Log hibernate -->
     <logger name="org.hibernate" level="DEBUG"/>
-    <Logger name="org.hibernate.search" level="TRACE" additivity="false">
+    <logger name="org.hibernate.search" level="TRACE" additivity="false">
         <appender-ref ref="CONSOLE"/>
-    </Logger>
+    </logger>
     <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
         <appender-ref ref="FILE_AUDIT"/>
     </logger>
     <logger name="org.hibernate.type" level="TRACE" additivity="false">
         <appender-ref ref="FILE_AUDIT"/>
     </logger>
-    <Logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
+    <logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
         <appender-ref ref="FILE_AUDIT"/>
-    </Logger>
-    <!-- Log cache -->
-    <Logger name="org.hibernate.cache" level="DEBUG" additivity="false">
-        <AppenderRef ref="CONSOLE"/>
-    </Logger>
-    <Logger name="org.ehcache" level="DEBUG" additivity="false">
-        <AppenderRef ref="CONSOLE"/>
-    </Logger>
-    <!-- Log hibernate batch -->
-    <Logger name="org.hibernate.engine.jdbc.batch.internal.BatchingBatch" level="DEBUG" additivity="false">
-        <AppenderRef ref="CONSOLE"/>
-    </Logger>
+    </logger>
 
+    <!-- Log hibernate cache -->
+    <logger name="org.hibernate.cache" level="DEBUG" additivity="false">
+        <AppenderRef ref="CONSOLE"/>
+    </logger>
+    <logger name="org.ehcache" level="DEBUG" additivity="false">
+        <AppenderRef ref="CONSOLE"/>
+    </logger>
+
+    <!-- Log hibernate batch -->
+    <logger name="org.hibernate.engine.jdbc.batch.internal.BatchingBatch" level="DEBUG" additivity="false">
+        <AppenderRef ref="CONSOLE"/>
+    </logger>
+
+    <!-- Log sqoola common -->
     <logger name="com.wildbeeslabs.sensiblemetrics.sqoola.common" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_AUDIT"/>
