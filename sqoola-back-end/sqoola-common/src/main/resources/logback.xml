@@ -141,15 +141,15 @@ THE SOFTWARE.
 
     <!-- Log hibernate cache -->
     <logger name="org.hibernate.cache" level="DEBUG" additivity="false">
-        <AppenderRef ref="CONSOLE"/>
+        <appender-ref ref="CONSOLE"/>
     </logger>
     <logger name="org.ehcache" level="DEBUG" additivity="false">
-        <AppenderRef ref="CONSOLE"/>
+        <appender-ref ref="CONSOLE"/>
     </logger>
 
     <!-- Log hibernate batch -->
     <logger name="org.hibernate.engine.jdbc.batch.internal.BatchingBatch" level="DEBUG" additivity="false">
-        <AppenderRef ref="CONSOLE"/>
+        <appender-ref ref="CONSOLE"/>
     </logger>
 
     <!-- Log sqoola common -->
