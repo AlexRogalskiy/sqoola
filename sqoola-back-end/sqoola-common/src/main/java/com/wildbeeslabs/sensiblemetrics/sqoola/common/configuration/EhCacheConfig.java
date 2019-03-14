@@ -60,6 +60,28 @@
 //                .build();
 //        return cacheConfiguration;
 //    }
+
+
+//public <K, V> Cache<K, V> createCache(Class<K> keyClass, Class<V> valueClass) {
+//    CachingProvider provider = Caching.getCachingProvider(EhcacheCachingProvider.class.getCanonicalName());
+//    CacheManager cacheManager = provider.getCacheManager();
+//    Configuration<K, V> configuration = createConfiguration(keyClass, valueClass);
+//    Cache<K, V> cache = cacheManager.createCache(getName(), configuration);
+//    //Following code is required to refresh the caches and actually perform the MBean registration
+//    //This seems to be a bug in EhCache107 implementation.
+//    cacheManager.getCacheNames();
+//    return cache;
+//    }
+//
+//private <K, V> Configuration<K, V> createConfiguration(Class<K> keyClass, Class<V> valueClass) {
+//    org.ehcache.config.CacheConfiguration<K, V> cacheConfiguration = CacheConfigurationBuilder.newCacheConfigurationBuilder(keyClass, valueClass,
+//    ResourcePoolsBuilder.heap(maxNrObjectsCached))
+//    .withExpiry(Expirations.timeToLiveExpiration(org.ehcache.expiry.Duration.of(timeToLive.toMilliseconds(), TimeUnit.MILLISECONDS)))
+//    .add(new Jsr107CacheConfiguration(ConfigurationElementState.ENABLED, ConfigurationElementState.ENABLED))
+//    .build();
+//    return Eh107Configuration.fromEhcacheCacheConfiguration(cacheConfiguration);
+//    }
+
 //
 //    @Bean(destroyMethod = "destroy")
 //    public PersistentCacheManager persistentCacheConfigurationManager(final @Value("${triggers.ehcache.config.location:'/.cache'}") String locationPath,
