@@ -23,11 +23,11 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao.impl;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.utility.StringUtils;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.Account;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.Role;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao.AccountDaoService;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao.AuthUserDaoService;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.utility.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -40,9 +40,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * {@link AuthUserDaoService} service implementation
@@ -64,16 +66,23 @@ public class AuthUserDaoServiceImpl implements AuthUserDaoService {
         if (Objects.isNull(account)) {
             throw new UsernameNotFoundException("Username not found");
         }
-        return new User(account.getUsername(), account.getPassword(), account.isEnabled(), true, true, true, getGrantedAuthorities(account));
+        return User.builder()
+            .username(account.getUsername())
+            .password(account.getPassword())
+            .disabled(!account.isEnabled())
+            .accountExpired(false)
+            .credentialsExpired(true)
+            .accountLocked(false)
+            .authorities(getGrantedAuthorities(account))
+            .build();
     }
 
     private List<GrantedAuthority> getGrantedAuthorities(final Account account) {
-        final List<GrantedAuthority> authorities = new ArrayList<>();
-        for (final Role role : account.getRoles()) {
-            if (role.isEnabled()) {
-                authorities.add(new SimpleGrantedAuthority(StringUtils.getStringByDelimiter(DEFAULT_ROLE_DELIMITER, DEFAULT_ROLE_PREFIX, role.getCode())));
-            }
-        }
-        return authorities;
+        return Optional.ofNullable(account.getRoles())
+            .orElseGet(Collections::emptySet)
+            .stream()
+            .filter(Role::isEnabled)
+            .map(role -> new SimpleGrantedAuthority(StringUtils.getStringByDelimiter(DEFAULT_ROLE_DELIMITER, DEFAULT_ROLE_PREFIX, role.getCode())))
+            .collect(Collectors.toList());
     }
 }

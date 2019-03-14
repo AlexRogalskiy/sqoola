@@ -243,6 +243,9 @@ spring:
       autoCommit: true
       #leakDetectionThreshold: 60000
     hibernate:
+#      javax:
+#        cache:
+#          provider: org.ehcache.jsr107.EhcacheCachingProvider
       validator:
         apply_to_ddl: false
         autoregister_listeners: false
@@ -288,17 +291,18 @@ spring:
       multiTenantConnectionProvider: true
       multiTenancy: SCHEMA
       jdbc:
-        fetchSize: 50
-        batchSize: 30
+        fetch_size: 50
+        batch_size: 30
         batchVersionedData: true
       orderInserts: true
       orderUpdates: true
       #      cache:
       #        ehcache.missingCacheStrategy: create
       #        region:
-      #          factoryClass: org.hibernate.cache.ehcache.EhCacheRegionFactory
+      #          factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+      #          org.hibernate.cache.jcache.JCacheRegionFactory
       #        defaultCacheConcurrencyStrategy: TRANSACTIONAL
-      #        useSecondLevelCache: true
+      #        use_second_level_cache: true
       #        useStructuredEntries: true
       #        useQueryCache: true
       #        configurationResourceName: /ehcache.xml

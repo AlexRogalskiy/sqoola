@@ -114,6 +114,17 @@ THE SOFTWARE.
     <Logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
         <appender-ref ref="FILE_AUDIT"/>
     </Logger>
+    <!-- Log cache -->
+    <Logger name="org.hibernate.cache" level="DEBUG" additivity="false">
+        <AppenderRef ref="CONSOLE"/>
+    </Logger>
+    <Logger name="org.ehcache" level="DEBUG" additivity="false">
+        <AppenderRef ref="CONSOLE"/>
+    </Logger>
+    <!-- Log hibernate batch -->
+    <Logger name="org.hibernate.engine.jdbc.batch.internal.BatchingBatch" level="DEBUG" additivity="false">
+        <AppenderRef ref="CONSOLE"/>
+    </Logger>
 
     <logger name="com.wildbeeslabs.sensiblemetrics.sqoola.common" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>

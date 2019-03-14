@@ -329,6 +329,13 @@
             <version>${hibernate-c3p0.version}</version>
         </dependency>
 
+        <!-- Hibernate Jcache -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+            <version>5.4.1.Final</version>
+        </dependency>
+
         <!-- P6spy library dependencies -->
         <dependency>
             <groupId>p6spy</groupId>

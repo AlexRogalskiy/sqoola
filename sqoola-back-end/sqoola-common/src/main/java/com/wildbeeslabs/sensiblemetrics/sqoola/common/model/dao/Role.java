@@ -74,6 +74,9 @@ public class Role extends BaseInfoModel<Long> implements PersistableRole {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private final Set<Account> accounts = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Permission> authorities = new HashSet<>();
+
     public void setAccounts(final Collection<? extends Account> accounts) {
         this.getAccounts().clear();
         Optional.ofNullable(accounts)
