@@ -358,13 +358,14 @@ public class DBConfig {
         //jpaProperties.put(MULTI_TENANT, env.getRequiredProperty("sqoola.datasource.hibernate.multiTenancy"));
 
         // hibernate cache properties
-        jpaProperties.put("hibernate.cache.ehcache.missing_cache_strategy", env.getRequiredProperty("triggers.datasource.config.hibernate.cache.ehcache.missingCacheStrategy"));
-        jpaProperties.put(CACHE_REGION_FACTORY, env.getRequiredProperty("triggers.datasource.config.hibernate.cache.region.factoryClass"));
-        jpaProperties.put(USE_SECOND_LEVEL_CACHE, env.getRequiredProperty("triggers.datasource.config.hibernate.cache.useSecondLevelCache"));
-        jpaProperties.put(USE_STRUCTURED_CACHE, env.getRequiredProperty("triggers.datasource.config.hibernate.cache.useStructuredEntries"));
-        jpaProperties.put(USE_QUERY_CACHE, env.getRequiredProperty("triggers.datasource.config.hibernate.cache.useQueryCache"));
-        //jpaProperties.put(DEFAULT_CACHE_CONCURRENCY_STRATEGY, env.getRequiredProperty("triggers.datasource.config.hibernate.cache.defaultCacheConcurrencyStrategy"));
-        jpaProperties.put("net.sf.ehcache.configurationResourceName", env.getRequiredProperty("triggers.datasource.config.hibernate.cache.configurationResourceName"));
+        jpaProperties.put("hibernate.cache.ehcache.missing_cache_strategy", env.getRequiredProperty("sqoola.datasource.hibernate.cache.ehcache.missingCacheStrategy"));
+        jpaProperties.put(CACHE_REGION_FACTORY, env.getRequiredProperty("sqoola.datasource.hibernate.cache.region.factoryClass"));
+        jpaProperties.put(USE_SECOND_LEVEL_CACHE, env.getRequiredProperty("sqoola.datasource.hibernate.cache.useSecondLevelCache"));
+        jpaProperties.put(USE_STRUCTURED_CACHE, env.getRequiredProperty("sqoola.datasource.hibernate.cache.useStructuredEntries"));
+        jpaProperties.put(USE_QUERY_CACHE, env.getRequiredProperty("sqoola.datasource.hibernate.cache.useQueryCache"));
+        jpaProperties.put("hibernate.javax.cache.provider", env.getRequiredProperty("sqoola.datasource.hibernate.cache.providerClass"));
+        //jpaProperties.put(DEFAULT_CACHE_CONCURRENCY_STRATEGY, env.getRequiredProperty("sqoola.datasource.hibernate.cache.defaultCacheConcurrencyStrategy"));
+        jpaProperties.put("net.sf.ehcache.configurationResourceName", env.getRequiredProperty("sqoola.datasource.hibernate.cache.configurationResourceName"));
 
         // hibernate search properties
         jpaProperties.put("hibernate.search.exclusive_index_use", env.getRequiredProperty("sqoola.datasource.hibernate.search.exclusiveIndexUse"));

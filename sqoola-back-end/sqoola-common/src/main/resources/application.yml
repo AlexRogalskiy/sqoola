@@ -243,9 +243,9 @@ spring:
       autoCommit: true
       #leakDetectionThreshold: 60000
     hibernate:
-#      javax:
-#        cache:
-#          provider: org.ehcache.jsr107.EhcacheCachingProvider
+      #      javax:
+      #        cache:
+      #          provider: org.ehcache.jsr107.internal.EhcacheCachingProvider
       validator:
         apply_to_ddl: false
         autoregister_listeners: false
@@ -296,16 +296,20 @@ spring:
         batchVersionedData: true
       orderInserts: true
       orderUpdates: true
-      #      cache:
-      #        ehcache.missingCacheStrategy: create
-      #        region:
-      #          factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
-      #          org.hibernate.cache.jcache.JCacheRegionFactory
-      #        defaultCacheConcurrencyStrategy: TRANSACTIONAL
-      #        use_second_level_cache: true
-      #        useStructuredEntries: true
-      #        useQueryCache: true
-      #        configurationResourceName: /ehcache.xml
+#      cache:
+#        region:
+#          factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+#        #org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+#        #org.hibernate.cache.ehcache.EhCacheRegionFactory
+#        #defaultCacheConcurrencyStrategy: TRANSACTIONAL
+#        provider_class: org.ehcache.jsr107.EhcacheCachingProvider
+#        #net.sf.ehcache.hibernate.EhCacheProvider
+#        use_second_level_cache: true
+#        use_structured_entries: true
+#        use_query_cache: true
+#        configurationResourceName: classpath:ehcache.xml
+#        ehcache:
+#          missing_cache_strategy: create
       c3p0:
         min_size: 10
         max_size: 25
