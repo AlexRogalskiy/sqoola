@@ -71,11 +71,12 @@ server:
     enabled: true
     min-response-size: 1
     mime-types: application/xml,application/json,text/html,text/css
-  undertow:
-    io-threads: 4
-    worker-threads: 5
+#  undertow:
+#    io-threads: 4
+#    worker-threads: 5
   error:
     path: /error
+    include-stacktrace: never
     whitelabel:
       enabled: false
   ssl:
@@ -85,7 +86,9 @@ server:
     key-password: secret
   tomcat:
     max-threads: 4
+    uri-encoding: UTF-8
     accesslog:
+      directory: logs
       enabled: true
       pattern: '%t %a "%r" %s (%D ms)'
   use-forward-headers: true
