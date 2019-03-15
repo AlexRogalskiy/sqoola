@@ -24,9 +24,15 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.repository;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.Order;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.QueryHint;
 import java.util.List;
+import java.util.stream.Stream;
+
+import static org.hibernate.jpa.QueryHints.HINT_FETCH_SIZE;
 
 /**
  * Order repository declaration {@link BaseModelRepository}
@@ -37,4 +43,8 @@ public interface OrderRepository extends BaseModelRepository<Order, Long> {
     List<? extends Order> findByTitle(final String title);
 
     List<? extends Order> findByDescription(final String description);
+
+    @QueryHints(value = @QueryHint(name = HINT_FETCH_SIZE, value = "" + Integer.MIN_VALUE))
+    @Query(value = "select o from Order o")
+    Stream<Order> streamAll();
 }
