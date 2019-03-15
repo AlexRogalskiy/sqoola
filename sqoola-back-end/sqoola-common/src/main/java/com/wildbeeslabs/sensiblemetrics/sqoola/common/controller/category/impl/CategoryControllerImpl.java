@@ -24,11 +24,11 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.controller.category.impl;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.controller.category.CategoryController;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.controller.impl.BaseModelControllerImpl;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.exception.BadRequestException;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.Category;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dto.CategoryView;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.utility.MapperUtils;
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.controller.impl.BaseModelControllerImpl;
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.exception.BadRequestException;
 import com.wildbeeslabs.sensiblemetrics.supersolr.controller.wrapper.SearchRequest;
 import com.wildbeeslabs.sensiblemetrics.supersolr.exception.EmptyContentException;
 import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableCategory;
@@ -45,13 +45,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -341,6 +346,47 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
                 .stream()
                 .map(document -> getHighLightSearchResult(document, page.getHighlights(document), CategoryView.class))
                 .collect(Collectors.toList()));
+    }
+
+    // Handler method to produce JSON response
+    @GetMapping(path = "/get/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> getJSON() {
+        final List<String> list = new ArrayList<>();
+        list.add("One");
+        list.add("Two");
+        list.add("Three");
+        return ResponseEntity
+            .ok()
+            .cacheControl(CacheControl.noCache())
+            .body(list);
+    }
+
+    /*
+     * Get user from session attribute
+     */
+    @GetMapping("/info")
+    public String userInfo(@SessionAttribute("user") User user) {
+
+        System.out.println("Email: " + user.getEmail());
+        System.out.println("First Name: " + user.getFname());
+
+        return "user";
+    }
+
+    /*
+     * Binding a matrix variable with optional and default value
+     */
+    @GetMapping("/person/{name}")
+    @ResponseBody
+    public String handler(@PathVariable("name") String name,
+                          @MatrixVariable("dob") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dob,
+                          @MatrixVariable(required = false, defaultValue = "91XXXXXXXX") String mobile) {
+
+        return "Path Variables <br>"
+            + "name = " + name + "<br>"
+            + "<br>Matxrix variable <br> "
+            + "dob =" + dob + "<br>"
+            + "mobile =" + mobile;
     }
 
     /**

@@ -23,6 +23,8 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.configuration;
 
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.handler.AdminInterceptor;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.handler.GuestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -35,11 +37,18 @@ import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
+import org.springframework.web.util.UrlPathHelper;
 
+import javax.xml.validation.Validator;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -137,5 +146,43 @@ public class WebMvcConfig implements WebMvcConfigurer {
             .exposedHeaders("header-1", "header-2")
             .allowCredentials(false)
             .maxAge(6000);
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        final CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+        return localeResolver;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        final ThemeChangeInterceptor themeChangeInterceptor = new ThemeChangeInterceptor();
+        themeChangeInterceptor.setParamName("theme");
+        registry.addInterceptor(themeChangeInterceptor);
+
+        final LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("lang");
+        registry.addInterceptor(localeChangeInterceptor);
+
+        // Register guest interceptor with single path pattern
+        registry.addInterceptor(new GuestInterceptor()).addPathPatterns("/guest");
+
+        // Register admin interceptor with multiple path patterns
+        registry.addInterceptor(new AdminInterceptor()).addPathPatterns(new String[]{"/admin", "/admin/*"});
+    }
+
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        final UrlPathHelper pathHelper = new UrlPathHelper();
+        //Enable matrix variable
+        pathHelper.setRemoveSemicolonContent(false);
+        configurer.setUrlPathHelper(pathHelper);
+    }
+
+    @Override
+    public Validator getValidator() {
+        final LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+        validator.setValidationMessageSource(messageSource());
+        return validator;
     }
 }
