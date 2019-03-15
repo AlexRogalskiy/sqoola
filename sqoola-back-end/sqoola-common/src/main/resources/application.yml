@@ -273,23 +273,23 @@ spring:
       ejb:
         namingStrategy: org.hibernate.cfg.ImprovedNamingStrategy
       archive.autodetection: class,hbm
-      show_sql: true
-      format_sql: true
+      showSql: true
+      formatSql: true
       useSqlComments: true
       maxFetchDepth: 3
       defaultBatchFetchSize: 30
       generateStatistics: false
-      enable_lazy_load_no_trans: true
-      globally_quoted_identifiers: false
+      enableLazyLoadNoTrans: true
+      globallyQuotedIdentifiers: false
       id:
-        new_generator_mappings: true
+        newGeneratorMappings: true
       transaction:
-        flush_before_completion: true
-        auto_close_session: true
+        flushBeforeCompletion: true
+        autoCloseSession: true
         #manager_lookup_class: org.hibernate.transaction.TransactionManagerLookup
       event:
         merge:
-          entity_copy_observer: allow
+          entityCopyObserver: allow
       bytecode:
         useReflectionOptimizer: false
       temp:
@@ -297,8 +297,8 @@ spring:
       multiTenantConnectionProvider: true
       multiTenancy: SCHEMA
       jdbc:
-        fetch_size: 50
-        batch_size: 30
+        fetchSize: 50
+        batchSize: 30
         batchVersionedData: true
       orderInserts: true
       orderUpdates: true

@@ -42,10 +42,10 @@ public class DefaultFailureAnalyzer extends AbstractFailureAnalyzer<BeanNotOfReq
      */
     @Override
     protected FailureAnalysis analyze(final Throwable rootFailure, final BeanNotOfRequiredTypeException cause) {
-        return new FailureAnalysis(String.format("ERROR: message=%s", getDescription(cause)), null, cause);
+        return new FailureAnalysis(String.format("ERROR: message = {%s}", getDescription(cause)), null, cause);
     }
 
     private String getDescription(final BeanNotOfRequiredTypeException ex) {
-        return String.format("The bean %s could not be injected due to %s", ex.getBeanName(), ex.getRequiredType().getName());
+        return String.format("The bean {%s} could not be injected due to {%s}", ex.getBeanName(), ex.getRequiredType().getName());
     }
 }
