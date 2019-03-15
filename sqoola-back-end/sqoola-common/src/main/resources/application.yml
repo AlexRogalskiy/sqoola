@@ -134,6 +134,7 @@ spring:
     label: © 2019 Powered by Sqoola
   main:
     banner-mode: "off"
+    logStartupInfo: false
 
 server:
   email: prod@sqoola.com
@@ -171,12 +172,17 @@ spring:
       enabled: true
     livereload:
       enabled: false
+  cache:
+    type: EHCACHE
+    ehcache:
+      config: classpath:ehcache-config.xml
   jackson:
     serialization:
       indent_output: true
       write_dates_as_timestamps: false
   main:
     banner-mode: "console"
+    logStartupInfo: false
   jmx:
     enabled: false
   datasource:
@@ -296,20 +302,20 @@ spring:
         batchVersionedData: true
       orderInserts: true
       orderUpdates: true
-#      cache:
-#        region:
-#          factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
-#        #org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
-#        #org.hibernate.cache.ehcache.EhCacheRegionFactory
-#        #defaultCacheConcurrencyStrategy: TRANSACTIONAL
-#        provider_class: org.ehcache.jsr107.EhcacheCachingProvider
-#        #net.sf.ehcache.hibernate.EhCacheProvider
-#        use_second_level_cache: true
-#        use_structured_entries: true
-#        use_query_cache: true
-#        configurationResourceName: classpath:ehcache.xml
-#        ehcache:
-#          missing_cache_strategy: create
+      #      cache:
+      #        region:
+      #          factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+      #        #org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+      #        #org.hibernate.cache.ehcache.EhCacheRegionFactory
+      #        #defaultCacheConcurrencyStrategy: TRANSACTIONAL
+      #        provider_class: org.ehcache.jsr107.EhcacheCachingProvider
+      #        #net.sf.ehcache.hibernate.EhCacheProvider
+      #        use_second_level_cache: true
+      #        use_structured_entries: true
+      #        use_query_cache: true
+      #        configurationResourceName: classpath:ehcache.xml
+      #        ehcache:
+      #          missing_cache_strategy: create
       c3p0:
         min_size: 10
         max_size: 25

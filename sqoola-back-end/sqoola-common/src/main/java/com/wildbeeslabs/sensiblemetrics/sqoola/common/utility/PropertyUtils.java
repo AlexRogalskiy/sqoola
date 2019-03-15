@@ -23,8 +23,10 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.utility;
 
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -101,5 +103,13 @@ public class PropertyUtils {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(String.format("ERROR: cannot read enum property {%s} by key {%s} from resource {%s}", enumName, propertyKey, properties));
         }
+    }
+
+    public <T> T getPropertyValue(@NonNull final Environment environment, final String propertName, final Class<T> clazz) {
+        return getPropertyValue(environment, propertName, clazz, null);
+    }
+
+    public <T> T getPropertyValue(@NonNull final Environment environment, final String propertName, final Class<T> clazz, final T defaultValue) {
+        return environment.getProperty(propertName, clazz, defaultValue);
     }
 }

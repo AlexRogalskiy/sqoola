@@ -24,21 +24,19 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.controller.product.impl;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.controller.product.ProductController;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.exception.BadRequestException;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.Product;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dto.ProductView;
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.exception.BadRequestException;
 import com.wildbeeslabs.sensiblemetrics.supersolr.controller.product.ProductSearchController;
 import com.wildbeeslabs.sensiblemetrics.supersolr.controller.wrapper.SearchRequest;
 import com.wildbeeslabs.sensiblemetrics.supersolr.exception.EmptyContentException;
 import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableProduct;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.service.ProductSearchService;
 import com.wildbeeslabs.sensiblemetrics.supersolr.search.view.CategoryView;
 import io.swagger.annotations.*;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -126,6 +124,18 @@ public class ProductControllerImpl extends BaseModelControllerImpl<Product, Prod
             .headers(getHeaders(productPage))
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .body(mapAll(productPage.getContent(), ProductView.class));
+    }
+
+
+    @RequestMapping("/request6")
+    @ResponseBody
+    public String handler(
+        @DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam("date") LocalDate date,
+        @DateTimeFormat(pattern = "HH:mm:ss") @RequestParam("time") LocalTime time) {
+
+        return "URL parameters - <br>"
+            + " date = " + date + " <br>"
+            + " time = " + time;
     }
 
     @GetMapping("/autocomplete")

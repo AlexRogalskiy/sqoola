@@ -23,17 +23,21 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
 import java.nio.charset.StandardCharsets;
@@ -45,6 +49,9 @@ import java.util.List;
 @EnableWebMvc
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
+    @Autowired
+    private Environment env;
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -81,6 +88,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
         mappingJackson2XmlHttpMessageConverter.setPrettyPrint(true);
         mappingJackson2XmlHttpMessageConverter.setDefaultCharset(StandardCharsets.UTF_8);
         return mappingJackson2XmlHttpMessageConverter;
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        final CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(env.getRequiredProperty("sqoola.config.maxUploadSize", Integer.class));
+        multipartResolver.setMaxUploadSizePerFile(env.getRequiredProperty("sqoola.config.maxUploadSizePerFile", Integer.class));
+        multipartResolver.setResolveLazily(true);
+        multipartResolver.setPreserveFilename(false);
+        multipartResolver.setDefaultEncoding(StandardCharsets.UTF_8.name());
+        return multipartResolver;
     }
 
     @Override
