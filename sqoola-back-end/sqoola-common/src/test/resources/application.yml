@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: "local"
+    active: "dev"
 ---
 springfox:
   documentation:
@@ -43,19 +43,7 @@ spring:
     check-location: false
     baselineOnMigrate: true
     schemas: public
-  tomcat:
-    default-auto-commit: false
-    max-active: 200
-    max-idle: 200
-    min-idle: 10
-    initial-size: 10
-    max-wait: 5000
-    validation-query: SELECT 1;
-    validation-query-timeout: 1000
-    test-on-borrow: false
-    test-on-connect: true
-    test-on-return: true
-    test-while-idle: true
+
 hibernate:
   connection:
     charSet:UTF-8
@@ -81,6 +69,7 @@ server:
   base-path: http://localhost
   compression:
     enabled: true
+    min-response-size: 1
     mime-types: application/xml,application/json,text/html,text/css
   undertow:
     io-threads: 4
@@ -92,7 +81,15 @@ server:
   ssl:
     enabled: false
     key-store: classpath:main.jks
+    key-store-password: secret
     key-password: secret
+  tomcat:
+    max-threads: 4
+    accesslog:
+      enabled: true
+      pattern: %t %a "%r" %s (%D ms)
+  use-forward-headers: true
+
 management:
   info:
     git:
@@ -122,7 +119,7 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 ---
 spring:
-  profiles: local, default
+  profiles: dev, default
   resources:
     static-locations: classpath:/templates
   application:
