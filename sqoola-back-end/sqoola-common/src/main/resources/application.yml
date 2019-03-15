@@ -64,20 +64,6 @@ spring:
     check-location: false
     baselineOnMigrate: true
     schemas: public
-  datasource:
-    tomcat:
-      default-auto-commit: false
-      max-active: 50
-      max-idle: 20
-      min-idle: 15
-      initial-size: 10
-      max-wait: 20000
-      validation-query: SELECT 1;
-      validation-query-timeout: 1000
-      test-on-borrow: false
-      test-on-connect: true
-      test-on-return: true
-      test-while-idle: true
 
 logging:
   config: classpath:logback.xml
@@ -105,6 +91,7 @@ server:
   base-path: http://localhost
   compression:
     enabled: true
+    min-response-size: 1
     mime-types: application/xml,application/json,text/html,text/css
   undertow:
     io-threads: 4
@@ -116,7 +103,14 @@ server:
   ssl:
     enabled: false
     key-store: classpath:main.jks
+    key-store-password: secret
     key-password: secret
+  tomcat:
+    max-threads: 4
+    accesslog:
+      enabled: true
+      pattern: '%t %a "%r" %s (%D ms)'
+  use-forward-headers: true
   hystrix:
     command.default.execution.timeout.enabled: false
 

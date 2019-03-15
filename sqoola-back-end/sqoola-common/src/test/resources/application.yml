@@ -87,7 +87,7 @@ server:
     max-threads: 4
     accesslog:
       enabled: true
-      pattern: %t %a "%r" %s (%D ms)
+      pattern: '%t %a "%r" %s (%D ms)'
   use-forward-headers: true
 
 management:
