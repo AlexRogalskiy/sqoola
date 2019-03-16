@@ -23,6 +23,7 @@ addons:
     update: true
     packages:
       - oracle-java8-installer
+before_install: echo "MAVEN_OPTS='-Xmx2048m -XX:MaxPermSize=512m'" > ~/.mavenrc
 install: true
 before_script:
   - pip install --user codecov
