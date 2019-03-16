@@ -876,6 +876,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>sonatype-public-repository</id>
+            <name>Sonatype public Repository</name>
             <url>https://oss.sonatype.org/content/groups/public</url>
             <snapshots>
                 <enabled>false</enabled>
