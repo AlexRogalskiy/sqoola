@@ -70,7 +70,7 @@ logging:
     org.springframework: DEBUG
     org.springframework.web: DEBUG
     org.hibernate: DEBUG
-    com.wildbeeslabs.sensiblemetrics.sqoola: DEBUG
+    com.sensiblemetrics.api.sqoola.common: DEBUG
   pattern:
     console: "%d{HH:mm:ss.SSS} [%highlight(%-5.5level)] %cyan(%-56.56logger{56}) - %msg \\(%F:%L\\)#%M%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

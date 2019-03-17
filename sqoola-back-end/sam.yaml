@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: AWS Serverless Spring Boot API - com.wildbeeslabs.api.cascoder.common::cascoder-common
+Description: AWS Serverless Spring Boot API - com.sensiblemetrics.api.sqoola::sqoola-common
 Globals:
   Api:
     EndpointConfiguration: REGIONAL

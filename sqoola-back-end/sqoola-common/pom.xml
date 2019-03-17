@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sensiblemetrics.api.sqoola</groupId>
-    <artifactId>common</artifactId>
+    <artifactId>sqoola-common</artifactId>
     <version>1.0.0-RELEASE</version>
     <packaging>war</packaging>
 
