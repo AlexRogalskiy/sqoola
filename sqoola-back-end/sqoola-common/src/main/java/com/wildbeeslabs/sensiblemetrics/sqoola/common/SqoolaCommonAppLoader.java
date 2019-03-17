@@ -27,7 +27,10 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
@@ -36,10 +39,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication(scanBasePackages = {"com.wildbeeslabs.sensiblemetrics.sqoola.common"}, exclude = {ErrorMvcAutoConfiguration.class})
 @EnableBatchProcessing
 @EnableSwagger2
+@EnableConfigurationProperties
+@EnableScheduling
+@EnableFeignClients
 //@EnableAuthorizationServer
 public class SqoolaCommonAppLoader extends SpringBootServletInitializer {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(SqoolaCommonAppLoader.class, args);
     }
 }

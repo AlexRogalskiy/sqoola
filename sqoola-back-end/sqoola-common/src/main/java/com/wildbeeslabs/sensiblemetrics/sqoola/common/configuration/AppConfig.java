@@ -44,10 +44,10 @@ import java.util.Locale;
 @Configuration
 public class AppConfig {
 
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+//    @Bean
+//    public ModelMapper modelMapper() {
+//        return new ModelMapper();
+//    }
 
     @Bean
     public ObjectMapper jsonObjectMapper() {

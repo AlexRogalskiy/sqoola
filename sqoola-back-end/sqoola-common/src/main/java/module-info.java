@@ -1,5 +1,5 @@
 /**
- * Sqoola module info
+ * Sqoola Common REST API module info
  */
 module com.wildbeeslabs.sensiblemetrics.sqoola.common {
     requires static lombok;
@@ -50,4 +50,6 @@ module com.wildbeeslabs.sensiblemetrics.sqoola.common {
     requires spring.data.rest.core;
     requires spring.websocket;
     requires org.hibernate.validator;
+    requires spring.cloud.netflix.core;
+    requires commons.collections;
 }
