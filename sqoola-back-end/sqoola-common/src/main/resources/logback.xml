@@ -155,7 +155,7 @@ THE SOFTWARE.
     </logger>
 
     <!-- Log sqoola common -->
-    <logger name="com.wildbeeslabs.sensiblemetrics.sqoola.common" level="DEBUG" additivity="false">
+    <logger name="com.sensiblemetrics.api.sqoola.common" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_AUDIT"/>
     </logger>

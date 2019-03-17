@@ -1,0 +1,2 @@
+org.springframework.boot.diagnostics.FailureAnalyzer=DefaultFailureAnalyzer
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.javers.spring.boot.sql.JaversSqlAutoConfiguration

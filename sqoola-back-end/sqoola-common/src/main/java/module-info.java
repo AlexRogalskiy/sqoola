@@ -1,7 +1,7 @@
 /**
  * Sqoola Common REST API module info
  */
-module com.wildbeeslabs.sensiblemetrics.sqoola.common {
+module com.sensiblemetrics.api.sqoola.common {
     requires static lombok;
     requires org.apache.commons.lang3;
     requires slf4j.api;

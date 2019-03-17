@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.wildbeeslabs.sensiblemetrics.sqoola</groupId>
-    <artifactId>sqoola-common</artifactId>
+    <groupId>com.sensiblemetrics.api.sqoola</groupId>
+    <artifactId>common</artifactId>
     <version>1.0.0-RELEASE</version>
     <packaging>war</packaging>
 
@@ -14,14 +14,14 @@
     <inceptionYear>2019</inceptionYear>
 
     <parent>
-        <groupId>com.wildbeeslabs.sensiblemetrics</groupId>
+        <groupId>com.sensiblemetrics.api</groupId>
         <artifactId>sqoola</artifactId>
         <version>1.0.0-RELEASE</version>
     </parent>
 
     <properties>
         <main.basedir>${project.basedir}/../..</main.basedir>
-        <start-class>com.wildbeeslabs.sensiblemetrics.sqoola.common.SqoolaCommonAppLoader</start-class>
+        <start-class>com.sensiblemetrics.api.sqoola.common.CommonAppLoader</start-class>
 
         <!--<solr.deps>solr/libs</solr.deps>-->
 
