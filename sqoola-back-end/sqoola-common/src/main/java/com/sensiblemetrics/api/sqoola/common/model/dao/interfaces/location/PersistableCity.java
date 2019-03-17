@@ -21,21 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.sensiblemetrics.api.sqoola.common.model.dao.interfaces;
+package com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.location;
 
-/**
- * Persistable attribute model definition
- */
-public interface PersistableAttribute {
+public interface PersistableCity {
 
     /**
      * Default document ID
      */
-    String MODEL_ID = "Attribute";
+    String MODEL_ID = "City";
     /**
      * Default table name
      */
-    String TABlE_NAME = "attributes";
+    String TABlE_NAME = "cities";
 
     /**
      * Default field names
@@ -50,5 +47,5 @@ public interface PersistableAttribute {
     /**
      * Default reference field names
      */
-    String ATTRIBUTES_REF_FIELD_NAME = "attributes";
+    String ATTRIBUTES_REF_FIELD_NAME = "cities";
 }

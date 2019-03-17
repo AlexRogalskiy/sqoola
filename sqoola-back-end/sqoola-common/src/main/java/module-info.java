@@ -52,4 +52,5 @@ module com.sensiblemetrics.api.sqoola.common {
     requires org.hibernate.validator;
     requires spring.cloud.netflix.core;
     requires commons.collections;
+    requires java.persistence;
 }

@@ -21,34 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.sensiblemetrics.api.sqoola.common.model.dao.interfaces;
+package com.sensiblemetrics.api.sqoola.common.model.dao.location;
+
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.PersistableBaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.location.PersistableCountry;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
+
+import javax.persistence.*;
 
 /**
- * Persistable attribute model definition
+ * Country model {@link BaseModel}
  */
-public interface PersistableAttribute {
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@Entity(name = PersistableCountry.MODEL_ID)
+@BatchSize(size = 10)
+@Table(name = PersistableCountry.TABlE_NAME, catalog = "public")
+@AttributeOverrides({
+    @AttributeOverride(name = PersistableBaseModel.ID_FIELD_NAME, column = @Column(name = PersistableCountry.ID_FIELD_NAME, unique = true, nullable = false))
+})
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Country extends BaseModel<Long> implements PersistableCountry {
 
-    /**
-     * Default document ID
-     */
-    String MODEL_ID = "Attribute";
-    /**
-     * Default table name
-     */
-    String TABlE_NAME = "attributes";
+    private String countryCode;
 
-    /**
-     * Default field names
-     */
-    String ID_FIELD_NAME = "id";
-    String ATTRIBUTE_ID_FIELD_NAME = "attributeId";
-    String NAME_FIELD_NAME = "name";
-    String SYNONYM_FIELD_NAME = "synonym";
-    String DESCRIPTION_TEXT_FIELD_NAME = "descriptionText";
-    String KEYWORDS_FIELD_NAME = "keywords";
-    String PRODUCTS_FIELD_NAME = "products";
-    /**
-     * Default reference field names
-     */
-    String ATTRIBUTES_REF_FIELD_NAME = "attributes";
+    private String countryName;
 }

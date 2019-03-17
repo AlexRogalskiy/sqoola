@@ -69,7 +69,7 @@ public class IPValidator implements ConstraintValidator<IP, String> {
         boolean isValid = ipField.trim().toLowerCase().matches(IPValidator.DEFAULT_IPV4_PATTERN_FORMAT) || ipField.trim().toLowerCase().matches(IPValidator.DEFAULT_IPV6_PATTERN_FORMAT);
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect IP address format ={%s})", ipField)).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect IP location format ={%s})", ipField)).addConstraintViolation();
         }
         return isValid;
     }

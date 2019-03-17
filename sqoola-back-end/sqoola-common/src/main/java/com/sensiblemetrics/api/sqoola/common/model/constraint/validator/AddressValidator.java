@@ -40,11 +40,11 @@ import java.util.Objects;
 public class AddressValidator implements ConstraintValidator<Address, BaseAddressEntity> {
 
     /**
-     * Default street address pattern format
+     * Default street location pattern format
      */
     public static final String DEFAULT_STREET_ADDRESS_PATTERN_FORMAT = "^[\\p{Alnum}]$";
     /**
-     * Default house address pattern format
+     * Default house location pattern format
      */
     public static final String DEFAULT_HOUSE_ADDRESS_PATTERN_FORMAT = "^[\\p{Alnum}]$";
     /**
@@ -64,13 +64,13 @@ public class AddressValidator implements ConstraintValidator<Address, BaseAddres
         boolean isValid = Objects.isNull(baseAddressEntity.getStreetAddress()) || baseAddressEntity.getStreetAddress().matches(AddressValidator.DEFAULT_STREET_ADDRESS_PATTERN_FORMAT);
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect street address format ={%s} (expected format={%s})", baseAddressEntity.getStreetAddress(), AddressValidator.DEFAULT_STREET_ADDRESS_PATTERN_FORMAT)).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect street location format ={%s} (expected format={%s})", baseAddressEntity.getStreetAddress(), AddressValidator.DEFAULT_STREET_ADDRESS_PATTERN_FORMAT)).addConstraintViolation();
             return false;
         }
         isValid = Objects.isNull(baseAddressEntity.getHouseAddress()) || baseAddressEntity.getHouseAddress().matches(AddressValidator.DEFAULT_HOUSE_ADDRESS_PATTERN_FORMAT);
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect house address format ={%s} (expected format={%s})", baseAddressEntity.getHouseAddress(), AddressValidator.DEFAULT_HOUSE_ADDRESS_PATTERN_FORMAT)).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect house location format ={%s} (expected format={%s})", baseAddressEntity.getHouseAddress(), AddressValidator.DEFAULT_HOUSE_ADDRESS_PATTERN_FORMAT)).addConstraintViolation();
             return false;
         }
         isValid = Objects.isNull(baseAddressEntity.getZipCode()) || baseAddressEntity.getZipCode().matches(AddressValidator.DEFAULT_ZIP_CODE_PATTERN_FORMAT);
