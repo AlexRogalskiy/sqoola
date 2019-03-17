@@ -8,7 +8,33 @@ springfox:
       v2:
         path: classpath:securityDefinition.json
 
+#eureka:
+#    instance:
+#        leaseRenewalIntervalInSeconds: 10
+#    client:
+#        registryFetchIntervalSeconds: 5
+#    serviceUrl:
+#        defaultZone: http://localhost:8080/v1/eureka
+
+security:
+  rememberMe:
+    tokenValidity: 1209600
+  user:
+    roles:
+      - USER
+      - ADMIN
+
 spring:
+  cloud:
+    config:
+      enabled: false
+  boot:
+    admin:
+      url: http://localhost:8080/v1
+      client:
+        service-url: http://localhost:8080/v1
+        management-url: http://localhost:8080/v1
+        health-url: http://localhost:8080/v1/health
   messages:
     basename: messages
     encoding: UTF-8
@@ -71,15 +97,22 @@ logging:
   file: logs/application.log
   level:
     ROOT: DEBUG
-    org.springframework: DEBUG
-    org.springframework.web: DEBUG
     org.hibernate: DEBUG
     org.hibernate.search: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: DEBUG
-    com.wildbeeslabs.sensiblemetrics.sqoola: DEBUG
+    org.springframework: DEBUG
     org.springframework.boot.autoconfigure.security: DEBUG
+    org.springframework.web.servlet.mvc: DEBUG
+    org.springframework.transaction: DEBUG
+    org.springframework.batch: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.controllers: DEBUG
+    org.springframework.data: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.hibernate: DEBUG
+    com.wildbeeslabs.sensiblemetrics.sqoola.common: DEBUG
   pattern:
     console: "%d{HH:mm:ss.SSS} [%highlight(%-5.5level)] %cyan(%-56.56logger{56}) - %msg \\(%F:%L\\)#%M%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
@@ -117,6 +150,13 @@ server:
   use-forward-headers: true
   hystrix:
     command.default.execution.timeout.enabled: false
+  cluster:
+    - ip: 192.168.0.1
+      path: /app1
+    - ip: 192.168.0.2
+      path: /app2
+    - ip: 192.168.0.3
+      path: /app3
 
 management:
   info:
@@ -136,20 +176,34 @@ spring:
 
 server:
   email: prod@sqoola.com
+  cluster:
+    - ip: 192.168.0.1
+      path: /app1
+    - ip: 192.168.0.2
+      path: /app2
+    - ip: 192.168.0.3
+      path: /app3
 
 logging:
   file: logs/application_prod.log
   level:
     ROOT: WARN
-    org.springframework: WARN
-    org.springframework.web: WARN
     org.hibernate: WARN
     org.hibernate.search: WARN
     org.hibernate.SQL: WARN
     org.hibernate.type: WARN
     org.hibernate.type.descriptor.sql.BasicBinder: WARN
-    com.wildbeeslabs.sensiblemetrics.sqoola: WARN
+    org.springframework: WARN
     org.springframework.boot.autoconfigure.security: WARN
+    org.springframework.web.servlet.mvc: WARN
+    org.springframework.transaction: WARN
+    org.springframework.batch: WARN
+    org.springframework.security: WARN
+    org.springframework.controllers: WARN
+    org.springframework.data: WARN
+    org.springframework.web: WARN
+    org.springframework.hibernate: WARN
+    com.wildbeeslabs.sensiblemetrics.sqoola.common: WARN
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
@@ -373,20 +427,34 @@ spring:
 
 server:
   email: dev@sqoola.com
+  cluster:
+    - ip: 192.168.0.1
+      path: /app1
+    - ip: 192.168.0.2
+      path: /app2
+    - ip: 192.168.0.3
+      path: /app3
 
 logging:
   file: logs/application_dev.log
   level:
     ROOT: WARN
-    org.springframework: WARN
-    org.springframework.web: WARN
     org.hibernate: WARN
     org.hibernate.search: WARN
     org.hibernate.SQL: WARN
     org.hibernate.type: WARN
     org.hibernate.type.descriptor.sql.BasicBinder: WARN
-    com.wildbeeslabs.sensiblemetrics.sqoola: WARN
+    org.springframework: WARN
     org.springframework.boot.autoconfigure.security: WARN
+    org.springframework.web.servlet.mvc: WARN
+    org.springframework.transaction: WARN
+    org.springframework.batch: WARN
+    org.springframework.security: WARN
+    org.springframework.controllers: WARN
+    org.springframework.data: WARN
+    org.springframework.web: WARN
+    org.springframework.hibernate: WARN
+    com.wildbeeslabs.sensiblemetrics.sqoola.common: WARN
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
