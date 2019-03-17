@@ -23,10 +23,12 @@
  */
 package com.sensiblemetrics.api.sqoola.common.model.dao.interfaces;
 
+import java.io.Serializable;
+
 /**
  * Persistable category model definition
  */
-public interface PersistableCategory {
+public interface PersistableCategory extends Serializable {
 
     /**
      * Default document ID

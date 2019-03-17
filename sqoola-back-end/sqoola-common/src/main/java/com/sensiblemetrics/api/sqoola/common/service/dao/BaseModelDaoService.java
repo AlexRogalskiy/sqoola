@@ -29,14 +29,28 @@ import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * {@link BaseModel} service declaration
+ * {@link BaseModel} DAO service declaration
  *
  * @param <E>  type of base model {@link BaseModel}
  * @param <ID> type of base document identifier {@link Serializable}
  */
 public interface BaseModelDaoService<E extends BaseModel<ID>, ID extends Serializable> extends AuditModelDaoService<E, ID> {
 
+    /**
+     * Get information entities {@link BaseInfoEntity} by prefix name
+     *
+     * @param prefix - information prefix name
+     * @return information entities {@link BaseInfoEntity} in optional container
+     * {@link Optional}
+     */
     Optional<? extends E> findByPrefix(final String prefix);
 
-    List<? extends E> findByDictionary(final BaseDictionaryInfoEntity dictionary);
+    /**
+     * Get list of information entities {@link BaseInfoEntity} by dictionary
+     * entities {@link BaseDictionaryInfoEntity}
+     *
+     * @param dictionary - dictionary entities
+     * @return list of information entities {@link BaseInfoEntity}
+     */
+    Iterable<? extends E> findByDictionary(final BaseDictionaryInfoEntity dictionary);
 }

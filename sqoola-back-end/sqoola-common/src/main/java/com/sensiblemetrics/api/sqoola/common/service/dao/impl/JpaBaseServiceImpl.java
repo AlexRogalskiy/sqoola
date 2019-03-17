@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.sensiblemetrics.api.sqoola.common.service.dao;
+package com.sensiblemetrics.api.sqoola.common.service.dao.impl;
 
+import com.sensiblemetrics.api.sqoola.common.service.dao.IJpaBaseService;
 import com.wildbeeslabs.api.rest.common.service.interfaces.IJpaBaseService;
 
 import com.wildbeeslabs.api.rest.common.model.IBaseEntity;

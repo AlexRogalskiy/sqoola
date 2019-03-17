@@ -24,11 +24,12 @@
 package com.sensiblemetrics.api.sqoola.common.controller.impl;
 
 import com.google.common.collect.Lists;
-import com.sensiblemetrics.api.sqoola.common.service.dao.BaseDaoService;
-import com.sensiblemetrics.api.sqoola.common.utility.MapperUtils;
 import com.sensiblemetrics.api.sqoola.common.controller.BaseController;
 import com.sensiblemetrics.api.sqoola.common.exception.EmptyContentException;
+import com.sensiblemetrics.api.sqoola.common.exception.ResourceAlreadyExistException;
 import com.sensiblemetrics.api.sqoola.common.exception.ResourceNotFoundException;
+import com.sensiblemetrics.api.sqoola.common.service.dao.BaseDaoService;
+import com.sensiblemetrics.api.sqoola.common.utility.MapperUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -37,13 +38,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Persistable;
 
 import java.beans.PropertyEditorSupport;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-import static com.sensiblemetrics.api.sqoola.common.utility.MapperUtils.map;
+import static com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage;
 
 /**
  * {@link BaseController} controller implementation
@@ -56,16 +58,16 @@ import static com.sensiblemetrics.api.sqoola.common.utility.MapperUtils.map;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public abstract class BaseControllerImpl<E, T, ID extends Serializable> implements BaseController<E, T, ID> {
+public abstract class BaseControllerImpl<E extends Persistable<ID>, T, ID extends Serializable> implements BaseController {
 
     @Autowired
     private MessageSource messageSource;
 
     protected List<? extends E> getAllItems() throws EmptyContentException {
         log.debug("Fetching all items");
-        final List<? extends E> items = Lists.newArrayList(getService().findAll());
+        final List<E> items = Lists.newArrayList(getService().findAll());
         if (items.isEmpty()) {
-            throw new EmptyContentException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.no.content"));
+            throw new EmptyContentException(formatMessage(getMessageSource(), "error.no.content"));
         }
         return items;
     }
@@ -74,18 +76,17 @@ public abstract class BaseControllerImpl<E, T, ID extends Serializable> implemen
         log.debug("Fetching item by ID: {}", id);
         final Optional<? extends E> item = getService().find(id);
         if (!item.isPresent()) {
-            throw new ResourceNotFoundException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.no.item.id", id));
+            throw new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id));
         }
         return item.get();
     }
 
-    protected E createItem(final T itemDto,
-                           final Class<? extends E> entityClass) {
+    protected E createItem(final T itemDto, final Class<? extends E> entityClass) {
         log.debug("Creating new item: {}", itemDto);
         final E itemEntity = MapperUtils.map(itemDto, entityClass);
-//        if (getService().exists(itemEntity)) {
-//            throw new ResourceAlreadyExistException(formatMessage(getMessageSource(), "error.already.exist.item"));
-//        }
+        if (getService().exists(itemEntity.getId())) {
+            throw new ResourceAlreadyExistException(formatMessage(getMessageSource(), "error.already.exist.item"));
+        }
         getService().save(itemEntity);
         return itemEntity;
     }
@@ -94,7 +95,7 @@ public abstract class BaseControllerImpl<E, T, ID extends Serializable> implemen
                            final T itemDto,
                            final Class<? extends E> entityClass) {
         log.info("Updating item by ID: {}, itemDto: {}", id, itemDto);
-        final E currentItem = getService().find(id).orElseThrow(() -> new ResourceNotFoundException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.no.item.id", id)));
+        final E currentItem = getService().find(id).orElseThrow(() -> new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id)));
         final E itemEntity = MapperUtils.map(itemDto, entityClass);
         getService().save(itemEntity);
         return currentItem;
@@ -104,7 +105,7 @@ public abstract class BaseControllerImpl<E, T, ID extends Serializable> implemen
         log.info("Deleting item by ID: {}", id);
         final Optional<? extends E> item = getService().find(id);
         if (!item.isPresent()) {
-            throw new ResourceNotFoundException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.no.item.id", id));
+            throw new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id));
         }
         getService().delete(item.get());
         return item.get();

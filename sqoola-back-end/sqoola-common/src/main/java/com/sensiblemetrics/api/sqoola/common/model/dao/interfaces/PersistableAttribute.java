@@ -23,10 +23,12 @@
  */
 package com.sensiblemetrics.api.sqoola.common.model.dao.interfaces;
 
+import java.io.Serializable;
+
 /**
  * Persistable attribute model definition
  */
-public interface PersistableAttribute {
+public interface PersistableAttribute extends Serializable {
 
     /**
      * Default document ID

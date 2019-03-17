@@ -23,10 +23,12 @@
  */
 package com.sensiblemetrics.api.sqoola.common.model.dao.interfaces;
 
+import java.io.Serializable;
+
 /**
  * Persistable role model definition
  */
-public interface PersistableRole {
+public interface PersistableRole extends Serializable {
 
     /**
      * Default document ID

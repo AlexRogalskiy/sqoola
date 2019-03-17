@@ -30,30 +30,28 @@ import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * Base service declaration
+ * Base DAO service declaration
  *
- * @param <E>  type of document
- * @param <ID> type of document identifier {@link Serializable}
+ * @param <E>  type of model {@link Serializable}
+ * @param <ID> type of model identifier {@link Serializable}
  */
 public interface BaseDaoService<E extends Serializable, ID extends Serializable> {
 
     Iterable<? extends E> findAll();
 
-    Iterable<? extends E> findAll(final Iterable<ID> ids);
+    Iterable<? extends E> findAll(final Iterable<ID> target);
 
-    Page<E> findAll(final Pageable pageable);
+    Page<? extends E> findAll(final Pageable pageable);
 
-    Optional<E> find(final ID id);
+    Optional<? extends E> find(final ID id);
 
-    <S extends E> S save(final S entity);
-
-    //void saveAll(final Iterable<? extends E> target);
+    E save(final E entity);
 
     //void saveOrUpdate(final E target, final Class<? extends E> clazz);
 
     boolean exists(final ID id);
 
-    <S extends E> Iterable<S> save(final Iterable<S> entities);
+    Iterable<? extends E> saveAll(final Iterable<? extends E> target);
 
     void delete(final E target);
 

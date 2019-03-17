@@ -23,43 +23,41 @@
  */
 package com.sensiblemetrics.api.sqoola.common.service.dao;
 
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseInfoModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModel;
 import com.wildbeeslabs.api.rest.common.model.BaseDictionaryInfoEntity;
-import com.wildbeeslabs.api.rest.common.model.BaseInfoEntity;
-import com.wildbeeslabs.api.rest.common.repository.BaseInfoRepository;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 /**
+ * {@link BaseInfoModel} DAO service declaration
  *
- * BaseInfo REST Application Service declaration
- *
- * @author Alex
- * @version 1.0.0
- * @since 2017-08-08
- * @param <T>
- * @param <R>
+ * @param <E>  type of base model {@link BaseModel}
+ * @param <ID> type of base document identifier {@link Serializable}
  */
-public interface IBaseInfoService<T extends BaseInfoEntity, R extends BaseInfoRepository<T>> extends IService<T, R> {
+public interface BaseInfoModelDaoService<E extends BaseInfoModel<ID>, ID extends Serializable> extends BaseDaoService<E, ID> {
 
     /**
-     * Get information entities {@link BaseInfoEntity} by prefix name
+     * Get information entities {@link BaseInfoModel} by prefix name
      *
      * @param prefix - information prefix name
-     * @return information entities {@link BaseInfoEntity} in optional container
+     * @return information entities {@link BaseInfoModel} in optional container
      * {@link Optional}
      */
-    default Optional<? extends T> findByPrefix(final String prefix) {
+    default Optional<? extends E> findByPrefix(final String prefix) {
         return getRepository().findByPrefix(prefix);
     }
 
     /**
-     * Get list of information entities {@link BaseInfoEntity} by dictionary
+     * Get list of information entities {@link BaseInfoModel} by dictionary
      * entities {@link BaseDictionaryInfoEntity}
      *
      * @param dictionary - dictionary entities
-     * @return list of information entities {@link BaseInfoEntity}
+     * @return list of information entities {@link BaseInfoModel}
      */
-    default List<? extends T> findByDictionary(final BaseDictionaryInfoEntity dictionary) {
+    default List<? extends E> findByDictionary(final BaseDictionaryInfoEntity dictionary) {
         return getRepository().findByDictionary(dictionary);
     }
 }
