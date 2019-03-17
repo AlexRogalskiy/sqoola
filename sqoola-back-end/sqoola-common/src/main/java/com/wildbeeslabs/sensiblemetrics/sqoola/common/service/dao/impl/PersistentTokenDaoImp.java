@@ -31,13 +31,10 @@ public class PersistentTokenDaoImp implements PersistentTokenRepository {
 
     @Override
     public PersistentRememberMeToken getTokenForSeries(String seriesId) {
-        PersistentLogins logins = sessionFactory.getCurrentSession()
-            .get(PersistentLogins.class, seriesId);
-
+        PersistentLogins logins = sessionFactory.getCurrentSession().get(PersistentLogins.class, seriesId);
         if (Objects.nonNull(logins)) {
             return new PersistentRememberMeToken(logins.getUsername(), logins.getSeries(), logins.getToken(), logins.getLastUsed());
         }
-
         return null;
     }
 
@@ -54,5 +51,4 @@ public class PersistentTokenDaoImp implements PersistentTokenRepository {
         logins.setToken(tokenValue);
         logins.setLastUsed(lastUsed);
     }
-
 }

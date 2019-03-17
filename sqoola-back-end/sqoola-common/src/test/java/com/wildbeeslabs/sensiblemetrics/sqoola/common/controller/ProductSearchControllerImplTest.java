@@ -24,6 +24,7 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.controller;
 
 import com.google.common.collect.ImmutableMap;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.BaseTest;
 import com.wildbeeslabs.sensiblemetrics.supersolr.BaseTest;
 import com.wildbeeslabs.sensiblemetrics.supersolr.controller.wrapper.SearchRequest;
 import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.Product;

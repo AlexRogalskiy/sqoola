@@ -17,6 +17,21 @@ public class OperationEventListener {
     @Transient
     public static final String COMPONENT_ID = "operationEventListener";
 
+    @PrePersist
+    public <ID extends Serializable> void prePersist(final BaseModel<ID> entity) {
+        log.debug("@PrePersist: entity = {}, id = {}", entity.getClass().getCanonicalName(), entity.getId());
+    }
+
+    @PreUpdate
+    public <ID extends Serializable> void preUpdate(final BaseModel<ID> entity) {
+        log.debug("@PreUpdate: entity = {}, id = {}", entity.getClass().getCanonicalName(), entity.getId());
+    }
+
+    @PreRemove
+    public <ID extends Serializable> void preRemove(final BaseModel<ID> entity) {
+        log.debug("@PreRemove: entity = {}, state = {}, id = {}", entity.getClass().getCanonicalName(), entity.getId());
+    }
+
     @PostPersist
     public <ID extends Serializable> void postPersist(final BaseModel<ID> entity) {
         log.debug("@PostPersist: entity = {}, id = {}", entity.getClass().getCanonicalName(), entity.getId());

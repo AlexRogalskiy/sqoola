@@ -10,6 +10,7 @@ springfox:
 
 spring:
   messages:
+    basename: messages
     encoding: UTF-8
   mvc:
     static-path-pattern: /resources/**

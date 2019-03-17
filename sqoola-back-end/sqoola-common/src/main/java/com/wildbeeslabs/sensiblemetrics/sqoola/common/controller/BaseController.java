@@ -31,13 +31,10 @@ import java.io.Serializable;
 /**
  * Base search controller declaration
  *
- * @param <E>  type of document
- * @param <T>  type of document view
- * @param <ID> type of document identifier {@link Serializable}
  * @author Alex
  * @version 1.0.0
  */
-public interface BaseController<E, T, ID extends Serializable> {
+public interface BaseController {
 
     /**
      * Default not allowed {@link ResponseEntity}
@@ -59,7 +56,7 @@ public interface BaseController<E, T, ID extends Serializable> {
      * @param id - initial input entity identifier
      * @return response body {@link ResponseEntity}
      */
-    default ResponseEntity<?> getById(final ID id) {
+    default <ID extends Serializable> ResponseEntity<?> getById(final ID id) {
         return DEFAULT_NOT_ALLOWED_RESPONSE;
     }
 
@@ -69,7 +66,7 @@ public interface BaseController<E, T, ID extends Serializable> {
      * @param itemDto - initial input entity dto
      * @return response body {@link ResponseEntity}
      */
-    default ResponseEntity<?> create(final T itemDto) {
+    default <T> ResponseEntity<?> create(final T itemDto) {
         return DEFAULT_NOT_ALLOWED_RESPONSE;
     }
 
@@ -80,7 +77,7 @@ public interface BaseController<E, T, ID extends Serializable> {
      * @param itemDto - initial input entity dto
      * @return response body {@link ResponseEntity}
      */
-    default ResponseEntity<?> update(final ID id, final T itemDto) {
+    default <T, ID extends Serializable> ResponseEntity<?> update(final ID id, final T itemDto) {
         return DEFAULT_NOT_ALLOWED_RESPONSE;
     }
 
@@ -90,7 +87,7 @@ public interface BaseController<E, T, ID extends Serializable> {
      * @param id - initial input entity identifier
      * @return response body {@link ResponseEntity}
      */
-    default ResponseEntity<?> delete(final ID id) {
+    default <ID extends Serializable> ResponseEntity<?> delete(final ID id) {
         return DEFAULT_NOT_ALLOWED_RESPONSE;
     }
 

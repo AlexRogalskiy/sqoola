@@ -23,15 +23,11 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.service.dao;
 
-import com.wildbeeslabs.api.rest.common.model.BaseDictionaryInfoEntity;
-import com.wildbeeslabs.api.rest.common.repository.BaseDictionaryInfoRepository;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 /**
- *
  * {@link DictionaryInfoEntity} service declaration
  *
  * @param <E>

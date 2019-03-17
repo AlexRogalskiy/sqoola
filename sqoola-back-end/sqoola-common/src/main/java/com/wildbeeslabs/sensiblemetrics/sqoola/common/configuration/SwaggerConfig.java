@@ -67,12 +67,43 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("Sqoola API")
-            .description("description")
+            .title("Sqoola REST API")
+            .description("Sqoola API for creating and managing gateway connectors")
+            .termsOfServiceUrl("http://example.com/terms-of-service")
             .contact(new Contact("sqoola", "sqoola.io", "info@sqoola.com"))
-            .license("MIT")
+            .license("MIT License")
             .licenseUrl("http://www.opensource.org/licenses/mit-license.php")
             .version("2.0")
             .build();
     }
+
+//    @Bean
+//    public SwaggerSpringMvcPlugin v1APIConfiguration() {
+//        SwaggerSpringMvcPlugin swaggerSpringMvcPlugin = new SwaggerSpringMvcPlugin(this.springSwaggerConfig);
+//        swaggerSpringMvcPlugin
+//            .apiInfo(getApiInfo()).apiVersion("1.0")
+//            .includePatterns("/v1/*.*").swaggerGroup("v1");
+//        swaggerSpringMvcPlugin.useDefaultResponseMessages(false);
+//        return swaggerSpringMvcPlugin;
+//    }
+//
+//    @Bean
+//    public SwaggerSpringMvcPlugin v2APIConfiguration() {
+//        SwaggerSpringMvcPlugin swaggerSpringMvcPlugin = new SwaggerSpringMvcPlugin(this.springSwaggerConfig);
+//        swaggerSpringMvcPlugin
+//            .apiInfo(getApiInfo()).apiVersion("2.0")
+//            .includePatterns("/v2/*.*").swaggerGroup("v2");
+//        swaggerSpringMvcPlugin.useDefaultResponseMessages(false);
+//        return swaggerSpringMvcPlugin;
+//    }
+//
+//    @Bean
+//    public SwaggerSpringMvcPlugin v3APIConfiguration() {
+//        SwaggerSpringMvcPlugin swaggerSpringMvcPlugin = new SwaggerSpringMvcPlugin(this.springSwaggerConfig);
+//        swaggerSpringMvcPlugin
+//            .apiInfo(getApiInfo()).apiVersion("3.0")
+//            .includePatterns("/v3/*.*").swaggerGroup("v3");
+//        swaggerSpringMvcPlugin.useDefaultResponseMessages(false);
+//        return swaggerSpringMvcPlugin;
+//    }
 }

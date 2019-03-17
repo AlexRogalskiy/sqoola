@@ -81,4 +81,36 @@ public class AppConfig {
         builder.autoDetectFields(true);
         return builder.build();
     }
+
+    //    @Bean
+//    public ServletListenerRegistrationBean<HttpSessionListener> httpSessionCreatedListener() {
+//        ServletListenerRegistrationBean<HttpSessionListener> listenerRegistrationBean = new ServletListenerRegistrationBean<>();
+//        listenerRegistrationBean.setListener(new HttpSessionCreatedListener());
+//        return listenerRegistrationBean;
+//    }
+//    @Bean
+//    public FilterRegistrationBean noHttpSessionFilter() {
+//        FilterRegistrationBean registration = new FilterRegistrationBean();
+//        registration.setFilter(new NoHttpSessionFilter());
+//        registration.addUrlPatterns("/*");
+//        return registration;
+//    }
+//    @Bean
+//    @Autowired
+//    public CookieSecurityContextRepository securityContextRepository(final String sessionEncryptionKeyBase64) {
+//        return new CookieSecurityContextRepository(new JwtEncryption(""));
+//    }
+//
+//    @Bean
+//    public CookieRequestCache cookieRequestCache() {
+//        return new CookieRequestCache();
+//    }
+//
+//    @Bean
+//    public FilterRegistrationBean httpsOnlyFilter() {
+//        FilterRegistrationBean registration = new FilterRegistrationBean();
+//        registration.setFilter(new HttpsOnlyFilter());
+//        registration.addUrlPatterns("/*");
+//        return registration;
+//    }
 }

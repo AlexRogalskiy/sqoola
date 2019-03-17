@@ -23,8 +23,8 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.constraint.ChronologicalDates;
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.interfaces.Auditable;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.constraint.annotation.ChronologicalDates;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.interfaces.Auditable;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.interfaces.PersistableAuditModel;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.utility.DateUtils;
 import lombok.Data;

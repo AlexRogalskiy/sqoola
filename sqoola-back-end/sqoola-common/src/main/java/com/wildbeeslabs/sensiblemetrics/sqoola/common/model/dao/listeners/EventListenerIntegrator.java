@@ -12,26 +12,16 @@ import org.hibernate.service.spi.SessionFactoryServiceRegistry;
 
 public class EventListenerIntegrator implements Integrator {
 
-   @Override
-   public void integrate(Metadata metadata, SessionFactoryImplementor 
-         sessionFactory, SessionFactoryServiceRegistry serviceRegistry) {
+    @Override
+    public void integrate(Metadata metadata, SessionFactoryImplementor sessionFactory, SessionFactoryServiceRegistry serviceRegistry) {
 
-      EventListenerRegistry eventListenerRegistry = 
-            serviceRegistry.getService(EventListenerRegistry.class);
+        final EventListenerRegistry eventListenerRegistry = serviceRegistry.getService(EventListenerRegistry.class);
+        eventListenerRegistry.getEventListenerGroup(EventType.SAVE).appendListener(new SaveUpdateEventListenerImp());
+        eventListenerRegistry.getEventListenerGroup(EventType.LOAD).appendListener(new LoadEventListenerImp());
+        eventListenerRegistry.getEventListenerGroup(EventType.REFRESH).appendListener(new RefreshEventListenerImp());
+    }
 
-      eventListenerRegistry.getEventListenerGroup(EventType.SAVE)
-                     .appendListener(new SaveUpdateEventListenerImp());
-      
-      eventListenerRegistry.getEventListenerGroup(EventType.LOAD)
-                     .appendListener(new LoadEventListenerImp());
-      
-      eventListenerRegistry.getEventListenerGroup(EventType.REFRESH)
-                     .appendListener(new RefreshEventListenerImp());
-   }
-
-   @Override
-   public void disintegrate(SessionFactoryImplementor sessionFactory,
-         SessionFactoryServiceRegistry serviceRegistry) {
-
-   }
+    @Override
+    public void disintegrate(SessionFactoryImplementor sessionFactory, SessionFactoryServiceRegistry serviceRegistry) {
+    }
 }

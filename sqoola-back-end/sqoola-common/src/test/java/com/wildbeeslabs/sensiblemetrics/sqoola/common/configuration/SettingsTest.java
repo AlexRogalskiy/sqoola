@@ -1,7 +1,9 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.configuration;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.annotation.TestConfiguration;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -11,10 +13,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class SettingsTest {
 
     @Autowired
-    TestSettings settings;
+    private TestSettings settings;
 
     @Test
     public void testConfig() {
-        Assert.assertEquals("TEST_PROPERTY", settings.getProperty());
+        assertEquals("TEST_PROPERTY", settings.getProperty());
     }
 }

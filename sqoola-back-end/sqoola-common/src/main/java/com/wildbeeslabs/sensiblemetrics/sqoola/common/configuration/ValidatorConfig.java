@@ -64,7 +64,7 @@ public class ValidatorConfig {
     @Bean
     public MethodValidationPostProcessor methodValidationPostProcessor(final MessageSource validationMessageSource) {
         final MethodValidationPostProcessor processor = new MethodValidationPostProcessor();
-        processor.setValidatorFactory(this.validator(validationMessageSource));
+        processor.setValidatorFactory(validator(validationMessageSource));
         return processor;
     }
 }

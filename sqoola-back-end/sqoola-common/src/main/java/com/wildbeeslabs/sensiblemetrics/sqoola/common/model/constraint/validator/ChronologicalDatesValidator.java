@@ -23,7 +23,7 @@
  */
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.model.constraint.validator;
 
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.constraint.ChronologicalDates;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.constraint.annotation.ChronologicalDates;
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.BaseModel;
 
 import javax.validation.ConstraintValidator;
@@ -31,7 +31,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.Objects;
 
 /**
- * {@link ChronologicalDates} constraint implementation {@link ConstraintValidator}
+ * {@link ChronologicalDates} constraint validator implementation {@link ConstraintValidator}
  *
  * @version 1.0.0
  * @since 2017-08-08

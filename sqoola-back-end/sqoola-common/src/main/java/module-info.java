@@ -1,4 +1,7 @@
-module com.wildbeeslabs.sensiblemetrics.ansifancy {
+/**
+ * Sqoola module info
+ */
+module com.wildbeeslabs.sensiblemetrics.sqoola.common {
     requires static lombok;
     requires org.apache.commons.lang3;
     requires slf4j.api;
@@ -6,7 +9,6 @@ module com.wildbeeslabs.sensiblemetrics.ansifancy {
     requires java.sql;
     requires org.joda.time;
     requires spring.jdbc;
-    requires java.persistence;
     requires modelmapper;
     requires spring.security.core;
     requires spring.context;
@@ -31,10 +33,10 @@ module com.wildbeeslabs.sensiblemetrics.ansifancy {
     requires spring.beans;
     requires com.fasterxml.jackson.databind;
     requires spring.security.config;
-    requires spring.security.crypto;
+    //requires spring.security.crypto;
     requires spring.security.web;
     requires springfox.spring.web;
-    requires springfox.spi;
+    //requires springfox.spi;
     requires springfox.core;
     requires com.google.common;
     requires spring.webmvc;
@@ -43,5 +45,9 @@ module com.wildbeeslabs.sensiblemetrics.ansifancy {
     requires spring.context.support;
     requires jackson.annotations;
     requires com.fasterxml.jackson.core;
-    requires rt;
+    requires spring.hateoas;
+    requires com.fasterxml.jackson.dataformat.xml;
+    requires spring.data.rest.core;
+    requires spring.websocket;
+    requires org.hibernate.validator;
 }

@@ -139,7 +139,7 @@ public class SecurityUtils {
     public static String encode(final String username, final String password) {
         final String authorizationString = String.format("%s:%s", username, password);
         try {
-            return new String(Base64.getEncoder().encode(authorizationString.getBytes(StandardCharsets.UTF_8.name())));
+            return String.valueOf(Base64.getEncoder().encode(authorizationString.getBytes(StandardCharsets.UTF_8.name())));
         } catch (UnsupportedEncodingException e) {
             log.error(String.format("ERROR: cannot process authorisation parameters username: {%s}, message: {%s}", username, e.getMessage()));
         }

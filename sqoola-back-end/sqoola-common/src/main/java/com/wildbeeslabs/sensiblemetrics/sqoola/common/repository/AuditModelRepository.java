@@ -41,27 +41,117 @@ import java.util.concurrent.CompletableFuture;
 @NoRepositoryBean
 public interface AuditModelRepository<E extends AuditModel, ID extends Serializable> extends BaseJpaRepository<E, ID> {
 
+    /**
+     * Get list of entities {@link AuditModel} created before requested date
+     *
+     * @param date - requested date (excluding)
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.created <= ?1")
     @Async
     CompletableFuture<List<? extends E>> findByCreatedLessThanEqual(final Date date);
 
+    /**
+     * Get list of entities {@link AuditModel} created after requested date
+     *
+     * @param date - requested date (excluding)
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.created > ?1")
     @Async
     CompletableFuture<List<? extends E>> findByCreatedGreaterThan(final Date date);
 
+    /**
+     * Get list of entities {@link AuditModel} created within requested period
+     *
+     * @param dateFrom - start date of requested period (excluding)
+     * @param dateTo   - end date of requested period (including)
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.created > ?1 AND e.created <= ?2")
     @Async
     CompletableFuture<List<? extends E>> findByCreatedBetween(final Date dateFrom, final Date dateTo);
 
+    /**
+     * Get list of entities {@link AuditModel} created by user / owner name
+     *
+     * @param createdBy - user / owner name of created entities
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.createdBy = ?1")
     @Async
-    CompletableFuture<List<? extends E>> findByCreatedByIgnoreCase(final String createdBy);
+    CompletableFuture<List<? extends E>> findByCreatedBy(final String createdBy);
 
-    //@Query("SELECT e FROM #{#entityName} e WHERE e.changedBy = ?1")
+    /**
+     * Get list of entities {@link AuditModel} created by user / owner name
+     * pattern
+     *
+     * @param createdByPattern - user / owner name pattern of created entities
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.createdBy LIKE ?1")
     @Async
-    CompletableFuture<List<? extends E>> findByChangedByIgnoreCase(final String changedBy);
+    CompletableFuture<List<? extends E>> findByCreatedByLike(final String createdByPattern);
 
+    /**
+     * Get list of entities {@link AuditModel} modified before requested date
+     *
+     * @param date - requested date (excluding)
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.changed <= ?1")
+    @Async
+    CompletableFuture<List<? extends E>> findByChangedLessThan(final Date date);
+
+    /**
+     * Get list of entities {@link AuditModel} modified after requested date
+     *
+     * @param date - requested date (excluding)
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.changed > ?1")
+    @Async
+    CompletableFuture<List<? extends E>> findByChangedGreaterThan(final Date date);
+
+    /**
+     * Get list of entities {@link AuditModel} modified within requested period
+     *
+     * @param dateFrom - start date of requested period (excluding)
+     * @param dateTo   - end date of requested period (including)
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.changed > ?1 AND e.changed <= ?2")
     @Async
     CompletableFuture<List<? extends E>> findByChangedBetween(final Date dateFrom, final Date dateTo);
+
+    /**
+     * Get list of entities {@link AuditModel} modified by user / owner name
+     *
+     * @param changedBy - user / owner name of modified entities
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.changedBy = ?1")
+    @Async
+    CompletableFuture<List<? extends E>> findByChangedBy(final String changedBy);
+
+    /**
+     * Get list of entities {@link AuditModel} modified by user / owner name
+     * pattern
+     *
+     * @param changedByPattern - user / owner name pattern of modified entities
+     * @return list of entities {@link AuditModel} with asynchronous iterator
+     * {@link CompletableFuture}
+     */
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.changedBy LIKE ?1")
+    @Async
+    CompletableFuture<List<? extends E>> findByChangedByLike(final String changedByPattern);
 }

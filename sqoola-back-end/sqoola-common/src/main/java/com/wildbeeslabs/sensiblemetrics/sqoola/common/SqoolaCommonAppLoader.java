@@ -36,6 +36,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication(scanBasePackages = {"com.wildbeeslabs.sensiblemetrics.sqoola.common"}, exclude = {ErrorMvcAutoConfiguration.class})
 @EnableBatchProcessing
 @EnableSwagger2
+//@EnableAuthorizationServer
 public class SqoolaCommonAppLoader extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

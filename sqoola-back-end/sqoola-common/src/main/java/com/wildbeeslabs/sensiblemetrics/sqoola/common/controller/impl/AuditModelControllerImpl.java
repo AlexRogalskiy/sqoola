@@ -35,10 +35,13 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * {@link AuditModelController} implementation
@@ -71,16 +74,11 @@ public class AuditModelControllerImpl<E extends AuditModel, T extends AuditModel
 
     @RequestMapping("/person/{id}")
     public String getPersonChanges(@PathVariable Integer id, @RequestParam Optional<String> param) {
-        QueryBuilder jqlQuery = QueryBuilder.byInstanceId(id, Person.class);
-
+        final QueryBuilder jqlQuery = QueryBuilder.byInstanceId(id, Person.class);
         jqlQuery = param.isPresent() ? jqlQuery.andProperty(param.get()) : jqlQuery;
-
         List<Change> changes = javers.findChanges(jqlQuery.build());
-
         changes.sort((o1, o2) -> -1 * o1.getCommitMetadata().get().getCommitDate().compareTo(o2.getCommitMetadata().get().getCommitDate()));
-
-        JsonConverter jsonConverter = javers.getJsonConverter();
-
+        final JsonConverter jsonConverter = javers.getJsonConverter();
         return jsonConverter.toJson(changes);
     }
 
@@ -119,23 +117,17 @@ public class AuditModelControllerImpl<E extends AuditModel, T extends AuditModel
         Hierarchy l = hierarchyRepository.findOne(left);
         Hierarchy p = hierarchyRepository.findOne(right);
 
-
         Diff diff = javers.compare(l, p);
-
-
 //        TODO
 //        List<Change> changes = diff.getChanges(input ->
 //                (input instanceof NewObject
 //                        && input.getAffectedGlobalId().getCdoClass().getClientsClass() != Hierarchy.class));
-
-
         JsonConverter jsonConverter = javers.getJsonConverter();
-
         return jsonConverter.toJson(diff.getChanges());
     }
 
     protected List<Map<String, Object>> getAllLeadHistory(String leadId) throws ClassNotFoundException {
-        QueryBuilder jqlQuery = QueryBuilder.byInstanceId(leadId, Lead.class);
+        final QueryBuilder jqlQuery = QueryBuilder.byInstanceId(leadId, Lead.class);
         List<CdoSnapshot> changes = javers.findSnapshots(jqlQuery.build());
         changes.sort((o1, o2) -> -1 * (int) o1.getVersion() - (int) o2.getVersion());
         return commonUtil.getHistoryMap(changes);
@@ -152,6 +144,7 @@ public class AuditModelControllerImpl<E extends AuditModel, T extends AuditModel
         headers.add(DEFAULT_TOTAL_ELEMENTS_HEADER, Long.toString(page.getTotalElements()));
         headers.add(DEFAULT_EXPIRES_AFTER_HEADER, LocalDate.now().plusDays(DEFAULT_TOKEN_EXPIRE_PERIOD).toString());
         headers.add(DEFAULT_RATE_LIMIT_HEADER, String.valueOf(DEFAULT_RATE_LIMIT));
+        //headers.set(AUTHORIZATION, "Basic " + SecurityUtils.encode("", ""));
         return headers;
     }
 

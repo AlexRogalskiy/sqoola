@@ -61,7 +61,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 //@EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 //@ImportResource({ "classpath:spring-security.config.xml" })
-@Order(SecurityProperties.BASIC_AUTH_ORDER)
+@Order(SecurityProperties.DEFAULT_FILTER_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -120,15 +120,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             //.accessDeniedHandler(authenticationAccessDeniedHandler())
             //.authenticationEntryPoint(restAuthenticationEntryPoint)
             .authorizeRequests()
-            .antMatchers("/api/search").permitAll()
+            .antMatchers("/v1/**", "/v2/**", "/swagger-ui/**", "/api-docs/**").permitAll()
             .antMatchers("/api/**").hasAnyRole("USER", "MANAGER").and()
 //            .antMatchers(HttpMethod.GET, "/api/order").hasRole("USER")
 //            .antMatchers(HttpMethod.POST, "/api/order").hasRole("USER")
 //            .antMatchers(HttpMethod.PUT, "/api/order").hasRole("USER")
 //            .antMatchers(HttpMethod.DELETE, "/api/order").hasRole("MANAGER")
 //            .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("MANAGER").and()
-            .headers().cacheControl().disable().and()
-            .csrf().disable();
+            .headers()
+            .cacheControl()
+            .disable()
+            .and()
+            .csrf()
+            .disable();
 
 //        http.csrf().disable()
 //            .authorizeRequests()
@@ -184,6 +188,56 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(authUserService).passwordEncoder(passwordEncoder());
     }
+
+    //    @Bean
+//    public PersistentTokenRepository persistentTokenRepository() {
+//        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+//        db.setDataSource(dataSource);
+//        return db;
+////        CassandraTokenRepository db = new CassandraTokenRepository(persistanceTokenDao);
+////        return db;
+//    }
+
+    //    @Bean
+//    public SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler() {
+//        SavedRequestAwareAuthenticationSuccessHandler auth = new SavedRequestAwareAuthenticationSuccessHandler();
+//        auth.setTargetUrlParameter("targetUrl");
+//        return auth;
+//    }
+//
+//    @Bean
+//    public CookieCsrfTokenRepository csrfTokenRepository() {
+//        return new CookieCsrfTokenRepository();
+//    }
+//
+////    @Bean
+////    public AbstractRememberMeServices rememberMeServices() {
+////        PersistentTokenBasedRememberMeServices rememberMeServices = new PersistentTokenBasedRememberMeServices("token", authService, persistentTokenRepository());
+////        rememberMeServices.setCookieName("remember-me-token");
+////        rememberMeServices.setAlwaysRemember(true);
+////        rememberMeServices.setTokenValiditySeconds(1209600);
+////        return rememberMeServices;
+////    }
+//    private RequestMatcher createCSRFMatcher() {
+//        return new RequestMatcher() {
+//            private final Pattern allowedMethods = Pattern.compile("^GET$");
+//
+//            private final AntPathRequestMatcher[] requestMatchers = {new AntPathRequestMatcher("/script/**"), new AntPathRequestMatcher("/page/external/client/**"), new AntPathRequestMatcher("/page/token")};
+//
+//            @Override
+//            public boolean matches(HttpServletRequest request) {
+//                if (allowedMethods.matcher(request.getMethod()).matches()) {
+//                    return false;
+//                }
+//                for (AntPathRequestMatcher rm : requestMatchers) {
+//                    if (rm.matches(request)) {
+//                        return false;
+//                    }
+//                }
+//                return true;
+//            }
+//        };
+//    }
 
     @Bean
     public AuditorAware<UserDetails> auditorAware() {

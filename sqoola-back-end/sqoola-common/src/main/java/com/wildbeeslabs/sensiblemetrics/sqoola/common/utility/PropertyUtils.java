@@ -105,11 +105,15 @@ public class PropertyUtils {
         }
     }
 
-    public <T> T getPropertyValue(@NonNull final Environment environment, final String propertName, final Class<T> clazz) {
-        return getPropertyValue(environment, propertName, clazz, null);
+    public static <T> T getProperty(@NonNull final Environment environment, final String propertyName, final Class<T> clazz) {
+        return getProperty(environment, propertyName, clazz, null);
     }
 
-    public <T> T getPropertyValue(@NonNull final Environment environment, final String propertName, final Class<T> clazz, final T defaultValue) {
-        return environment.getProperty(propertName, clazz, defaultValue);
+    public static <T> T getProperty(@NonNull final Environment environment, final String propertyName, final Class<T> clazz, final T defaultValue) {
+        return environment.getProperty(propertyName, clazz, defaultValue);
+    }
+
+    public static <T> T getRequiredProperty(@NonNull final Environment environment, final String name, final Class<T> clazz) {
+        return environment.getRequiredProperty(name, clazz);
     }
 }

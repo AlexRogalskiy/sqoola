@@ -76,8 +76,8 @@ import static org.hibernate.cfg.AvailableSettings.*;
     }
 )
 @PropertySources({
-    @PropertySource("classpath:application.properties"),
-    @PropertySource("classpath:application.yml")
+    @PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true),
+    @PropertySource(value = "classpath:application.yml", ignoreResourceNotFound = true)
 })
 public class DBConfig {
 

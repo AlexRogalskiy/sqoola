@@ -220,6 +220,11 @@
             <artifactId>javers-spring-boot-starter-sql</artifactId>
             <version>${javers.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.javers</groupId>
+            <artifactId>javers-core</artifactId>
+            <version>${javers.version}</version>
+        </dependency>
 
         <!-- Database library dependencies -->
         <dependency>

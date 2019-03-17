@@ -24,7 +24,7 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao;
 
 import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.interfaces.PersistableBaseModel;
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.interfaces.Versionable;
+import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.interfaces.Versionable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

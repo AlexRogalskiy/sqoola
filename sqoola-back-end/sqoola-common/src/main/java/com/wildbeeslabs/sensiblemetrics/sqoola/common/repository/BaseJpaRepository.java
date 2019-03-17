@@ -24,10 +24,16 @@
 package com.wildbeeslabs.sensiblemetrics.sqoola.common.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.scheduling.annotation.Async;
 
 import java.io.Serializable;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 /**
  * Base JPA repository declaration {@link JpaRepository}
@@ -36,7 +42,16 @@ import java.util.Optional;
  * @param <ID> type of model identifier
  */
 @NoRepositoryBean
-public interface BaseJpaRepository<E, ID extends Serializable> extends JpaRepository<E, ID> {
+public interface BaseJpaRepository<E, ID extends Serializable> extends JpaRepository<E, ID>, JpaSpecificationExecutor<E>, QuerydslPredicateExecutor<E> {
+
+    /**
+     * Get list of item entities as stream using the {@link Query} annotation
+     *
+     * @return list of item entities as stream
+     */
+    @Query("SELECT e FROM #{#entityName} e")
+    @Async
+    CompletableFuture<Stream<? extends E>> streamAll();
 
     Optional<E> findById(final ID id);
 }
