@@ -3,7 +3,7 @@
  *
  * Copyright 2017 Pivotal Software, Inc..
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,16 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.service.dao.impl;
 
-import com.sensiblemetrics.api.sqoola.common.service.dao.IJpaBaseService;
-import com.wildbeeslabs.api.rest.common.service.interfaces.IJpaBaseService;
-
 import com.wildbeeslabs.api.rest.common.model.IBaseEntity;
-import com.wildbeeslabs.api.rest.common.repository.JpaBaseRepository;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -40,19 +31,22 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+
 /**
- *
  * JPA Base REST Application Service implementation
  *
- * @author Alex
- * @version 1.0.0
- * @since 2017-08-08
  * @param <T>
  * @param <ID>
  * @param <R>
+ * @author Alex
+ * @version 1.0.0
+ * @since 2017-08-08
  */
 @Transactional
-public abstract class JpaBaseServiceImpl<T extends IBaseEntity, ID extends Serializable, R extends JpaBaseRepository<T, ID>> implements IJpaBaseService<T, ID> {
+public abstract class JpaBaseServiceImpl<T extends IBaseEntity, ID extends Serializable> implements JpaBaseService<T, ID> {
 
     @Autowired
     private R repository;

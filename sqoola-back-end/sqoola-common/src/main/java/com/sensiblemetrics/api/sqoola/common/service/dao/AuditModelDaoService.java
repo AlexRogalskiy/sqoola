@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,64 +23,63 @@
  */
 package com.sensiblemetrics.api.sqoola.common.service.dao;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModelEntity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * {@link AuditModel} service declaration
+ * {@link AuditModelEntity} service declaration
  *
- * @param <E>  type of audit document {@link AuditModel}
+ * @param <E>  type of audit document {@link AuditModelEntity}
  * @param <ID> type of audit document identifier {@link Serializable}
  */
-public interface AuditModelDaoService<E extends AuditModel, ID extends Serializable> extends BaseDaoService<E, ID> {
+public interface AuditModelDaoService<E extends AuditModelEntity, ID extends Serializable> extends BaseDaoService<E, ID> {
 
     /**
-     * Get list of entities {@link AuditModel} created by user / owner name
+     * Get list of entities {@link AuditModelEntity} created by user / owner name
      *
      * @param createdBy - user / owner name of created entities
-     * @return list of entities {@link AuditModel} in concurrent container
+     * @return list of entities {@link AuditModelEntity} in concurrent container
      * {@link CompletableFuture}
      */
-    default CompletableFuture<List<? extends E>> findByCreatedBy(final String createdBy) {
+    default CompletableFuture<Iterable<? extends E>> findByCreatedBy(final String createdBy) {
         return getRepository().findByCreatedBy(createdBy);
     }
 
     /**
-     * Get list of entities {@link AuditModel} modified by user / owner name
+     * Get list of entities {@link AuditModelEntity} modified by user / owner name
      *
      * @param modifiedBy - user / owner name of modified entities
-     * @return list of entities {@link AuditModel} in concurrent container
+     * @return list of entities {@link AuditModelEntity} in concurrent container
      * {@link CompletableFuture}
      */
-    default CompletableFuture<List<? extends E>> findByModifiedBy(final String modifiedBy) {
+    default CompletableFuture<Iterable<? extends E>> findByModifiedBy(final String modifiedBy) {
         return getRepository().findByModifiedBy(modifiedBy);
     }
 
     /**
-     * Get list of entities {@link AuditModel} created within requested period
+     * Get list of entities {@link AuditModelEntity} created within requested period
      *
      * @param dateFrom - start date of requested period (excluding)
      * @param dateTo   - end date of requested period (including)
-     * @return list of entities {@link AuditModel} in concurrent container
+     * @return list of entities {@link AuditModelEntity} in concurrent container
      * {@link CompletableFuture}
      */
-    default CompletableFuture<List<? extends E>> findByCreatedAtBetween(final Date dateFrom, final Date dateTo) {
+    default CompletableFuture<Iterable<? extends E>> findByCreatedAtBetween(final Date dateFrom, final Date dateTo) {
         return getRepository().findByCreatedAtBetween(dateFrom, dateTo);
     }
 
     /**
-     * Get list of entities {@link AuditModel} created within requested period
+     * Get list of entities {@link AuditModelEntity} created within requested period
      *
      * @param dateFrom - start date of requested period (excluding)
      * @param dateTo   - end date of requested period (including)
-     * @return list of entities {@link AuditModel} in concurrent container
+     * @return list of entities {@link AuditModelEntity} in concurrent container
      * {@link CompletableFuture}
      */
-    default CompletableFuture<List<? extends E>> findByModifiedAtBetween(final Date dateFrom, final Date dateTo) {
+    default CompletableFuture<Iterable<? extends E>> findByModifiedAtBetween(final Date dateFrom, final Date dateTo) {
         return getRepository().findByModifiedAtBetween(dateFrom, dateTo);
     }
 }

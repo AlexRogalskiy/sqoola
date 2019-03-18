@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,9 +23,9 @@
  */
 package com.sensiblemetrics.api.sqoola.common.service.dao.impl;
 
+import com.sensiblemetrics.api.sqoola.common.model.dao.AccountEntity;
+import com.sensiblemetrics.api.sqoola.common.model.dao.RoleEntity;
 import com.sensiblemetrics.api.sqoola.common.utility.StringUtils;
-import com.sensiblemetrics.api.sqoola.common.model.dao.Account;
-import com.sensiblemetrics.api.sqoola.common.model.dao.Role;
 import com.sensiblemetrics.api.sqoola.common.service.dao.AccountDaoService;
 import com.sensiblemetrics.api.sqoola.common.service.dao.AuthUserDaoService;
 import lombok.EqualsAndHashCode;
@@ -47,7 +47,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * {@link AuthUserDaoService} service implementation
+ * {@link UserDetails} service implementation
  */
 @Slf4j
 @EqualsAndHashCode
@@ -62,7 +62,7 @@ public class AuthUserDaoServiceImpl implements AuthUserDaoService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        final Account account = this.userService.findByUsername(username).get();
+        final AccountEntity account = this.userService.findByUsername(username).get();
         if (Objects.isNull(account)) {
             throw new UsernameNotFoundException("Username not found");
         }
@@ -77,11 +77,11 @@ public class AuthUserDaoServiceImpl implements AuthUserDaoService {
             .build();
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(final Account account) {
+    private List<GrantedAuthority> getGrantedAuthorities(final AccountEntity account) {
         return Optional.ofNullable(account.getRoles())
             .orElseGet(Collections::emptySet)
             .stream()
-            .filter(Role::isEnabled)
+            .filter(RoleEntity::isEnabled)
             .map(role -> new SimpleGrantedAuthority(StringUtils.getStringByDelimiter(DEFAULT_ROLE_DELIMITER, DEFAULT_ROLE_PREFIX, role.getCode())))
             .collect(Collectors.toList());
     }

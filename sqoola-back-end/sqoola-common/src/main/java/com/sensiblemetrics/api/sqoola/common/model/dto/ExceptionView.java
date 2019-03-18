@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -44,7 +44,7 @@ import java.util.Date;
 import static com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableExceptionView.*;
 
 /**
- * Exception document dto
+ * Exception model view
  */
 @Builder
 @Data
@@ -52,14 +52,14 @@ import static com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.Exposab
 @ToString
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonPropertyOrder(value = {
-    ExposableExceptionView.PATH_FIELD_NAME,
+    PATH_FIELD_NAME,
     CODE_FIELD_NAME,
     TYPE_FIELD_NAME,
     DESCRIPTION_FIELD_NAME,
     MESSAGE_FIELD_NAME,
     TIMESTAMP_FIELD_NAME
 }, alphabetic = true)
-@JacksonXmlRootElement(localName = ExposableExceptionView.VIEW_ID, namespace="io.sqoola")
+@JacksonXmlRootElement(localName = ExposableExceptionView.VIEW_ID, namespace = "io.sqoola")
 @ApiModel(value = ExposableExceptionView.VIEW_ID, description = "All details about exception document")
 public class ExceptionView implements ExposableExceptionView, Serializable {
 

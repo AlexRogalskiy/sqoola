@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -28,7 +28,7 @@ import org.springframework.data.solr.core.query.Criteria;
 import java.io.Serializable;
 
 /**
- * Custom base simple search service declaration
+ * Base simple search service declaration
  *
  * @param <E>  type of document
  * @param <ID> type of document identifier {@link Serializable}

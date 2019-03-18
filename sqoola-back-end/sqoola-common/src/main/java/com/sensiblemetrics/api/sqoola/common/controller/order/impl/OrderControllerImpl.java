@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,9 +23,10 @@
  */
 package com.sensiblemetrics.api.sqoola.common.controller.order.impl;
 
+import com.sensiblemetrics.api.sqoola.common.annotation.SwaggerAPI;
 import com.sensiblemetrics.api.sqoola.common.controller.order.OrderController;
 import com.sensiblemetrics.api.sqoola.common.controller.impl.BaseModelControllerImpl;
-import com.sensiblemetrics.api.sqoola.common.model.dao.Order;
+import com.sensiblemetrics.api.sqoola.common.model.dao.OrderEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.OrderView;
 import com.wildbeeslabs.sensiblemetrics.supersolr.controller.order.OrderSearchController;
 import com.wildbeeslabs.sensiblemetrics.supersolr.exception.EmptyContentException;
@@ -52,7 +53,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
 import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.mapAll;
 
 /**
- * Order {@link OrderSearchController} implementation
+ * OrderEntity {@link OrderSearchController} implementation
  */
 @Slf4j
 @NoArgsConstructor
@@ -60,6 +61,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
 @ToString(callSuper = true)
 @RestController(OrderSearchController.CONTROLLER_ID)
 @RequestMapping(value = "/api/order", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@SwaggerAPI
 @Api(
     value = "/api/order",
     description = "Endpoint for order search operations",
@@ -74,7 +76,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
     })
 @Secured("ROLE_MANAGER")
 @CrossOrigin(origins = {"http://localhost:4200"})
-public class OrderControllerImpl extends BaseModelControllerImpl<Order, OrderView, String> implements OrderController {
+public class OrderControllerImpl extends BaseModelControllerImpl<OrderEntity, OrderView, String> implements OrderController {
 
     @Autowired
     private HttpServletRequest request;
@@ -137,9 +139,9 @@ public class OrderControllerImpl extends BaseModelControllerImpl<Order, OrderVie
         @ApiResponse(code = 400, message = "Invalid order document value"),
         @ApiResponse(code = 405, message = "Validation exception")
     })
-    public ResponseEntity<?> createOrder(@ApiParam(value = "Order that needs to be added to the store", required = true, readOnly = true) @Valid @RequestBody final OrderView order) {
+    public ResponseEntity<?> createOrder(@ApiParam(value = "OrderEntity that needs to be added to the store", required = true, readOnly = true) @Valid @RequestBody final OrderView order) {
         log.info("Creating new order by view: {}", order);
-        final OrderView orderDtoCreated = map(this.createItem(order, Order.class), OrderView.class);
+        final OrderView orderDtoCreated = map(this.createItem(order, OrderEntity.class), OrderView.class);
         final UriComponentsBuilder ucBuilder = UriComponentsBuilder.newInstance();
         final URI uri = ucBuilder.path(this.request.getRequestURI() + "/{id}").buildAndExpand(orderDtoCreated.getId()).toUri();
         return ResponseEntity
@@ -167,7 +169,7 @@ public class OrderControllerImpl extends BaseModelControllerImpl<Order, OrderVie
         @ApiResponse(code = 400, message = "Invalid order ID value"),
         @ApiResponse(code = 404, message = "Not found")
     })
-    public ResponseEntity<?> getById(@ApiParam(value = "Order ID that needs to be fetched", required = true, readOnly = true) @PathVariable("id") final String id) {
+    public ResponseEntity<?> getById(@ApiParam(value = "OrderEntity ID that needs to be fetched", required = true, readOnly = true) @PathVariable("id") final String id) {
         log.info("Fetching order by ID: {}", id);
         return ResponseEntity
             .ok()
@@ -191,12 +193,12 @@ public class OrderControllerImpl extends BaseModelControllerImpl<Order, OrderVie
     @ApiResponses(value = {
         @ApiResponse(code = 405, message = "Invalid input value")
     })
-    public ResponseEntity<?> updateOrder(@ApiParam(value = "Order that needs to be updated", required = true, readOnly = true) @Valid @RequestBody final OrderView order) {
+    public ResponseEntity<?> updateOrder(@ApiParam(value = "OrderEntity that needs to be updated", required = true, readOnly = true) @Valid @RequestBody final OrderView order) {
         log.info("Updating order by view: {}", order);
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON_UTF8)
-            .body(map(this.updateItem(order.getId(), order, Order.class), OrderView.class));
+            .body(map(this.updateItem(order.getId(), order, OrderEntity.class), OrderView.class));
     }
 
     @DeleteMapping("/{id}")
@@ -217,7 +219,7 @@ public class OrderControllerImpl extends BaseModelControllerImpl<Order, OrderVie
         @ApiResponse(code = 400, message = "Invalid order ID value")
     })
     public ResponseEntity<?> deleteOrder(@ApiParam(value = "Security authentication API Key", required = true, readOnly = true) final String apiKey,
-                                         @ApiParam(value = "Order ID that needs to be deleted", required = true) @PathVariable("id") final String id) {
+                                         @ApiParam(value = "OrderEntity ID that needs to be deleted", required = true) @PathVariable("id") final String id) {
         log.info("Updating order by ID: {}", id);
         return ResponseEntity
             .ok()

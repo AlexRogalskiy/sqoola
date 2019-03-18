@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -79,22 +79,22 @@ public abstract class BaseTest {
         }
     }
 
-    protected Category createCategory(
+    protected CategoryEntity createCategory(
         final Long id,
         final Integer index,
         final String title,
         final String description,
-        final Product... products) {
-        final Category category = new Category();
+        final ProductEntity... products) {
+        final CategoryEntity category = new CategoryEntity();
         category.setId(id);
         category.setIndex(index);
         category.setTitle(title);
         category.setDescription(description);
-        category.setProducts(Arrays.asList(Optional.ofNullable(products).orElse(new Product[0])));
+        category.setProducts(Arrays.asList(Optional.ofNullable(products).orElse(new ProductEntity[0])));
         return category;
     }
 
-    protected Product createProduct(
+    protected ProductEntity createProduct(
         final Long id,
         final String name,
         final String shortDescription,
@@ -106,8 +106,8 @@ public abstract class BaseTest {
         double price,
         double recommendedPrice,
         boolean available,
-        final Attribute... attributes) {
-        final Product product = new Product();
+        final AttributeEntity... attributes) {
+        final ProductEntity product = new ProductEntity();
         product.setId(id);
         product.setName(name);
         product.setShortDescription(shortDescription);
@@ -119,28 +119,28 @@ public abstract class BaseTest {
         product.setPrice(price);
         product.setRecommendedPrice(recommendedPrice);
         product.setAvailable(available);
-        product.setAttributes(Arrays.asList(Optional.ofNullable(attributes).orElse(new Attribute[0])));
+        product.setAttributes(Arrays.asList(Optional.ofNullable(attributes).orElse(new AttributeEntity[0])));
         return product;
     }
 
-    protected Order createOrder(
+    protected OrderEntity createOrder(
         final Long id,
         final String clientMobile,
         final String clientName,
         final String title,
         final String description,
-        final Product... products) {
-        final Order order = new Order();
+        final ProductEntity... products) {
+        final OrderEntity order = new OrderEntity();
         order.setId(id);
         order.setClientMobile(clientMobile);
         order.setClientName(clientName);
         order.setTitle(title);
         order.setDescription(description);
-        order.setProducts(Arrays.asList(Optional.ofNullable(products).orElse(new Product[0])));
+        order.setProducts(Arrays.asList(Optional.ofNullable(products).orElse(new ProductEntity[0])));
         return order;
     }
 
-    protected <E extends BaseModel<ID>, ID extends Serializable> boolean containsIds(final List<? extends E> models, final String... idsToCheck) {
+    protected <E extends BaseModelEntity<ID>, ID extends Serializable> boolean containsIds(final List<? extends E> models, final String... idsToCheck) {
         final String[] categoryIds = models.stream().map(category -> category.getId()).toArray(String[]::new);
         Arrays.sort(categoryIds);
         Arrays.sort(idsToCheck);

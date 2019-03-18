@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,10 +23,10 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.service.impl;
 
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.Product;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableProduct;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.repository.ProductSearchRepository;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.service.ProductSearchService;
+import com.sensiblemetrics.api.sqoola.common.search.document.Product;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableProduct;
+import com.sensiblemetrics.api.sqoola.common.search.repository.ProductSearchRepository;
+import com.sensiblemetrics.api.sqoola.common.search.service.ProductSearchService;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -55,7 +55,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Product {@link ProductSearchService} implementation
+ * {@link Product} search service implementation
  */
 @Slf4j
 @EqualsAndHashCode(callSuper = true)

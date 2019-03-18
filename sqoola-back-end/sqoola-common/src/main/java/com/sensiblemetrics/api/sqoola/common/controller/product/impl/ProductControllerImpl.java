@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,22 +23,26 @@
  */
 package com.sensiblemetrics.api.sqoola.common.controller.product.impl;
 
+import com.sensiblemetrics.api.sqoola.common.annotation.SwaggerAPI;
 import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
+import com.sensiblemetrics.api.sqoola.common.controller.impl.BaseModelControllerImpl;
 import com.sensiblemetrics.api.sqoola.common.controller.product.ProductController;
+import com.sensiblemetrics.api.sqoola.common.model.dao.ProductEntity;
+import com.sensiblemetrics.api.sqoola.common.search.controller.product.ProductSearchController;
+import com.sensiblemetrics.api.sqoola.common.search.controller.wrapper.SearchRequest;
 import com.sensiblemetrics.api.sqoola.common.exception.BadRequestException;
+import com.sensiblemetrics.api.sqoola.common.exception.EmptyContentException;
 import com.sensiblemetrics.api.sqoola.common.model.dto.ProductView;
-import com.sensiblemetrics.api.sqoola.common.model.dao.Product;
-import com.wildbeeslabs.sensiblemetrics.supersolr.controller.product.ProductSearchController;
-import com.wildbeeslabs.sensiblemetrics.supersolr.controller.wrapper.SearchRequest;
-import com.wildbeeslabs.sensiblemetrics.supersolr.exception.EmptyContentException;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableProduct;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.view.CategoryView;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableProduct;
+import com.sensiblemetrics.api.sqoola.common.search.view.CategoryView;
 import io.swagger.annotations.*;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,6 +52,7 @@ import org.springframework.data.geo.Point;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,11 +64,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.mapAll;
+import static com.sensiblemetrics.api.sqoola.common.utility.MapperUtils.map;
+import static com.sensiblemetrics.api.sqoola.common.utility.MapperUtils.mapAll;
 
 /**
- * Product {@link ProductSearchController} implementation
+ * ProductEntity {@link ProductSearchController} implementation
  */
 @Slf4j
 @NoArgsConstructor
@@ -71,6 +76,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
 @ToString(callSuper = true)
 @RestController(ProductSearchController.CONTROLLER_ID)
 @RequestMapping(value = "/api/product", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@SwaggerAPI
 @Api(
     value = "/api/product",
     description = "Endpoint for product search operations",
@@ -83,7 +89,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
                 @AuthorizationScope(scope = "read:documents", description = "read product documents")
             })
     })
-public class ProductControllerImpl extends BaseModelControllerImpl<Product, ProductView, String> implements ProductController {
+public class ProductControllerImpl extends BaseModelControllerImpl<ProductEntity, ProductView, String> implements ProductController {
 
     /**
      * Default {@link ProductService} instance
@@ -116,7 +122,7 @@ public class ProductControllerImpl extends BaseModelControllerImpl<Product, Prod
                                     @ApiParam(value = "Page number to filter by") @PageableDefault(size = BaseModelController.DEFAULT_PAGE_SIZE) final Pageable pageable,
                                     final HttpServletRequest request) {
         log.info("Fetching products by search query: {}", query);
-        final Page<? extends Product> productPage = getService().findByName(query, pageable);
+        final Page<? extends ProductEntity> productPage = getService().findByName(query, pageable);
         if (Objects.isNull(productPage)) {
             throw new BadRequestException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.bad.request"));
         }
@@ -163,7 +169,7 @@ public class ProductControllerImpl extends BaseModelControllerImpl<Product, Prod
     public ResponseEntity<?> autoComplete(@ApiParam(value = "Search term query to fetch products by", required = true, readOnly = true) @RequestParam("term") final String searchTerm,
                                           @ApiParam(value = "Page number to filter by") @PageableDefault(size = BaseModelController.DEFAULT_PAGE_SIZE) final Pageable pageable) {
         log.info("Fetching products by autocomplete search term: {}", searchTerm);
-        final FacetPage<? extends Product> productPage = getService().findByAutoCompleteNameFragment(searchTerm, pageable);
+        final FacetPage<? extends ProductEntity> productPage = getService().findByAutoCompleteNameFragment(searchTerm, pageable);
         return ResponseEntity
             .ok()
             .headers(getHeaders(productPage))
@@ -197,7 +203,7 @@ public class ProductControllerImpl extends BaseModelControllerImpl<Product, Prod
                                   @ApiParam(value = "Offset number to filter by", required = true, readOnly = true) @RequestParam(value = "offset", defaultValue = BaseModelController.DEFAULT_PAGE_OFFSET_VALUE) int offset,
                                   @ApiParam(value = "Limit number to filter by", required = true, readOnly = true) @RequestParam(value = "limit", defaultValue = BaseModelController.DEFAULT_PAGE_LIMIT_VALUE) int limit) {
         log.info("Fetching products by search term: {}, offset: {}, limit: {}", searchTerm, offset, limit);
-        final HighlightPage<Product> page = (HighlightPage<Product>) findBy(SearchableProduct.COLLECTION_ID, searchTerm, offset, limit);
+        final HighlightPage<ProductEntity> page = (HighlightPage<ProductEntity>) findBy(SearchableProduct.COLLECTION_ID, searchTerm, offset, limit);
         return ResponseEntity
             .ok()
             .headers(getHeaders(page))
@@ -255,7 +261,7 @@ public class ProductControllerImpl extends BaseModelControllerImpl<Product, Prod
         @ApiResponse(code = 404, message = "Not found"),
         @ApiResponse(code = 405, message = "Validation exception")
     })
-    public ResponseEntity<?> search(@ApiParam(value = "Product ID to fetch by", required = true, readOnly = true) @PathVariable("id") final String id,
+    public ResponseEntity<?> search(@ApiParam(value = "ProductEntity ID to fetch by", required = true, readOnly = true) @PathVariable("id") final String id,
                                     final HttpServletRequest request) {
         log.info("Fetching product by ID: {}", id);
         return ResponseEntity
@@ -283,7 +289,7 @@ public class ProductControllerImpl extends BaseModelControllerImpl<Product, Prod
     public ResponseEntity<?> findBySearchTerm(@ApiParam(value = "Search term query to fetch products by", required = true, readOnly = true) @PathVariable("term") final String searchTerm,
                                               @ApiParam(value = "Page number to filter by", allowableValues = "range[1,infinity]", required = true, readOnly = true) @PathVariable("page") int page) {
         log.info("Fetching product by term: {}, page: {}", searchTerm, page);
-        final HighlightPage<? extends Product> productPage = getService().find(SearchableProduct.COLLECTION_ID, searchTerm, PageRequest.of(page, BaseModelController.DEFAULT_PAGE_SIZE));
+        final HighlightPage<? extends ProductEntity> productPage = getService().find(SearchableProduct.COLLECTION_ID, searchTerm, PageRequest.of(page, BaseModelController.DEFAULT_PAGE_SIZE));
         if (Objects.isNull(productPage)) {
             throw new BadRequestException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.bad.request"));
         }
@@ -312,7 +318,7 @@ public class ProductControllerImpl extends BaseModelControllerImpl<Product, Prod
     public ResponseEntity<?> findByDescription(@ApiParam(value = "Search description query to fetch products by", required = true, readOnly = true) @PathVariable("desc") final String description,
                                                @ApiParam(value = "Page number to filter by", allowableValues = "range[1,infinity]", required = true, readOnly = true) @PathVariable("page") int page) {
         log.info("Fetching product by description: {}, page: {}", description, page);
-        final Page<? extends Product> productPage = getService().findByDescription(description, PageRequest.of(page, BaseModelController.DEFAULT_PAGE_SIZE));
+        final Page<? extends ProductEntity> productPage = getService().findByDescription(description, PageRequest.of(page, BaseModelController.DEFAULT_PAGE_SIZE));
         if (Objects.isNull(productPage)) {
             throw new BadRequestException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.bad.request"));
         }
@@ -376,7 +382,7 @@ public class ProductControllerImpl extends BaseModelControllerImpl<Product, Prod
     public ResponseEntity<?> findByNames(@ApiParam(value = "Search request to fetch products by names", required = true, readOnly = true) @Valid @RequestBody final SearchRequest searchRequest,
                                          @ApiParam(value = "Page number to filter by") @PageableDefault(size = BaseModelController.DEFAULT_PAGE_SIZE) final Pageable pageable) {
         log.info("Fetching products by name: {}", StringUtils.join(searchRequest.getKeywords(), "|"));
-        final HighlightPage<Product> page = (HighlightPage<Product>) getService().findByNameIn(searchRequest.getKeywords(), pageable);
+        final HighlightPage<ProductEntity> page = (HighlightPage<ProductEntity>) getService().findByNameIn(searchRequest.getKeywords(), pageable);
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON_UTF8)

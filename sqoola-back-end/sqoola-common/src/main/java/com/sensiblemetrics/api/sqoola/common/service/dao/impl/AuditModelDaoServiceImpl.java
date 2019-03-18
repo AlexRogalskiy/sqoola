@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.service.dao.impl;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModelEntity;
 import com.sensiblemetrics.api.sqoola.common.repository.AuditModelRepository;
 import com.sensiblemetrics.api.sqoola.common.service.dao.AuditModelDaoService;
 import lombok.EqualsAndHashCode;
@@ -34,16 +34,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 
 /**
- * {@link AuditModelDaoService} service implementation
+ * {@link AuditModelEntity} service implementation
  *
- * @param <E>  type of audit model {@link AuditModel}
+ * @param <E>  type of audit model {@link AuditModelEntity}
  * @param <ID> type of audit model identifier {@link Serializable}
  */
 @Slf4j
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Transactional
-public abstract class AuditModelDaoServiceImpl<E extends AuditModel, ID extends Serializable> extends BaseServiceImpl<E, ID> implements AuditModelDaoService<E, ID> {
+public abstract class AuditModelDaoServiceImpl<E extends AuditModelEntity, ID extends Serializable> extends BaseServiceImpl<E, ID> implements AuditModelDaoService<E, ID> {
 
     protected abstract AuditModelRepository<E, ID> getRepository();
 }

@@ -1,34 +1,33 @@
 package com.sensiblemetrics.api.sqoola.common.service.dao.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.sensiblemetrics.api.sqoola.common.service.dao.IArticleService;
+import com.concretepage.repository.ArticleRepository;
+import com.sensiblemetrics.api.sqoola.common.model.dao.ArticleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
-import com.concretepage.entity.Article;
-import com.concretepage.repository.ArticleRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-public class ArticleService implements IArticleService {
+public class ArticleService extends BaseDaoServiceImpl<ArticleEntity, Long> implements ArticleDaoService {
 	@Autowired
 	private ArticleRepository articleRepository;
 	
 	@Override	
 	@Cacheable(value= "articleCache", key= "#articleId")		
-	public Article getArticleById(long articleId) {
+	public ArticleEntity getArticleById(long articleId) {
 		System.out.println("--- Inside getArticleById() ---");		
 		return  articleRepository.findById(articleId).get();
 	}
 	@Override	
 	@Cacheable(value= "allArticlesCache", unless= "#result.size() == 0")	
-	public List<Article> getAllArticles(){
+	public List<ArticleEntity> getAllArticles(){
 		System.out.println("--- Inside getAllArticles() ---");
-		List<Article> list = new ArrayList<>();
+		List<ArticleEntity> list = new ArrayList<>();
 		articleRepository.findAll().forEach(e -> list.add(e));
 		return list;
 	}
@@ -37,7 +36,7 @@ public class ArticleService implements IArticleService {
 		put= { @CachePut(value= "articleCache", key= "#article.articleId") },
 		evict= { @CacheEvict(value= "allArticlesCache", allEntries= true) }
 	)
-	public Article addArticle(Article article){
+	public ArticleEntity addArticle(ArticleEntity article){
 		System.out.println("--- Inside addArticle() ---");		
 		return articleRepository.save(article);
 	}
@@ -46,7 +45,7 @@ public class ArticleService implements IArticleService {
 		put= { @CachePut(value= "articleCache", key= "#article.articleId") },
 		evict= { @CacheEvict(value= "allArticlesCache", allEntries= true) }
 	)
-	public Article updateArticle(Article article) {
+	public ArticleEntity updateArticle(ArticleEntity article) {
 		System.out.println("--- Inside updateArticle() ---");		
 		return articleRepository.save(article);
 	}

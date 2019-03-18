@@ -3,7 +3,7 @@
  *
  * Copyright 2017 WildBees Labs.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,23 +23,22 @@
  */
 package com.sensiblemetrics.api.sqoola.common.repository;
 
-import com.wildbeeslabs.api.rest.common.model.BaseTagEntity;
-import java.util.List;
-import java.util.Optional;
 import org.springframework.data.repository.NoRepositoryBean;
 
+import java.io.Serializable;
+import java.util.Optional;
+
 /**
+ * {@link BaseTagEntity} repository declaration
  *
- * BaseTag REST Application storage repository to manage {@link BaseTagEntity}
- * instances
- *
+ * @param <E>  type of model
+ * @param <ID> type of model identifier
  * @author Alex
  * @version 1.0.0
  * @since 2017-08-08
- * @param <T>
  */
 @NoRepositoryBean
-public interface BaseTagRepository<T extends BaseTagEntity> extends BaseRepository<T> {
+public interface BaseTagRepository<E extends BaseTagEntity<ID>, ID extends Serializable> extends BaseModelRepository<E, ID> {
 
     /**
      * Get tag entities {@link BaseTagEntity} by tag name
@@ -48,7 +47,7 @@ public interface BaseTagRepository<T extends BaseTagEntity> extends BaseReposito
      * @return tag entities {@link BaseTagEntity} in optional container
      * {@link Optional}
      */
-    Optional<? extends T> findByName(final String name);
+    Optional<? extends E> findByName(final String name);
 
     /**
      * Get list of tag entities {@link BaseTagEntity} by tag name pattern
@@ -56,5 +55,5 @@ public interface BaseTagRepository<T extends BaseTagEntity> extends BaseReposito
      * @param namePattern - tag name pattern
      * @return list of tag entities {@link BaseTagEntity}
      */
-    List<? extends T> findByNameLike(final String namePattern);
+    Iterable<? extends E> findByNameLike(final String namePattern);
 }

@@ -53,4 +53,7 @@ module com.sensiblemetrics.api.sqoola.common {
     requires spring.cloud.netflix.core;
     requires commons.collections;
     requires java.persistence;
+    requires rt;
+    requires spring.data.solr;
+    requires commons.lang;
 }

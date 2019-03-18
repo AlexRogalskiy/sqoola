@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.controller;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.BaseModelView;
 
 import java.io.Serializable;
@@ -31,13 +31,13 @@ import java.io.Serializable;
 /**
  * Base {@link BaseController} declaration
  *
- * @param <E>  type of base document model {@link BaseModel}
+ * @param <E>  type of base document model {@link BaseModelEntity}
  * @param <T>  type of base document view model {@link BaseModelView}
  * @param <ID> type of base document identifier {@link Serializable}
  * @author Alex
  * @version 1.0.0
  */
-public interface BaseModelController<E extends BaseModel<ID>, T extends BaseModelView<ID>, ID extends Serializable> extends BaseController {
+public interface BaseModelController<E extends BaseModelEntity<ID>, T extends BaseModelView<ID>, ID extends Serializable> extends BaseController {
 
     /**
      * Default page offset value

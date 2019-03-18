@@ -1,6 +1,6 @@
 package com.sensiblemetrics.api.sqoola.common.service.dao.impl;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.PersistentLogins;
+import com.sensiblemetrics.api.sqoola.common.model.dao.LoginEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class PersistentTokenDaoImp implements PersistentTokenRepository {
 
     @Override
     public void createNewToken(PersistentRememberMeToken token) {
-        final PersistentLogins logins = new PersistentLogins();
+        final LoginEntity logins = new LoginEntity();
         logins.setUsername(token.getUsername());
         logins.setSeries(token.getSeries());
         logins.setToken(token.getTokenValue());
@@ -31,7 +31,7 @@ public class PersistentTokenDaoImp implements PersistentTokenRepository {
 
     @Override
     public PersistentRememberMeToken getTokenForSeries(String seriesId) {
-        PersistentLogins logins = sessionFactory.getCurrentSession().get(PersistentLogins.class, seriesId);
+        LoginEntity logins = sessionFactory.getCurrentSession().get(LoginEntity.class, seriesId);
         if (Objects.nonNull(logins)) {
             return new PersistentRememberMeToken(logins.getUsername(), logins.getSeries(), logins.getToken(), logins.getLastUsed());
         }
@@ -47,7 +47,7 @@ public class PersistentTokenDaoImp implements PersistentTokenRepository {
     @Override
     public void updateToken(String series, String tokenValue, Date lastUsed) {
         final Session session = sessionFactory.getCurrentSession();
-        PersistentLogins logins = session.get(PersistentLogins.class, series);
+        LoginEntity logins = session.get(LoginEntity.class, series);
         logins.setToken(tokenValue);
         logins.setLastUsed(lastUsed);
     }

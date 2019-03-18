@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.model.dao.location;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.PersistableBaseModel;
 import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.location.PersistableCity;
 import lombok.Data;
@@ -35,7 +35,7 @@ import org.hibernate.annotations.BatchSize;
 import javax.persistence.*;
 
 /**
- * City model {@link BaseModel}
+ * City model {@link BaseModelEntity}
  */
 @Data
 @NoArgsConstructor
@@ -48,7 +48,7 @@ import javax.persistence.*;
     @AttributeOverride(name = PersistableBaseModel.ID_FIELD_NAME, column = @Column(name = PersistableCity.ID_FIELD_NAME, unique = true, nullable = false))
 })
 @Inheritance(strategy = InheritanceType.JOINED)
-public class City extends BaseModel<Long> implements PersistableCity {
+public class City extends BaseModelEntity<Long> implements PersistableCity {
 
     private String cityName;
 

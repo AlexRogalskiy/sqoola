@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -26,7 +26,7 @@ package com.sensiblemetrics.api.sqoola.common.search.view;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableAuditDocumentView;
+import com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableAuditDocumentView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,12 +34,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import static com.wildbeeslabs.sensiblemetrics.supersolr.model.interfaces.PersistableAuditModel.*;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.DateUtils.DEFAULT_DATE_FORMAT_LOCALE;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableAuditDocumentView.*;
+import static com.sensiblemetrics.api.sqoola.common.utility.DateUtils.DEFAULT_DATE_FORMAT_LOCALE;
+import static com.sensiblemetrics.api.sqoola.common.utility.DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT;
 
 /**
  * Audit document view
@@ -62,7 +61,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.DateUtils.DEFAU
 )
 @JacksonXmlRootElement(localName = ExposableAuditDocumentView.VIEW_ID)
 @ApiModel(value = ExposableAuditDocumentView.VIEW_ID, description = "All audit details about document")
-public abstract class AuditDocumentView implements ExposableAuditDocumentView, Serializable {
+public abstract class AuditDocumentView implements ExposableAuditDocumentView {
 
     /**
      * Default explicit serialVersionUID for interoperability

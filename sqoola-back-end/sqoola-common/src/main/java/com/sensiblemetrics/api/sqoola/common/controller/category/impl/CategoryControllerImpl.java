@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,15 +23,18 @@
  */
 package com.sensiblemetrics.api.sqoola.common.controller.category.impl;
 
+import com.sensiblemetrics.api.sqoola.common.annotation.SwaggerAPI;
 import com.sensiblemetrics.api.sqoola.common.controller.category.CategoryController;
 import com.sensiblemetrics.api.sqoola.common.controller.impl.BaseModelControllerImpl;
+import com.sensiblemetrics.api.sqoola.common.model.dao.CategoryEntity;
+import com.sensiblemetrics.api.sqoola.common.search.controller.wrapper.SearchRequest;
 import com.sensiblemetrics.api.sqoola.common.exception.BadRequestException;
-import com.sensiblemetrics.api.sqoola.common.model.dao.Category;
-import com.sensiblemetrics.api.sqoola.common.model.dto.CategoryView;
+import com.sensiblemetrics.api.sqoola.common.exception.EmptyContentException;
+import com.sensiblemetrics.api.sqoola.common.model.dao.UserEntity;
+import com.sensiblemetrics.api.sqoola.common.model.dto.BaseCategoryView;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableCategory;
+import com.sensiblemetrics.api.sqoola.common.service.dao.BaseCategoryDaoService;
 import com.sensiblemetrics.api.sqoola.common.utility.MapperUtils;
-import com.wildbeeslabs.sensiblemetrics.supersolr.controller.wrapper.SearchRequest;
-import com.wildbeeslabs.sensiblemetrics.supersolr.exception.EmptyContentException;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableCategory;
 import io.swagger.annotations.*;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -61,7 +64,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.sensiblemetrics.api.sqoola.common.utility.MapperUtils.map;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map;
 
 /**
  * {@link CategoryController} controller implementation
@@ -72,6 +74,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
 @ToString(callSuper = true)
 @RestController(CategoryController.CONTROLLER_ID)
 @RequestMapping(value = "/api/category", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@SwaggerAPI
 @Api(
     value = "/api/category",
     description = "Endpoint for category search operations",
@@ -84,13 +87,13 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
                 @AuthorizationScope(scope = "read:documents", description = "read category documents")
             })
     })
-public class CategoryControllerImpl extends BaseModelControllerImpl<Category, CategoryView, String> implements CategoryController {
+public class CategoryControllerImpl extends BaseModelControllerImpl<CategoryEntity, BaseCategoryView, String> implements CategoryController {
 
     /**
-     * Default {@link CategoryService} instance
+     * Default {@link BaseCategoryDaoService} instance
      */
     @Autowired
-    private CategoryService categoryService;
+    private BaseCategoryDaoService categoryService;
 
     @GetMapping("/search")
     @ResponseBody
@@ -100,7 +103,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
         notes = "Returns list of category documents by search query",
         nickname = "search",
         tags = {"fetchByQuery"},
-        response = CategoryView.class,
+        response = BaseCategoryView.class,
         responseContainer = "List",
         consumes = "application/json, application/xml",
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -117,7 +120,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
                                     @ApiParam(value = "Page number to filter by") @PageableDefault(size = DEFAULT_PAGE_SIZE) final Pageable pageable,
                                     final HttpServletRequest request) {
         log.info("Fetching categories by search query: {}", query);
-        final Page<? extends Category> categoryPage = getService().findByTitle(query, pageable);
+        final Page<? extends CategoryEntity> categoryPage = getService().findByTitle(query, pageable);
         if (Objects.isNull(categoryPage)) {
             throw new BadRequestException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.bad.request"));
         }
@@ -125,7 +128,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
             .ok()
             .headers(getHeaders(categoryPage))
             .contentType(MediaType.APPLICATION_JSON_UTF8)
-            .body(MapperUtils.mapAll(categoryPage.getContent(), CategoryView.class));
+            .body(MapperUtils.mapAll(categoryPage.getContent(), BaseCategoryView.class));
     }
 
     @GetMapping("/autocomplete")
@@ -137,7 +140,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
         nickname = "autoComplete",
         tags = {"fetchByAutocomplete"},
         position = 1,
-        response = CategoryView.class,
+        response = BaseCategoryView.class,
         responseContainer = "List",
         consumes = "application/json, application/xml",
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -152,12 +155,12 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
     public ResponseEntity<?> autoComplete(@ApiParam(value = "Search term query to fetch categories by", required = true, readOnly = true) @RequestParam("term") final String searchTerm,
                                           @ApiParam(value = "Page number to filter by") @PageableDefault(size = DEFAULT_PAGE_SIZE) final Pageable pageable) {
         log.info("Fetching categories by autocomplete search term: {}", searchTerm);
-        final FacetPage<? extends Category> categoryPage = getService().findByAutoCompleteTitleFragment(searchTerm, pageable);
+        final FacetPage<? extends CategoryEntity> categoryPage = getService().findByAutoCompleteTitleFragment(searchTerm, pageable);
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .headers(getHeaders(categoryPage))
-            .body(MapperUtils.mapAll(getResultSetByTerm(categoryPage, searchTerm), CategoryView.class));
+            .body(MapperUtils.mapAll(getResultSetByTerm(categoryPage, searchTerm), BaseCategoryView.class));
     }
 
     @GetMapping("/page")
@@ -169,7 +172,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
         nickname = "find",
         tags = {"fetchByTerm"},
         position = 2,
-        response = CategoryView.class,
+        response = BaseCategoryView.class,
         responseContainer = "List",
         consumes = "application/json, application/xml",
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -186,14 +189,14 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
                                   @ApiParam(value = "Offset number to filter by", required = true, readOnly = true) @RequestParam(value = "offset", defaultValue = DEFAULT_PAGE_OFFSET_VALUE) int offset,
                                   @ApiParam(value = "Limit number to filter by", required = true, readOnly = true) @RequestParam(value = "limit", defaultValue = DEFAULT_PAGE_LIMIT_VALUE) int limit) {
         log.info("Fetching categories by search term: {}, offset: {}, limit: {}", searchTerm, offset, limit);
-        final HighlightPage<Category> page = (HighlightPage<Category>) findBy(SearchableCategory.COLLECTION_ID, searchTerm, offset, limit);
+        final HighlightPage<CategoryEntity> page = (HighlightPage<CategoryEntity>) findBy(SearchableCategory.COLLECTION_ID, searchTerm, offset, limit);
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .headers(getHeaders(page))
             .body(page
                 .stream()
-                .map(document -> getHighLightSearchResult(document, page.getHighlights(document), CategoryView.class))
+                .map(document -> getHighLightSearchResult(document, page.getHighlights(document), BaseCategoryView.class))
                 .collect(Collectors.toList()));
     }
 
@@ -206,7 +209,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
         nickname = "findAll",
         tags = {"fetchAll"},
         position = 3,
-        response = CategoryView.class,
+        response = BaseCategoryView.class,
         responseContainer = "List",
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
@@ -219,7 +222,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
             return ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .body(MapperUtils.mapAll(this.getAllItems(), CategoryView.class));
+                .body(MapperUtils.mapAll(this.getAllItems(), BaseCategoryView.class));
         } catch (EmptyContentException ex) {
             return ResponseEntity
                 .noContent()
@@ -236,7 +239,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
         nickname = "searchById",
         tags = {"fetchById"},
         position = 4,
-        response = CategoryView.class,
+        response = BaseCategoryView.class,
         responseContainer = "List",
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
@@ -245,13 +248,13 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
         @ApiResponse(code = 404, message = "Not found"),
         @ApiResponse(code = 405, message = "Validation exception")
     })
-    public ResponseEntity<?> search(@ApiParam(value = "Category ID to fetch by", required = true, readOnly = true) @PathVariable("id") final String id,
+    public ResponseEntity<?> search(@ApiParam(value = "CategoryEntity ID to fetch by", required = true, readOnly = true) @PathVariable("id") final String id,
                                     final HttpServletRequest request) {
         log.info("Fetching categories by ID: {}", id);
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON_UTF8)
-            .body(map(this.getItem(id), CategoryView.class));
+            .body(map(this.getItem(id), BaseCategoryView.class));
     }
 
     @GetMapping("/search/{term}/{page}")
@@ -263,7 +266,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
         nickname = "findBySearchTerm",
         tags = {"fetchByTermAnPage"},
         position = 5,
-        response = CategoryView.class,
+        response = BaseCategoryView.class,
         responseContainer = "List",
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
@@ -273,14 +276,14 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
     public ResponseEntity<?> findBySearchTerm(@ApiParam(value = "Search term query to fetch categories by", required = true, readOnly = true) @PathVariable("term") final String searchTerm,
                                               @ApiParam(value = "Page number to filter by", allowableValues = "range[1,infinity]", required = true, readOnly = true) @PathVariable("page") int page) {
         log.info("Fetching products by search term: {}, page: {}", searchTerm, page);
-        final HighlightPage<? extends Category> categoryPage = getService().find(SearchableCategory.COLLECTION_ID, searchTerm, PageRequest.of(page, DEFAULT_PAGE_SIZE));
+        final HighlightPage<? extends CategoryEntity> categoryPage = getService().find(SearchableCategory.COLLECTION_ID, searchTerm, PageRequest.of(page, DEFAULT_PAGE_SIZE));
         if (Objects.isNull(categoryPage)) {
             throw new BadRequestException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.bad.request"));
         }
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON_UTF8)
-            .body(MapperUtils.mapAll(categoryPage.getContent(), CategoryView.class));
+            .body(MapperUtils.mapAll(categoryPage.getContent(), BaseCategoryView.class));
     }
 
     @GetMapping("/desc/{desc}/{page}")
@@ -292,7 +295,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
         nickname = "findByDescription",
         tags = {"fetchByDesc"},
         position = 6,
-        response = CategoryView.class,
+        response = BaseCategoryView.class,
         responseContainer = "List",
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
@@ -302,14 +305,14 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
     public ResponseEntity<?> findByDescription(@ApiParam(value = "Search description query to fetch categories by", required = true, readOnly = true) @PathVariable("desc") final String description,
                                                @ApiParam(value = "Page number to filter by", allowableValues = "range[1,infinity]", required = true, readOnly = true) @PathVariable("page") int page) {
         log.info("Fetching categories by description: {}, page: {}", description, page);
-        final Page<? extends Category> categoryPage = getService().findByDescription(description, PageRequest.of(page, DEFAULT_PAGE_SIZE));
+        final Page<? extends CategoryEntity> categoryPage = getService().findByDescription(description, PageRequest.of(page, DEFAULT_PAGE_SIZE));
         if (Objects.isNull(categoryPage)) {
             throw new BadRequestException(com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage(getMessageSource(), "error.bad.request"));
         }
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON_UTF8)
-            .body(MapperUtils.mapAll(categoryPage.getContent(), CategoryView.class));
+            .body(MapperUtils.mapAll(categoryPage.getContent(), BaseCategoryView.class));
     }
 
     @PostMapping("/search/title")
@@ -321,7 +324,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
         nickname = "findByTitles",
         tags = {"fetchByTitles"},
         position = 7,
-        response = CategoryView.class,
+        response = BaseCategoryView.class,
         responseContainer = "List",
         consumes = "application/json, application/xml",
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -337,14 +340,14 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
     public ResponseEntity<?> findByTitles(@ApiParam(value = "Search request to fetch categories by title", required = true, readOnly = true) @Valid @RequestBody final SearchRequest searchRequest,
                                           @ApiParam(value = "Page number to filter by") @PageableDefault(size = DEFAULT_PAGE_SIZE) final Pageable pageable) {
         log.info("Fetching categories by title: {}", StringUtils.join(searchRequest.getKeywords(), "|"));
-        final HighlightPage<Category> page = (HighlightPage<Category>) getService().findByTitleIn(searchRequest.getKeywords(), pageable);
+        final HighlightPage<CategoryEntity> page = (HighlightPage<CategoryEntity>) getService().findByTitleIn(searchRequest.getKeywords(), pageable);
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .headers(getHeaders(page))
             .body(page
                 .stream()
-                .map(document -> getHighLightSearchResult(document, page.getHighlights(document), CategoryView.class))
+                .map(document -> getHighLightSearchResult(document, page.getHighlights(document), BaseCategoryView.class))
                 .collect(Collectors.toList()));
     }
 
@@ -365,7 +368,7 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
      * Get user from session attribute
      */
     @GetMapping("/info")
-    public String userInfo(@SessionAttribute("user") User user) {
+    public String userInfo(@SessionAttribute("user") UserEntity user) {
 
         System.out.println("Email: " + user.getEmail());
         System.out.println("First Name: " + user.getFname());
@@ -390,11 +393,11 @@ public class CategoryControllerImpl extends BaseModelControllerImpl<Category, Ca
     }
 
     /**
-     * Returns {@link CategoryService} service
+     * Returns {@link BaseCategoryDaoService} service
      *
-     * @return {@link CategoryService} service
+     * @return {@link BaseCategoryDaoService} service
      */
-    protected CategoryService getService() {
+    protected BaseCategoryDaoService getService() {
         return this.categoryService;
     }
 }

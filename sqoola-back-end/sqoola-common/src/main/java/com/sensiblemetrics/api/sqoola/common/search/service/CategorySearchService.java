@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.service;
 
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.Category;
+import com.sensiblemetrics.api.sqoola.common.search.document.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -32,7 +32,7 @@ import org.springframework.data.solr.core.query.result.HighlightPage;
 import java.util.Collection;
 
 /**
- * Custom category document search service declaration {@link BaseDocumentSearchService}
+ * {@link Category} document search service declaration {@link BaseDocumentSearchService}
  */
 public interface CategorySearchService extends BaseDocumentSearchService<Category, String> {
 

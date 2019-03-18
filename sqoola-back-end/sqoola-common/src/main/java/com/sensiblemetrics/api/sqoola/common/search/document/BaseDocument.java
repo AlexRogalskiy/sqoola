@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.document;
 
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableBaseDocument;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableBaseDocument;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.solr.core.mapping.Indexed;
@@ -33,7 +33,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Custom full-text search base document {@link AuditDocument}
+ * Full-text search base document {@link AuditDocument}
  *
  * @param <ID> type of document identifier {@link Serializable}
  */

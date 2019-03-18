@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,14 +23,14 @@
  */
 package com.sensiblemetrics.api.sqoola.common.service.dao;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.Account;
+import com.sensiblemetrics.api.sqoola.common.model.dao.AccountEntity;
 
 import java.io.Serializable;
 import java.util.Optional;
 import java.util.UUID;
 
 /**
- * {@link Account} service declaration
+ * {@link BaseAccount} service declaration
  *
  * @param <E>
  * @param <ID>
@@ -38,7 +38,7 @@ import java.util.UUID;
  * @version 1.0.0
  * @since 2017-08-08
  */
-public interface AccountDaoService extends BaseModelDaoService<E, Long> {
+public interface AccountDaoService<E extends BaseAccount<ID>, ID extends Serializable> extends BaseModelDaoService<E, Long> {
 
     /**
      * Default service ID
@@ -46,20 +46,20 @@ public interface AccountDaoService extends BaseModelDaoService<E, Long> {
     String SERVICE_ID = "accountService";
 
     /**
-     * Get user account entities {@link Account} by user name
+     * Get user account entities {@link AccountEntity} by user name
      *
      * @param username - user name
-     * @return user account entities {@link Account} in optional
+     * @return user account entities {@link AccountEntity} in optional
      * container {@link Optional}
      */
-    <E extends BaseAccount<ID>, ID extends Serializable> Optional<? extends E> findByUsername(final String username);
+    Optional<? extends E> findByUsername(final String username);
 
 
     /**
-     * Get user account entities {@link Account} by uuId
+     * Get user account entities {@link AccountEntity} by uuId
      *
      * @param uuId - user unique ID
-     * @return user account entities {@link Account} in optional
+     * @return user account entities {@link AccountEntity} in optional
      * container {@link Optional}
      */
     Optional<? extends E> findByUuId(final UUID uuId);

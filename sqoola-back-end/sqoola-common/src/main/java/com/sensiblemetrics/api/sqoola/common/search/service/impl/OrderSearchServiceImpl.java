@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,10 +23,10 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.service.impl;
 
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.Order;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableOrder;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.repository.OrderSearchRepository;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.service.OrderSearchService;
+import com.sensiblemetrics.api.sqoola.common.search.document.Order;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableOrder;
+import com.sensiblemetrics.api.sqoola.common.search.repository.OrderSearchRepository;
+import com.sensiblemetrics.api.sqoola.common.search.service.OrderSearchService;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Order {@link OrderSearchService} implementation
+ * {@link Order} search service implementation
  */
 @Slf4j
 @EqualsAndHashCode(callSuper = true)

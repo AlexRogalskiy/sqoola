@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -29,7 +29,7 @@ import org.springframework.http.MediaType;
 import java.lang.annotation.*;
 
 /**
- * Swagger API constraint
+ * Swagger API definition annotation
  */
 @Documented
 @Inherited
@@ -37,13 +37,13 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @SwaggerDefinition(
     info = @Info(
-        description = "Sqoola",
-        version = "V01012",
-        title = "Sqoola Resource API",
+        description = "SuperSolr",
+        version = "1.0.0-RELEASE",
+        title = "SuperSolr REST API",
         contact = @Contact(
-            name = "Alexander Rogalskiy",
-            email = "alexander.rogalskiy@sqoola.com",
-            url = "http://www.sqoola.io"
+            name = "ARogalskiy",
+            email = "alexander.rogalskiy@supersolr.com",
+            url = "http://www.supersolr.com"
         ),
         license = @License(
             name = "MIT",
@@ -51,10 +51,21 @@ import java.lang.annotation.*;
         )
     ),
     basePath = "/api/*",
-    consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-    produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-    schemes = {SwaggerDefinition.Scheme.HTTP, SwaggerDefinition.Scheme.HTTPS},
-    externalDocs = @ExternalDocs(value = "Information Support Desk", url = "http://sqoola.io")
+    consumes = {
+        MediaType.APPLICATION_JSON_VALUE,
+        MediaType.APPLICATION_XML_VALUE
+    },
+    produces = {
+        MediaType.APPLICATION_JSON_VALUE,
+        MediaType.APPLICATION_XML_VALUE
+    },
+    schemes = {
+        SwaggerDefinition.Scheme.HTTP,
+        SwaggerDefinition.Scheme.HTTPS
+    },
+    externalDocs = @ExternalDocs(
+        value = "SuperSolr Document Info",
+        url = "http://supersolr.com")
 )
 public @interface SwaggerAPI {
 }

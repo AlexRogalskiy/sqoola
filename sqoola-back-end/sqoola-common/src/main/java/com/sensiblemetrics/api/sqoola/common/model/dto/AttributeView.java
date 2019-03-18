@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -29,8 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableAttributetView;
-import com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableBaseModelView;
+import com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableAttributeView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -41,10 +40,13 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableAttributetView.*;
+import static com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableAttributeView.*;
+import static com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableBaseModelView.ID_FIELD_NAME;
+import static com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableBaseModelView.SCORE_FIELD_NAME;
+
 
 /**
- * Attribute document dto {@link BaseModelView}
+ * AttributeEntity document view {@link BaseModelView} implementation
  */
 @Data
 @NoArgsConstructor
@@ -52,39 +54,39 @@ import static com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.Exposab
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonPropertyOrder(value = {
-    ExposableBaseModelView.ID_FIELD_NAME,
-    ExposableBaseModelView.SCORE_FIELD_NAME,
-    ExposableAttributetView.NAME_FIELD_NAME,
+    ID_FIELD_NAME,
+    SCORE_FIELD_NAME,
+    NAME_FIELD_NAME,
     SYNONYM_FIELD_NAME,
     DESCRIPTION_TEXT_FIELD_NAME,
     KEYWORDS_FIELD_NAME,
     PRODUCTS_FIELD_NAME
 }, alphabetic = true)
-@JacksonXmlRootElement(localName = ExposableAttributetView.VIEW_ID, namespace="io.sqoola")
-@ApiModel(value = ExposableAttributetView.VIEW_ID, description = "All details about attribute document")
-public class AttributeView extends BaseModelView<String> implements ExposableAttributetView {
+@JacksonXmlRootElement(localName = ExposableAttributeView.VIEW_ID, namespace = "io.sqoola")
+@ApiModel(value = ExposableAttributeView.VIEW_ID, description = "All details about attribute document")
+public class AttributeView extends BaseModelView<String> implements ExposableAttributeView {
 
     /**
      * Default explicit serialVersionUID for interoperability
      */
     private static final long serialVersionUID = -6304630916069644472L;
 
-    @ApiModelProperty(value = "Attribute name", name = "name", example = "name", required = true)
+    @ApiModelProperty(value = "AttributeEntity name", name = "name", example = "name", required = true)
     @JacksonXmlProperty(localName = NAME_FIELD_NAME)
     @JsonProperty(NAME_FIELD_NAME)
     private String name;
 
-    @ApiModelProperty(value = "Attribute name synonym", name = "synonym", example = "short remark")
+    @ApiModelProperty(value = "AttributeEntity name synonym", name = "synonym", example = "short remark")
     @JacksonXmlProperty(localName = SYNONYM_FIELD_NAME)
     @JsonProperty(SYNONYM_FIELD_NAME)
     private String name2;
 
-    @ApiModelProperty(value = "Attribute description", name = "description", example = "description")
+    @ApiModelProperty(value = "AttributeEntity description", name = "description", example = "description")
     @JacksonXmlProperty(localName = DESCRIPTION_TEXT_FIELD_NAME)
     @JsonProperty(DESCRIPTION_TEXT_FIELD_NAME)
     private String descriptionText;
 
-    @ApiModelProperty(value = "Attribute keywords", name = "keywords", example = "keywords")
+    @ApiModelProperty(value = "AttributeEntity keywords", name = "keywords", example = "keywords")
     @JacksonXmlProperty(localName = KEYWORDS_FIELD_NAME)
     @JsonProperty(KEYWORDS_FIELD_NAME)
     private String keywords;

@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -24,7 +24,7 @@
 package com.sensiblemetrics.api.sqoola.common.controller.impl;
 
 import com.sensiblemetrics.api.sqoola.common.controller.AuditModelController;
-import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModelEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.AuditModelView;
 import com.sensiblemetrics.api.sqoola.common.service.dao.AuditModelDaoService;
 import lombok.EqualsAndHashCode;
@@ -47,7 +47,7 @@ import java.util.Optional;
 /**
  * {@link AuditModelController} implementation
  *
- * @param <E>  type of audit model {@link AuditModel}
+ * @param <E>  type of audit model {@link AuditModelEntity}
  * @param <T>  type of audit view model {@link AuditModelView}
  * @param <ID> type of audit identifier {@link Serializable}
  */
@@ -57,7 +57,7 @@ import java.util.Optional;
 @ToString(callSuper = true)
 @RestController
 @RequestMapping(value = "/audit")
-public class AuditModelControllerImpl<E extends AuditModel, T extends AuditModelView, ID extends Serializable> extends BaseControllerImpl<E, T, ID> implements AuditModelController<E, T, ID> {
+public class AuditModelControllerImpl<E extends AuditModelEntity, T extends AuditModelView, ID extends Serializable> extends BaseControllerImpl<E, T, ID> implements AuditModelController<E, T, ID> {
 
     private final Javers javers;
 

@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -53,7 +53,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Product repository implementation unit test
+ * ProductEntity repository implementation unit test
  */
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -132,7 +132,7 @@ public class ProductRepositoryTest {
     @DisplayName("Test search category by name")
     public void testFindByName() {
         // given
-        final String name = "Product 01";
+        final String name = "ProductEntity 01";
 
         // when
         final List<? extends Product> products = getProductRepository().findByName(name);

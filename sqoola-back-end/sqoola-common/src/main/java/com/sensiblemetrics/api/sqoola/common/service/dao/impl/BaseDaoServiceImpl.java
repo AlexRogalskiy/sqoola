@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -39,7 +39,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * {@link BaseDaoService} service implementation
+ * Base DAO service implementation
  *
  * @param <E>  type of model
  * @param <ID> type of model identifier {@link Serializable}

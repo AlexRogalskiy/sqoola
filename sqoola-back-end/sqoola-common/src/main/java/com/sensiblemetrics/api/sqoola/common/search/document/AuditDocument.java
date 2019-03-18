@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.document;
 
-import com.wildbeeslabs.sensiblemetrics.supersolr.model.annotation.ChronologicalDates;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableAuditDocument;
+import com.sensiblemetrics.api.sqoola.common.model.constraint.annotation.ChronologicalDates;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableAuditDocument;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -35,14 +35,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Custom full-text search audit document {@link Serializable}
+ * Full-text search audit document {@link Serializable}
  */
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
 @ChronologicalDates
-public abstract class AuditDocument implements SearchableAuditDocument, Serializable {
+public abstract class AuditDocument implements SearchableAuditDocument {
 
     /**
      * Default explicit serialVersionUID for interoperability

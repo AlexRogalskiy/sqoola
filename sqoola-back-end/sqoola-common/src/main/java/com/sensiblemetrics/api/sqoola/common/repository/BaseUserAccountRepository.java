@@ -3,7 +3,7 @@
  *
  * Copyright 2017 WildBees Labs.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,30 +23,27 @@
  */
 package com.sensiblemetrics.api.sqoola.common.repository;
 
-import com.wildbeeslabs.api.rest.common.model.BaseUserAccountEntity;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.scheduling.annotation.Async;
 
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+
 /**
+ * {@link BaseUserAccountEntity} repository declaration
  *
- * BaseUserAccount REST Application storage repository to manage
- * {@link BaseUserAccountEntity} instances
- *
+ * @param <E>  type of model
+ * @param <ID> type of model identifier
  * @author Alex
  * @version 1.0.0
  * @since 2017-08-08
- * @param <T>
  */
 @NoRepositoryBean
-public interface BaseUserAccountRepository<T extends BaseUserAccountEntity> extends BaseRepository<T> {
+public interface BaseUserAccountRepository<E extends BaseUserAccountEntity<ID>, ID extends Serializable> extends BaseModelRepository<E, ID> {
 
     /**
      * Get user account entities {@link BaseUserAccountEntity} by uuId
@@ -57,7 +54,7 @@ public interface BaseUserAccountRepository<T extends BaseUserAccountEntity> exte
      */
     //@CacheEvict("byUsername")
     @Cacheable(value = "userAccountFindCache", key = "#uuId", sync = true, cacheNames = {"userAccountFindCache"})
-    Optional<? extends T> findByUuId(final UUID uuId);
+    Optional<? extends E> findByUuId(final UUID uuId);
 
     /**
      * Get user account entities {@link BaseUserAccountEntity} by user name
@@ -68,7 +65,7 @@ public interface BaseUserAccountRepository<T extends BaseUserAccountEntity> exte
      */
     //@CacheEvict("byUsername")
     @Cacheable(value = "userAccountFindCache", key = "#username", sync = true, cacheNames = {"userAccountFindCache"})
-    Optional<? extends T> findByUsername(final String username);
+    Optional<? extends E> findByUsername(final String username);
 
     /**
      * Get list of user account entities {@link BaseUserAccountEntity} by
@@ -77,7 +74,7 @@ public interface BaseUserAccountRepository<T extends BaseUserAccountEntity> exte
      * @param isEnabled - user enabled status
      * @return list of user account entities {@link BaseUserAccountEntity}
      */
-    List<? extends T> findByIsEnabled(final Boolean isEnabled);
+    Iterable<? extends E> findByIsEnabled(final Boolean isEnabled);
 
     /**
      * Get list of user account entities {@link BaseUserAccountEntity} activated
@@ -89,7 +86,7 @@ public interface BaseUserAccountRepository<T extends BaseUserAccountEntity> exte
      */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.activatedAt <= ?1")
     @Async
-    CompletableFuture<List<? extends T>> findByActivatedAtLessThan(final Date date);
+    CompletableFuture<Iterable<? extends E>> findByActivatedAtLessThan(final Date date);
 
     /**
      * Get list of user account entities {@link BaseUserAccountEntity} activated
@@ -101,20 +98,20 @@ public interface BaseUserAccountRepository<T extends BaseUserAccountEntity> exte
      */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.activatedAt > ?1")
     @Async
-    CompletableFuture<List<? extends T>> findByActivatedAtGreaterThan(final Date date);
+    CompletableFuture<Iterable<? extends E>> findByActivatedAtGreaterThan(final Date date);
 
     /**
      * Get list of user account entities {@link BaseUserAccountEntity} activated
      * within requested period
      *
      * @param dateFrom - start date of requested period (excluding)
-     * @param dateTo - end date of requested period (including)
+     * @param dateTo   - end date of requested period (including)
      * @return list of user account entities {@link BaseUserAccountEntity} with
      * asynchronous iterator {@link CompletableFuture}
      */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.activatedAt > ?1 AND e.activatedAt <= ?2")
     @Async
-    CompletableFuture<List<? extends T>> findByActivatedAtBetween(final Date dateFrom, final Date dateTo);
+    CompletableFuture<Iterable<? extends E>> findByActivatedAtBetween(final Date dateFrom, final Date dateTo);
 
     /**
      * Get list of user account entities {@link BaseUserAccountEntity} accessed
@@ -126,7 +123,7 @@ public interface BaseUserAccountRepository<T extends BaseUserAccountEntity> exte
      */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.accessedAt <= ?1")
     @Async
-    CompletableFuture<List<? extends T>> findByAccessedAtLessThan(final Date date);
+    CompletableFuture<Iterable<? extends E>> findByAccessedAtLessThan(final Date date);
 
     /**
      * Get list of user account entities {@link BaseUserAccountEntity} accessed
@@ -138,18 +135,18 @@ public interface BaseUserAccountRepository<T extends BaseUserAccountEntity> exte
      */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.accessedAt > ?1")
     @Async
-    CompletableFuture<List<? extends T>> findByAccessedAtGreaterThan(final Date date);
+    CompletableFuture<Iterable<? extends E>> findByAccessedAtGreaterThan(final Date date);
 
     /**
      * Get list of user account entities {@link BaseUserAccountEntity} accessed
      * within requested period
      *
      * @param dateFrom - start date of requested period (excluding)
-     * @param dateTo - end date of requested period (including)
+     * @param dateTo   - end date of requested period (including)
      * @return list of user account entities {@link BaseUserAccountEntity} with
      * asynchronous iterator {@link CompletableFuture}
      */
     //@Query("SELECT e FROM #{#entityName} e WHERE e.accessedAt > ?1 AND e.accessedAt <= ?2")
     @Async
-    CompletableFuture<List<? extends T>> findByAccessedAtBetween(final Date dateFrom, final Date dateTo);
+    CompletableFuture<Iterable<? extends E>> findByAccessedAtBetween(final Date dateFrom, final Date dateTo);
 }

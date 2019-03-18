@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -52,7 +52,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Category repository implementation unit test
+ * CategoryEntity repository implementation unit test
  */
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -131,7 +131,7 @@ public class CategoryRepositoryTest {
     @DisplayName("Test search category by title")
     public void testFindByTitle() {
         // given
-        final String title = "Category 01";
+        final String title = "CategoryEntity 01";
 
         // when
         final List<? extends Category> categories = getCategoryRepository().findByTitle(title);

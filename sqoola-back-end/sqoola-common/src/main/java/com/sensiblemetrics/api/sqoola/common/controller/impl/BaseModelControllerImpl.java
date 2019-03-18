@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -24,9 +24,9 @@
 package com.sensiblemetrics.api.sqoola.common.controller.impl;
 
 import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
-import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.BaseModelView;
-import com.sensiblemetrics.api.sqoola.common.model.utility.OffsetPageRequest;
+import com.sensiblemetrics.api.sqoola.common.wrapper.OffsetPageRequest;
 import com.sensiblemetrics.api.sqoola.common.service.dao.BaseModelDaoService;
 import com.sensiblemetrics.api.sqoola.common.utility.MapperUtils;
 import com.sensiblemetrics.api.sqoola.common.exception.ResourceNotFoundException;
@@ -50,7 +50,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
 /**
  * {@link BaseModelController} controller implementation
  *
- * @param <E>  type of base document model {@link BaseModel}
+ * @param <E>  type of base document model {@link BaseModelEntity}
  * @param <T>  type of base document view model {@link BaseModelView}
  * @param <ID> type of base document identifier {@link Serializable}
  */
@@ -58,7 +58,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.MapperUtils.map
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public abstract class BaseModelControllerImpl<E extends BaseModel<ID>, T extends BaseModelView<ID>, ID extends Serializable> extends AuditModelControllerImpl<E, T, ID> implements BaseModelController<E, T, ID> {
+public abstract class BaseModelControllerImpl<E extends BaseModelEntity<ID>, T extends BaseModelView<ID>, ID extends Serializable> extends AuditModelControllerImpl<E, T, ID> implements BaseModelController<E, T, ID> {
 
     @Override
     public E updateItem(final ID id,

@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,20 +23,19 @@
  */
 package com.sensiblemetrics.api.sqoola.common.repository;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.Category;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * {@link Category} repository declaration {@link BaseModelRepository}
+ * {@link BaseCategoryEntity} repository declaration
  */
 @Repository
-public interface CategoryRepository extends BaseModelRepository<Category, Long> {
+public interface CategoryRepository<E extends BaseCategoryEntity<ID>, ID extends Serializable> extends BaseModelRepository<E, ID> {
 
-    List<? extends Category> findByTitle(final String title);
+    Iterable<? extends E> findByTitle(final String title);
 
-    List<? extends Category> findByIndex(final Integer index);
+    Iterable<? extends E> findByIndex(final Integer index);
 
-    List<? extends Category> findByDescription(final String description);
+    Iterable<? extends E> findByDescription(final String description);
 }

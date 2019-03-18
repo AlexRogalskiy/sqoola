@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,16 +23,16 @@
  */
 package com.sensiblemetrics.api.sqoola.common.repository;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.Account;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * {@link Account} repository declaration {@link BaseModelRepository}
+ * {@link BaseAccount} repository declaration
  */
 @Repository
-public interface AccountRepository extends BaseModelRepository<Account, Long> {
+public interface AccountRepository<E extends BaseAccount<ID>, ID extends Serializable> extends BaseModelRepository<E, ID> {
 
-    Optional<Account> findByUsername(final String username);
+    Optional<? extends E> findByUsername(final String username);
 }

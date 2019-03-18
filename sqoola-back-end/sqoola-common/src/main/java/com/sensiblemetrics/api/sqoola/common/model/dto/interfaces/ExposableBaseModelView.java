@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,12 +23,14 @@
  */
 package com.sensiblemetrics.api.sqoola.common.model.dto.interfaces;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
+
+import java.io.Serializable;
 
 /**
- * {@link BaseModel} model view definition
+ * {@link BaseModelEntity} model view definition
  */
-public interface ExposableBaseModelView {
+public interface ExposableBaseModelView extends Serializable {
 
     /**
      * Default dto ID

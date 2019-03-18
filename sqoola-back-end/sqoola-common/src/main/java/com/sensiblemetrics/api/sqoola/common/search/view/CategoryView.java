@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableCategoryView;
+import com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableCategoryView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -40,12 +40,13 @@ import lombok.ToString;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableBaseDocumentView.ID_FIELD_NAME;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableBaseDocumentView.SCORE_FIELD_NAME;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableCategoryView.*;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableBaseDocumentView.ID_FIELD_NAME;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableBaseDocumentView.SCORE_FIELD_NAME;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableCategoryView.*;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableExceptionView.DESCRIPTION_FIELD_NAME;
 
 /**
- * Category document view {@link BaseDocumentView}
+ * CategoryEntity document view {@link BaseDocumentView}
  */
 @Data
 @NoArgsConstructor
@@ -70,17 +71,17 @@ public class CategoryView extends BaseDocumentView<String> implements ExposableC
      */
     private static final long serialVersionUID = -878245565646636436L;
 
-    @ApiModelProperty(value = "Category index", name = "index", example = "index", required = true)
+    @ApiModelProperty(value = "CategoryEntity index", name = "index", example = "index", required = true)
     @JacksonXmlProperty(localName = INDEX_FIELD_NAME)
     @JsonProperty(INDEX_FIELD_NAME)
     private Integer index;
 
-    @ApiModelProperty(value = "Category title", name = "title", example = "title", required = true)
+    @ApiModelProperty(value = "CategoryEntity title", name = "title", example = "title", required = true)
     @JacksonXmlProperty(localName = TITLE_FIELD_NAME)
     @JsonProperty(TITLE_FIELD_NAME)
     private String title;
 
-    @ApiModelProperty(value = "Category description", name = "description", example = "description")
+    @ApiModelProperty(value = "CategoryEntity description", name = "description", example = "description")
     @JacksonXmlProperty(localName = DESCRIPTION_FIELD_NAME)
     @JsonProperty(DESCRIPTION_FIELD_NAME)
     private String description;

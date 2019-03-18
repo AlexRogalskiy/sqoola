@@ -3,7 +3,7 @@
  *
  * Copyright 2017 WildBees Labs.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -35,8 +35,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * BaseUser REST Application storage repository to manage {@link BaseUserEntity}
- * instances
+ * {@link BaseUserEntity} repository declaration
  *
  * @param <E>
  * @author Alex
@@ -44,7 +43,7 @@ import java.util.UUID;
  * @since 2017-08-08
  */
 @NoRepositoryBean
-public interface BaseUserRepository<E extends BaseUserEntity, ID extends Serializable> extends AuditModelRepositoryRepository<E, ID>, PagingAndSortingRepository<E, ID> {
+public interface BaseUserRepository<E extends BaseUserEntity, ID extends Serializable> extends AuditModelRepository<E, ID>, PagingAndSortingRepository<E, ID> {
 
     /**
      * Get user entities {@link BaseUserEntity} by uuId

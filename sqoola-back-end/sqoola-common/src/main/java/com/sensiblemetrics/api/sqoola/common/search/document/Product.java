@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.document;
 
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableProduct;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableProduct;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -36,7 +36,7 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import java.util.*;
 
 /**
- * Custom full-text search product document {@link BaseDocument}
+ * Full-text search product document {@link BaseDocument}
  */
 @Data
 @NoArgsConstructor
@@ -114,7 +114,7 @@ public class Product extends BaseDocument<String> implements SearchableProduct {
         this.getTags().clear();
         Optional.ofNullable(tags)
             .orElseGet(Collections::emptyList)
-            .forEach(tag -> this.addTag(tag));
+            .forEach(this::addTag);
     }
 
     public void addTag(final String tag) {
@@ -127,7 +127,7 @@ public class Product extends BaseDocument<String> implements SearchableProduct {
         this.getCategories().clear();
         Optional.ofNullable(categories)
             .orElseGet(Collections::emptyList)
-            .forEach(category -> this.addCategory(category));
+            .forEach(this::addCategory);
     }
 
     public void addCategory(final Category category) {
@@ -140,7 +140,7 @@ public class Product extends BaseDocument<String> implements SearchableProduct {
         this.getMainCategories().clear();
         Optional.ofNullable(mainCategories)
             .orElseGet(Collections::emptyList)
-            .forEach(mainCategory -> this.addMainCategory(mainCategory));
+            .forEach(this::addMainCategory);
     }
 
     public void addMainCategory(final Category mainCategory) {
@@ -153,7 +153,7 @@ public class Product extends BaseDocument<String> implements SearchableProduct {
         this.getAttributes().clear();
         Optional.ofNullable(attributes)
             .orElseGet(Collections::emptyList)
-            .forEach(attribute -> this.addAttribute(attribute));
+            .forEach(this::addAttribute);
     }
 
     public void addAttribute(final Attribute attribute) {
@@ -166,7 +166,7 @@ public class Product extends BaseDocument<String> implements SearchableProduct {
         this.getOrders().clear();
         Optional.ofNullable(orders)
             .orElseGet(Collections::emptyList)
-            .forEach(order -> this.addOrder(order));
+            .forEach(this::addOrder);
     }
 
     public void addOrder(final Order order) {

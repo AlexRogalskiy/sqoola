@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.service.dao.impl;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
 import com.sensiblemetrics.api.sqoola.common.repository.BaseModelRepository;
 import com.sensiblemetrics.api.sqoola.common.service.dao.BaseModelDaoService;
 import lombok.EqualsAndHashCode;
@@ -35,16 +35,16 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * {@link BaseModelDaoService} service implementation
+ * {@link BaseModelEntity} service implementation
  *
- * @param <E>  type of base model {@link BaseModel}
+ * @param <E>  type of base model {@link BaseModelEntity}
  * @param <ID> type of base model identifier {@link Serializable}
  */
 @Slf4j
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Transactional
-public abstract class BaseModelDaoServiceImpl<E extends BaseModel<ID>, ID extends Serializable> extends AuditModelServiceImpl<E, ID> implements BaseModelDaoService<E, ID> {
+public abstract class BaseModelDaoServiceImpl<E extends BaseModelEntity<ID>, ID extends Serializable> extends AuditModelDaoServiceImpl<E, ID> implements BaseModelDaoService<E, ID> {
 
     @Override
     public void saveOrUpdate(final E target, final Class<? extends E> clazz) {

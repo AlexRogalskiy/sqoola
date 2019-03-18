@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -25,39 +25,39 @@ package com.sensiblemetrics.api.sqoola.common.controller.category.impl;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.sensiblemetrics.api.sqoola.common.controller.utility.GeneralResult;
-import com.sensiblemetrics.api.sqoola.common.model.dao.Category;
-import com.sensiblemetrics.api.sqoola.common.model.dto.CategoryView;
+import com.sensiblemetrics.api.sqoola.common.controller.wrapper.GeneralResult;
+import com.sensiblemetrics.api.sqoola.common.model.dao.CategoryEntity;
+import com.sensiblemetrics.api.sqoola.common.model.dto.BaseCategoryView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * {@link Category} result entity
+ * {@link CategoryEntity} result entity
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JacksonXmlRootElement(localName = "categories")
-public class CategoryResult extends GeneralResult<CategoryView> {
+public class CategoryResult extends GeneralResult<BaseCategoryView> {
 
     /**
-     * Default {@link CategoryResult} constructor with input {@link CategoryView} key
+     * Default {@link CategoryResult} constructor with input {@link BaseCategoryView} key
      *
-     * @param key - initial input {@link CategoryView} key
+     * @param key - initial input {@link BaseCategoryView} key
      */
-    public CategoryResult(final CategoryView key) {
+    public CategoryResult(final BaseCategoryView key) {
         super(key);
     }
 
     /**
-     * Default {@link CategoryResult} constructor with input {@link CategoryView} key and error message {@link String}
+     * Default {@link CategoryResult} constructor with input {@link BaseCategoryView} key and error message {@link String}
      *
-     * @param key          - initial input {@link CategoryView} key
+     * @param key          - initial input {@link BaseCategoryView} key
      * @param errorMessage - initial input error message {@link String}
      */
-    public CategoryResult(final CategoryView key, final String errorMessage) {
+    public CategoryResult(final BaseCategoryView key, final String errorMessage) {
         super(key, errorMessage);
     }
 }

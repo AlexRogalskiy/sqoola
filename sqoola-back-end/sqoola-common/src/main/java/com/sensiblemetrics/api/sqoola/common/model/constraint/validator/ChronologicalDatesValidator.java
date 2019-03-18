@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -24,7 +24,7 @@
 package com.sensiblemetrics.api.sqoola.common.model.constraint.validator;
 
 import com.sensiblemetrics.api.sqoola.common.model.constraint.annotation.ChronologicalDates;
-import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -36,14 +36,14 @@ import java.util.Objects;
  * @version 1.0.0
  * @since 2017-08-08
  */
-public class ChronologicalDatesValidator implements ConstraintValidator<ChronologicalDates, BaseModel<?>> {
+public class ChronologicalDatesValidator implements ConstraintValidator<ChronologicalDates, BaseModelEntity<?>> {
 
     @Override
     public void initialize(final ChronologicalDates constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(final BaseModel<?> baseEntity, final ConstraintValidatorContext context) {
+    public boolean isValid(final BaseModelEntity<?> baseEntity, final ConstraintValidatorContext context) {
         if (Objects.isNull(baseEntity.getChanged())) {
             return true;
         }

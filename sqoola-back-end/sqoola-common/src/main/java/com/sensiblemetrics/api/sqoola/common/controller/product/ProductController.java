@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,16 +23,16 @@
  */
 package com.sensiblemetrics.api.sqoola.common.controller.product;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.Product;
+import com.sensiblemetrics.api.sqoola.common.model.dao.ProductEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.ProductView;
 import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 
 /**
- * {@link Product} controller declaration
+ * {@link ProductEntity} controller declaration
  */
-public interface ProductController extends BaseModelController<Product, ProductView, String> {
+public interface ProductController extends BaseModelController<ProductEntity, ProductView, String> {
 
     /**
      * Default service ID

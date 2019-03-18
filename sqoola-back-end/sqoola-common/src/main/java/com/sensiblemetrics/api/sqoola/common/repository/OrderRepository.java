@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,28 +23,27 @@
  */
 package com.sensiblemetrics.api.sqoola.common.repository;
 
-import com.sensiblemetrics.api.sqoola.common.model.dao.Order;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.QueryHint;
-import java.util.List;
+import java.io.Serializable;
 import java.util.stream.Stream;
 
 import static org.hibernate.jpa.QueryHints.HINT_FETCH_SIZE;
 
 /**
- * Order repository declaration {@link BaseModelRepository}
+ * {@link BaseOrderEntity} repository declaration
  */
 @Repository
-public interface OrderRepository extends BaseModelRepository<Order, Long> {
+public interface OrderRepository<E extends BaseOrderEntity<ID>, ID extends Serializable> extends BaseModelRepository<E, ID> {
 
-    List<? extends Order> findByTitle(final String title);
+    Iterable<? extends E> findByTitle(final String title);
 
-    List<? extends Order> findByDescription(final String description);
+    Iterable<? extends E> findByDescription(final String description);
 
     @QueryHints(value = @QueryHint(name = HINT_FETCH_SIZE, value = "" + Integer.MIN_VALUE))
-    @Query(value = "select o from Order o")
-    Stream<Order> streamAll();
+    @Query(value = "select o from OrderEntity o")
+    Stream<? extends E> streamAll();
 }

@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -70,7 +70,7 @@ public class SwaggerConfig {
             .title("Sqoola REST API")
             .description("Sqoola API for creating and managing gateway connectors")
             .termsOfServiceUrl("http://example.com/terms-of-service")
-            .contact(new Contact("sqoola", "sqoola.io", "info@sqoola.com"))
+            .contact(new Contact("sqoola", "sqoola.io", "info@sqoola.io"))
             .license("MIT License")
             .licenseUrl("http://www.opensource.org/licenses/mit-license.php")
             .version("2.0")

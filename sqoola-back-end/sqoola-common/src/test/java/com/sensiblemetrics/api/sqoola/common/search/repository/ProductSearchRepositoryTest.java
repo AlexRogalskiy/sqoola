@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -64,7 +64,7 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 
 /**
- * Product search repository implementation unit test {@link BaseTest}
+ * ProductEntity search repository implementation unit test {@link BaseTest}
  */
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -220,7 +220,7 @@ public class ProductSearchRepositoryTest extends BaseTest {
         final List<String> names = Arrays.asList("Treasure");
 
         // given
-        final Product product = createProduct("14", "Product 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 7, 1.0, 2.0, true);
+        final Product product = createProduct("14", "ProductEntity 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 7, 1.0, 2.0, true);
         product.addCategory(createCategory("04", 4, "Moon landing", "All facts about Apollo 11, a best seller"));
 
         getSolrTemplate().saveBean(SearchableProduct.COLLECTION_ID, product);
@@ -237,7 +237,7 @@ public class ProductSearchRepositoryTest extends BaseTest {
     @DisplayName("Test search all products")
     public void testFindAll() {
         // given
-        final Product product = createProduct("14", "Product 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 8, 1.0, 2.0, true);
+        final Product product = createProduct("14", "ProductEntity 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 8, 1.0, 2.0, true);
         product.addCategory(createCategory("04", 4, "Moon landing", "All facts about Apollo 11, a best seller"));
 
         getSolrTemplate().saveBean(SearchableProduct.COLLECTION_ID, product);
@@ -282,7 +282,7 @@ public class ProductSearchRepositoryTest extends BaseTest {
     @DisplayName("Test search all products by created date range")
     public void testFindAllByFuture() throws ExecutionException, InterruptedException {
         // given
-        final Product product = createProduct("14", "Product 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 8, 1.0, 2.0, true);
+        final Product product = createProduct("14", "ProductEntity 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 8, 1.0, 2.0, true);
         product.setCreated(DateUtils.toDate(2018, 05, 05));
         product.addCategory(createCategory("04", 4, "Moon landing", "All facts about Apollo 11, a best seller"));
 
@@ -304,10 +304,10 @@ public class ProductSearchRepositoryTest extends BaseTest {
     @DisplayName("Test search category by name like")
     public void testFindByNameLike() {
         // expected
-        final List<String> names = Arrays.asList("Product 01", "Product 02");
+        final List<String> names = Arrays.asList("ProductEntity 01", "ProductEntity 02");
 
         // given
-        final Product product = createProduct("14", "Product 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 8, 1.0, 2.0, true);
+        final Product product = createProduct("14", "ProductEntity 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 8, 1.0, 2.0, true);
         product.addCategory(createCategory("04", 4, "Moon landing", "All facts about Apollo 11, a best seller"));
 
         getSolrTemplate().saveBean(SearchableProduct.COLLECTION_ID, product);
@@ -329,7 +329,7 @@ public class ProductSearchRepositoryTest extends BaseTest {
         double upperBound = 100.0;
 
         // given
-        final Product product = createProduct("14", "Product 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 6, 1.0, 2.0, true);
+        final Product product = createProduct("14", "ProductEntity 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 6, 1.0, 2.0, true);
         product.addCategory(createCategory("04", 4, "Moon landing", "All facts about Apollo 11, a best seller"));
 
         getSolrTemplate().saveBean(SearchableProduct.COLLECTION_ID, product);
@@ -352,7 +352,7 @@ public class ProductSearchRepositoryTest extends BaseTest {
         double upperBound = 100.0;
 
         // given
-        final Product product = createProduct("14", "Product 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 0, 1.0, 2.0, true);
+        final Product product = createProduct("14", "ProductEntity 01", "TestCase 01", "TestCase 01 for product 01", "Price description", "Catalog number", "Page title", 0, 1.0, 2.0, true);
         product.addCategory(createCategory("04", 4, "Moon landing", "All facts about Apollo 11, a best seller"));
 
         getSolrTemplate().saveBean(SearchableProduct.COLLECTION_ID, product);

@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,9 +23,9 @@
  */
 package com.sensiblemetrics.api.sqoola.common.service.dao.impl;
 
-import com.sensiblemetrics.api.sqoola.common.service.dao.AccountDaoService;
-import com.sensiblemetrics.api.sqoola.common.model.dao.Account;
+import com.sensiblemetrics.api.sqoola.common.model.dao.AccountEntity;
 import com.sensiblemetrics.api.sqoola.common.repository.AccountRepository;
+import com.sensiblemetrics.api.sqoola.common.service.dao.AccountDaoService;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -36,21 +36,21 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 /**
- * {@link AccountDaoService} service implementation
+ * {@link AccountEntity} service implementation
  */
 @Slf4j
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Service(AccountDaoService.SERVICE_ID)
 @Transactional
-public class AccountDaoServiceImpl extends BaseServiceImpl<Account, Long> implements AccountDaoService {
+public class AccountDaoServiceImpl extends BaseDaoServiceImpl<AccountEntity, Long> implements AccountDaoService {
 
     @Autowired
     private AccountRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Account> findByUsername(final String username) {
+    public Optional<AccountEntity> findByUsername(final String username) {
         return getRepository().findByUsername(username);
     }
 

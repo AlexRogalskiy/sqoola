@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableExceptionView;
+import com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableExceptionView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -37,12 +37,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import static com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableExceptionView.*;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.DateUtils.DEFAULT_DATE_FORMAT_LOCALE;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableExceptionView.*;
+import static com.sensiblemetrics.api.sqoola.common.utility.DateUtils.DEFAULT_DATE_FORMAT_LOCALE;
+import static com.sensiblemetrics.api.sqoola.common.utility.DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT;
 
 /**
  * Exception document view
@@ -62,7 +61,7 @@ import static com.wildbeeslabs.sensiblemetrics.supersolr.utility.DateUtils.DEFAU
 }, alphabetic = true)
 @JacksonXmlRootElement(localName = ExposableExceptionView.VIEW_ID)
 @ApiModel(value = ExposableExceptionView.VIEW_ID, description = "All details about exception document")
-public class ExceptionView implements ExposableExceptionView, Serializable {
+public class ExceptionView implements ExposableExceptionView {
 
     /**
      * Default explicit serialVersionUID for interoperability

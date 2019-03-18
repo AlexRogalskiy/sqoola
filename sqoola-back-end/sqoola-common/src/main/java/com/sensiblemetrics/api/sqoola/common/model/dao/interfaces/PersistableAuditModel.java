@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -33,7 +33,7 @@ public interface PersistableAuditModel extends Serializable {
     /**
      * Default document ID
      */
-    String MODEL_ID = "AuditModel";
+    String MODEL_ID = "AuditModelEntity";
 
     /**
      * Default field names

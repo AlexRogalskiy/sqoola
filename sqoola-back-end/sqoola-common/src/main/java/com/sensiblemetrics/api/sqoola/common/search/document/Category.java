@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.document;
 
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableCategory;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableCategory;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -34,7 +34,7 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import java.util.*;
 
 /**
- * Custom full-text search category document {@link BaseDocument}
+ * Full-text search category document {@link BaseDocument}
  */
 @Data
 @NoArgsConstructor
@@ -69,8 +69,8 @@ public class Category extends BaseDocument<String> implements SearchableCategory
     public void setProducts(final Collection<? extends Product> products) {
         this.getProducts().clear();
         Optional.ofNullable(products)
-                .orElseGet(Collections::emptyList)
-                .forEach(product -> this.addProduct(product));
+            .orElseGet(Collections::emptyList)
+            .forEach(this::addProduct);
     }
 
     public void addProduct(final Product product) {
@@ -82,8 +82,8 @@ public class Category extends BaseDocument<String> implements SearchableCategory
     public void setMainProducts(final Collection<? extends Product> mainProducts) {
         this.getMainProducts().clear();
         Optional.ofNullable(mainProducts)
-                .orElseGet(Collections::emptyList)
-                .forEach(mainProduct -> this.addMainProduct(mainProduct));
+            .orElseGet(Collections::emptyList)
+            .forEach(this::addMainProduct);
     }
 
     public void addMainProduct(final Product mainProduct) {

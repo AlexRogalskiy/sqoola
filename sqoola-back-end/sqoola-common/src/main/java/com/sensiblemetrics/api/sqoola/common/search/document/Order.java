@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.document;
 
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableOrder;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -34,7 +34,7 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import java.util.*;
 
 /**
- * Custom full-text search order document {@link BaseDocument}
+ * Full-text search order document {@link BaseDocument}
  */
 @Data
 @NoArgsConstructor
@@ -70,7 +70,7 @@ public class Order extends BaseDocument<String> implements SearchableOrder {
         this.getProducts().clear();
         Optional.ofNullable(products)
             .orElseGet(Collections::emptyList)
-            .forEach(product -> this.addProduct(product));
+            .forEach(this::addProduct);
     }
 
     public void addProduct(final Product product) {

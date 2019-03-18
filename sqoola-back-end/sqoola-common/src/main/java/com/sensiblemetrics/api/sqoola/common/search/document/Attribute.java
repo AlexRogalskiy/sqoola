@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.document;
 
-import com.wildbeeslabs.sensiblemetrics.supersolr.model.BaseModel;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.interfaces.SearchableAttribute;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
+import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableAttribute;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -35,14 +35,14 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import java.util.*;
 
 /**
- * Custom full-text search attribute document {@link BaseModel}
+ * Full-text search attribute document {@link BaseModelEntity}
  */
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @SolrDocument(solrCoreName = SearchableAttribute.CORE_ID, collection = SearchableAttribute.COLLECTION_ID)
-public class Attribute extends BaseModel<String> implements SearchableAttribute {
+public class Attribute extends BaseModelEntity<String> implements SearchableAttribute {
 
     /**
      * Default explicit serialVersionUID for interoperability
@@ -67,8 +67,8 @@ public class Attribute extends BaseModel<String> implements SearchableAttribute 
     public void setProducts(final Collection<? extends Product> products) {
         this.getProducts().clear();
         Optional.ofNullable(products)
-                .orElseGet(Collections::emptyList)
-                .forEach(product -> this.addProduct(product));
+            .orElseGet(Collections::emptyList)
+            .forEach(this::addProduct);
     }
 
     public void addProduct(final Product product) {

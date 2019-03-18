@@ -171,11 +171,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-starter-data-solr</artifactId>-->
-        <!--<version>${spring-boot-starter.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-solr</artifactId>
+            <version>${spring-boot-starter.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -471,11 +471,11 @@
             <artifactId>spring-data-commons</artifactId>
             <version>${spring-data-commons.version}</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.data</groupId>-->
-        <!--<artifactId>spring-data-solr</artifactId>-->
-        <!--<version>${spring-data-solr.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-solr</artifactId>
+            <version>${spring-data-solr.version}</version>
+        </dependency>
 
         <!-- Jackson library dependencies -->
         <dependency>
@@ -675,22 +675,22 @@
         </dependency>
 
         <!-- Solr library dependencies -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.solr</groupId>-->
-        <!--<artifactId>solr-solrj</artifactId>-->
-        <!--<version>${solrj.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.solr</groupId>-->
-        <!--<artifactId>solr-core</artifactId>-->
-        <!--<version>${solrj.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.solr</groupId>-->
-        <!--<artifactId>solr-test-framework</artifactId>-->
-        <!--<version>${solrj.version}</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>${solrj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-core</artifactId>
+            <version>${solrj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-test-framework</artifactId>
+            <version>${solrj.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Redis library dependencies -->
         <dependency>

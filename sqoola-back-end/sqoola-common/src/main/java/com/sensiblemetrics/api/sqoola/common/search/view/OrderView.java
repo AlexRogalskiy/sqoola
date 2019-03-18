@@ -3,7 +3,7 @@
  *
  * Copyright 2019 WildBees Labs, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * PermissionEntity is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableOrderView;
+import com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableOrderView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -36,13 +36,13 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import static com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableBaseDocumentView.ID_FIELD_NAME;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableBaseDocumentView.SCORE_FIELD_NAME;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableOrderView.DESCRIPTION_FIELD_NAME;
-import static com.wildbeeslabs.sensiblemetrics.supersolr.search.view.interfaces.ExposableOrderView.TITLE_FIELD_NAME;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableBaseDocumentView.ID_FIELD_NAME;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableBaseDocumentView.SCORE_FIELD_NAME;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableCategoryView.TITLE_FIELD_NAME;
+import static com.sensiblemetrics.api.sqoola.common.search.view.interfaces.ExposableExceptionView.DESCRIPTION_FIELD_NAME;
 
 /**
- * Order document view {@link BaseDocumentView}
+ * OrderEntity document view {@link BaseDocumentView}
  */
 @Data
 @NoArgsConstructor
@@ -64,12 +64,12 @@ public class OrderView extends BaseDocumentView<String> implements ExposableOrde
      */
     private static final long serialVersionUID = -5143268414907649969L;
 
-    @ApiModelProperty(value = "Order title", name = "title", example = "title")
+    @ApiModelProperty(value = "OrderEntity title", name = "title", example = "title")
     @JacksonXmlProperty(localName = TITLE_FIELD_NAME)
     @JsonProperty(TITLE_FIELD_NAME)
     private String title;
 
-    @ApiModelProperty(value = "Order description", name = "description", example = "description")
+    @ApiModelProperty(value = "OrderEntity description", name = "description", example = "description")
     @JacksonXmlProperty(localName = DESCRIPTION_FIELD_NAME)
     @JsonProperty(DESCRIPTION_FIELD_NAME)
     private String description;
