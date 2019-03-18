@@ -37,25 +37,25 @@ import java.util.Optional;
  */
 public interface BaseDaoService<E extends Serializable, ID extends Serializable> {
 
-    Iterable<? extends E> findAll();
+    <E extends Serializable> Iterable<? extends E> findAll();
 
-    Iterable<? extends E> findAll(final Iterable<ID> target);
+    <E extends Serializable, ID extends Serializable> Iterable<? extends E> findAll(final Iterable<ID> target);
 
-    Page<? extends E> findAll(final Pageable pageable);
+    <E extends Serializable> Page<? extends E> findAll(final Pageable pageable);
 
-    Optional<? extends E> find(final ID id);
+    <E extends Serializable, ID extends Serializable> Optional<E> find(final ID id);
 
-    E save(final E entity);
+    <E extends Serializable> E save(final E entity);
 
     //void saveOrUpdate(final E target, final Class<? extends E> clazz);
 
-    boolean exists(final ID id);
+    <ID extends Serializable> boolean exists(final ID id);
 
-    Iterable<? extends E> saveAll(final Iterable<? extends E> target);
+    <E extends Serializable> Iterable<? extends E> saveAll(final Iterable<? extends E> target);
 
-    void delete(final E target);
+    <E extends Serializable> void delete(final E target);
 
-    void deleteAll(final Iterable<? extends E> target);
+    <E extends Serializable> void deleteAll(final Iterable<? extends E> target);
 
     void deleteAll();
 }

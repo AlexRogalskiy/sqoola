@@ -50,29 +50,29 @@ import static com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMe
 /**
  * {@link BaseController} controller implementation
  *
- * @param <E>  type of document model
- * @param <T>  type of document view model
- * @param <ID> type of document identifier {@link Serializable}
+ * @param <E>  type of model
+ * @param <T>  type of view model
+ * @param <ID> type of model identifier {@link Serializable}
  */
 @Slf4j
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public abstract class BaseControllerImpl<E extends Persistable<ID>, T, ID extends Serializable> implements BaseController {
+public abstract class BaseControllerImpl<E extends Serializable, T extends Serializable, ID extends Serializable> implements BaseController {
 
     @Autowired
     private MessageSource messageSource;
 
-    protected List<? extends E> getAllItems() throws EmptyContentException {
+    protected <E extends Serializable> List<? extends E> getAllItems() throws EmptyContentException {
         log.debug("Fetching all items");
-        final List<E> items = Lists.newArrayList(getService().findAll());
+        final List<? extends E> items = Lists.newArrayList(getService().findAll());
         if (items.isEmpty()) {
             throw new EmptyContentException(formatMessage(getMessageSource(), "error.no.content"));
         }
         return items;
     }
 
-    protected E getItem(final ID id) {
+    protected <E extends Serializable, ID extends Serializable> E getItem(final ID id) {
         log.debug("Fetching item by ID: {}", id);
         final Optional<? extends E> item = getService().find(id);
         if (!item.isPresent()) {
@@ -81,7 +81,7 @@ public abstract class BaseControllerImpl<E extends Persistable<ID>, T, ID extend
         return item.get();
     }
 
-    protected E createItem(final T itemDto, final Class<? extends E> entityClass) {
+    protected <E extends Serializable & Persistable<ID>, ID extends Serializable> E createItem(final T itemDto, final Class<? extends E> entityClass) {
         log.debug("Creating new item: {}", itemDto);
         final E itemEntity = MapperUtils.map(itemDto, entityClass);
         if (getService().exists(itemEntity.getId())) {
@@ -91,17 +91,15 @@ public abstract class BaseControllerImpl<E extends Persistable<ID>, T, ID extend
         return itemEntity;
     }
 
-    protected E updateItem(final ID id,
-                           final T itemDto,
-                           final Class<? extends E> entityClass) {
+    protected <E extends Serializable, T extends Serializable, ID extends Serializable> E updateItem(final ID id, final T itemDto, final Class<? extends E> entityClass) {
         log.info("Updating item by ID: {}, itemDto: {}", id, itemDto);
-        final E currentItem = getService().find(id).orElseThrow(() -> new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id)));
+        final E currentItem = (E) getService().find(id).orElseThrow(() -> new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id)));
         final E itemEntity = MapperUtils.map(itemDto, entityClass);
         getService().save(itemEntity);
         return currentItem;
     }
 
-    protected E deleteItem(final ID id) {
+    protected <E extends Serializable, ID extends Serializable> E deleteItem(final ID id) {
         log.info("Deleting item by ID: {}", id);
         final Optional<? extends E> item = getService().find(id);
         if (!item.isPresent()) {
@@ -111,8 +109,7 @@ public abstract class BaseControllerImpl<E extends Persistable<ID>, T, ID extend
         return item.get();
     }
 
-    protected void deleteItems(final List<? extends T> itemDtos,
-                               final Class<? extends E> entityClass) {
+    protected <E extends Serializable, T extends Serializable> void deleteItems(final List<? extends T> itemDtos, final Class<? extends E> entityClass) {
         log.debug("Deleting items: {}", StringUtils.join(itemDtos, ", "));
         final List<? extends E> items = MapperUtils.mapAll(itemDtos, entityClass);
         getService().deleteAll(items);

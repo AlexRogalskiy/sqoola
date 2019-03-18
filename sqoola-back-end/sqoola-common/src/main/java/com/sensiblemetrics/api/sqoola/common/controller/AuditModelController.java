@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.controller;
 
-import com.sensiblemetrics.api.sqoola.common.model.dto.AuditModelView;
 import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModel;
+import com.sensiblemetrics.api.sqoola.common.model.dto.AuditModelView;
 
 import java.io.Serializable;
 
@@ -37,7 +37,7 @@ import java.io.Serializable;
  * @author Alex
  * @version 1.0.0
  */
-public interface AuditModelController<E extends AuditModel, T extends AuditModelView, ID extends Serializable> extends BaseController<E, T, ID> {
+public interface AuditModelController<E extends AuditModel, T extends AuditModelView, ID extends Serializable> extends BaseController {
 
     /**
      * Default token expire period

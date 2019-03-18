@@ -37,7 +37,7 @@ import java.io.Serializable;
  * @author Alex
  * @version 1.0.0
  */
-public interface BaseModelController<E extends BaseModel<ID>, T extends BaseModelView<ID>, ID extends Serializable> extends BaseController<E, T, ID> {
+public interface BaseModelController<E extends BaseModel<ID>, T extends BaseModelView<ID>, ID extends Serializable> extends BaseController {
 
     /**
      * Default page offset value

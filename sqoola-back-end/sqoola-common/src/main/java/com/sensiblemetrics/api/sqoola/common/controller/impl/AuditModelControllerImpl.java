@@ -41,14 +41,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
  * {@link AuditModelController} implementation
  *
- * @param <E>  type of audit document model {@link AuditModel}
- * @param <T>  type of audit document view model {@link AuditModelView}
- * @param <ID> type of audit document identifier {@link Serializable}
+ * @param <E>  type of audit model {@link AuditModel}
+ * @param <T>  type of audit view model {@link AuditModelView}
+ * @param <ID> type of audit identifier {@link Serializable}
  */
 @Slf4j
 @NoArgsConstructor
@@ -117,7 +118,7 @@ public class AuditModelControllerImpl<E extends AuditModel, T extends AuditModel
         Hierarchy l = hierarchyRepository.findOne(left);
         Hierarchy p = hierarchyRepository.findOne(right);
 
-        Diff diff = javers.compare(l, p);
+        final Diff diff = javers.compare(l, p);
 //        TODO
 //        List<Change> changes = diff.getChanges(input ->
 //                (input instanceof NewObject

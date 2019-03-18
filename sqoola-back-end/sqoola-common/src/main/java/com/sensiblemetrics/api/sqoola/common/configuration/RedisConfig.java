@@ -40,8 +40,13 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -50,6 +55,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPoolConfig;
 
 import javax.annotation.PreDestroy;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Optional;
@@ -132,9 +138,25 @@ public class RedisConfig extends CachingConfigurerSupport {
         return jedisPoolConfig;
     }
 
+    @Bean
+    public JedisClientConfiguration jedisClientConfiguration() {
+        return JedisClientConfiguration.builder()
+            .clientName("test")
+            .connectTimeout(Duration.ZERO)
+            .readTimeout(Duration.ZERO)
+            .usePooling()
+            .poolConfig(jedisPoolConfig())
+            .build();
+    }
+
     @Bean(destroyMethod = "destroy")
     public JedisConnectionFactory jedisConnectionFactory() {
-        return new JedisConnectionFactory(jedisPoolConfig());
+        return new JedisConnectionFactory(standaloneConfig(), jedisClientConfiguration());
+    }
+
+    @Bean(destroyMethod = "destroy")
+    public LettuceConnectionFactory lettuceConnectionFactory() {
+        return new LettuceConnectionFactory(standaloneConfig());
     }
 
     @Bean
@@ -144,6 +166,23 @@ public class RedisConfig extends CachingConfigurerSupport {
             .sentinel(env.getRequiredProperty("supersolr.redis.hosts.host1"), env.getRequiredProperty("supersolr.redis.hosts.port1", Integer.class))
             .sentinel(env.getRequiredProperty("supersolr.redis.hosts.host2"), env.getRequiredProperty("supersolr.redis.hosts.port2", Integer.class))
             .sentinel(env.getRequiredProperty("supersolr.redis.hosts.host3"), env.getRequiredProperty("supersolr.redis.hosts.port3", Integer.class));
+    }
+
+    @Bean
+    public RedisStandaloneConfiguration standaloneConfig() {
+        final RedisStandaloneConfiguration redisConfiguration = new RedisStandaloneConfiguration();
+        //redisConfiguration.setDatabase(0);
+        redisConfiguration.setHostName(env.getProperty("redis.host"));
+        redisConfiguration.setPort(Integer.parseInt(env.getProperty("redis.port")));
+        redisConfiguration.setPassword(RedisPassword.of(env.getProperty("redis.password")));
+        return redisConfiguration;
+    }
+
+    @Bean
+    public RedisCacheManager cacheManager() {
+        final RedisCacheManager cacheManager = RedisCacheManager.create(jedisConnectionFactory());
+        cacheManager.setTransactionAware(true);
+        return cacheManager;
     }
 
     @PreDestroy
