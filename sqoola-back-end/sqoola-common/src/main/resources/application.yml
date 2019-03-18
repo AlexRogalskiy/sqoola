@@ -16,6 +16,7 @@ springfox:
 #    serviceUrl:
 #        defaultZone: http://localhost:8080/v1/eureka
 
+
 security:
   rememberMe:
     tokenValidity: 1209600
@@ -169,6 +170,10 @@ server:
       path: /app3
 
 management:
+  endpoints:
+    web:
+      exposure:
+        include: beans,env,health,metrics,httptrace,mappings
   info:
     git:
       mode: full

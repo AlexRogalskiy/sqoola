@@ -56,4 +56,5 @@ module com.sensiblemetrics.api.sqoola.common {
     requires rt;
     requires spring.data.solr;
     requires commons.lang;
+    requires spring.cloud.commons;
 }
