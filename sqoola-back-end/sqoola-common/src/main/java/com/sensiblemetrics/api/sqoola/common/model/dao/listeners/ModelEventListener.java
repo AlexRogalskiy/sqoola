@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 
 @Slf4j
-@Component(OperationEventListener.COMPONENT_ID)
-public class OperationEventListener {
+@Component(ModelEventListener.COMPONENT_ID)
+public class ModelEventListener {
 
     /**
      * Default component ID

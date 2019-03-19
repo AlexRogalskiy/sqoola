@@ -24,6 +24,7 @@
 package com.sensiblemetrics.api.sqoola.common.model.dao;
 
 import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.PersistableBaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.listeners.ModelEventListener;
 import com.sensiblemetrics.api.sqoola.common.model.interfaces.Versionable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,6 +46,7 @@ import java.util.Objects;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @MappedSuperclass
+@EntityListeners(ModelEventListener.class)
 public abstract class BaseModelEntity<ID extends Serializable> extends AuditModelEntity<ID> implements PersistableBaseModel, Versionable<Long> {
 
     /**
