@@ -7,22 +7,23 @@ import java.time.temporal.Temporal;
  * Auditable interface declaration
  *
  * @param <T> type of temporal entity
+ * @param <T> type of principal entity
  */
-public interface Auditable<T extends Temporal> extends Serializable {
+public interface Auditable<T extends Temporal, S extends Serializable> extends Serializable {
 
     T getCreated();
 
     void setCreated(final T created);
 
-    String getCreatedBy();
+    S getCreatedBy();
 
-    void setCreatedBy(final String createdBy);
+    void setCreatedBy(final S createdBy);
 
     T getChanged();
 
     void setChanged(final T changed);
 
-    String getChangedBy();
+    S getChangedBy();
 
-    void setChangedBy(final String changedBy);
+    void setChangedBy(final S changedBy);
 }
