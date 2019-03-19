@@ -27,7 +27,7 @@ import com.sensiblemetrics.api.sqoola.common.security.SecurityAccessDeniedHandle
 import com.sensiblemetrics.api.sqoola.common.security.SecurityAuditorAwareHandler;
 import com.sensiblemetrics.api.sqoola.common.security.SecurityAuthenticationEntryPoint;
 import com.sensiblemetrics.api.sqoola.common.security.SecurityAuthenticationSuccessHandler;
-import com.sensiblemetrics.api.sqoola.common.service.dao.AuthUserDaoService;
+import com.sensiblemetrics.api.sqoola.common.service.AuthUserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

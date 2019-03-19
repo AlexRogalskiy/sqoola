@@ -28,7 +28,7 @@ import com.sensiblemetrics.api.sqoola.common.controller.BaseController;
 import com.sensiblemetrics.api.sqoola.common.exception.EmptyContentException;
 import com.sensiblemetrics.api.sqoola.common.exception.ResourceAlreadyExistException;
 import com.sensiblemetrics.api.sqoola.common.exception.ResourceNotFoundException;
-import com.sensiblemetrics.api.sqoola.common.service.dao.BaseDaoService;
+import com.sensiblemetrics.api.sqoola.common.service.BaseDaoService;
 import com.sensiblemetrics.api.sqoola.common.utility.MapperUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

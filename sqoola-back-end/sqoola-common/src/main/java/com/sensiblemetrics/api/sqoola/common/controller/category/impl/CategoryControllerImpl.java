@@ -33,7 +33,7 @@ import com.sensiblemetrics.api.sqoola.common.exception.EmptyContentException;
 import com.sensiblemetrics.api.sqoola.common.model.dao.UserEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.BaseCategoryView;
 import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableCategory;
-import com.sensiblemetrics.api.sqoola.common.service.dao.BaseCategoryDaoService;
+import com.sensiblemetrics.api.sqoola.common.service.BaseCategoryDaoService;
 import com.sensiblemetrics.api.sqoola.common.utility.MapperUtils;
 import io.swagger.annotations.*;
 import lombok.EqualsAndHashCode;

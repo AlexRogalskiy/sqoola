@@ -26,7 +26,7 @@ package com.sensiblemetrics.api.sqoola.common.controller.impl;
 import com.sensiblemetrics.api.sqoola.common.controller.AuditModelController;
 import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModelEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.AuditModelView;
-import com.sensiblemetrics.api.sqoola.common.service.dao.AuditModelDaoService;
+import com.sensiblemetrics.api.sqoola.common.service.AuditModelDaoService;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

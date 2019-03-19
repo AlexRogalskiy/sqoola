@@ -25,7 +25,7 @@ package com.sensiblemetrics.api.sqoola.common.controller.article.impl;
 
 import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
 import com.sensiblemetrics.api.sqoola.common.model.dao.ArticleEntity;
-import com.sensiblemetrics.api.sqoola.common.service.dao.impl.ArticleService;
+import com.sensiblemetrics.api.sqoola.common.service.impl.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

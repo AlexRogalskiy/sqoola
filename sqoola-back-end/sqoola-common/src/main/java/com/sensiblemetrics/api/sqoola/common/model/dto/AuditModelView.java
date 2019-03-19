@@ -27,7 +27,6 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableAuditModelView;
-import com.sensiblemetrics.api.sqoola.common.utility.DateUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -38,9 +37,11 @@ import lombok.ToString;
 import java.util.Date;
 
 import static com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.ExposableAuditModelView.*;
+import static com.sensiblemetrics.api.sqoola.common.utility.DateUtils.DEFAULT_DATE_FORMAT_LOCALE;
+import static com.sensiblemetrics.api.sqoola.common.utility.DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT;
 
 /**
- * Audit document dto
+ * Audit model view
  */
 @Data
 @NoArgsConstructor
@@ -70,8 +71,8 @@ public abstract class AuditModelView implements ExposableAuditModelView {
     @ApiModelProperty(value = "Audit created date", name = "createdDate", example = "01/01/2018 11:00:00", required = true)
     @JacksonXmlProperty(localName = CREATED_FIELD_NAME)
     @JsonProperty(CREATED_FIELD_NAME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT, locale = DateUtils.DEFAULT_DATE_FORMAT_LOCALE)
-    private Date created;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DEFAULT_DATE_FORMAT_PATTERN_EXT, locale = DEFAULT_DATE_FORMAT_LOCALE)
+    private Date createdDate;
 
     @ApiModelProperty(value = "Audit created by", name = "createdBy", example = "createdBy", required = true)
     @JacksonXmlProperty(localName = CREATED_BY_FIELD_NAME)
@@ -81,8 +82,8 @@ public abstract class AuditModelView implements ExposableAuditModelView {
     @ApiModelProperty(value = "Audit changed date", name = "changedDate", example = "01/01/2019 18:00:00")
     @JacksonXmlProperty(localName = CHANGED_FIELD_NAME)
     @JsonProperty(CHANGED_FIELD_NAME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT, locale = DateUtils.DEFAULT_DATE_FORMAT_LOCALE)
-    private Date changed;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DEFAULT_DATE_FORMAT_PATTERN_EXT, locale = DEFAULT_DATE_FORMAT_LOCALE)
+    private Date lastModifiedDate;
 
     @ApiModelProperty(value = "Audit changed by", name = "changedBy", example = "changedBy")
     @JacksonXmlProperty(localName = CHANGED_BY_FIELD_NAME)
