@@ -3,7 +3,7 @@ package com.sensiblemetrics.api.sqoola.common.model.interfaces;
 import java.io.Serializable;
 
 /**
- * Stateful entity interface declaration
+ * Stateful interface declaration
  *
  * @param <T> type of state entity
  */

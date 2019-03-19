@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.temporal.Temporal;
 
 /**
- * Auditable entity interface declaration
+ * Auditable interface declaration
  *
  * @param <T> type of temporal entity
  */
