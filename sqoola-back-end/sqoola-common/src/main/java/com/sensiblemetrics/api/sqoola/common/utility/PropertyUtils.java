@@ -67,8 +67,8 @@ public class PropertyUtils {
      * @return property value {@link String}
      */
     public static String getStringProperty(final Properties properties, final String propertyKey) {
-        Objects.requireNonNull(properties);
-        Objects.requireNonNull(propertyKey);
+        Objects.requireNonNull(properties, "Properties must not be null!");
+        Objects.requireNonNull(propertyKey, "Property key must not be null!");
 
         if (!properties.containsKey(propertyKey)) {
             throw new IllegalArgumentException(String.format("ERROR: cannot read property {%s} from resource {%s}", propertyKey, properties));

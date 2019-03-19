@@ -1,35 +1,32 @@
 package com.sensiblemetrics.api.sqoola.common.model.dao.listeners.event;
 
-import com.boraji.tutorial.hibernate.entity.Book;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.HibernateException;
 import org.hibernate.event.spi.RefreshEvent;
 import org.hibernate.event.spi.RefreshEventListener;
 
 import java.util.Map;
 
+@Slf4j
 public class RefreshEventListenerImp implements RefreshEventListener {
-   
-   private static final long serialVersionUID = 1L;
-   private static Logger logger = LogManager
-            .getLogger(RefreshEventListenerImp.class);
 
-   @Override
-   public void onRefresh(RefreshEvent e) throws HibernateException {
-      logger.info("onRefresh is called.");
-      Object obj = e.getObject();
-      if (obj instanceof Book) {
-         Book book = (Book) obj;
-         logger.info(book);
-      }
-   }
+    /**
+     * Default explicit serialVersionUID for interoperability
+     */
+    private static final long serialVersionUID = 8603892619424226458L;
 
-   @SuppressWarnings("rawtypes")
-   @Override
-   public void onRefresh(RefreshEvent e, Map refreshedAlready) 
-         throws HibernateException {
-      logger.info("onRefresh is called.");
-   }
+    @Override
+    public void onRefresh(final RefreshEvent event) throws HibernateException {
+        final Object obj = event.getObject();
+        if (obj instanceof BaseModelEntity) {
+            final BaseModelEntity<?> entity = (BaseModelEntity<?>) obj;
+            log.info("Refreshing entity with name={%s}, id={%s}", event.getEntityName(), entity.getId());
+        }
+    }
 
+    @Override
+    public void onRefresh(final RefreshEvent event, final Map refreshedAlready) throws HibernateException {
+        this.onRefresh(event);
+    }
 }

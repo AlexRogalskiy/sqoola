@@ -25,26 +25,33 @@ package com.sensiblemetrics.api.sqoola.common.model.dao;
 
 import com.sensiblemetrics.api.sqoola.common.model.constraint.annotation.ChronologicalDates;
 import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.PersistableAuditModel;
-import com.sensiblemetrics.api.sqoola.common.model.interfaces.Auditable;
-import com.sensiblemetrics.api.sqoola.common.utility.DateUtils;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.annotations.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.domain.Auditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.Objects;
+import java.util.Optional;
+
+import static com.sensiblemetrics.api.sqoola.common.utility.DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT;
 
 /**
- * Audit model
+ * Audit model entity {@link Auditable}
+ *
+ * @param <ID> type of model identifier {@link Serializable}
  */
-@Data
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
@@ -53,40 +60,72 @@ import java.util.Date;
 @MappedSuperclass
 @ChronologicalDates
 @EntityListeners(AuditingEntityListener.class)
-public abstract class AuditModelEntity implements PersistableAuditModel, Auditable {
+public abstract class AuditModelEntity<ID extends Serializable> implements Auditable<String, ID, LocalDateTime>, PersistableAuditModel {
 
     /**
      * Default explicit serialVersionUID for interoperability
      */
-    private static final long serialVersionUID = -4511025234589044122L;
+    private static final long serialVersionUID = 431774856692738135L;
 
     @CreationTimestamp
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = DEFAULT_DATE_FORMAT_PATTERN_EXT)
     @NotBlank(message = "{audit.created.notBlank}")
     @Column(name = CREATED_FIELD_NAME, nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    private Date createdDate;
 
+    @Setter
     @CreatedBy
+    @ManyToOne
     @NotBlank(message = "{audit.createdBy.notBlank}")
     @Column(name = CREATED_BY_FIELD_NAME, nullable = false, updatable = false)
     private String createdBy;
 
     @UpdateTimestamp
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = DateUtils.DEFAULT_DATE_FORMAT_PATTERN_EXT)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = DEFAULT_DATE_FORMAT_PATTERN_EXT)
     @Column(name = CHANGED_FIELD_NAME, insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date changed;
+    private Date lastModifiedDate;
 
+    @Setter
     @LastModifiedBy
+    @ManyToOne
     @Column(name = CHANGED_BY_FIELD_NAME, insertable = false)
-    private String changedBy;
+    private String lastModifiedBy;
 
-    @Version
-    @ColumnDefault("0")
-    @Column(name = VERSION_BY_FIELD_NAME, insertable = false, updatable = false)
-    //@Generated(GenerationTime.ALWAYS)
-    private Long version;
+    @Override
+    public Optional<LocalDateTime> getCreatedDate() {
+        return Objects.isNull(this.createdDate)
+            ? Optional.empty()
+            : Optional.of(LocalDateTime.ofInstant(this.createdDate.toInstant(), ZoneId.systemDefault()));
+    }
+
+    @Override
+    public void setCreatedDate(@NonNull final LocalDateTime createdDate) {
+        this.createdDate = Date.from(createdDate.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    @Override
+    public Optional<String> getCreatedBy() {
+        return Optional.ofNullable(this.createdBy);
+    }
+
+    @Override
+    public Optional<LocalDateTime> getLastModifiedDate() {
+        return Objects.isNull(this.lastModifiedDate)
+            ? Optional.empty()
+            : Optional.of(LocalDateTime.ofInstant(this.lastModifiedDate.toInstant(), ZoneId.systemDefault()));
+    }
+
+    @Override
+    public void setLastModifiedDate(@NonNull final LocalDateTime lastModifiedDate) {
+        this.lastModifiedDate = Date.from(lastModifiedDate.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    @Override
+    public Optional<String> getLastModifiedBy() {
+        return Optional.ofNullable(this.lastModifiedBy);
+    }
 
     @PrePersist
     protected void onCreate() {
@@ -95,6 +134,6 @@ public abstract class AuditModelEntity implements PersistableAuditModel, Auditab
 
     @PreUpdate
     protected void onUpdate() {
-        setChangedBy(this.getClass().getName());
+        setLastModifiedBy(this.getClass().getName());
     }
 }

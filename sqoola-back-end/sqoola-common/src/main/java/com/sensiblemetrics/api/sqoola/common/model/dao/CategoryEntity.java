@@ -35,7 +35,7 @@ import javax.persistence.*;
 import java.util.*;
 
 /**
- * CategoryEntity model {@link BaseModelEntity}
+ * Category model entity {@link BaseModelEntity}
  */
 @Data
 @NoArgsConstructor

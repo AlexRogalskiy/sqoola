@@ -34,7 +34,7 @@ import org.hibernate.annotations.BatchSize;
 import javax.persistence.*;
 
 /**
- * ArticleEntity model {@link BaseModelEntity}
+ * Article model entity {@link BaseModelEntity}
  */
 @Data
 @NoArgsConstructor

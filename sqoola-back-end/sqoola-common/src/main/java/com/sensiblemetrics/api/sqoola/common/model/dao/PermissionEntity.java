@@ -12,5 +12,4 @@ public class PermissionEntity {
     @ManyToOne
     @JoinColumn(name = "role")
     private RoleEntity role;
-
 }

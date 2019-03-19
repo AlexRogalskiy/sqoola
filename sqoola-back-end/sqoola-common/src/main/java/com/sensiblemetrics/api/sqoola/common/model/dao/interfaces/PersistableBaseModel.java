@@ -39,4 +39,5 @@ public interface PersistableBaseModel extends Serializable {
      * Default field names
      */
     String ID_FIELD_NAME = "id";
+    String VERSION_BY_FIELD_NAME = "version";
 }

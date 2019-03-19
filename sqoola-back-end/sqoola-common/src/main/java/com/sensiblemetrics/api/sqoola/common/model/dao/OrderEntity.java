@@ -37,7 +37,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 /**
- * OrderEntity model {@link BaseModelEntity}
+ * Order model entity {@link BaseModelEntity}
  */
 @Data
 @NoArgsConstructor

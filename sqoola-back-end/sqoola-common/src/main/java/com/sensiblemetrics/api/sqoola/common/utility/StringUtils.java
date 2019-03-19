@@ -23,6 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.utility;
 
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
@@ -62,9 +63,7 @@ public class StringUtils {
      * @param message       - initial input raw string message {@link String}
      * @return localized string message {@link String}
      */
-    public static String getLocaleMessage(final MessageSource messageSource, final String message) {
-        Objects.requireNonNull(messageSource, "Username must not be null!");
-
+    public static String getLocaleMessage(@NonNull final MessageSource messageSource, final String message) {
         final Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage(Optional.ofNullable(message).orElse(Strings.EMPTY), null, locale);
     }

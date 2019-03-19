@@ -24,7 +24,7 @@
 package com.sensiblemetrics.api.sqoola.common.model.constraint.validator;
 
 import com.sensiblemetrics.api.sqoola.common.model.constraint.annotation.ChronologicalDates;
-import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
+import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModelEntity;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -36,21 +36,21 @@ import java.util.Objects;
  * @version 1.0.0
  * @since 2017-08-08
  */
-public class ChronologicalDatesValidator implements ConstraintValidator<ChronologicalDates, BaseModelEntity<?>> {
+public class ChronologicalDatesValidator implements ConstraintValidator<ChronologicalDates, AuditModelEntity> {
 
     @Override
     public void initialize(final ChronologicalDates constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(final BaseModelEntity<?> baseEntity, final ConstraintValidatorContext context) {
-        if (Objects.isNull(baseEntity.getChanged())) {
+    public boolean isValid(final AuditModelEntity auditModelEntity, final ConstraintValidatorContext context) {
+        if (Objects.isNull(auditModelEntity.getChanged())) {
             return true;
         }
-        boolean isValid = baseEntity.getCreated().getTime() <= baseEntity.getChanged().getTime();
+        boolean isValid = auditModelEntity.getCreated().getTime() <= auditModelEntity.getChanged().getTime();
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect entity chronological dates: created={%s}, changed={%s} (expected dates: created <= changed)", baseEntity.getCreated(), baseEntity.getChanged())).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect entity chronological dates: created={%s}, changed={%s} (expected dates: created <= changed)", auditModelEntity.getCreated(), auditModelEntity.getChanged())).addConstraintViolation();
         }
         return isValid;
     }

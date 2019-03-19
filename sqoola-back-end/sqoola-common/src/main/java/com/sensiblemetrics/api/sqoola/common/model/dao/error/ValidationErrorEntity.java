@@ -40,6 +40,6 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ValidationErrorDTO extends AbstractBaseErrorDTO {
+public class ValidationErrorEntity extends AbstractBaseErrorEntity {
 
 }

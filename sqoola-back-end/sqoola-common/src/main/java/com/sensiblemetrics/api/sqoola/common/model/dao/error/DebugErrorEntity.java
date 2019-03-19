@@ -28,22 +28,35 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
- * Base error DTO model
+ * Debug error DTO model
  *
  * @author Alex
  * @version 1.0.0
  * @since 2017-08-08
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AbstractBaseErrorDTO implements Serializable {
+public class DebugErrorEntity extends AbstractBaseErrorEntity {
 
-    private String errorCode;
-    private String errorMessage;
+    private String title;
+    private int status;
+    private String detail;
+    private long timeStamp;
+    private String debugMessage;
+    private Map<String, List<ValidationErrorEntity>> errors = new HashMap<String, List<ValidationErrorEntity>>();
+
+    public Map<String, List<ValidationErrorEntity>> getErrors() {
+        return errors;
+    }
+    public void setErrors(Map<String, List<ValidationErrorEntity>> errors) {
+        this.errors = errors;
+    }
 }

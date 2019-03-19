@@ -1,26 +1,25 @@
 package com.sensiblemetrics.api.sqoola.common.model.dao.listeners.event;
 
-import com.boraji.tutorial.hibernate.entity.Book;
-import org.apache.logging.log4j.Logger;
+import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.HibernateException;
 import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.hibernate.event.spi.SaveOrUpdateEventListener;
 
+@Slf4j
 public class SaveUpdateEventListenerImp implements SaveOrUpdateEventListener {
-   
-   private static Logger logger = LogManager
-            .getLogger(SaveUpdateEventListenerImp.class);
-   private static final long serialVersionUID = 1L;
 
-   @Override
-   public void onSaveOrUpdate(SaveOrUpdateEvent e) throws HibernateException {
+    /**
+     * Default explicit serialVersionUID for interoperability
+     */
+    private static final long serialVersionUID = -6625750526033104563L;
 
-      logger.info("onSaveOrUpdate is called.");
-
-      Object obj = e.getEntity();
-      if (obj instanceof Book) {
-         Book book = (Book) obj;
-         logger.info(book);
-      }
-   }
+    @Override
+    public void onSaveOrUpdate(final SaveOrUpdateEvent event) throws HibernateException {
+        final Object obj = event.getEntity();
+        if (obj instanceof BaseModelEntity) {
+            final BaseModelEntity<?> entity = (BaseModelEntity<?>) obj;
+            log.info("Refreshing entity with name={%s}, id={%s}", event.getEntityName(), entity.getId());
+        }
+    }
 }

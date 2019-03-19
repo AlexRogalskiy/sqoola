@@ -218,38 +218,7 @@
         <!--<version>${ehcache3.version}</version>-->
         <!--</dependency>-->
 
-        <!-- Camel library dependencies -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring-boot-starter</artifactId>
-            <version>2.23.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-stream-starter</artifactId>
-            <version>2.23.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-http4-starter</artifactId>
-            <version>2.23.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-servlet-starter</artifactId>
-            <version>2.23.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jackson-starter</artifactId>
-            <version>2.23.0</version>
-        </dependency>
-
         <!-- Opentracing library dependencies -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-opentracing-starter</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.jaegertracing</groupId>
             <artifactId>jaeger-tracerresolver</artifactId>
@@ -259,6 +228,11 @@
             <groupId>io.jaegertracing</groupId>
             <artifactId>jaeger-thrift</artifactId>
             <version>0.32.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentracing.contrib</groupId>
+            <artifactId>opentracing-spring-web-starter</artifactId>
+            <version>1.0.1</version>
         </dependency>
 
         <!-- Javers library dependencies -->
@@ -638,16 +612,10 @@
             <version>${otj-pg-embedded.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring</artifactId>
-            <version>2.23.0</version>
-            <scope>test</scope>
-        </dependency>
 
         <!-- Swagger library dependencies -->
         <dependency>
-            <groupId>io.springfox</groupId>
+            <groupId>io.sprringfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${swagger.version}</version>
         </dependency>

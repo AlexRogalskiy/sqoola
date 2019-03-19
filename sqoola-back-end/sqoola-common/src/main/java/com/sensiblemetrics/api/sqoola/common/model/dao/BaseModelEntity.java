@@ -30,14 +30,13 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Base model {@link AuditModelEntity}
+ * Base model entity {@link AuditModelEntity}
  *
  * @param <ID> type of model identifier {@link Serializable}
  */
@@ -46,7 +45,7 @@ import java.util.Objects;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @MappedSuperclass
-public abstract class BaseModelEntity<ID extends Serializable> extends AuditModelEntity implements PersistableBaseModel, Persistable<ID>, Versionable<Long> {
+public abstract class BaseModelEntity<ID extends Serializable> extends AuditModelEntity<ID> implements PersistableBaseModel, Versionable<Long> {
 
     /**
      * Default explicit serialVersionUID for interoperability
@@ -64,9 +63,9 @@ public abstract class BaseModelEntity<ID extends Serializable> extends AuditMode
     @Column(name = ID_FIELD_NAME, unique = true, nullable = false)
     private ID id;
 
-    //@Version
+    @Version
     @ColumnDefault("0")
-    @Column(name = "version", insertable = false, updatable = false)
+    @Column(name = VERSION_BY_FIELD_NAME, insertable = false, updatable = false)
     //@Generated(GenerationTime.ALWAYS)
     private Long version;
 

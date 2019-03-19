@@ -610,6 +610,7 @@
                                 <consoleOutput>true</consoleOutput>
                                 <maxAllowedViolations>5</maxAllowedViolations>
                                 <failsOnError>true</failsOnError>
+                                <failOnViolation>true</failOnViolation>
                             </configuration>
                             <goals>
                                 <goal>check</goal>
@@ -724,15 +725,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot-version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- Camel BOM -->
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-spring-boot-dependencies</artifactId>
-                <version>2.23.0</version>
+                <version>${spring-boot-starter.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

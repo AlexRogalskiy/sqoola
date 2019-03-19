@@ -42,5 +42,4 @@ public interface PersistableAuditModel extends Serializable {
     String CHANGED_FIELD_NAME = "changed";
     String CREATED_BY_FIELD_NAME = "createdBy";
     String CHANGED_BY_FIELD_NAME = "changedBy";
-    String VERSION_BY_FIELD_NAME = "version";
 }

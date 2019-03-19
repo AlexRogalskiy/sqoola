@@ -24,21 +24,22 @@
 package com.sensiblemetrics.api.sqoola.common.model.dao;
 
 import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.*;
-import com.sensiblemetrics.sqoola.common.model.dao.interfaces.*;
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.interfaces.*;
-import com.wildbeeslabs.sensiblemetrics.sqoola.model.dao.interfaces.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.*;
 
 /**
- * ProductEntity model {@link BaseModelEntity}
+ * Product model entity {@link BaseModelEntity}
  */
 @Data
 @NoArgsConstructor
@@ -46,7 +47,7 @@ import java.util.*;
 @ToString(callSuper = true)
 @Entity(name = PersistableProduct.MODEL_ID)
 @BatchSize(size = 10)
-@Table(name = PersistableProduct.TABlE_NAME, catalog = "public",
+@Table(name = PersistableProduct.TABLE_NAME, catalog = "public",
     indexes = {@Index(name = "product_catalog_number_idx", columnList = PersistableProduct.ID_FIELD_NAME + ", " + PersistableProduct.CATALOG_NUMBER_FIELD_NAME)}
 )
 @AttributeOverrides({

@@ -164,7 +164,7 @@ public class DateUtils {
     }
 
     public static Date toDate(final String date, final String dateFormat, final Locale locale, final TimeZone timeZone) {
-        Objects.requireNonNull(dateFormat);
+        Objects.requireNonNull(dateFormat, "Date format must not be null!");
         try {
             final SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, locale);
             formatter.setTimeZone(timeZone);

@@ -125,7 +125,7 @@ public class SecurityUtils {
      * @return calculated authorization key {@link String}
      */
     public static String encode(final UserDetails userDetails) {
-        Objects.requireNonNull(userDetails);
+        Objects.requireNonNull(userDetails, "UserDetails must not be null!");
         return encode(userDetails.getUsername(), userDetails.getPassword());
     }
 

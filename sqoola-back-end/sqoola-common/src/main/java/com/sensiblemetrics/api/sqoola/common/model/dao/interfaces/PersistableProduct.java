@@ -37,7 +37,7 @@ public interface PersistableProduct extends Serializable {
     /**
      * Default table name
      */
-    String TABlE_NAME = "products";
+    String TABLE_NAME = "products";
 
     /**
      * Default field names

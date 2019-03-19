@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BaseLogErrorDTO extends AbstractBaseErrorDTO {
+public class BaseLogErrorEntity extends AbstractBaseErrorEntity {
 
     private Long id;
     private LocalDateTime logTime;

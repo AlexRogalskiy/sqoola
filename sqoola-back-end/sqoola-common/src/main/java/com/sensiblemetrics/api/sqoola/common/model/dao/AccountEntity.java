@@ -35,7 +35,7 @@ import javax.persistence.*;
 import java.util.*;
 
 /**
- * AccountEntity model {@link BaseModelEntity}
+ * Account model entity {@link BaseModelEntity}
  */
 @Data
 @NoArgsConstructor
