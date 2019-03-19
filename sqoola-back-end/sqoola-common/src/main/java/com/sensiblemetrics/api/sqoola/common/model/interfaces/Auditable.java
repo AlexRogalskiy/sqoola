@@ -1,21 +1,26 @@
 package com.sensiblemetrics.api.sqoola.common.model.interfaces;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.temporal.Temporal;
 
-public interface Auditable extends Serializable {
+/**
+ * Auditable entity interface declaration
+ *
+ * @param <T> type of temporal entity
+ */
+public interface Auditable<T extends Temporal> extends Serializable {
 
-    Date getCreated();
+    T getCreated();
 
-    void setCreated(final Date created);
+    void setCreated(final T created);
 
     String getCreatedBy();
 
     void setCreatedBy(final String createdBy);
 
-    Date getChanged();
+    T getChanged();
 
-    void setChanged(final Date changed);
+    void setChanged(final T changed);
 
     String getChangedBy();
 

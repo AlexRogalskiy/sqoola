@@ -567,6 +567,36 @@
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>1.16</version>
+                    <configuration>
+                        <licenseName>MIT</licenseName>
+                        <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+                        <failOnMissingHeader>true</failOnMissingHeader>
+                        <failOnNotUptodateHeader>true</failOnNotUptodateHeader>
+                        <roots>
+                            <root>${project.basedir}</root>
+                        </roots>
+                        <excludes>
+                            <exclude>**/test-output/**</exclude>
+                            <exclude>**/target/**</exclude>
+                            <exclude>.idea/**</exclude>
+                            <exclude>**/*.json</exclude>
+                            <exclude>**/src/main/resources/checkstyle.xml</exclude>
+                        </excludes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>check-file-header</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
                     <version>3.0.5</version>
                     <configuration>

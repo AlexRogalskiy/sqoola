@@ -37,7 +37,7 @@ import java.util.Objects;
  * @version 1.0.0
  * @since 2017-08-08
  */
-public final class BigDecimalRangeValidator implements ConstraintValidator<BigDecimalRange, BigDecimal> {
+public class BigDecimalRangeValidator implements ConstraintValidator<BigDecimalRange, BigDecimal> {
 
     private long maxPrecision;
     private long minPrecision;

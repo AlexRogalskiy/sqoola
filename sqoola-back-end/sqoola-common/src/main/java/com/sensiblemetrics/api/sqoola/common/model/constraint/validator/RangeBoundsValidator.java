@@ -37,7 +37,7 @@ import java.util.Objects;
  * @version 1.0.0
  * @since 2017-08-08
  */
-public final class RangeBoundsValidator implements ConstraintValidator<RangeBounds, BaseRangeEntity> {
+public class RangeBoundsValidator implements ConstraintValidator<RangeBounds, BaseRangeEntity> {
 
     @Override
     public void initialize(final RangeBounds constraintAnnotation) {

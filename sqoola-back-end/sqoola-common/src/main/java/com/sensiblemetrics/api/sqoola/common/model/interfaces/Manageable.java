@@ -1,9 +1,17 @@
 package com.sensiblemetrics.api.sqoola.common.model.interfaces;
 
-public interface Manageable {
+import java.io.Serializable;
+
+/**
+ * Manageable entity interface declaration
+ *
+ * @param <T> type of manageable status
+ */
+public interface Manageable<T extends Serializable> extends Serializable {
+
     void invoke();
 
-    String getStatus();
+    T getStatus();
 
     void receive(final String data);
 

@@ -36,7 +36,7 @@ import java.util.Objects;
  * @version 1.0.0
  * @since 2017-08-08
  */
-public final class LessThanValidator implements ConstraintValidator<LessThan, Integer> {
+public class LessThanValidator implements ConstraintValidator<LessThan, Integer> {
 
     private Integer annotationComparator;
 

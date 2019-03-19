@@ -28,29 +28,27 @@ import com.sensiblemetrics.api.sqoola.common.model.dao.AuditModelEntity;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Objects;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * {@link ChronologicalDates} constraint validator implementation {@link ConstraintValidator}
- *
- * @version 1.0.0
- * @since 2017-08-08
  */
-public class ChronologicalDatesValidator implements ConstraintValidator<ChronologicalDates, AuditModelEntity> {
+public class ChronologicalDatesValidator implements ConstraintValidator<ChronologicalDates, AuditModelEntity<?>> {
 
     @Override
     public void initialize(final ChronologicalDates constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(final AuditModelEntity auditModelEntity, final ConstraintValidatorContext context) {
-        if (Objects.isNull(auditModelEntity.getChanged())) {
-            return true;
-        }
-        boolean isValid = auditModelEntity.getCreated().getTime() <= auditModelEntity.getChanged().getTime();
+    public boolean isValid(final AuditModelEntity<?> auditModel, final ConstraintValidatorContext context) {
+        final Optional<LocalDateTime> createdDateOptional = auditModel.getCreatedDate();
+        final Optional<LocalDateTime> modifiedDateOptional = auditModel.getLastModifiedDate();
+        if (!createdDateOptional.isPresent() || !modifiedDateOptional.isPresent()) return true;
+        boolean isValid = createdDateOptional.get().isBefore(modifiedDateOptional.get());
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect entity chronological dates: created={%s}, changed={%s} (expected dates: created <= changed)", auditModelEntity.getCreated(), auditModelEntity.getChanged())).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect model chronological dates: created={%s}, changed={%s} (expected dates: created <= changed)", createdDateOptional.get(), modifiedDateOptional.get())).addConstraintViolation();
         }
         return isValid;
     }
