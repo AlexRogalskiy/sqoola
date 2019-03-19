@@ -39,7 +39,7 @@ public class CacheEventEntry implements Serializable {
      *
      * @param subscribers - initial input collection of subscribers {@link Collection}
      */
-    public void setSubscribers(final Collection<? extends String> subscribers) {
+    public void setSubscribers(final Iterable<? extends String> subscribers) {
         this.getSubscribers().clear();
         Optional.ofNullable(subscribers)
             .orElseGet(Collections::emptyList)
