@@ -47,6 +47,7 @@ THE SOFTWARE.
         </module>
         <module name="PackageName">
             <property name="severity" value="ignore"/>
+            <property name="format" value="com\.sensiblemetrics\.api\.sqoola(\.[a-z][a-zA-Z0-9]+)*$"/>
             <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
         </module>
         <module name="ParameterName">
@@ -62,6 +63,12 @@ THE SOFTWARE.
             <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
         </module>
         <module name="IllegalImport"/>
+        <module name="UnusedImports"/>
+        <module name="NewlineAtEndOfFile"/>
+        <module name="FileTabCharacter">
+            <property name="eachLine" value="false"/>
+            <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+        </module>
         <module name="MethodLength">
             <property name="severity" value="ignore"/>
             <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
