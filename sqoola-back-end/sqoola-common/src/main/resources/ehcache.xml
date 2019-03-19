@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
+         name="CacheModel"
+         updateCheck="false">
+
+    <diskStore path="${java.io.tmpdir}/.ehcache"/>
+
+    <defaultCache
+        maxElementsInMemory="10000"
+        overflowToDisk="true"
+        timeToIdleSeconds="3000"
+        timeToLiveSeconds="6000"
+        maxElementsOnDisk="10000000"
+        diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120"
+        diskSpoolBufferSizeMB="200"
+        memoryStoreEvictionPolicy="LRU"
+        statistics="true"
+    >
+        <!--<persistence strategy="localTempSwap"/>-->
+    </defaultCache>
+
+    <!-- Custom caches by method rules -->
+    <cache name="endpoint.isEnabled"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="endpoint.getName"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="endpointOperation.getEndpointNameByGuid"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="endpointOperation.getCategoryIdByGuid"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="endpoint.getEndpointNameByGuid"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="mailTemplateContent.getMailTemplateByStateGuid"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="baseMailOperation.findByRiderId"
+           maxElementsInMemory="3000"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="baseRiderOperation.findByRiderId"
+           maxElementsInMemory="3000"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="baseSubscriptionOperation.findByRiderId"
+           maxElementsInMemory="3000"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="baseOperationState.findByGuid"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="baseOperationState.findByCategoryGuid"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="base.find"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="base.findAll"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="baseStateCategory.findByName"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache name="baseStateCategory.findByGuid"
+           maxElementsInMemory="300"
+           overflowToDisk="false"
+           timeToLiveSeconds="300"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <!-- Custom caches by entity rules -->
+    <cache
+        name="com.dinamexoft.carol.triggers.models.template.MailTemplate"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.template.MailTemplateContent"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.endpoint.OperationStateEndpoint"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.endpoint.StateCategoryEndpoint"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.mail.MailOperationState"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.mail.MailStateCategory"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.mail.period.MailOperationPeriodState"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.mail.period.MailPeriodStateCategory"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.rider.RiderOperationState"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.rider.RiderStateCategory"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.rider.period.RiderOperationPeriodState"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.rider.period.RiderPeriodStateCategory"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.subscription.SubscriptionOperationState"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.subscription.SubscriptionStateCategory"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.subscription.period.SubscriptionOperationPeriodState"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+    <cache
+        name="com.dinamexoft.carol.triggers.models.subscription.period.SubscriptionPeriodStateCategory"
+        maxEntriesLocalHeap="1000"
+        maxElementsInMemory="100"
+        diskSpoolBufferSizeMB="50"
+        timeToIdleSeconds="900"
+        timeToLiveSeconds="900"
+        memoryStoreEvictionPolicy="LFU">
+
+        <cacheEventListenerFactory
+            class="com.dinamexoft.carol.triggers.cache.DelegatedCacheEventListenerLoggerFactory"/>
+    </cache>
+
+</ehcache>

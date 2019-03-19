@@ -16,7 +16,6 @@ springfox:
 #    serviceUrl:
 #        defaultZone: http://localhost:8080/v1/eureka
 
-
 security:
   rememberMe:
     tokenValidity: 1209600
@@ -54,9 +53,9 @@ spring:
       key-prefix: sqoola:common
       time-to-live: 600000
       cache-null-values: false
-    cache-names: search_query_result
-    caffeine:
-      spec: maximumSize=70000,expireAfterAccess=300s
+    cache-names: cache_pool_result
+  #    caffeine:
+  #      spec: maximumSize=70000,expireAfterAccess=300s
   main:
     allow-bean-definition-overriding: true
   batch:
