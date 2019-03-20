@@ -23,6 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.controller.wrapper;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -38,9 +39,10 @@ import java.io.Serializable;
 @AllArgsConstructor(staticName = "of")
 @EqualsAndHashCode
 @ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JacksonXmlRootElement(localName = "key")
-public class SearchKey implements Serializable {
+public class SearchKey<T extends Serializable> implements Serializable {
 
     /**
      * Default explicit serialVersionUID for interoperability
@@ -48,9 +50,9 @@ public class SearchKey implements Serializable {
     private static final long serialVersionUID = -2761481783742372926L;
 
     @Getter
-    @JacksonXmlProperty(localName = "term")
-    @JsonProperty("term")
-    private String term;
+    @JacksonXmlProperty(localName = "item")
+    @JsonProperty("item")
+    private T item;
 
     @Getter
     @JacksonXmlProperty(localName = "description")

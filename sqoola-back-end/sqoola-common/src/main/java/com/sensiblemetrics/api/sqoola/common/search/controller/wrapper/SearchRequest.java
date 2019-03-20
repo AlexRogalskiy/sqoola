@@ -23,6 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.controller.wrapper;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -40,6 +41,7 @@ import java.util.Collection;
 @Data
 @EqualsAndHashCode
 @ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JacksonXmlRootElement(localName = "request")
 public class SearchRequest {
@@ -47,7 +49,7 @@ public class SearchRequest {
     @JsonProperty("item")
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "items")
-    private Collection<SearchKey> items;
+    private Collection<? extends SearchKey<?>> items;
 
     @JacksonXmlProperty(localName = "keywords")
     @JsonProperty("keywords")

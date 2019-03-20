@@ -27,6 +27,7 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.internal.util.Lists;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -86,8 +87,8 @@ public class MapperUtils {
      * @param <T>        type of entity in <code>entityList</code>
      * @return list of mapped entities with <code><D></code> type
      */
-    public static <D, T> List<D> mapAll(final Collection<T> entityList, final Class<D> outClass) {
-        return Optional.ofNullable(entityList)
+    public static <D, T> List<D> mapAll(final Iterable<T> entityList, final Class<D> outClass) {
+        return Optional.ofNullable(Lists.from(entityList.iterator()))
             .orElseGet(Collections::emptyList)
             .stream()
             .map(entity -> map(entity, outClass))

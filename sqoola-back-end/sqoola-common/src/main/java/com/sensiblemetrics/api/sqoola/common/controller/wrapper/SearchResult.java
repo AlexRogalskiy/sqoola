@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.sensiblemetrics.api.sqoola.common.search.controller.wrapper;
+package com.sensiblemetrics.api.sqoola.common.controller.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -30,35 +30,68 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.*;
-import org.apache.commons.collections.CollectionUtils;
+import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Search response entity
+ * Search result entity
+ *
+ * @param <T> type of search item
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JacksonXmlRootElement(localName = "response")
-public class SearchResponse {
-
-    @JsonProperty("item")
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "items")
-    private Collection<? extends SearchResult<?>> items;
+@JacksonXmlRootElement(localName = "result")
+public class SearchResult<T extends Serializable> implements Serializable {
 
     /**
-     * Returns binary flag based on errors in items {@link List}
-     *
-     * @return true - if items {@link List} contains errors, false - otherwise
+     * Default explicit serialVersionUID for interoperability
      */
-    public boolean hasErrors() {
-        return CollectionUtils.isEmpty(getItems()) || getItems().stream().anyMatch(r -> !r.isSuccess());
+    private static final long serialVersionUID = 8620973562870664729L;
+
+    /**
+     * Default search item {@code T}
+     */
+    @NonNull
+    @JacksonXmlProperty(localName = "item")
+    @JsonProperty("item")
+    private T item;
+
+    /**
+     * Default error message list {@link List}
+     */
+    @Getter
+    @JsonProperty("error")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "errors")
+    private final Collection<String> errors = new ArrayList<>();
+
+    /**
+     * Default {@link SearchResult} constructor by input parameters
+     *
+     * @param key          - initial input search item key {@code T}
+     * @param errorMessage - initial input error message
+     */
+    public SearchResult(final T key, final String errorMessage) {
+        this(key);
+        addError(errorMessage);
+    }
+
+    public boolean isSuccess() {
+        return CollectionUtils.isEmpty(getErrors());
+    }
+
+    public void addError(final String errorMessage) {
+        if (Objects.nonNull(errorMessage)) {
+            this.getErrors().add(errorMessage);
+        }
     }
 }
