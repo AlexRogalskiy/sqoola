@@ -72,6 +72,7 @@
         <c3p0.version>0.9.1.2</c3p0.version>
         <p6spy.version>3.0.0</p6spy.version>
         <logback.version>1.2.3</logback.version>
+        <logstash.logback.encoder.version>4.9</logstash.logback.encoder.version>
         <lombok.version>1.18.4</lombok.version>
         <guava.version>27.0.1-jre</guava.version>
         <jackson-mapper.version>1.9.13</jackson-mapper.version>
@@ -645,6 +646,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash.logback.encoder.version}</version>
         </dependency>
 
         <!-- Commons library dependencies -->

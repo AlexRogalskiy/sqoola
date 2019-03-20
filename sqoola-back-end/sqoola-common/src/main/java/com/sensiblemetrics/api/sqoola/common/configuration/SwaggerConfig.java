@@ -54,6 +54,7 @@ public class SwaggerConfig {
     public Docket swaggerSpringMvcPlugin() {
         return new Docket(DocumentationType.SWAGGER_2)
             .useDefaultResponseMessages(false)
+            .groupName("sqoola")
             .apiInfo(apiInfo())
             .select()
             .apis(RequestHandlerSelectors.any())
@@ -73,7 +74,7 @@ public class SwaggerConfig {
             .contact(new Contact("sqoola", "sqoola.io", "info@sqoola.io"))
             .license("MIT License")
             .licenseUrl("http://www.opensource.org/licenses/mit-license.php")
-            .version("2.0")
+            .version("1.0")
             .build();
     }
 

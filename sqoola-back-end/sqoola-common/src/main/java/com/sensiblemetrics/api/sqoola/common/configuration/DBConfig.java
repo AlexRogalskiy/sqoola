@@ -72,8 +72,8 @@ import static org.hibernate.cfg.AvailableSettings.*;
 @EnableTransactionManagement
 @EnableJpaRepositories(
     basePackages = {
-        "com.wildbeeslabs.sensiblemetrics.sqoola.common.model",
-        "com.wildbeeslabs.sensiblemetrics.sqoola.common.repository"
+        "com.sensiblemetrics.api.sqoola.common.model",
+        "com.sensiblemetrics.api.sqoola.common.repository"
     }
 )
 @PropertySources({
@@ -85,8 +85,8 @@ public class DBConfig {
     /**
      * Default model/repository source packages
      */
-    public static final String DEFAULT_REPOSITORY_PACKAGE = "com.wildbeeslabs.sensiblemetrics.sqoola.repository";
-    public static final String DEFAULT_MODEL_PACKAGE = "com.wildbeeslabs.sensiblemetrics.sqoola.model";
+    public static final String DEFAULT_REPOSITORY_PACKAGE = "com.sensiblemetrics.api.sqoola.repository";
+    public static final String DEFAULT_MODEL_PACKAGE = "com.sensiblemetrics.api.sqoola.model";
     /**
      * Default task executor thread prefix
      */

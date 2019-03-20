@@ -39,7 +39,7 @@ import static com.sensiblemetrics.api.sqoola.common.model.dto.interfaces.Exposab
 
 
 /**
- * Base data model view {@link BaseModelView} implementation
+ * Base permission model view {@link BaseModelView} implementation
  */
 @Data
 @NoArgsConstructor

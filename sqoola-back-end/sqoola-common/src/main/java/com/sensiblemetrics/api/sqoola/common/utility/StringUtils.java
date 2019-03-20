@@ -26,6 +26,7 @@ package com.sensiblemetrics.api.sqoola.common.utility;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -33,7 +34,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -96,5 +96,13 @@ public class StringUtils {
 
     public static String getStringByDelimiter(final String delimiter, final String... values) {
         return org.apache.commons.lang3.StringUtils.join(values, delimiter);
+    }
+
+    public static String removeTrailingSlash(final String path) {
+        return path.endsWith("/") ? path.substring(0, path.length() - 1) : path;
+    }
+
+    public static String generateId(final int count) {
+        return RandomStringUtils.random(count, true, true).toLowerCase();
     }
 }
