@@ -39,39 +39,39 @@ public class MailOperationServiceAspect {
      */
     public static final String COMPONENT_ID = "mailOperationServiceAspect";
 
-    @Before(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.dao.impl.mail.period.MailOperationPeriodServiceImpl.*(..))")
+    @Before(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.impl.mail.period.MailOperationPeriodServiceImpl.*(..)) && this(org.springframework.data.repository.CrudRepository)")
     public void logMailPeriodServiceBeforeAdvice(final JoinPoint joinPoint) {
         log.info(String.format("MailOperationServiceAspect: model={%s}, method={%s}, args={%s}", joinPoint.getTarget(), joinPoint.getSignature().getName(), joinPoint.getArgs()));
     }
 
-    @After(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.dao.impl.mail.period.MailOperationPeriodServiceImpl.*(..))")
+    @After(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.impl.mail.period.MailOperationPeriodServiceImpl.*(..)) && this(org.springframework.data.repository.CrudRepository)")
     public void logMailPeriodServiceAfterAdvice(final JoinPoint joinPoint) {
         log.info(String.format("MailOperationServiceAspect: model={%s}, method={%s}, args={%s}", joinPoint.getTarget(), joinPoint.getSignature().getName(), joinPoint.getArgs()));
     }
 
-    @AfterReturning(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.dao.impl.mail.period.MailOperationPeriodServiceImpl.*(..))", returning = "resultSet")
+    @AfterReturning(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.impl.mail.period.MailOperationPeriodServiceImpl.*(..)) && this(org.springframework.data.repository.CrudRepository)", returning = "resultSet")
     public void logMailPeriodServiceAfterReturningAdvice(final JoinPoint joinPoint, final Object resultSet) {
         log.info(String.format("MailOperationServiceAspect: model={%s}, method={%s}, args={%s}, resultSet={%s}", joinPoint.getTarget(), joinPoint.getSignature().getName(), joinPoint.getArgs(), resultSet));
     }
 
-    @AfterThrowing(pointcut = "execution(* com.sensiblemetrics.api.sqoola.common.service.dao.impl.mail.period.MailOperationPeriodServiceImpl.*(..))", throwing = "error")
+    @AfterThrowing(pointcut = "execution(* com.sensiblemetrics.api.sqoola.common.service.impl.mail.period.MailOperationPeriodServiceImpl.*(..)) && this(org.springframework.data.repository.CrudRepository)", throwing = "error")
     public void logMailPeriodServiceAfterThrowingAdvice(final JoinPoint joinPoint, final Throwable error) {
         log.info(String.format("MailOperationServiceAspect: model={%s}, method={%s}, args={%s}, error={%s}", joinPoint.getTarget(), joinPoint.getSignature().getName(), joinPoint.getArgs(), error));
     }
 
-    @Around("execution(* com.sensiblemetrics.api.sqoola.common.service.dao.impl.mail.period.MailOperationPeriodServiceImpl.*(..))")
+    @Around("execution(* com.sensiblemetrics.api.sqoola.common.service.impl.mail.period.MailOperationPeriodServiceImpl.*(..)) && this(org.springframework.data.repository.CrudRepository)")
     public Object logMailPeriodServiceAroundAdvice(final ProceedingJoinPoint joinPoint) throws Throwable {
         final Object result = joinPoint.proceed();
         log.info(String.format("MailOperationServiceAspect: model={%s}, method={%s}, args={%s}, result={%s}", joinPoint.getTarget(), joinPoint.getSignature().getName(), joinPoint.getArgs(), result));
         return result;
     }
 
-    @Before(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.dao.impl.mail.MailOperationServiceImpl.*(..))")
+    @Before(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.impl.mail.MailOperationServiceImpl.*(..)) && this(org.springframework.data.repository.CrudRepository)")
     public void mailOperationBeforeAdvice(final JoinPoint joinPoint) {
         log.info(String.format("MailOperationServiceAspect: processing model={%s} by method={%s} with args={%s}", joinPoint.getTarget(), joinPoint.getSignature(), joinPoint.getArgs()));
     }
 
-    @After(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.dao.impl.mail.MailOperationServiceImpl.*(..))")
+    @After(value = "execution(* com.sensiblemetrics.api.sqoola.common.service.impl.mail.MailOperationServiceImpl.*(..)) && this(org.springframework.data.repository.CrudRepository)")
     public void mailOperationAfterAdvice(final JoinPoint joinPoint) {
         log.info(String.format("MailOperationServiceAspect: model={%s} has been processed", joinPoint.getTarget()));
     }
