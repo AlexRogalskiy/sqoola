@@ -26,8 +26,6 @@ package com.sensiblemetrics.api.sqoola.common;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sensiblemetrics.api.sqoola.common.model.dao.*;
-import com.sensiblemetrics.sqoola.common.model.dao.*;
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.model.dao.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
