@@ -56,15 +56,11 @@ import java.util.Optional;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @RestController
-@RequestMapping(value = "/audit")
-public class AuditModelControllerImpl<E extends AuditModelEntity, T extends AuditModelView, ID extends Serializable> extends BaseControllerImpl<E, T, ID> implements AuditModelController<E, T, ID> {
-
-    private final Javers javers;
+@RequestMapping
+public abstract class AuditModelControllerImpl<E extends AuditModelEntity, T extends AuditModelView, ID extends Serializable> extends BaseControllerImpl<E, T, ID> implements AuditModelController<E, T, ID> {
 
     @Autowired
-    public AuditModelControllerImpl(final Javers javers) {
-        this.javers = javers;
-    }
+    private Javers javers;
 
     @RequestMapping("/person")
     public String getPersonChanges() {
