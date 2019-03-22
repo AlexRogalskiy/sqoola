@@ -174,10 +174,6 @@ THE SOFTWARE.
         <appender-ref ref="FILE_AUDIT"/>
     </logger>
 
-    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
-        <resetJUL>true</resetJUL>
-    </contextListener>
-
     <root level="ERROR">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_AUDIT"/>
