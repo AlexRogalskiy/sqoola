@@ -62,7 +62,7 @@ public class AuthUserDaoServiceImpl implements AuthUserDaoService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        final AccountEntity account = this.userService.findByUsername(username).get();
+        final BaseAccountEntity<?> account = this.userService.findByUsername(username).get();
         if (Objects.isNull(account)) {
             throw new UsernameNotFoundException("Username not found");
         }

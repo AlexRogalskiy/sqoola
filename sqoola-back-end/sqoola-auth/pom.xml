@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>sqoola</groupId>
+    <artifactId>sqoola-auth</artifactId>
+    <version>1.0.0-RELEASE</version>
+    <packaging>war</packaging>
+
+    <name>Sqoola Auth</name>
+    <url>https://github.com/AlexRogalskiy/sqoola</url>
+    <description>Sqoola Auth API</description>
+    <inceptionYear>2019</inceptionYear>
+
+    <parent>
+        <groupId>com.sensiblemetrics.api</groupId>
+        <artifactId>sqoola</artifactId>
+        <version>1.0.0-RELEASE</version>
+    </parent>
+
+    <properties>
+        <main.basedir>${project.basedir}/../..</main.basedir>
+        <start-class>de.pearl.pem.product.fetcher.PemProductFetcherAppLoader</start-class>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.scm.version>1.9.4</maven.scm.version>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
+        <javers.version>5.1.3</javers.version>
+
+        <rest-location>${project.groupId}.${project.artifactId}.web</rest-location>
+
+        <unit-tests.skip>true</unit-tests.skip>
+        <integration-tests.skip>true</integration-tests.skip>
+        <integration-tests>**/*IT.java</integration-tests>
+
+        <hikari.version>3.2.0</hikari.version>
+        <postgresql.version>9.4.1212</postgresql.version>
+        <apache-commons-lang3.version>3.8.1</apache-commons-lang3.version>
+        <swagger.version>2.8.0</swagger.version>
+        <swagger-core.version>1.5.21</swagger-core.version>
+
+        <spring-boot-starter.version>2.1.1.RELEASE</spring-boot-starter.version>
+        <cloud.hystrix.version>2.0.0.M2</cloud.hystrix.version>
+        <cloud.feign.version>1.4.6.RELEASE</cloud.feign.version>
+        <spring.version>5.1.3.RELEASE</spring.version>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+        <spring-data-commons.version>2.1.3.RELEASE</spring-data-commons.version>
+        <spring.security.version>5.1.2.RELEASE</spring.security.version>
+
+        <hibernate.version>5.4.0.Final</hibernate.version>
+        <hibernate-search.version>5.11.0.Final</hibernate-search.version>
+        <hibernate-validator.version>6.0.14.Final</hibernate-validator.version>
+        <hibernate-c3p0.version>5.2.11.Final</hibernate-c3p0.version>
+        <hibernate-jpa.version>1.0.2.Final</hibernate-jpa.version>
+        <hibernate-jcache.version>5.4.1.Final</hibernate-jcache.version>
+        <hibernate-search-engine.version>5.10.5.Final</hibernate-search-engine.version>
+
+        <rest-assured.version>2.9.0</rest-assured.version>
+        <assertj.version>3.11.1</assertj.version>
+        <wiremock.version>2.1.6</wiremock.version>
+        <junit.version>4.12</junit.version>
+        <junit-jupiter.version>5.3.2</junit-jupiter.version>
+        <junit-platform.version>1.3.2</junit-platform.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <mockito.version>2.23.4</mockito.version>
+        <zonky-test.version>1.3.4</zonky-test.version>
+        <otj-pg-embedded.version>0.12.6</otj-pg-embedded.version>
+        <reactor.version>3.2.3.RELEASE</reactor.version>
+
+        <caffeine.version>2.6.2</caffeine.version>
+        <c3p0.version>0.9.1.2</c3p0.version>
+        <p6spy.version>3.0.0</p6spy.version>
+        <logback.version>1.2.3</logback.version>
+        <lombok.version>1.18.4</lombok.version>
+        <springfox.version>2.8.0</springfox.version>
+        <guava.version>27.0.1-jre</guava.version>
+        <jackson-mapper.version>1.9.13</jackson-mapper.version>
+        <jackson-core.version>2.9.8</jackson-core.version>
+        <joda-time.version>2.10.1</joda-time.version>
+        <modelmapper.version>1.1.0</modelmapper.version>
+        <lucene.version>5.5.5</lucene.version>
+        <cache-api.version>1.1.0</cache-api.version>
+        <ehcache3.version>3.3.0</ehcache3.version>
+
+        <validation-api.version>2.0.1.Final</validation-api.version>
+        <javax.persistence.version>2.2</javax.persistence.version>
+
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPaths>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
+        <sonar.language>java</sonar.language>
+
+        <surefire.forkNumber>0</surefire.forkNumber>
+    </properties>
+
+    <issueManagement>
+        <url>https://git.pearl.de/AlexRogalskiy/pem-product-fetcher/issues</url>
+        <system>GitLab Issues</system>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:git://git.pearl.de/sqoola.git</connection>
+        <url>scm:git:git://git.pearl.de/pem-product-fetcher.git</url>
+        <developerConnection>scm:git:git://git.pearl.de/pem-product-fetcher.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <organization>
+        <name>Pearl GmbH</name>
+        <url>http://www.pearl.de/</url>
+    </organization>
+
+    <reporting>
+        <outputDirectory>${project.build.directory}/release</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>dependency-updates-report</report>
+                            <report>plugin-updates-report</report>
+                            <report>property-updates-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <dependencies>
+        <!-- Spring Boot library dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot-starter.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+            <version>5.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
+            <version>5.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <version>2.1.3.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>2.1.3.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>5.1.4.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <version>3.14.0</version>
+        </dependency>
+
+    </dependencies>
+
+
+</project>
