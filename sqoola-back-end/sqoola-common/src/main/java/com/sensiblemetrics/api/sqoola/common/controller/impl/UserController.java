@@ -10,17 +10,18 @@ public class UserController {
         userList.add(new User(3, "Max", 27));
     }
 
-    @GetMapping(value = "/user/{id}")
-    public ResponseEntity<?> getUser(@PathVariable int id) {
+    @PatchMapping(value = "/user/{id}")
+    public ResponseEntity<?> updateAge(@PathVariable int id, @RequestParam int age) {
         if (id < 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            throw new ValidationException("Id cannot be less than 0");
+        }
+        if (age < 20 || age > 60) {
+            throw new ValidationException("Age must be between 20 to 60");
         }
         User user = findUser(id);
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        user.setAge(age);
 
-        return ResponseEntity.ok(user);
+        return ResponseEntity.accepted().body(user);
     }
 
     private User findUser(int id) {
