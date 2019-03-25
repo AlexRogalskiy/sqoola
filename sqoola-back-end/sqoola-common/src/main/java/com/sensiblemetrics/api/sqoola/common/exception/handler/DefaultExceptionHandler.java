@@ -24,8 +24,6 @@
 package com.sensiblemetrics.api.sqoola.common.exception.handler;
 
 import com.sensiblemetrics.api.sqoola.common.exception.*;
-import com.sensiblemetrics.sqoola.common.exception.*;
-import com.wildbeeslabs.sensiblemetrics.sqoola.common.exception.*;
 import com.sensiblemetrics.api.sqoola.common.model.dto.ExceptionView;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
@@ -45,11 +43,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 
 /**
  * Default {@link ResponseEntityExceptionHandler} implementation
@@ -58,10 +60,10 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({ResourceAlreadyExistException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.CONFLICT)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final ResourceAlreadyExistException ex) {
+    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "Resource already exist")
+    @ExceptionHandler({ResourceAlreadyExistException.class})
+    protected ResponseEntity<?> handleResourceAlreadyExistException(final HttpServletRequest req, final ResourceAlreadyExistException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView
             .builder()
@@ -71,10 +73,22 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler({BadRequestException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final BadRequestException ex) {
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "Data access is not permitted")
+    @ExceptionHandler({DataAccessException.class})
+    protected ResponseEntity<?> handleDataAccessException(final HttpServletRequest req, final DataAccessException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(ExceptionView.builder()
+            .path(req.getRequestURI().substring(req.getContextPath().length()))
+            .code(HttpStatus.UNAUTHORIZED.value())
+            .message(ex.getLocalizedMessage())
+            .build(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Bad request")
+    @ExceptionHandler({BadRequestException.class})
+    protected ResponseEntity<?> handleBadRequestException(final HttpServletRequest req, final BadRequestException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -83,10 +97,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({ResourceNotFoundException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final ResourceNotFoundException ex) {
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource is not found")
+    @ExceptionHandler({ResourceNotFoundException.class})
+    protected ResponseEntity<?> handleResourceNotFoundException(final HttpServletRequest req, final ResourceNotFoundException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -95,10 +109,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler({EmptyContentException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final EmptyContentException ex) {
+    @ResponseStatus(value = HttpStatus.NO_CONTENT, reason = "Empty response")
+    @ExceptionHandler({EmptyContentException.class})
+    protected ResponseEntity<?> handleEmptyContentException(final HttpServletRequest req, final EmptyContentException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -107,8 +121,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.NO_CONTENT);
     }
 
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE, reason = "Repository validation constraint is violated")
     @ExceptionHandler({RepositoryConstraintViolationException.class})
-    public ResponseEntity<?> handle(final HttpServletRequest req, final RepositoryConstraintViolationException ex) {
+    public ResponseEntity<?> handleRepositoryConstraintViolationException(final HttpServletRequest req, final RepositoryConstraintViolationException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -117,10 +133,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @ExceptionHandler({TypeMismatchException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final TypeMismatchException ex) {
+    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE, reason = "Parameter type mismatched")
+    @ExceptionHandler({TypeMismatchException.class})
+    protected ResponseEntity<?> handleTypeMismatchException(final HttpServletRequest req, final TypeMismatchException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -129,10 +145,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
 
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Data integrity violation")
     @ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class, DataIntegrityViolationException.class})
-    @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final MethodArgumentNotValidException ex) {
+    protected ResponseEntity<?> handleMethodArgumentNotValidException(final HttpServletRequest req, final MethodArgumentNotValidException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -141,10 +157,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.BAD_REQUEST);
     }
 
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Validation constraint violation")
     @ExceptionHandler({javax.validation.ConstraintViolationException.class})
-    @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final javax.validation.ConstraintViolationException ex) {
+    protected ResponseEntity<?> handleConstraintViolationException(final HttpServletRequest req, final javax.validation.ConstraintViolationException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -153,10 +169,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.BAD_REQUEST);
     }
 
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Path variable is not provided")
     @ExceptionHandler({MissingPathVariableException.class})
-    @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final MissingPathVariableException ex) {
+    protected ResponseEntity<?> handleMissingPathVariableException(final HttpServletRequest req, final MissingPathVariableException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -165,10 +181,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final HttpRequestMethodNotSupportedException ex) {
+    @ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED, reason = "Method is not supported")
+    @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
+    protected ResponseEntity<?> handleHttpRequestMethodNotSupportedException(final HttpServletRequest req, final HttpRequestMethodNotSupportedException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -177,10 +193,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.METHOD_NOT_ALLOWED);
     }
 
-    @ExceptionHandler({HttpMessageNotReadableException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final HttpMessageNotReadableException ex) {
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Url is not valid")
+    @ExceptionHandler({URISyntaxException.class, MalformedURLException.class})
+    public ResponseEntity<?> handleURISyntaxException(final HttpServletRequest req, final Exception ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -189,10 +205,22 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({HttpMediaTypeNotSupportedException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final HttpMediaTypeNotSupportedException ex) {
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Message is invalid")
+    @ExceptionHandler({HttpMessageNotReadableException.class})
+    protected ResponseEntity<?> handleHttpMessageNotReadableException(final HttpServletRequest req, final HttpMessageNotReadableException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(ExceptionView.builder()
+            .path(req.getRequestURI().substring(req.getContextPath().length()))
+            .code(HttpStatus.BAD_REQUEST.value())
+            .message(ex.getLocalizedMessage())
+            .build(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE, reason = "Media type is not supported")
+    @ExceptionHandler({HttpMediaTypeNotSupportedException.class})
+    protected ResponseEntity<?> handleHttpMediaTypeNotSupportedException(final HttpServletRequest req, final HttpMediaTypeNotSupportedException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -201,10 +229,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
 
-    @ExceptionHandler({ServiceException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final ServiceException ex) {
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Cannot process client request")
+    @ExceptionHandler({ServiceException.class})
+    protected ResponseEntity<?> handleServiceException(final HttpServletRequest req, final ServiceException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -213,10 +241,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler({AccessDeniedException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final AccessDeniedException ex) {
+    @ResponseStatus(value = HttpStatus.FORBIDDEN, reason = "Access is denied")
+    @ExceptionHandler({AccessDeniedException.class})
+    protected ResponseEntity<?> handleAccessDeniedException(final HttpServletRequest req, final AccessDeniedException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -225,10 +253,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.FORBIDDEN);
     }
 
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE, reason = "Media type is not acceptable")
     @ExceptionHandler({HttpMediaTypeNotAcceptableException.class})
-    @ResponseBody
-    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final HttpMediaTypeNotAcceptableException ex) {
+    protected ResponseEntity<?> handleHttpMediaTypeNotAcceptableException(final HttpServletRequest req, final HttpMediaTypeNotAcceptableException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -237,10 +265,10 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
 
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE, reason = "Multipart message is not supported")
     @ExceptionHandler({MultipartException.class})
-    @ResponseBody
-    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final MultipartException ex) {
+    protected ResponseEntity<?> handleMultipartException(final HttpServletRequest req, final MultipartException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
@@ -249,15 +277,87 @@ public class DefaultExceptionHandler {//extends ResponseEntityExceptionHandler {
             .build(), HttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
 
-    @ExceptionHandler({MaxUploadSizeExceededException.class})
     @ResponseBody
-    @ResponseStatus(HttpStatus.PAYLOAD_TOO_LARGE)
-    protected ResponseEntity<?> handle(final HttpServletRequest req, final MaxUploadSizeExceededException ex) {
+    @ResponseStatus(value = HttpStatus.PAYLOAD_TOO_LARGE, reason = "Max upload size exceeded")
+    @ExceptionHandler({MaxUploadSizeExceededException.class})
+    protected ResponseEntity<?> handleMaxUploadSizeExceededException(final HttpServletRequest req, final MaxUploadSizeExceededException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ExceptionView.builder()
             .path(req.getRequestURI().substring(req.getContextPath().length()))
             .code(HttpStatus.PAYLOAD_TOO_LARGE.value())
             .message(ex.getLocalizedMessage())
             .build(), HttpStatus.PAYLOAD_TOO_LARGE);
+    }
+
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "MasterUrl is not valid")
+    @ExceptionHandler(UnknownHostException.class)
+    public ResponseEntity<?> handleUnknownHostException(final HttpServletRequest req, final UnknownHostException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(ExceptionView.builder()
+            .path(req.getRequestURI().substring(req.getContextPath().length()))
+            .code(HttpStatus.BAD_REQUEST.value())
+            .message(ex.getLocalizedMessage())
+            .build(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Bad Request (most likely the token is invalid)")
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity<?> handleHttpClientErrorException(final HttpServletRequest req, final HttpClientErrorException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(ExceptionView.builder()
+            .path(req.getRequestURI().substring(req.getContextPath().length()))
+            .code(HttpStatus.BAD_REQUEST.value())
+            .message(ex.getLocalizedMessage())
+            .build(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Namespace not found")
+    @ExceptionHandler(NamespaceNotFoundException.class)
+    public ResponseEntity<?> handleNamespaceNotFoundException(final HttpServletRequest req, final NamespaceNotFoundException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(ExceptionView.builder()
+            .path(req.getRequestURI().substring(req.getContextPath().length()))
+            .code(HttpStatus.NOT_FOUND.value())
+            .message(ex.getLocalizedMessage())
+            .build(), HttpStatus.NOT_FOUND);
+    }
+
+//    @ResponseBody
+//    @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "Credentials are invalid")
+//    @ExceptionHandler(KubernetesClientException.class)
+//    public ResponseEntity<?> handleKubernetesClientException(final HttpServletRequest req, final KubernetesClientException ex) {
+//        log.error(ex.getMessage());
+//        return new ResponseEntity<>(ExceptionView.builder()
+//            .path(req.getRequestURI().substring(req.getContextPath().length()))
+//            .code(HttpStatus.UNAUTHORIZED.value())
+//            .message(ex.getLocalizedMessage())
+//            .build(), HttpStatus.UNAUTHORIZED);
+//    }
+
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Invalid token format")
+    @ExceptionHandler(InvalidTokenFormatException.class)
+    public ResponseEntity<?> handleInvalidTokenFormatException(final HttpServletRequest req, final InvalidTokenFormatException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(ExceptionView.builder()
+            .path(req.getRequestURI().substring(req.getContextPath().length()))
+            .code(HttpStatus.BAD_REQUEST.value())
+            .message(ex.getLocalizedMessage())
+            .build(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Cannot validate OAuth token")
+    @ExceptionHandler(OAuthTokenException.class)
+    public ResponseEntity<?> handleOAuthTokenException(final HttpServletRequest req, final OAuthTokenException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(ExceptionView.builder()
+            .path(req.getRequestURI().substring(req.getContextPath().length()))
+            .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+            .message(ex.getLocalizedMessage())
+            .build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

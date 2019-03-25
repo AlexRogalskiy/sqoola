@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
+@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource is not found")
 public class ResourceNotFoundException extends RuntimeException {
 
     /**

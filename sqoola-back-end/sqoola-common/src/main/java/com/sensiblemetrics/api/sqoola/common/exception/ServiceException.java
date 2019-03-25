@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE, reason = "Request cannot be served")
+@ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE, reason = "Request cannot be processed")
 public class ServiceException extends RuntimeException {
 
     /**

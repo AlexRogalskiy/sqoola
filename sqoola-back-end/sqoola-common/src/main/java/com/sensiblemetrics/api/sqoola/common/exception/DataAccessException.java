@@ -58,7 +58,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@ResponseStatus(value = HttpStatus.FORBIDDEN, reason = "Access denied")
+@ResponseStatus(value = HttpStatus.FORBIDDEN, reason = "Access is denied")
 public class DataAccessException extends RuntimeException {
 
     /**

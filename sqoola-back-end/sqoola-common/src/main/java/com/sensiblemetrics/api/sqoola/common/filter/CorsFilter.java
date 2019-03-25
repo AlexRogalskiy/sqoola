@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Custom CORS filter implementation {@link Filter}
+ * CORS filter implementation {@link Filter}
  */
 @Component
 public class CorsFilter implements Filter {
