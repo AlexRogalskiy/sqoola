@@ -43,7 +43,6 @@ import org.springframework.data.domain.Persistable;
 import java.beans.PropertyEditorSupport;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 import static com.sensiblemetrics.api.sqoola.common.utility.StringUtils.formatMessage;
 
@@ -74,11 +73,7 @@ public abstract class BaseControllerImpl<E extends Serializable, T extends Seria
 
     protected <E extends Serializable, ID extends Serializable> E getItem(final ID id) {
         log.debug("Fetching item by ID: {}", id);
-        final Optional<? extends E> item = getService().find(id);
-        if (!item.isPresent()) {
-            throw new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id));
-        }
-        return item.get();
+        return getService().<E, ID>find(id).orElseThrow(() -> new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id)));
     }
 
     protected <E extends Serializable & Persistable<ID>, ID extends Serializable> E createItem(final T itemDto, final Class<? extends E> entityClass) {
@@ -93,7 +88,7 @@ public abstract class BaseControllerImpl<E extends Serializable, T extends Seria
 
     protected <E extends Serializable, T extends Serializable, ID extends Serializable> E updateItem(final ID id, final T itemDto, final Class<? extends E> entityClass) {
         log.info("Updating item by ID: {}, itemDto: {}", id, itemDto);
-        final E currentItem = (E) getService().find(id).orElseThrow(() -> new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id)));
+        final E currentItem = getService().<E, ID>find(id).orElseThrow(() -> new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id)));
         final E itemEntity = MapperUtils.map(itemDto, entityClass);
         getService().save(itemEntity);
         return currentItem;
@@ -101,18 +96,14 @@ public abstract class BaseControllerImpl<E extends Serializable, T extends Seria
 
     protected <E extends Serializable, ID extends Serializable> E deleteItem(final ID id) {
         log.info("Deleting item by ID: {}", id);
-        final Optional<? extends E> item = getService().find(id);
-        if (!item.isPresent()) {
-            throw new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id));
-        }
-        getService().delete(item.get());
-        return item.get();
+        final E item = getService().<E, ID>find(id).orElseThrow(() -> new ResourceNotFoundException(formatMessage(getMessageSource(), "error.no.item.id", id)));
+        getService().delete(item);
+        return item;
     }
 
     protected <E extends Serializable, T extends Serializable> void deleteItems(final List<? extends T> itemDtos, final Class<? extends E> entityClass) {
         log.debug("Deleting items: {}", StringUtils.join(itemDtos, ", "));
-        final List<? extends E> items = MapperUtils.mapAll(itemDtos, entityClass);
-        getService().deleteAll(items);
+        getService().deleteAll(MapperUtils.mapAll(itemDtos, entityClass));
     }
 
     protected void deleteAllItems() {
