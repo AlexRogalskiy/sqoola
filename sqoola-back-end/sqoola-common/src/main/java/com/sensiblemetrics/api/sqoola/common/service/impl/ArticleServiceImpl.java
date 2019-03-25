@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ArticleService extends BaseDaoServiceImpl<ArticleEntity, Long> implements ArticleDaoService {
+public class ArticleServiceImpl extends BaseDaoServiceImpl<ArticleEntity, Long> implements ArticleDaoService {
 	@Autowired
 	private ArticleRepository articleRepository;
 	
@@ -31,6 +31,19 @@ public class ArticleService extends BaseDaoServiceImpl<ArticleEntity, Long> impl
 		articleRepository.findAll().forEach(e -> list.add(e));
 		return list;
 	}
+
+    public Map<Integer, String> findAllPersons() {
+        return StreamSupport.stream(personRepository.findAll().spliterator(), false)
+            .collect(toMap((Function<Person, Integer>) person -> person.getId(),
+                (Function<Person, String>) person -> person.getFirstName() + " " + person.getLastName()));
+    }
+
+    public List<String> findAllEmployees() {
+        return StreamSupport.stream(employeeRepository.findAll().spliterator(), false)
+            .map(e -> e.getDomainName())
+            .collect(Collectors.toList());
+    }
+
 	@Override	
 	@Caching(
 		put= { @CachePut(value= "articleCache", key= "#article.articleId") },

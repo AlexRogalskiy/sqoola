@@ -25,7 +25,7 @@ package com.sensiblemetrics.api.sqoola.common.controller.article.impl;
 
 import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
 import com.sensiblemetrics.api.sqoola.common.model.dao.ArticleEntity;
-import com.sensiblemetrics.api.sqoola.common.service.impl.ArticleService;
+import com.sensiblemetrics.api.sqoola.common.service.impl.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ import java.util.List;
 public class ArticleControllerImpl extends BaseModelController<ArticleEntity, ArticleView, String> {
 
     @Autowired
-    private ArticleService articleService;
+    private ArticleServiceImpl articleService;
 
     @GetMapping("article/{id}")
     public ResponseEntity<ArticleEntity> getArticleById(final @PathVariable("id") Long id) {
