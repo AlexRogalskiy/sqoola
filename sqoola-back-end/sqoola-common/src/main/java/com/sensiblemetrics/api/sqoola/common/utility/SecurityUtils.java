@@ -42,6 +42,10 @@ import java.util.*;
 /**
  * Custom security utilities implementation
  */
+
+/**
+ * Security utilities implementation
+ */
 @Slf4j
 @UtilityClass
 public class SecurityUtils {
@@ -58,10 +62,7 @@ public class SecurityUtils {
         Objects.requireNonNull(username, "Username must not be null!");
         Objects.requireNonNull(password, "Password must not be null!");
         Objects.requireNonNull(roles, "Roles must not be null!");
-
-        SecurityContextHolder.getContext().setAuthentication(
-            new UsernamePasswordAuthenticationToken(username, password, AuthorityUtils.createAuthorityList(roles))
-        );
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(username, password, AuthorityUtils.createAuthorityList(roles)));
     }
 
     public static Object getPrincipal() {
@@ -125,7 +126,7 @@ public class SecurityUtils {
      * @return calculated authorization key {@link String}
      */
     public static String encode(final UserDetails userDetails) {
-        Objects.requireNonNull(userDetails, "UserDetails must not be null!");
+        Objects.requireNonNull(userDetails);
         return encode(userDetails.getUsername(), userDetails.getPassword());
     }
 
@@ -139,7 +140,7 @@ public class SecurityUtils {
     public static String encode(final String username, final String password) {
         final String authorizationString = String.format("%s:%s", username, password);
         try {
-            return String.valueOf(Base64.getEncoder().encode(authorizationString.getBytes(StandardCharsets.UTF_8.name())));
+            return new String(Base64.getEncoder().encode(authorizationString.getBytes(StandardCharsets.UTF_8.name())));
         } catch (UnsupportedEncodingException e) {
             log.error(String.format("ERROR: cannot process authorisation parameters username: {%s}, message: {%s}", username, e.getMessage()));
         }
@@ -154,7 +155,7 @@ public class SecurityUtils {
      */
     public static Pair<String, String> decode(final String basicAuthValue) {
         if (Objects.isNull(basicAuthValue)) {
-            return null;
+            return ImmutablePair.nullPair();
         }
         try {
             final byte[] decodeBytes = Base64.getDecoder().decode(basicAuthValue.substring(basicAuthValue.indexOf(StringUtils.SPACE) + 1).getBytes(StandardCharsets.UTF_8.name()));

@@ -37,7 +37,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 /**
- * Custom string utilities implementation
+ * String utilities implementation
  */
 @Slf4j
 @UtilityClass
@@ -90,18 +90,43 @@ public class StringUtils {
         return DEFAULT_DECIMAL_FORMATTER.get().format(num);
     }
 
+    /**
+     * Returns concatenated {@link String} by input array of items
+     *
+     * @param values - initial input array of items
+     * @return concatenated {@link String}
+     */
     public static String getString(final String... values) {
         return getStringByDelimiter(org.apache.commons.lang3.StringUtils.EMPTY, values);
     }
 
+    /**
+     * Returns concatenated {@link String} by input delimiter and array of items
+     *
+     * @param delimiter - initial input delimiter {@link String}
+     * @param values    - initial input array of items
+     * @return concatenated {@link String}
+     */
     public static String getStringByDelimiter(final String delimiter, final String... values) {
         return org.apache.commons.lang3.StringUtils.join(values, delimiter);
     }
 
+    /**
+     * Returns {@link String} stripped from trailing slash
+     *
+     * @param path - initial input path to be stripped
+     * @return stripped {@link String}
+     */
     public static String removeTrailingSlash(final String path) {
         return path.endsWith("/") ? path.substring(0, path.length() - 1) : path;
     }
 
+    /**
+     * Returns generated identifier {@link String} by initial input length value
+     *
+     * @param count - initial input length value
+     * @return generated identifier {@link String}
+     */
     public static String generateId(final int count) {
         return RandomStringUtils.random(count, true, true).toLowerCase();
     }

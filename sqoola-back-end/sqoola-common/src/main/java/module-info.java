@@ -59,4 +59,7 @@ module com.sensiblemetrics.api.sqoola.common {
     requires spring.cloud.commons;
     requires springfox.spi;
     requires feign.core;
+    requires javers.persistence.sql;
+    requires javers.core;
+    requires spring.cloud.openfeign.core;
 }

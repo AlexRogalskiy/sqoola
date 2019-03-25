@@ -29,8 +29,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -39,11 +40,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @SpringBootApplication(scanBasePackages = {"com.sensiblemetrics.api.sqoola.common"}, exclude = {ErrorMvcAutoConfiguration.class})
 @EnableBatchProcessing
-@EnableSwagger2
-@EnableConfigurationProperties
 @EnableScheduling
 @EnableFeignClients
-@EnableCircuitBreaker
+@EnableConfigurationProperties
+@EnableHystrix
+@EnableSwagger2
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+//@EnableHystrixDashboard
 //@EnableAuthorizationServer
 public class CommonAppLoader extends SpringBootServletInitializer {
 

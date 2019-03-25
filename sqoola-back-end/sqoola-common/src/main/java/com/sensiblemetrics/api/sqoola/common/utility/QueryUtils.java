@@ -34,7 +34,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Custom query utilities implementation
+ * Query utilities implementation
  */
 @Slf4j
 @UtilityClass

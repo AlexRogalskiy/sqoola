@@ -36,7 +36,7 @@ import java.time.temporal.WeekFields;
 import java.util.*;
 
 /**
- * Custom date utilities implementation
+ * Date utilities implementation
  */
 @Slf4j
 @UtilityClass
