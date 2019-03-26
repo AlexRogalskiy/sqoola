@@ -60,22 +60,22 @@ public class RoleEntity extends BaseInfoModelEntity<Long> implements Persistable
     @Column(name = ENABLED_FIELD_NAME)
     private boolean enabled;
 
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private final Set<AccountEntity> accounts = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-        name = ROLE_ACCOUNT_TABLE_NAME,
+        name = "roles_permissions",
         joinColumns = {
             @JoinColumn(name = PersistableRole.ROLE_ID_FIELD_NAME, referencedColumnName = PersistableRole.ID_FIELD_NAME)
         },
         inverseJoinColumns = {
-            @JoinColumn(name = PersistableAccount.ACCOUNT_ID_FIELD_NAME, referencedColumnName = PersistableAccount.ID_FIELD_NAME)
+            @JoinColumn(name = PersistableAccount.PERMISSION_ID_FIELD_NAME, referencedColumnName = PersistablePermission.ID_FIELD_NAME)
         }
     )
     @Fetch(FetchMode.SELECT)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private final Set<AccountEntity> accounts = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<PermissionEntity> authorities = new HashSet<>();
+    private Set<PermissionEntity> permissions = new HashSet<>();
 
     public void setAccounts(final Collection<? extends AccountEntity> accounts) {
         this.getAccounts().clear();
@@ -87,6 +87,19 @@ public class RoleEntity extends BaseInfoModelEntity<Long> implements Persistable
     public void addAccount(final AccountEntity account) {
         if (Objects.nonNull(account)) {
             this.getAccounts().add(account);
+        }
+    }
+
+    public void setPermissions(final Collection<? extends PermissionEntity> permissions) {
+        this.getPermissions().clear();
+        Optional.ofNullable(permissions)
+            .orElseGet(Collections::emptyList)
+            .forEach(this::addPermission);
+    }
+
+    public void addPermission(final PermissionEntity permission) {
+        if (Objects.nonNull(permission)) {
+            this.getPermissions().add(permission);
         }
     }
 }

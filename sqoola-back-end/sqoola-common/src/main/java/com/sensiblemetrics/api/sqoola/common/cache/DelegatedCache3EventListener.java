@@ -7,7 +7,7 @@
 //import net.sf.ehcache.event.CacheEventListenerAdapter;
 //
 ///**
-// * Default delegate cache3 event listener implementation
+// * Default delegate cache3 event messaging implementation
 // */
 //@Slf4j
 //public class DelegatedCache3EventListener extends CacheEventListenerAdapter {

@@ -6,7 +6,7 @@
 //import java.util.Properties;
 //
 ///**
-// * Default delegate cache getString listener logger factory
+// * Default delegate cache getString messaging logger factory
 // */
 //public class DelegatedCacheEventListernerLoggerFactory extends CacheEventListenerFactory {
 //

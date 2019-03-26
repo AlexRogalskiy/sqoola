@@ -25,12 +25,16 @@ package com.sensiblemetrics.api.sqoola.common.model.dao;
 
 import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.PersistableAccount;
 import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.PersistableBaseModel;
+import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.PersistableRole;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.*;
 
@@ -64,7 +68,18 @@ public class AccountEntity extends BaseModelEntity<Long> implements PersistableA
     @Column(name = ENABLED_FIELD_NAME)
     private boolean enabled;
 
-    @ManyToMany(mappedBy = ACCOUNTS_REF_FIELD_NAME, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+        name = ROLE_ACCOUNT_TABLE_NAME,
+        joinColumns = {
+            @JoinColumn(name = PersistableRole.ROLE_ID_FIELD_NAME, referencedColumnName = PersistableRole.ID_FIELD_NAME)
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = PersistableAccount.ACCOUNT_ID_FIELD_NAME, referencedColumnName = PersistableAccount.ID_FIELD_NAME)
+        }
+    )
+    @Fetch(FetchMode.SELECT)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private final Set<RoleEntity> roles = new HashSet<>();
 
     public void setRoles(final Collection<? extends RoleEntity> roles) {

@@ -6,7 +6,7 @@
 //import org.ehcache.event.CacheEventListener;
 //
 ///**
-// * Default delegate cache getString listener implementation
+// * Default delegate cache getString messaging implementation
 // */
 //@Slf4j
 //public class DelegatedCacheEventListener implements CacheEventListener<String, CacheEventEntry> {
