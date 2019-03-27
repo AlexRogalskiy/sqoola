@@ -9,36 +9,41 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
+/**
+ * Abstract validator handler
+ *
+ * @param <T> type of validation {@link Class}
+ * @param <U> type of {@link Validator}
+ */
 public abstract class AbstractValidationHandler<T, U extends Validator> {
 
     private final Class<T> validationClass;
 
     private final U validator;
 
-    protected AbstractValidationHandler(Class<T> clazz, U validator) {
+    protected AbstractValidationHandler(final Class<T> clazz, final U validator) {
         this.validationClass = clazz;
         this.validator = validator;
     }
 
-    abstract protected Mono<ServerResponse> processBody(T validBody, final ServerRequest originalRequest);
-
     public final Mono<ServerResponse> handleRequest(final ServerRequest request) {
         return request.bodyToMono(this.validationClass)
             .flatMap(body -> {
-                Errors errors = new BeanPropertyBindingResult(body, this.validationClass.getName());
+                final Errors errors = new BeanPropertyBindingResult(body, this.validationClass.getName());
                 this.validator.validate(body, errors);
 
-                if (errors == null || errors.getAllErrors()
-                    .isEmpty()) {
+                if (Objects.isNull(errors) || errors.getAllErrors().isEmpty()) {
                     return processBody(body, request);
-                } else {
-                    return onValidationErrors(errors, body, request);
                 }
+                return onValidationErrors(errors, body, request);
             });
     }
 
-    protected Mono<ServerResponse> onValidationErrors(Errors errors, T invalidBody, final ServerRequest request) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errors.getAllErrors()
-            .toString());
+    protected Mono<ServerResponse> onValidationErrors(final Errors errors, final T invalidBody, final ServerRequest request) {
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errors.getAllErrors().toString());
     }
+
+    abstract protected Mono<ServerResponse> processBody(final T validBody, final ServerRequest originalRequest);
 }

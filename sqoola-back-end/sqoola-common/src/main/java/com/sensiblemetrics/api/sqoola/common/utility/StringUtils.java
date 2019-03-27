@@ -97,7 +97,7 @@ public class StringUtils {
      * @return concatenated {@link String}
      */
     public static String getString(final String... values) {
-        return getStringByDelimiter(org.apache.commons.lang3.StringUtils.EMPTY, values);
+        return getString(org.apache.commons.lang3.StringUtils.EMPTY, values);
     }
 
     /**
@@ -107,7 +107,7 @@ public class StringUtils {
      * @param values    - initial input array of items
      * @return concatenated {@link String}
      */
-    public static String getStringByDelimiter(final String delimiter, final String... values) {
+    public static String getString(final String delimiter, final String... values) {
         return org.apache.commons.lang3.StringUtils.join(values, delimiter);
     }
 
