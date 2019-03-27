@@ -23,11 +23,11 @@
  */
 package com.sensiblemetrics.api.sqoola.common.controller.impl;
 
-import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
+import com.sensiblemetrics.api.sqoola.common.controller.iface.BaseModelController;
 import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.BaseModelView;
 import com.sensiblemetrics.api.sqoola.common.wrapper.OffsetPageRequest;
-import com.sensiblemetrics.api.sqoola.common.service.BaseModelDaoService;
+import com.sensiblemetrics.api.sqoola.common.service.iface.BaseModelDaoService;
 import com.sensiblemetrics.api.sqoola.common.utility.MapperUtils;
 import com.sensiblemetrics.api.sqoola.common.exception.ResourceNotFoundException;
 import lombok.EqualsAndHashCode;

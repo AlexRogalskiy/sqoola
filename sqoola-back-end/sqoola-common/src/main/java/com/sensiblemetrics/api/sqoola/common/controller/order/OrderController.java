@@ -25,7 +25,7 @@ package com.sensiblemetrics.api.sqoola.common.controller.order;
 
 import com.sensiblemetrics.api.sqoola.common.model.dao.OrderEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.OrderView;
-import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
+import com.sensiblemetrics.api.sqoola.common.controller.iface.BaseModelController;
 
 /**
  * {@link OrderEntity} controller declaration

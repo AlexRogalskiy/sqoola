@@ -40,9 +40,9 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableAttribute.*;
-import static com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableBaseDocument.SCORE_FIELD_NAME;
-import static com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableOrder.PRODUCTS_FIELD_NAME;
+import static com.sensiblemetrics.api.sqoola.common.search.model.iface.SearchableAttribute.*;
+import static com.sensiblemetrics.api.sqoola.common.search.model.iface.SearchableBaseDocument.SCORE_FIELD_NAME;
+import static com.sensiblemetrics.api.sqoola.common.search.model.iface.SearchableOrder.PRODUCTS_FIELD_NAME;
 
 /**
  * AttributeEntity document view {@link BaseDocumentView}

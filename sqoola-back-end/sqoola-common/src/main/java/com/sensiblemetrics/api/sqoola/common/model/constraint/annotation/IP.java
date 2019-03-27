@@ -31,7 +31,7 @@ import javax.validation.ReportAsSingleViolation;
 import java.lang.annotation.*;
 
 /**
- * IP constraint annotation
+ * IP address constraint annotation
  *
  * @author Alex
  * @version 1.0.0

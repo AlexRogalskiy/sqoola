@@ -1,7 +1,7 @@
 package com.sensiblemetrics.api.sqoola.common.producer.rider;
 
 import com.sensiblemetrics.api.sqoola.common.producer.event.RiderOperationEvent;
-import com.sensiblemetrics.api.sqoola.common.producer.OperationEventProducer;
+import com.sensiblemetrics.api.sqoola.common.producer.iface.OperationEventProducer;
 
 public interface RiderOperationEventProducer extends OperationEventProducer<RiderOperationEvent> {
 

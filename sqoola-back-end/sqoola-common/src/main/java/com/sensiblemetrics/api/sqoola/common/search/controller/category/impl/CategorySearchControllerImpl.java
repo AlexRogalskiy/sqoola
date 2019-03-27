@@ -29,8 +29,8 @@ import com.sensiblemetrics.api.sqoola.common.search.controller.impl.BaseDocument
 import com.sensiblemetrics.api.sqoola.common.search.controller.wrapper.SearchRequest;
 import com.sensiblemetrics.api.sqoola.common.exception.BadRequestException;
 import com.sensiblemetrics.api.sqoola.common.exception.EmptyContentException;
-import com.sensiblemetrics.api.sqoola.common.search.document.Category;
-import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableCategory;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.Category;
+import com.sensiblemetrics.api.sqoola.common.search.model.iface.SearchableCategory;
 import com.sensiblemetrics.api.sqoola.common.search.service.CategorySearchService;
 import com.sensiblemetrics.api.sqoola.common.search.view.CategoryView;
 import io.swagger.annotations.*;

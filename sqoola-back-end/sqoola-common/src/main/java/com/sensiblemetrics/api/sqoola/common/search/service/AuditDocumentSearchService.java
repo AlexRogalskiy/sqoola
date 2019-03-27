@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.service;
 
-import com.sensiblemetrics.api.sqoola.common.search.document.AuditDocument;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.AuditDocument;
 
 import java.io.Serializable;
 

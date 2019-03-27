@@ -24,7 +24,7 @@
 package com.sensiblemetrics.api.sqoola.common.search.controller.impl;
 
 import com.google.common.collect.Lists;
-import com.sensiblemetrics.api.sqoola.common.search.controller.BaseSearchController;
+import com.sensiblemetrics.api.sqoola.common.search.controller.iface.BaseSearchController;
 import com.sensiblemetrics.api.sqoola.common.exception.EmptyContentException;
 import com.sensiblemetrics.api.sqoola.common.exception.ResourceNotFoundException;
 import com.sensiblemetrics.api.sqoola.common.search.service.BaseSearchService;

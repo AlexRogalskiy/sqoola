@@ -39,8 +39,17 @@ import java.util.Objects;
  */
 public class BigDecimalRangeValidator implements ConstraintValidator<BigDecimalRange, BigDecimal> {
 
+    /**
+     * Default max range precision
+     */
     private long maxPrecision;
+    /**
+     * Default min range precision
+     */
     private long minPrecision;
+    /**
+     * Default range scale
+     */
     private int scale;
 
     @Override

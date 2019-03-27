@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.controller.product;
 
-import com.sensiblemetrics.api.sqoola.common.search.controller.BaseDocumentSearchController;
-import com.sensiblemetrics.api.sqoola.common.search.document.Product;
+import com.sensiblemetrics.api.sqoola.common.search.controller.iface.BaseDocumentSearchController;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.Product;
 import com.sensiblemetrics.api.sqoola.common.search.view.ProductView;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;

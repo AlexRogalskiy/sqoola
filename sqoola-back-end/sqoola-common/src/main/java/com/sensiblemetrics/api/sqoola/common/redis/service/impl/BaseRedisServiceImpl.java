@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.redis.service.impl;
 
-import com.sensiblemetrics.api.sqoola.common.redis.service.BaseRedisService;
+import com.sensiblemetrics.api.sqoola.common.redis.service.iface.BaseRedisService;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;

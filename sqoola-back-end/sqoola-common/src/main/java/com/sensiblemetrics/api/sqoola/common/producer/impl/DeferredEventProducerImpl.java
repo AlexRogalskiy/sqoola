@@ -1,6 +1,6 @@
 package com.sensiblemetrics.api.sqoola.common.producer.impl;
 
-import com.sensiblemetrics.api.sqoola.common.producer.DeferredEventProducer;
+import com.sensiblemetrics.api.sqoola.common.producer.iface.DeferredEventProducer;
 
 import java.util.LinkedList;
 import java.util.List;

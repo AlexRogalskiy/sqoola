@@ -49,5 +49,4 @@ public @interface RangeBounds {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.controller.order;
 
-import com.sensiblemetrics.api.sqoola.common.search.controller.BaseDocumentSearchController;
-import com.sensiblemetrics.api.sqoola.common.search.document.Order;
+import com.sensiblemetrics.api.sqoola.common.search.controller.iface.BaseDocumentSearchController;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.Order;
 import com.sensiblemetrics.api.sqoola.common.search.view.OrderView;
 
 /**

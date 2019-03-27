@@ -40,9 +40,21 @@ import java.util.Objects;
  */
 public class URLValidator implements ConstraintValidator<URL, String> {
 
+    /**
+     * Empty url port
+     */
     public static final int DEFAULT_PORT_VALUE = -1;
+    /**
+     * Default url protocol
+     */
     private String protocol;
+    /**
+     * Default url host
+     */
     private String host;
+    /**
+     * Default url port
+     */
     private int port;
 
     @Override

@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.controller.category;
 
-import com.sensiblemetrics.api.sqoola.common.search.controller.BaseDocumentSearchController;
-import com.sensiblemetrics.api.sqoola.common.search.document.Category;
+import com.sensiblemetrics.api.sqoola.common.search.controller.iface.BaseDocumentSearchController;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.Category;
 import com.sensiblemetrics.api.sqoola.common.search.view.CategoryView;
 
 /**

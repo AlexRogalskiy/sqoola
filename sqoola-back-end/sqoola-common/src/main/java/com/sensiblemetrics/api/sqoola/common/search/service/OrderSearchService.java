@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.service;
 
-import com.sensiblemetrics.api.sqoola.common.search.document.Order;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

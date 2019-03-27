@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.service;
 
-import com.sensiblemetrics.api.sqoola.common.search.document.Category;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;

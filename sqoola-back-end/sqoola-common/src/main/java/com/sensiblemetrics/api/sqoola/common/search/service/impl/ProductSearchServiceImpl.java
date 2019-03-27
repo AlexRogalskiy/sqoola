@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.service.impl;
 
-import com.sensiblemetrics.api.sqoola.common.search.document.Product;
-import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableProduct;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.Product;
+import com.sensiblemetrics.api.sqoola.common.search.model.iface.SearchableProduct;
 import com.sensiblemetrics.api.sqoola.common.search.repository.ProductSearchRepository;
 import com.sensiblemetrics.api.sqoola.common.search.service.ProductSearchService;
 import io.swagger.annotations.ApiModelProperty;

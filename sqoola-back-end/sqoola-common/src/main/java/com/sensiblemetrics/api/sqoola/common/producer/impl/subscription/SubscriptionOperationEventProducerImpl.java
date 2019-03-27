@@ -2,7 +2,7 @@ package com.sensiblemetrics.api.sqoola.common.producer.impl.subscription;
 
 import com.sensiblemetrics.api.sqoola.common.producer.event.SubscriptionOperationEvent;
 import com.sensiblemetrics.api.sqoola.common.producer.impl.OperationEventProducerImpl;
-import com.sensiblemetrics.api.sqoola.common.producer.EventProducer;
+import com.sensiblemetrics.api.sqoola.common.producer.iface.EventProducer;
 import com.sensiblemetrics.api.sqoola.common.producer.subscription.SubscriptionOperationEventProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

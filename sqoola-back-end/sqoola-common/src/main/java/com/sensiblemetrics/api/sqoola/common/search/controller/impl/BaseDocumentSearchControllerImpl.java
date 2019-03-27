@@ -23,10 +23,10 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.controller.impl;
 
-import com.sensiblemetrics.api.sqoola.common.search.controller.BaseDocumentSearchController;
+import com.sensiblemetrics.api.sqoola.common.search.controller.iface.BaseDocumentSearchController;
 import com.sensiblemetrics.api.sqoola.common.exception.ResourceNotFoundException;
 import com.sensiblemetrics.api.sqoola.common.wrapper.OffsetPageRequest;
-import com.sensiblemetrics.api.sqoola.common.search.document.BaseDocument;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.BaseDocument;
 import com.sensiblemetrics.api.sqoola.common.search.service.BaseDocumentSearchService;
 import com.sensiblemetrics.api.sqoola.common.search.view.BaseDocumentView;
 import lombok.EqualsAndHashCode;

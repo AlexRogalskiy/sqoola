@@ -59,5 +59,4 @@ public @interface Session {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

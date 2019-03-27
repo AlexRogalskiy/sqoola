@@ -25,8 +25,8 @@ package com.sensiblemetrics.api.sqoola.common.service.impl;
 
 import com.sensiblemetrics.api.sqoola.common.model.dao.AccountEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dao.RoleEntity;
-import com.sensiblemetrics.api.sqoola.common.service.AccountDaoService;
-import com.sensiblemetrics.api.sqoola.common.service.AuthUserDaoService;
+import com.sensiblemetrics.api.sqoola.common.service.iface.AccountDaoService;
+import com.sensiblemetrics.api.sqoola.common.service.iface.AuthUserDaoService;
 import com.sensiblemetrics.api.sqoola.common.utility.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

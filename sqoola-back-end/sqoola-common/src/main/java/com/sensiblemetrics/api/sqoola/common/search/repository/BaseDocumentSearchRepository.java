@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.repository;
 
-import com.sensiblemetrics.api.sqoola.common.search.document.BaseDocument;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.BaseDocument;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.rest.core.annotation.Description;
 import org.springframework.data.rest.core.annotation.RestResource;

@@ -24,7 +24,7 @@
 package com.sensiblemetrics.api.sqoola.common.controller.product.impl;
 
 import com.sensiblemetrics.api.sqoola.common.annotation.SwaggerAPI;
-import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
+import com.sensiblemetrics.api.sqoola.common.controller.iface.BaseModelController;
 import com.sensiblemetrics.api.sqoola.common.controller.impl.BaseModelControllerImpl;
 import com.sensiblemetrics.api.sqoola.common.controller.product.ProductController;
 import com.sensiblemetrics.api.sqoola.common.model.dao.ProductEntity;
@@ -33,7 +33,7 @@ import com.sensiblemetrics.api.sqoola.common.search.controller.wrapper.SearchReq
 import com.sensiblemetrics.api.sqoola.common.exception.BadRequestException;
 import com.sensiblemetrics.api.sqoola.common.exception.EmptyContentException;
 import com.sensiblemetrics.api.sqoola.common.model.dto.ProductView;
-import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableProduct;
+import com.sensiblemetrics.api.sqoola.common.search.model.iface.SearchableProduct;
 import com.sensiblemetrics.api.sqoola.common.search.view.CategoryView;
 import io.swagger.annotations.*;
 import lombok.EqualsAndHashCode;

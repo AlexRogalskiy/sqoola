@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.service.impl;
 
-import com.sensiblemetrics.api.sqoola.common.search.document.Order;
-import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableOrder;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.Order;
+import com.sensiblemetrics.api.sqoola.common.search.model.iface.SearchableOrder;
 import com.sensiblemetrics.api.sqoola.common.search.repository.OrderSearchRepository;
 import com.sensiblemetrics.api.sqoola.common.search.service.OrderSearchService;
 import lombok.EqualsAndHashCode;

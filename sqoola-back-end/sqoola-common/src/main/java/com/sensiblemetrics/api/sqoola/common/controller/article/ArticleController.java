@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.controller.article;
 
-import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
+import com.sensiblemetrics.api.sqoola.common.controller.iface.BaseModelController;
 import com.sensiblemetrics.api.sqoola.common.model.dao.ArticleEntity;
 
 /**

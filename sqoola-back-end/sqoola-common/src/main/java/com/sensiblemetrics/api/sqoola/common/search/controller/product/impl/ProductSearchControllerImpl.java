@@ -29,8 +29,8 @@ import com.sensiblemetrics.api.sqoola.common.search.controller.product.ProductSe
 import com.sensiblemetrics.api.sqoola.common.search.controller.wrapper.SearchRequest;
 import com.sensiblemetrics.api.sqoola.common.exception.BadRequestException;
 import com.sensiblemetrics.api.sqoola.common.exception.EmptyContentException;
-import com.sensiblemetrics.api.sqoola.common.search.document.Product;
-import com.sensiblemetrics.api.sqoola.common.search.document.interfaces.SearchableProduct;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.Product;
+import com.sensiblemetrics.api.sqoola.common.search.model.iface.SearchableProduct;
 import com.sensiblemetrics.api.sqoola.common.search.service.ProductSearchService;
 import com.sensiblemetrics.api.sqoola.common.search.view.CategoryView;
 import com.sensiblemetrics.api.sqoola.common.search.view.ProductView;

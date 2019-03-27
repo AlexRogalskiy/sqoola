@@ -25,7 +25,6 @@ package com.sensiblemetrics.api.sqoola.common.model.constraint.validator;
 
 import com.sensiblemetrics.api.sqoola.common.model.constraint.annotation.IP;
 import org.apache.commons.lang3.StringUtils;
-import org.h2.util.StringUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -39,8 +38,6 @@ import javax.validation.ConstraintValidatorContext;
  */
 public class IPValidator implements ConstraintValidator<IP, String> {
 
-//    private static Pattern DEFAULT_IPV4_PATTERN = null;
-//    private static Pattern DEFAULT_IPV6_PATTERN = null;
     /**
      * Default IPv4 pattern format
      */
@@ -50,13 +47,6 @@ public class IPValidator implements ConstraintValidator<IP, String> {
      */
     public static final String DEFAULT_IPV6_PATTERN_FORMAT = "([0-9a-f]{1,4}:){7}([0-9a-f]){1,4}";
 
-    //    static {
-//        try {
-//            DEFAULT_IPV4_PATTERN = Pattern.compile(IPValidator.DEFAULT_IPV4_PATTERN_FORMAT, Pattern.CASE_INSENSITIVE);
-//            DEFAULT_IPV6_PATTERN = Pattern.compile(IPValidator.DEFAULT_IPV6_PATTERN_FORMAT, Pattern.CASE_INSENSITIVE);
-//        } catch (PatternSyntaxException e) {
-//        }
-//    }
     @Override
     public void initialize(final IP constraintAnnotation) {
     }

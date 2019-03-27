@@ -25,7 +25,7 @@ package com.sensiblemetrics.api.sqoola.common.controller.product;
 
 import com.sensiblemetrics.api.sqoola.common.model.dao.ProductEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.ProductView;
-import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
+import com.sensiblemetrics.api.sqoola.common.controller.iface.BaseModelController;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 

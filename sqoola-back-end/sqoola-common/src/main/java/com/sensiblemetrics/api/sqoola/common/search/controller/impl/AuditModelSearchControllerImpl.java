@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.controller.impl;
 
-import com.sensiblemetrics.api.sqoola.common.search.controller.AuditDocumentSearchController;
-import com.sensiblemetrics.api.sqoola.common.search.document.AuditDocument;
+import com.sensiblemetrics.api.sqoola.common.search.controller.iface.AuditDocumentSearchController;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.AuditDocument;
 import com.sensiblemetrics.api.sqoola.common.search.service.AuditDocumentSearchService;
 import com.sensiblemetrics.api.sqoola.common.search.view.AuditDocumentView;
 import lombok.EqualsAndHashCode;

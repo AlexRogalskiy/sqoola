@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.search.service.impl;
 
-import com.sensiblemetrics.api.sqoola.common.search.document.BaseDocument;
+import com.sensiblemetrics.api.sqoola.common.search.model.document.BaseDocument;
 import com.sensiblemetrics.api.sqoola.common.search.repository.BaseDocumentSearchRepository;
 import com.sensiblemetrics.api.sqoola.common.search.service.BaseDocumentSearchService;
 import lombok.EqualsAndHashCode;

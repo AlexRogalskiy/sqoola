@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.controller.article.impl;
 
-import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
+import com.sensiblemetrics.api.sqoola.common.controller.iface.BaseModelController;
 import com.sensiblemetrics.api.sqoola.common.model.dao.ArticleEntity;
 import com.sensiblemetrics.api.sqoola.common.service.impl.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

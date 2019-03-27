@@ -25,7 +25,7 @@ package com.sensiblemetrics.api.sqoola.common.service.impl;
 
 import com.sensiblemetrics.api.sqoola.common.model.dao.BaseModelEntity;
 import com.sensiblemetrics.api.sqoola.common.repository.BaseModelRepository;
-import com.sensiblemetrics.api.sqoola.common.service.BaseModelDaoService;
+import com.sensiblemetrics.api.sqoola.common.service.iface.BaseModelDaoService;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;

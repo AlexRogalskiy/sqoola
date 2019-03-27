@@ -25,7 +25,7 @@ package com.sensiblemetrics.api.sqoola.common.controller.category;
 
 import com.sensiblemetrics.api.sqoola.common.model.dao.CategoryEntity;
 import com.sensiblemetrics.api.sqoola.common.model.dto.BaseCategoryView;
-import com.sensiblemetrics.api.sqoola.common.controller.BaseModelController;
+import com.sensiblemetrics.api.sqoola.common.controller.iface.BaseModelController;
 
 /**
  * {@link CategoryEntity} controller declaration

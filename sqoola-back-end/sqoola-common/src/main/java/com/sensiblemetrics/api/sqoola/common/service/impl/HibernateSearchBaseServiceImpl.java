@@ -23,7 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.service.impl;
 
-import com.sensiblemetrics.api.sqoola.common.service.IHibernateSearchBaseService;
+import com.sensiblemetrics.api.sqoola.common.service.iface.IHibernateSearchBaseService;
 import com.wildbeeslabs.api.rest.common.model.IBaseEntity;
 
 import java.util.Collections;

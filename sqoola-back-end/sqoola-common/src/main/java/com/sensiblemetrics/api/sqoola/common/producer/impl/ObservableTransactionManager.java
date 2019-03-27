@@ -1,6 +1,6 @@
 package com.sensiblemetrics.api.sqoola.common.producer.impl;
 
-import com.sensiblemetrics.api.sqoola.common.producer.TransactionObserver;
+import com.sensiblemetrics.api.sqoola.common.producer.iface.TransactionObserver;
 import org.springframework.orm.jpa.JpaTransactionManager;
 
 import javax.persistence.EntityManagerFactory;

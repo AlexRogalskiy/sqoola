@@ -3,7 +3,7 @@ package com.sensiblemetrics.api.sqoola.common.producer.impl.mail;
 import com.sensiblemetrics.api.sqoola.common.producer.event.MailOperationEvent;
 import com.sensiblemetrics.api.sqoola.common.producer.mail.MailOperationEventProducer;
 import com.sensiblemetrics.api.sqoola.common.producer.impl.OperationEventProducerImpl;
-import com.sensiblemetrics.api.sqoola.common.producer.EventProducer;
+import com.sensiblemetrics.api.sqoola.common.producer.iface.EventProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

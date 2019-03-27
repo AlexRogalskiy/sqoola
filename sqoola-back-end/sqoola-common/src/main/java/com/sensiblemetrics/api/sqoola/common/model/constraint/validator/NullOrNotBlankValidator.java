@@ -38,9 +38,18 @@ import java.util.Objects;
  */
 public class NullOrNotBlankValidator implements ConstraintValidator<NullOrNotBlank, String> {
 
+    /**
+     * Default blank pattern
+     */
     public static final String DEFAULT_BLANK_PATTERN_FORMAT = "^[^\\s]*$";
 
+    /**
+     * Default max range
+     */
     private int max;
+    /**
+     * Default min range
+     */
     private int min;
 
     @Override
