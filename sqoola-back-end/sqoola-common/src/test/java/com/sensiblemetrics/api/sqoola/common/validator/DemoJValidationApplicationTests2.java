@@ -1,4 +1,4 @@
-package de.pearl.pem.product.fetcher.validator;
+package com.sensiblemetrics.api.sqoola.common.validator;
 
 
 @RunWith(SpringRunner.class)
