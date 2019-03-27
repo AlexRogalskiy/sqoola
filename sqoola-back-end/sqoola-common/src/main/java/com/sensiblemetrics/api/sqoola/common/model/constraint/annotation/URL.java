@@ -63,5 +63,4 @@ public @interface URL {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

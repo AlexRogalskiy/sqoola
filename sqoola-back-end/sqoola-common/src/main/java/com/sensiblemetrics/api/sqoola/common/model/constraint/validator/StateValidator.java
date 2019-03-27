@@ -1,5 +1,7 @@
 package com.sensiblemetrics.api.sqoola.common.model.constraint.validator;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Sets;
 import com.sensiblemetrics.api.sqoola.common.model.constraint.annotation.State;
 
 import javax.validation.ConstraintValidator;
@@ -15,22 +17,22 @@ import javax.validation.ConstraintValidatorContext;
 public class StateValidator implements ConstraintValidator<State, String> {
 
     /**
-     * Default state value
+     * Default state values
      */
-    private String state;
+    private String[] states;
 
     @Override
     public void initialize(final State constraintAnnotation) {
-        this.state = constraintAnnotation.value();
+        this.states = constraintAnnotation.value();
     }
 
     @Override
     public boolean isValid(final String value, final ConstraintValidatorContext context) {
-        boolean isValid = value.equalsIgnoreCase(this.state);
+        boolean isValid = Sets.newHashSet(this.states).contains(value);
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect state={%s} (expected value={%s})", value, this.state)).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect state={%s} (expected values={%s})", value, Joiner.on(",").join(this.states))).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

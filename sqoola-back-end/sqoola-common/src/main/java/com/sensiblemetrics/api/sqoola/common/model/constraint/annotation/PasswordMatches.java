@@ -1,20 +1,22 @@
 package com.sensiblemetrics.api.sqoola.common.model.constraint.annotation;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import com.sensiblemetrics.api.sqoola.common.model.constraint.validator.PasswordMatchesValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import java.lang.annotation.*;
 
-@Target({ TYPE, ANNOTATION_TYPE })
-@Retention(RUNTIME)
-@Constraint(validatedBy = PasswordMatchesValidator.class)
+/**
+ * PasswordMatches constraint annotation
+ *
+ * @author Alex
+ * @version 1.0.0
+ * @since 2017-08-08
+ */
 @Documented
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = PasswordMatchesValidator.class)
 public @interface PasswordMatches {
 
     String message() default "{PasswordMatches.message}";
@@ -22,5 +24,4 @@ public @interface PasswordMatches {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

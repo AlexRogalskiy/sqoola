@@ -76,6 +76,6 @@ public class OrderChronologicalDatesValidator implements ConstraintValidator<Ord
                 return false;
             }
         }
-        return isValid;
+        return true;
     }
 }

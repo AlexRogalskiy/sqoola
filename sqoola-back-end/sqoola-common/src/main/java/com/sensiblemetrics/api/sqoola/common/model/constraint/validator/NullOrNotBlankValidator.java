@@ -75,6 +75,6 @@ public class NullOrNotBlankValidator implements ConstraintValidator<NullOrNotBla
             context.buildConstraintViolationWithTemplate(String.format("ERROR: length range: from {%s} to {%s} in string={%s}", this.min, this.max, nullOrNotBlankField)).addConstraintViolation();
             return false;
         }
-        return isValid;
+        return true;
     }
 }

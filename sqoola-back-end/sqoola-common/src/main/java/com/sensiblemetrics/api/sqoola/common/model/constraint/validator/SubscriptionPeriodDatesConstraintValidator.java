@@ -29,7 +29,7 @@ public class SubscriptionPeriodDatesConstraintValidator implements ConstraintVal
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect subscription chronological dates: started={%s}, expired={%s} (expected dates: started < expired)", subscriptionOperationPeriod.getStarted(), subscriptionOperationPeriod.getExpired())).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }
 

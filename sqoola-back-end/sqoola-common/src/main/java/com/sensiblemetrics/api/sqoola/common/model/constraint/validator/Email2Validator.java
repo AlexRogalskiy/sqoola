@@ -33,7 +33,7 @@ public class Email2Validator implements ConstraintValidator<Email2, String> {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect email={%d} (expected pattern {%s})", email, EMAIL_PATTERN)).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 
     private boolean validateEmail(final String email) {

@@ -63,5 +63,4 @@ public @interface Barcode {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

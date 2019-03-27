@@ -54,6 +54,6 @@ public class PeriodChronologicalDatesValidator implements ConstraintValidator<Pe
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect period chronological dates: startedAt={%s}, expiredAt={%s} (expected dates: startedAt < expiredAt)", periodDataEntity.getFromDate(), periodDataEntity.getToDate())).addConstraintViolation();
             return false;
         }
-        return isValid;
+        return true;
     }
 }

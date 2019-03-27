@@ -59,5 +59,4 @@ public @interface UID {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

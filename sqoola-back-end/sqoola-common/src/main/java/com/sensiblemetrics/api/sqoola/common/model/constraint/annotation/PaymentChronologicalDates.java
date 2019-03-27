@@ -44,9 +44,9 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = {PaymentChronologicalDatesValidator.class})
 public @interface PaymentChronologicalDates {
 
-    public String message() default "{PaymentChronologicalDates.message}";
+    String message() default "{PaymentChronologicalDates.message}";
 
-    public Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-    public Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }

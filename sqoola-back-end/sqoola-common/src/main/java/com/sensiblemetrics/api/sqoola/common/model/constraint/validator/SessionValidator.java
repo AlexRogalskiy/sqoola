@@ -57,6 +57,6 @@ public class SessionValidator implements ConstraintValidator<Session, String> {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect session format ={%s} (expected format={%s})", sessionField, SessionValidator.DEFAULT_SESSION_PATTERN_FORMAT)).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

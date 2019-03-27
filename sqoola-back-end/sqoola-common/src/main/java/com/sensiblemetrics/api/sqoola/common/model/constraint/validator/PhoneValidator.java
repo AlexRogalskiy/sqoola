@@ -57,6 +57,6 @@ public class PhoneValidator implements ConstraintValidator<Phone, String> {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect phone={%s} (expected format={%s})", phoneField, PhoneValidator.DEFAULT_PHONE_PATTERN_FORMAT)).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

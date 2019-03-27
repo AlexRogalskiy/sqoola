@@ -56,6 +56,6 @@ public class DeliveryChronologicalDatesValidator implements ConstraintValidator<
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect delivery chronological dates: createdAt/modifiedAt={%s} < delivered={%s}", delivery.getCreatedAt(), delivery.getDeliveredAt())).addConstraintViolation();
             return false;
         }
-        return isValid;
+        return true;
     }
 }

@@ -39,7 +39,7 @@ public class DocumentModeValidator implements ConstraintValidator<DocumentMode, 
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect mode={%s} (expected value={%s})", value, this.mode)).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }
 

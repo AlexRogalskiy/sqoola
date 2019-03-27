@@ -21,11 +21,19 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = StateValidator.class)
 public @interface State {
 
+    @Target(value = {ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
+    @Retention(value = RetentionPolicy.RUNTIME)
+    @Documented
+    @interface List {
+
+        State[] value();
+    }
+
     String message() default "{State.message}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
-    String value() default "";
+    String[] value() default {};
 }

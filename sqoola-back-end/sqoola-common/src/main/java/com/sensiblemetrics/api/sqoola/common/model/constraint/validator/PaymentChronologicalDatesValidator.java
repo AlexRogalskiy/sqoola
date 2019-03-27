@@ -56,6 +56,6 @@ public class PaymentChronologicalDatesValidator implements ConstraintValidator<P
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect payment chronological dates: createdAt/modifiedAt={%s} < payedAt={%s}", payment.getCreatedAt(), payment.getPayedAt())).addConstraintViolation();
             return false;
         }
-        return isValid;
+        return true;
     }
 }

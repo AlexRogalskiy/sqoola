@@ -76,6 +76,6 @@ public class BigDecimalRangeValidator implements ConstraintValidator<BigDecimalR
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect scale format= to {%s} in number={%s}", this.scale, bigDecimalRangeField)).addConstraintViolation();
             return false;
         }
-        return isValid;
+        return true;
     }
 }

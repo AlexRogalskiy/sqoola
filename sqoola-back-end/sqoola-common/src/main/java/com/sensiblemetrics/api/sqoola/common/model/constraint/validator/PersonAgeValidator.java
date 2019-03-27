@@ -29,6 +29,6 @@ public class PersonAgeValidator implements ConstraintValidator<PersonAge, Intege
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect age={%s} (should be greater than zero)", age)).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

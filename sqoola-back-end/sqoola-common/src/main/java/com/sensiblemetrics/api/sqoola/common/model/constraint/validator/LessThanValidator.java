@@ -55,6 +55,6 @@ public class LessThanValidator implements ConstraintValidator<LessThan, Integer>
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect value={%d} (expected less or equal={%d})", comparatorField, this.annotationComparator)).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

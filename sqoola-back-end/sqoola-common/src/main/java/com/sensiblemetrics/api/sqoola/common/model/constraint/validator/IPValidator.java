@@ -61,6 +61,6 @@ public class IPValidator implements ConstraintValidator<IP, String> {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect IP location format ={%s})", ipField)).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

@@ -57,6 +57,6 @@ public class BarcodeValidator implements ConstraintValidator<Barcode, String> {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect bar code ={%s} (expected format={%s})", orderField, BarcodeValidator.DEFAULT_ORDER_BARCODE_PATTERN_FORMAT)).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

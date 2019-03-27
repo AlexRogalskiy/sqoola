@@ -53,6 +53,6 @@ public class EntityChronologicalDatesValidator implements ConstraintValidator<En
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect entities chronological dates: createdAt={%s}, modifiedAt={%s} (expected dates: createdAt < modifiedAt)", baseEntity.getCreatedAt(), baseEntity.getModifiedAt())).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

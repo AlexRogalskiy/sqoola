@@ -76,6 +76,6 @@ public class PolicyChronologicalDatesValidator implements ConstraintValidator<Or
                 return false;
             }
         }
-        return isValid;
+        return true;
     }
 }

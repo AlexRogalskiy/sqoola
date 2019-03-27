@@ -50,6 +50,6 @@ public class ChronologicalDatesValidator implements ConstraintValidator<Chronolo
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect model chronological dates: created={%s}, changed={%s} (expected dates: created <= changed)", createdDateOptional.get(), modifiedDateOptional.get())).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

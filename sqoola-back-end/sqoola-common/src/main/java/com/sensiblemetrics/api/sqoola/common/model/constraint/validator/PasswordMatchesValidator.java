@@ -27,6 +27,6 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect password={%s} (expected value={%s})", user.getPassword(), user.getMatchingPassword())).addConstraintViolation();
         }
-        return isValid;
+        return true;
     }
 }

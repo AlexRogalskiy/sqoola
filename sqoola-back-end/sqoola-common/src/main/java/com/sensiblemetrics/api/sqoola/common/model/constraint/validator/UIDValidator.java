@@ -52,6 +52,6 @@ public class UIDValidator implements ConstraintValidator<UID, UUID> {
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect uid={%s} (expected format={%s})", uidField, UIDValidator.DEFAULT_PATTERN_FORMAT)).addConstraintViolation();
             return false;
         }
-        return isValid;
+        return true;
     }
 }

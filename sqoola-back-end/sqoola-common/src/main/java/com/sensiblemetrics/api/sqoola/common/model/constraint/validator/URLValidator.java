@@ -94,6 +94,6 @@ public class URLValidator implements ConstraintValidator<URL, String> {
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect port format={%s} in url={%s}", this.port, urlField)).addConstraintViolation();
             return false;
         }
-        return isValid;
+        return true;
     }
 }

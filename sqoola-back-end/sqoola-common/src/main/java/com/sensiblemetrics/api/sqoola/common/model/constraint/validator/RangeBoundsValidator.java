@@ -54,6 +54,6 @@ public class RangeBoundsValidator implements ConstraintValidator<RangeBounds, Ba
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect range bounds: lower bound={%f}, upper bound={%f} (expected lower bound <= upper bound)", range.getLowerBound(), range.getUpperBound())).addConstraintViolation();
             return false;
         }
-        return isValid;
+        return true;
     }
 }

@@ -79,6 +79,6 @@ public class AddressValidator implements ConstraintValidator<Address, BaseAddres
             context.buildConstraintViolationWithTemplate(String.format("ERROR: incorrect zip code format ={%s} (expected format={%s})", baseAddressEntity.getZipCode(), AddressValidator.DEFAULT_ZIP_CODE_PATTERN_FORMAT)).addConstraintViolation();
             return false;
         }
-        return isValid;
+        return true;
     }
 }
