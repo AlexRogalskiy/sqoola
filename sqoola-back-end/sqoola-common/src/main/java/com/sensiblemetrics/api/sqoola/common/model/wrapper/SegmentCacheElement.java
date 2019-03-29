@@ -10,8 +10,11 @@ import java.util.List;
 @AllArgsConstructor
 public class SegmentCacheElement implements Serializable {
 
+    /**
+     * Default explicit serialVersionUID for interoperability
+     */
     private static final long serialVersionUID = 7677929909118573919L;
+
     private long createdAt;
     private List<SegmentEntry> entries;
-    
 }

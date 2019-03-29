@@ -7,7 +7,13 @@ import java.util.List;
 
 @Data
 public class Segment implements Serializable {
+
+    /**
+     * Default explicit serialVersionUID for interoperability
+     */
     private static final long serialVersionUID = 6811997223373851998L;
+
     private SegmentKey key;
+
     private List<SegmentEntry> entries;
 }

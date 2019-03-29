@@ -12,6 +12,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class SegmentEntry implements Serializable {
 
+    /**
+     * Default explicit serialVersionUID for interoperability
+     */
     private static final long serialVersionUID = -528926447432813240L;
+
     private String value;
 }

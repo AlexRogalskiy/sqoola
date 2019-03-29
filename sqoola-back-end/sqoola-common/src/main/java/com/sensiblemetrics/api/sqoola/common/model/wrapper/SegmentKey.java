@@ -1,19 +1,20 @@
 package com.sensiblemetrics.api.sqoola.common.model.wrapper;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(staticName = "of")
+@EqualsAndHashCode
 public class SegmentKey implements Serializable {
 
-    private static final long serialVersionUID = -8593253079283956680L;
+    /**
+     * Default explicit serialVersionUID for interoperability
+     */
+    private static final long serialVersionUID = -5899150520964785297L;
 
-    private String segment;
-    private String mailing;
-
+    @NonNull
+    @Getter
+    private Long id;
 }

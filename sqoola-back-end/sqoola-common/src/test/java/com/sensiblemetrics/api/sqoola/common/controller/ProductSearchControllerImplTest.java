@@ -24,7 +24,7 @@
 package com.sensiblemetrics.api.sqoola.common.controller;
 
 import com.google.common.collect.ImmutableMap;
-import com.sensiblemetrics.api.sqoola.common.BaseTest;
+import com.sensiblemetrics.api.sqoola.common.AbstractBaseTest;
 import com.wildbeeslabs.sensiblemetrics.supersolr.BaseTest;
 import com.wildbeeslabs.sensiblemetrics.supersolr.controller.wrapper.SearchRequest;
 import com.wildbeeslabs.sensiblemetrics.supersolr.search.document.Product;
@@ -61,7 +61,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * ProductEntity controller implementation unit test {@link BaseTest}
+ * ProductEntity controller implementation unit test {@link AbstractBaseTest}
  */
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -69,7 +69,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "file:src/test/resources/application.properties")
 @DirtiesContext
-public class ProductSearchControllerImplTest extends BaseTest {
+public class ProductSearchControllerImplTest extends AbstractBaseTest {
 
     /**
      * Default authentication user name

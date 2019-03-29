@@ -16,10 +16,19 @@ import java.io.Serializable;
 @AllArgsConstructor(staticName = "of")
 public class ClientKey implements Serializable {
 
-    public static final String DEFAULT_MAILING = "default";
-    public static final String DEFAULT_SEGMENT = "default";
-
+    /**
+     * Default explicit serialVersionUID for interoperability
+     */
     private static final long serialVersionUID = -8415478319140939556L;
+
+    /**
+     * Default mailing identifier
+     */
+    public static final String DEFAULT_MAILING = "default";
+    /**
+     * Default segment identifier
+     */
+    public static final String DEFAULT_SEGMENT = "default";
 
     @ApiModelProperty("ID of the client")
     final String clientId;

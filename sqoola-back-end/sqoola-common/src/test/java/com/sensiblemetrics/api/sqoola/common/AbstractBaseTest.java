@@ -47,7 +47,7 @@ import java.util.Optional;
  * Base test implementation
  */
 @Slf4j
-public abstract class BaseTest {
+public abstract class AbstractBaseTest {
 
     /**
      * Default xml type with utf-8 charset encoding
@@ -154,7 +154,7 @@ public abstract class BaseTest {
     protected MockHttpSession getSession(final UserDetailsService userDetailsService, final String username) {
         final UsernamePasswordAuthenticationToken principal = this.getPrincipal(userDetailsService, username);
         final MockHttpSession session = new MockHttpSession();
-        session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, new BaseTest.MockSecurityContext(principal));
+        session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, new AbstractBaseTest.MockSecurityContext(principal));
         return session;
     }
 
