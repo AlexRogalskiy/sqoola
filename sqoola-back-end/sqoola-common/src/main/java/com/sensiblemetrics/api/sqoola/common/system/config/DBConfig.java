@@ -280,6 +280,11 @@ public class DBConfig {
 //        return new ObservableTransactionManager<>(factory, observers);
 //    }
 
+//    @Bean
+//    public PlatformTransactionManager transactionManager() {
+//        return new DataSourceTransactionManager(getDataSource());
+//    }
+
     /**
      * Returns transactional task executor instance {@link TransactionalAsyncTaskExecutor}
      *
@@ -404,6 +409,16 @@ public class DBConfig {
         jpaProperties.setProperty("org.hibernate.type", "true");
         return jpaProperties;
     }
+
+//    @Bean
+////    public DataSource getDataSource() {
+////        SimpleDriverDataSource simpleDriverDataSource = new SimpleDriverDataSource();
+////        simpleDriverDataSource.setDriverClass(org.hsqldb.jdbcDriver.class);
+////        simpleDriverDataSource.setUrl("jdbc:hsqldb:mem:app-db");
+////        simpleDriverDataSource.setUsername("sa");
+////        simpleDriverDataSource.setPassword("");
+////        return simpleDriverDataSource;
+////    }
 
     /**
      * Returns {@link JpaDialect} configuration
