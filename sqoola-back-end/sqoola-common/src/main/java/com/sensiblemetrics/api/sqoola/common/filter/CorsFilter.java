@@ -23,6 +23,7 @@
  */
 package com.sensiblemetrics.api.sqoola.common.filter;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -40,12 +41,12 @@ public class CorsFilter implements Filter {
     public void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain) throws IOException, ServletException {
         final HttpServletRequest request = (HttpServletRequest) req;
         final HttpServletResponse response = (HttpServletResponse) res;
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-        response.setHeader("Access-Control-Expose-Headers", "custom-header1, custom-header2");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, api_key, Authorization, Accept, X-Requested-With, remember-me");
-        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, request.getHeader("Origin"));
+        response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+        response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, DELETE, PUT");
+        response.setHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range");
+        response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Content-Type, api_key, Authorization, Accept, X-Requested-With, remember-me");
+        response.setHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");
         chain.doFilter(req, res);
     }
 
