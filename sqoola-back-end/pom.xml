@@ -582,7 +582,8 @@
                             <exclude>**/target/**</exclude>
                             <exclude>.idea/**</exclude>
                             <exclude>**/*.json</exclude>
-                            <exclude>**/src/main/resources/checkstyle.xml</exclude>
+                            <exclude>**/checkstyle/**</exclude>
+                            <exclude>**/codestyle/**</exclude>
                         </excludes>
                     </configuration>
                     <executions>
@@ -634,9 +635,9 @@
                             <phase>validate</phase>
                             <configuration>
                                 <skip>${skip.checkstyle}</skip>
-                                <configLocation>${project.basedir}/checkstyle.xml</configLocation>
+                                <configLocation>${project.basedir}/checkstyle/checkstyle.xml</configLocation>
                                 <includeTestResources>true</includeTestResources>
-                                <encoding>UTF-8</encoding>
+                                <encoding>${project.reporting.outputEncoding}</encoding>
                                 <consoleOutput>true</consoleOutput>
                                 <maxAllowedViolations>5</maxAllowedViolations>
                                 <failsOnError>true</failsOnError>
