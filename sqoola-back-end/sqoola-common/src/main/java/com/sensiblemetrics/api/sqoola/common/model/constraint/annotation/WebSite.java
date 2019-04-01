@@ -6,7 +6,7 @@ import javax.validation.constraints.Pattern;
 import java.lang.annotation.*;
 
 /**
- * Phone constraint annotation
+ * Web site constraint annotation
  *
  * @author Alex
  * @version 1.0.0
