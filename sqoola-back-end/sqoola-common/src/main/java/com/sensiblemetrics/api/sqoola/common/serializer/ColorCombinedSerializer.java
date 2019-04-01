@@ -15,7 +15,7 @@ import java.awt.*;
 import java.io.IOException;
 
 @JsonComponent
-public class UserCombinedSerializer {
+public class ColorCombinedSerializer {
 
     public static class UserJsonSerializer extends JsonSerializer<User> {
 
