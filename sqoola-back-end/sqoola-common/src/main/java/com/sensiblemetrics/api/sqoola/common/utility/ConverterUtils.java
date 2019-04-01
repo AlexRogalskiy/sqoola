@@ -1,5 +1,6 @@
 package com.sensiblemetrics.api.sqoola.common.utility;
 
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.MapPropertySource;
@@ -18,6 +19,10 @@ public class ConverterUtils {
      * Default custom prefix
      */
     public final static String CUSTOM_PREFIX = "custom.";
+
+    public static <T> Iterable<T> toIterable(@NonNull final Optional<T> o) {
+        return o.map(Collections::singleton).orElseGet(Collections::emptySet);
+    }
 
     public static List<MapPropertySource> convertEntrySet(Set<Map.Entry> entrySet, Optional<String> parentKey) {
         return entrySet.stream()
