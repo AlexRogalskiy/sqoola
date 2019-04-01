@@ -1,7 +1,8 @@
-package com.sensiblemetrics.api.sqoola.common.retry;
+package com.sensiblemetrics.api.sqoola.common.retry.impl;
 
 import java.sql.SQLException;
 
+import com.sensiblemetrics.api.sqoola.common.retry.iface.MyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

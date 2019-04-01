@@ -25,7 +25,7 @@ package com.sensiblemetrics.api.sqoola.common.model.dao;
 
 import com.sensiblemetrics.api.sqoola.common.model.dao.interfaces.PersistableBaseModel;
 import com.sensiblemetrics.api.sqoola.common.model.dao.listeners.ModelEventListener;
-import com.sensiblemetrics.api.sqoola.common.model.interfaces.Versionable;
+import com.sensiblemetrics.api.sqoola.common.model.iface.Versionable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

@@ -1,10 +1,17 @@
 package com.sensiblemetrics.api.sqoola.common.utility;
 
+import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.dialect.*;
 import org.javers.common.exception.JaversException;
 import org.javers.common.exception.JaversExceptionCode;
 import org.javers.repository.sql.DialectName;
 
+/**
+ * Dialect utilities implementation
+ */
+@Slf4j
+@UtilityClass
 public class DialectMapper {
 
     public DialectName map(final Dialect hibernateDialect) {

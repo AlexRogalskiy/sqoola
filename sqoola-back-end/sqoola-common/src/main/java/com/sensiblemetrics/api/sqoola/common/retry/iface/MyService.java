@@ -1,4 +1,4 @@
-package com.sensiblemetrics.api.sqoola.common.retry;
+package com.sensiblemetrics.api.sqoola.common.retry.iface;
 
 import java.sql.SQLException;
 

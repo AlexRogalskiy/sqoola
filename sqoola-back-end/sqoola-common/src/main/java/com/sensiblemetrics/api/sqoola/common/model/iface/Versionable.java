@@ -1,4 +1,4 @@
-package com.sensiblemetrics.api.sqoola.common.model.interfaces;
+package com.sensiblemetrics.api.sqoola.common.model.iface;
 
 import java.io.Serializable;
 
