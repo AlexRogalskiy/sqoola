@@ -41,7 +41,7 @@ public class PhoneValidator implements ConstraintValidator<Phone, String> {
     /**
      * Default phone pattern format
      */
-    public static final String DEFAULT_PHONE_PATTERN_FORMAT = "\\+[0-9]+";
+    public static final String DEFAULT_PHONE_PATTERN_FORMAT = "^([0-9]( |-)?)?(\\(?[0-9]{3}\\)?|[0-9]{3})( |-)?([0-9]{3}( |-)?[0-9]{4}|[a-zA-Z0-9]{7})$";//"\\+[0-9]+";
 
     @Override
     public void initialize(final Phone constraintAnnotation) {

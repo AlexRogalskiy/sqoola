@@ -2,6 +2,13 @@ spring:
   profiles:
     active: "dev"
 ---
+info:
+  app:
+    name: Sqoola
+    description: This is my first spring boot application G1
+    version: 1.0.0
+  java-vendor: ${java.specification.vendor}
+---
 springfox:
   documentation:
     swagger:
@@ -25,6 +32,8 @@ security:
       - ADMIN
 
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
   resources:
     add-mappings: false
   cloud:
@@ -175,10 +184,14 @@ management:
   endpoint:
     health:
       enabled: true
+    shutdown:
+      enabled: true
   endpoints:
     web:
       exposure:
         include: beans,env,health,metrics,httptrace,mappings
+    jmx:
+      domain: io.sqoola
   info:
     git:
       mode: full
@@ -256,7 +269,8 @@ spring:
     banner-mode: "console"
     logStartupInfo: false
   jmx:
-    enabled: false
+    enabled: true
+    unique-names: true
   datasource:
     driver: com.p6spy.engine.spy.P6SpyDriver
     #driver-class-name:  org.postgresql.Driver
@@ -454,6 +468,10 @@ server:
       path: /app2
     - ip: 192.168.0.3
       path: /app3
+
+http:
+  mappers:
+    jsonPrettyPrint: true
 
 logging:
   file: logs/application_dev.log
