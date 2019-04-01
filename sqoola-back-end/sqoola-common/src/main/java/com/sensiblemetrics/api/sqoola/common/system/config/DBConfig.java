@@ -23,8 +23,8 @@
  */
 package com.sensiblemetrics.api.sqoola.common.system.config;
 
-import com.sensiblemetrics.api.sqoola.common.executors.TransactionalAsyncTaskExecutor;
-import com.sensiblemetrics.api.sqoola.common.executors.impl.DelegatedTransactionalAsyncTaskExecutor;
+import com.sensiblemetrics.api.sqoola.common.executor.TransactionalAsyncTaskExecutor;
+import com.sensiblemetrics.api.sqoola.common.executor.impl.DelegatedTransactionalAsyncTaskExecutor;
 import com.sensiblemetrics.api.sqoola.common.utility.StringUtils;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

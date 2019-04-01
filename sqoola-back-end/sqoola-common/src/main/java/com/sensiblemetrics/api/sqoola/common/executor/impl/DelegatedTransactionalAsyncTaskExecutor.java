@@ -1,6 +1,6 @@
-package com.sensiblemetrics.api.sqoola.common.executors.impl;
+package com.sensiblemetrics.api.sqoola.common.executor.impl;
 
-import com.sensiblemetrics.api.sqoola.common.executors.TransactionalAsyncTaskExecutor;
+import com.sensiblemetrics.api.sqoola.common.executor.TransactionalAsyncTaskExecutor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

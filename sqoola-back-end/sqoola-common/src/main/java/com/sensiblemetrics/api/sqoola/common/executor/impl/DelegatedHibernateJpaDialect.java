@@ -1,4 +1,4 @@
-package com.sensiblemetrics.api.sqoola.common.executors.impl;
+package com.sensiblemetrics.api.sqoola.common.executor.impl;
 
 import lombok.*;
 import org.hibernate.Session;

@@ -1,4 +1,4 @@
-package com.sensiblemetrics.api.sqoola.common.executors;
+package com.sensiblemetrics.api.sqoola.common.executor;
 
 import org.springframework.core.task.AsyncTaskExecutor;
 
