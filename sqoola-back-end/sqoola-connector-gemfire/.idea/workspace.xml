@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="11e7d782-b6ff-401d-8087-5c5d17c44edf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../sqoola-common/src/main/java/com/sensiblemetrics/api/sqoola/common/controller/GreetingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-common/src/main/java/com/sensiblemetrics/api/sqoola/common/repository/PersonRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-common/src/test/java/com/sensiblemetrics/api/sqoola/common/controller/GreetingMockMvcTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/ConnectorGemfireAppLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/model/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/repository/PersonRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-mongodb/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-mongodb/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/ConnectorMongoDBAppLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-mongodb/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-mongodb/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/CustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-mongodb/src/test/java/com/sensiblemetrics/api/sqoola/connector/mongodb/CustomerRepositoryTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-neo4j/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-neo4j/src/main/java/com/sensiblemetrics/api/sqoola/connector/neo4j/ConnectorNeo4jAppLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-neo4j/src/main/java/com/sensiblemetrics/api/sqoola/connector/neo4j/model/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-neo4j/src/main/java/com/sensiblemetrics/api/sqoola/connector/neo4j/repository/PersonRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-neo4j/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sqoola-connector-neo4j/start.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sqoola-auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sqoola-auth/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sqoola-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sqoola-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sqoola-connector-neo4j/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sqoola-connector-neo4j/pom.xml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/Application.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/repository/PersonRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/model/Person.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/ConnectorGemfireAppLoader.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1940" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="sqoola-connector-gemfire" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sqoola-connector-gemfire" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sqoola-connector-gemfire" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sqoola-connector-gemfire" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sqoola-connector-gemfire" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sqoola-connector-gemfire" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sqoola-connector-gemfire" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sqoola-connector-gemfire" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sqoola-connector-gemfire" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sqoola-connector-gemfire" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gemfire" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sqoola-connector-gemfire" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sqoola-connector-gemfire" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553468532389" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="11e7d782-b6ff-401d-8087-5c5d17c44edf" name="Default Changelist" comment="" />
+      <created>1553466708746</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1553466708746</updated>
+      <workItem from="1553466721959" duration="549000" />
+      <workItem from="1553468154709" duration="394000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="943000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20872483" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/model/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/repository/PersonRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="61" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/gemfire/ConnectorGemfireAppLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="150" column="62" selection-start-line="150" selection-start-column="62" selection-end-line="150" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
