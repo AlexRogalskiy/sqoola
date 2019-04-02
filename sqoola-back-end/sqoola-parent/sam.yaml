@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: AWS Serverless Spring Boot API - com.sensiblemetrics.api.sqoola::sqoola-common
+Description: AWS Serverless Spring Boot API - com.sensiblemetrics.api.sqoola::sqoola-parent
 Globals:
   Api:
     EndpointConfiguration: REGIONAL
@@ -9,9 +9,9 @@ Resources:
   CascoderCommonFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.wildbeeslabs.api.cascoder.common.handler.StreamLambdaHandler::handleRequest
+      Handler: com.sensiblemetrics.api.sqoola.common.handler.StreamLambdaHandler::handleRequest
       Runtime: java8
-      CodeUri: target/cascoder-common-1.0-SNAPSHOT.jar
+      CodeUri: target/cascoder-parent-1.0-SNAPSHOT.jar
       MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 30
@@ -23,8 +23,8 @@ Resources:
             Method: any
 
 Outputs:
-  CascoderCommonApi:
+  SqoolaCommonApi:
     Description: URLConstraint for application
     Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
     Export:
-      Name: CascoderCommonApi
+      Name: SqoolaCommonApi

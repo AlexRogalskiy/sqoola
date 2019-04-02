@@ -13,17 +13,10 @@ public class MessageListenerContainerFactory {
     @Autowired
     private ConnectionFactory connectionFactory;
 
-    public MessageListenerContainerFactory() {
-    }
-
-    public MessageListenerContainer createMessageListenerContainer(String queueName) {
-
-        SimpleMessageListenerContainer mlc = new SimpleMessageListenerContainer(connectionFactory);
-
+    public MessageListenerContainer createMessageListenerContainer(final String queueName) {
+        final SimpleMessageListenerContainer mlc = new SimpleMessageListenerContainer(this.connectionFactory);
         mlc.addQueueNames(queueName);
         mlc.setAcknowledgeMode(AcknowledgeMode.AUTO);
-
         return mlc;
     }
-
 }
