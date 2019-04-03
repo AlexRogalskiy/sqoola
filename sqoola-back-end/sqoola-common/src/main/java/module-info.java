@@ -63,4 +63,5 @@ module com.sensiblemetrics.api.sqoola.common {
     requires javers.core;
     requires spring.cloud.openfeign.core;
     requires passay;
+    requires spring.retry;
 }

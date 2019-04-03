@@ -1,5 +1,6 @@
 package com.sensiblemetrics.api.sqoola.common.system.config;
 
+import com.sensiblemetrics.api.sqoola.common.retry.DefaultListenerSupport;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +10,7 @@ import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 
 @Configuration
-@ComponentScan(basePackages = "org.baeldung.springretry")
+@ComponentScan(basePackages = "com.sensiblemetrics.api.sqoola.common")
 @EnableRetry
 // Uncomment this two lines if we need XML configuration
 // @EnableAspectJAutoProxy
