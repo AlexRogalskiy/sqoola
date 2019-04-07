@@ -1,4 +1,4 @@
-package com.sensiblemetrics.api.sqoola.common.service;
+package com.sensiblemetrics.api.sqoola.common.service.impl;
 
 @Service
 public class AsyncServiceImpl{

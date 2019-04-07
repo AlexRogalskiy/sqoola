@@ -130,4 +130,10 @@ public class StringUtils {
     public static String generateId(final int count) {
         return RandomStringUtils.random(count, true, true).toLowerCase();
     }
+
+    public static String truncate(@NonNull final String original, final String ellipsis, final int length) {
+        assert length > 0 : "Should be greater than zero";
+        if (original.length() <= 140) return original;
+        return getString(original.substring(0, length), ellipsis);
+    }
 }
