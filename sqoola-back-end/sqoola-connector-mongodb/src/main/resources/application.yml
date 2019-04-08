@@ -1,0 +1,526 @@
+spring:
+  profiles:
+    active: "dev"
+---
+info:
+  app:
+    name: Sqoola
+    description: This is my first spring boot application G1
+    version: 1.0.0
+  java-vendor: ${java.specification.vendor}
+---
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: classpath:securityDefinition.json
+
+#eureka:
+#    instance:
+#        leaseRenewalIntervalInSeconds: 10
+#    client:
+#        registryFetchIntervalSeconds: 5
+#    serviceUrl:
+#        defaultZone: http://localhost:8080/v1/eureka
+
+security:
+  rememberMe:
+    tokenValidity: 1209600
+  user:
+    roles:
+      - USER
+      - ADMIN
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://pgilad:password@cluster0-shard.mongodb.net:27017,cluster0-shard-00.mongodb.net:27017,cluster0-shard-01.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+  resources:
+    add-mappings: false
+  cloud:
+    config:
+      enabled: false
+  boot:
+    admin:
+      url: http://localhost:8080/v1
+      client:
+        service-url: http://localhost:8080/v1
+        management-url: http://localhost:8080/v1
+        health-url: http://localhost:8080/v1/health
+  messages:
+    basename: messages
+    encoding: UTF-8
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /resources/**
+    favicon:
+      enabled: true
+  security:
+    user:
+      name: admin
+      password: admin
+  cache:
+    type: REDIS
+    redis:
+      use-key-prefix: true
+      key-prefix: sqoola:common
+      time-to-live: 600000
+      cache-null-values: false
+    cache-names: cache_pool_result
+  #    caffeine:
+  #      spec: maximumSize=70000,expireAfterAccess=300s
+  main:
+    allow-bean-definition-overriding: true
+  batch:
+    job:
+      enabled: false
+  jpa:
+    repositories:
+      enabled: true
+    show-sql: true
+    open-in-view: false
+    generate-ddl: false
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        id:
+          new_generator_mappings: true
+        cache:
+          use_query_cache: false
+          use_second_level_cache: false
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        ddl-auto: none
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        temp:
+          use_jdbc_metadata_defaults: false
+  hibernate:
+    ddl-auto: create-drop
+  flyway:
+    locations: filesystem:db/migrations
+    check-location: false
+    baselineOnMigrate: true
+    schemas: public
+
+logging:
+  config: classpath:logback.xml
+  file: logs/application.log
+  level:
+    ROOT: DEBUG
+    org.hibernate: DEBUG
+    org.hibernate.search: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: DEBUG
+    org.springframework: DEBUG
+    org.springframework.boot.autoconfigure.security: DEBUG
+    org.springframework.web.servlet.mvc: DEBUG
+    org.springframework.transaction: DEBUG
+    org.springframework.batch: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.controllers: DEBUG
+    org.springframework.data: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.hibernate: DEBUG
+    com.sensiblemetrics.api.sqoola.common: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%highlight(%-5.5level)] %cyan(%-56.56logger{56}) - %msg \\(%F:%L\\)#%M%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  path: logs
+
+server:
+  email: dev@sqoola.com
+  port: 8080
+  endpoint-path: endpoints
+  base-path: http://localhost
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: application/xml,application/json,text/html,text/css
+  #  undertow:
+  #    io-threads: 4
+  #    worker-threads: 5
+  #    buffer-size: # Size of each buffer in bytes.
+  #    direct-buffers: # Allocate buffers outside the Java heap.
+  #    max-http-post-size: 0 # Maximum size in bytes of the HTTP post content.
+  #    accesslog:
+  #      enabled: false # Enable access log.
+  #      dir: # Undertow access log directory.
+  #      pattern: common # Format pattern for access logs.
+  #      prefix: access_log. # Log file name prefix.
+  #      rotate: true # Enable access log rotation.
+  #      suffix: log # Log file name suffix.
+  error:
+    path: /error
+    include-stacktrace: never
+    whitelabel:
+      enabled: false
+  ssl:
+    enabled: false
+    key-store: classpath:main.jks
+    key-store-password: secret
+    key-password: secret
+  tomcat:
+    max-threads: 4
+    uri-encoding: UTF-8
+    accesslog:
+      directory: logs
+      enabled: true
+      pattern: '%t %a "%r" %s (%D ms)'
+  use-forward-headers: true
+  hystrix:
+    command.default.execution.timeout.enabled: false
+  cluster:
+    - ip: 192.168.0.1
+      path: /app1
+    - ip: 192.168.0.2
+      path: /app2
+    - ip: 192.168.0.3
+      path: /app3
+
+management:
+  endpoint:
+    health:
+      enabled: true
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: beans,env,health,metrics,httptrace,mappings
+    jmx:
+      domain: io.sqoola
+  info:
+    git:
+      mode: full
+---
+spring:
+  profiles: prod
+  resources:
+    staticLocations: classpath:/templates
+  application:
+    name: Sqoola
+    label: © 2019 Powered by Sqoola
+  main:
+    banner-mode: "off"
+    logStartupInfo: false
+
+server:
+  email: prod@sqoola.com
+  cluster:
+    - ip: 192.168.0.1
+      path: /app1
+    - ip: 192.168.0.2
+      path: /app2
+    - ip: 192.168.0.3
+      path: /app3
+
+logging:
+  file: logs/application_prod.log
+  level:
+    ROOT: WARN
+    org.hibernate: WARN
+    org.hibernate.search: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
+    org.springframework: WARN
+    org.springframework.boot.autoconfigure.security: WARN
+    org.springframework.web.servlet.mvc: WARN
+    org.springframework.transaction: WARN
+    org.springframework.batch: WARN
+    org.springframework.security: WARN
+    org.springframework.controllers: WARN
+    org.springframework.data: WARN
+    org.springframework.web: WARN
+    org.springframework.hibernate: WARN
+    com.sensiblemetrics.api.sqoola.common: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+---
+spring:
+  profiles: dev, default
+  resources:
+    static-locations: classpath:/templates
+  application:
+    name: Sqoola
+    label: © 2019 Powered by Sqoola
+  devtools:
+    restart:
+      additional-paths: files
+      exclude: static/**,templates/**
+      trigger-file: apptrigger.txt
+      log-condition-evaluation-delta: false
+      enabled: true
+    livereload:
+      enabled: false
+  cache:
+    type: EHCACHE
+    ehcache:
+      config: classpath:ehcache-config.xml
+  jackson:
+    serialization:
+      indent_output: true
+      write_dates_as_timestamps: false
+  main:
+    banner-mode: "console"
+    logStartupInfo: false
+  jmx:
+    enabled: true
+    unique-names: true
+  datasource:
+    driver: com.p6spy.engine.spy.P6SpyDriver
+    #driver-class-name:  org.postgresql.Driver
+    url: jdbc:p6spy:postgresql://localhost:5432/sqoola_db
+    type: com.zaxxer.hikari.HikariDataSource
+    username: postgres
+    password: postgres
+    dialect: org.hibernate.dialect.PostgreSQL9Dialect
+    test-on-borrow: true
+    test-while-idle: true
+    validation-query: 'SELECT 1'
+    validation-interval: 30000
+    time-between-eviction-runs-millis: 60000
+    remove-abandoned: true
+    remove-abandoned-timeout: 60
+    connectionTestQuery: SELECT current_timestam
+    databasePlatform: org.hibernate.dialect.PostgreSQL9Dialect
+    initializationMode: always
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    maxActive: 15
+    maxIdle: 10
+    maxWait: 8000
+    cachePrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+    useServerPrepStmts: true
+    useLocalSessionState: true
+    useLocalTransactionState: true
+    rewriteBatchedStatements: true
+    #cacheResultSetMetadata: true
+    cacheServerConfiguration: true
+    elideSetAutoCommits: true
+    maintainTimeStats: false
+    verifyServerCertificate: false
+    allowPoolSuspension: true
+    autoCommit: true
+    maxPoolSize: 25
+    minPoolSize: 5
+    maxStatements: 100
+    maxStatementsPerConnection: 20
+    acquireIncrement: 5
+    useSqlComments: true
+    preferredTestQuery: SELECT current_timestamp
+    checkoutTimeout: 2000
+    idleConnectionTestPeriod: 30
+    initialPoolSize: 10
+    maxIdleTime: 180000
+    testConnectionOnCheckin: true
+    hikari:
+      dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+      registerMbeans: true
+      poolName: HIKARI_CP
+      minimumIdle: 5
+      maximumPoolSize: 25
+      idleTimeout: 30000
+      connectionTimeout: 20000
+      maxLifetime: 1200000
+      isolateInternalQueries: true
+      autoCommit: true
+      #leakDetectionThreshold: 60000
+    hibernate:
+      #      javax:
+      #        cache:
+      #          provider: org.ehcache.jsr107.internal.EhcacheCachingProvider
+      validator:
+        apply_to_ddl: false
+        autoregister_listeners: false
+      connection:
+        characterEncoding: UTF-8
+        charSet: UTF-8
+        useUnicode: true
+        providerClass: com.zaxxer.hikari.hibernate.HikariConnectionProvider
+        providerDisablesAutocommit: false
+        poolSize: 50
+        autocommit: true
+        releaseMode: on_close
+      dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      currentSessionContextClass: org.hibernate.context.internal.ThreadLocalSessionContext #org.hibernate.context.ManagedSessionContext
+      hbm2ddl:
+        auto: create-drop
+        defaultSchema:
+        importFiles: dml.sql
+      ejb:
+        namingStrategy: org.hibernate.cfg.ImprovedNamingStrategy
+      archive.autodetection: class,hbm
+      showSql: true
+      formatSql: true
+      useSqlComments: true
+      maxFetchDepth: 3
+      defaultBatchFetchSize: 30
+      generateStatistics: false
+      enableLazyLoadNoTrans: true
+      globallyQuotedIdentifiers: false
+      id:
+        newGeneratorMappings: true
+      transaction:
+        flushBeforeCompletion: true
+        autoCloseSession: true
+        #manager_lookup_class: org.hibernate.transaction.TransactionManagerLookup
+      event:
+        merge:
+          entityCopyObserver: allow
+      bytecode:
+        useReflectionOptimizer: false
+      temp:
+        useJdbcMetadataDefaults: false
+      multiTenantConnectionProvider: true
+      multiTenancy: SCHEMA
+      jdbc:
+        fetchSize: 50
+        batchSize: 30
+        batchVersionedData: true
+      orderInserts: true
+      orderUpdates: true
+      #      cache:
+      #        region:
+      #          factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+      #        #org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+      #        #org.hibernate.cache.ehcache.EhCacheRegionFactory
+      #        #defaultCacheConcurrencyStrategy: TRANSACTIONAL
+      #        provider_class: org.ehcache.jsr107.EhcacheCachingProvider
+      #        #net.sf.ehcache.hibernate.EhCacheProvider
+      #        use_second_level_cache: true
+      #        use_structured_entries: true
+      #        use_query_cache: true
+      #        configurationResourceName: classpath:ehcache.xml
+      #        ehcache:
+      #          missing_cache_strategy: create
+      c3p0:
+        min_size: 10
+        max_size: 25
+        timeout: 500
+        max_statements: 50
+        idle_test_period: 2000
+        acquire_increment: 1
+      search:
+        exclusiveIndexUse: true
+        luceneVersion: LATEST
+        default:
+          worker:
+            execution: async
+          directory_provider: filesystem
+          indexwriter:
+            infostream: true
+          indexBase: ${java.io.tmpdir}/.lucene
+          indexpath: ${java.io.tmpdir}/.lucene/indexes
+          indexmanager: near-real-time
+          chunk_size: 128000
+          metadata_cachename: LuceneIndexesMetadataOWR1
+          data_cachename: LuceneIndexesDataOWR1
+          locking_cachename: LuceneIndexesLockingOWR1
+          exclusive_index_use: true
+          batch:
+            mergeFactor: 10
+            maxBufferedDocs: 10
+  redis:
+    jedis:
+      pool:
+        maxIdle: 7
+        minIdle: 2
+        maxActive: 7
+        maxWaitMillis: 3000
+        maxTotal: 200
+        testOnBorrow: true
+    master: localhost
+    password:
+    key-prefix:
+    cache-null-values: false
+    time-to-live: 600000
+    use-key-prefix: true
+    hosts:
+      - host: localhost
+        port: 26379
+      - host: localhost
+        port: 26380
+      - host: localhost
+        port: 26381
+  config:
+    locale:
+      location: classpath:locale/messages
+      timeout: 3600
+    validation:
+      location: classpath:constraints
+      timeout: 3600
+
+server:
+  email: dev@sqoola.com
+  cluster:
+    - ip: 192.168.0.1
+      path: /app1
+    - ip: 192.168.0.2
+      path: /app2
+    - ip: 192.168.0.3
+      path: /app3
+
+http:
+  mappers:
+    jsonPrettyPrint: true
+
+logging:
+  file: logs/application_dev.log
+  level:
+    ROOT: WARN
+    org.hibernate: WARN
+    org.hibernate.search: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
+    org.springframework: WARN
+    org.springframework.boot.autoconfigure.security: WARN
+    org.springframework.web.servlet.mvc: WARN
+    org.springframework.transaction: WARN
+    org.springframework.batch: WARN
+    org.springframework.security: WARN
+    org.springframework.controllers: WARN
+    org.springframework.data: WARN
+    org.springframework.web: WARN
+    org.springframework.hibernate: WARN
+    com.sensiblemetrics.api.sqoola.common: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+---
+javers:
+  mappingStyle: FIELD
+  algorithm: SIMPLE
+  commitIdGenerator: synchronized_sequence
+  prettyPrint: true
+  typeSafeValues: false
+  newObjectSnapshot: false
+  packagesToScan:
+  auditableAspectEnabled: true
+  springDataAuditableRepositoryAspectEnabled: true
+  sqlSchema:
+  sqlSchemaManagementEnabled: true
+  prettyPrintDateFormats:
+    localDateTime: "dd MMM yyyy, HH:mm:ss"
+    zonedDateTime: "dd MMM yyyy, HH:mm:ssZ"
+    localDate: "dd MMM yyyy"
+    localTime: "HH:mm:ss"
+---
+ribbon:
+  ConnectTimeout: 250
+  ReadTimeout: 1000
+#  OkToRetryOnAllOperations: true
+#  MaxAutoRetriesNextServer: 2
+#  MaxAutoRetries: 2

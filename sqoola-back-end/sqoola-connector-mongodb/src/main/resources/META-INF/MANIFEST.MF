@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Implementation-Title: sqoola
+Implementation-Version: 1.0.-RELEASE
+Implementation-Vendor-Id: com.sensiblemetrics.api.sqoola.common
+Build-Jdk: 11
+Implementation-Vendor: WildBees Labs, Inc.
+Main-Class: com.sensiblemetrics.api.sqoola.common.CommonAppLoader
