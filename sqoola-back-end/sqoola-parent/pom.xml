@@ -774,6 +774,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -787,6 +788,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -798,6 +800,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -809,6 +812,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -820,6 +824,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -831,6 +836,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -842,6 +848,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -853,6 +860,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -864,6 +872,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -875,6 +884,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -887,6 +897,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -899,6 +910,7 @@
             <releases>
                 <enabled>false</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
         <repository>
@@ -910,6 +922,7 @@
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
     </repositories>
