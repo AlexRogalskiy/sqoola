@@ -2,15 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05339c1-6d31-4e11-a758-29833540b9fe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../sqoola-connector-cassandra/src/main/java/com/sqool/connector/api/cassandra/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sqoola-connector-cassandra/src/main/java/com/sqool/connector/api/cassandra/config/CassandraConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sqoola-connector-cassandra/src/main/java/com/sqool/connector/api/cassandra/model/Post.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sqoola-connector-cassandra/src/main/java/com/sqool/connector/api/cassandra/repository/PostRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/config/MongoConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/Post.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/PostRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/FileObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/LifeGuide.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/LostAndFound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/ManipulateLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/Navigation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/PartTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/BaseRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/GridFSConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/GridFSRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/MongoTemplateRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/service/CustomerRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/ConnectorMongoDBAppLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/ConnectorMongoDBAppLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sqoola-connector-redis/src/main/java/com/sqoola/api/connector/redis/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sqoola-connector-redis/src/main/java/com/sqoola/api/connector/redis/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sqoola-connector-redis/src/main/java/com/sqoola/api/connector/redis/controller/FavoriteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sqoola-connector-redis/src/main/java/com/sqoola/api/connector/redis/controller/FavoriteController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,26 +26,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="179" column="21" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/ConnectorMongoDBAppLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -58,6 +45,20 @@
         <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/PostRepository.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/docker-compose.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/service/CustomerRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/MongoTemplateRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/FileObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/PartTime.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/Navigation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/Navigation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/GridFSConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/GridFSRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/FileObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/BaseRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/ConnectorMongoDBAppLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/ManipulateLog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/LifeGuide.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/LostAndFound.java" />
       </list>
     </option>
   </component>
@@ -85,7 +86,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -119,10 +119,38 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="mongodb" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sqoola-connector-mongodb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sqoola-connector-mongodb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="mongodb" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sqoola-connector-mongodb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sqoola-connector-mongodb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="mongodb" type="462c0819:PsiDirectoryNode" />
+              <item name="repository" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sqoola-connector-mongodb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sqoola-connector-mongodb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="mongodb" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -221,15 +249,15 @@
       <updated>1557767790790</updated>
       <workItem from="1557767801150" duration="16000" />
       <workItem from="1557775377127" duration="798000" />
+      <workItem from="1565281933144" duration="514000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="814000" />
+    <option name="totallyTimeSpent" value="1328000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.152" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -303,15 +331,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
+        <state relative-caret-position="3043">
           <caret line="179" column="21" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/MongoTemplateRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/PartTime.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/Navigation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/GridFSConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="45" column="43" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/GridFSRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="36" column="53" selection-start-column="2" selection-end-line="145" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/FileObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/repository/BaseRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="2" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/ConnectorMongoDBAppLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="272">
           <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#619#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/service/CustomerRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/ManipulateLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="30" column="2" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/LifeGuide.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="39" column="24" lean-forward="true" selection-start-column="2" selection-end-line="70" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sensiblemetrics/api/sqoola/connector/mongodb/model/LostAndFound.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="31" lean-forward="true" selection-start-column="2" selection-end-line="70" selection-end-column="3" />
         </state>
       </provider>
     </entry>

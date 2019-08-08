@@ -4,7 +4,7 @@ package com.sqoola.api.connector.redis.config;
 public class RedisConfig {
 
     @Autowired
-    RedisConnectionFactory factory;
+    private RedisConnectionFactory factory;
 
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {

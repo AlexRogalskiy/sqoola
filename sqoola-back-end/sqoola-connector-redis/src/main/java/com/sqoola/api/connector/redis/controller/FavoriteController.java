@@ -20,10 +20,8 @@ class FavoriteController {
     }
 
     private static String toString(ByteBuffer byteBuffer) {
-
         byte[] bytes = new byte[byteBuffer.remaining()];
         byteBuffer.get(bytes);
         return new String(bytes);
     }
-
 }
