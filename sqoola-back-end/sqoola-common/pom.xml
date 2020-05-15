@@ -78,7 +78,7 @@
         <lombok.version>1.18.4</lombok.version>
         <guava.version>27.0.1-jre</guava.version>
         <jackson-mapper.version>1.9.13</jackson-mapper.version>
-        <jackson-core.version>2.9.8</jackson-core.version>
+        <jackson-core.version>2.11.0</jackson-core.version>
         <gson.version>2.8.5</gson.version>
         <joda-time.version>2.10.1</joda-time.version>
         <solrj.version>7.7.0</solrj.version>
