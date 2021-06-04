@@ -50,7 +50,7 @@
 
         <hibernate.version>5.4.0.Final</hibernate.version>
         <hibernate-search.version>5.11.0.Final</hibernate-search.version>
-        <hibernate-validator.version>6.0.14.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.0.20.Final</hibernate-validator.version>
         <hibernate-c3p0.version>5.2.11.Final</hibernate-c3p0.version>
         <hibernate-jcache.version>5.4.1.Final</hibernate-jcache.version>
         <hibernate-jpa.version>1.0.2.Final</hibernate-jpa.version>
