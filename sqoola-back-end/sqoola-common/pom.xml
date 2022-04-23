@@ -42,7 +42,7 @@
         <spring-boot-starter.version>2.1.3.RELEASE</spring-boot-starter.version>
         <cloud.hystrix.version>2.0.0.M2</cloud.hystrix.version>
         <cloud.feign.version>1.4.6.RELEASE</cloud.feign.version>
-        <spring.version>5.1.3.RELEASE</spring.version>
+        <spring.version>5.3.19</spring.version>
         <spring-data-commons.version>2.1.3.RELEASE</spring-data-commons.version>
         <spring-data-solr.version>4.0.3.RELEASE</spring-data-solr.version>
         <spring-data-redis.version>2.1.3.RELEASE</spring-data-redis.version>
