@@ -68,7 +68,7 @@
         <spring-mock-mvc.version>3.2.0</spring-mock-mvc.version>
         <json-path.version>2.4.0</json-path.version>
 
-        <undertow.version>2.0.16.Final</undertow.version>
+        <undertow.version>2.2.19.Final</undertow.version>
         <caffeine.version>2.6.2</caffeine.version>
         <jts.version>1.16.0</jts.version>
         <c3p0.version>0.9.1.2</c3p0.version>
