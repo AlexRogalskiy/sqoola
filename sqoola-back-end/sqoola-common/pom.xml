@@ -27,7 +27,7 @@
 
         <hikari.version>3.2.0</hikari.version>
         <mysql-connector.version>8.0.13</mysql-connector.version>
-        <postgresql.version>9.4.1212</postgresql.version>
+        <postgresql.version>42.3.7</postgresql.version>
 
         <apache-commons-lang3.version>3.8.1</apache-commons-lang3.version>
         <apache-commons-pool2.version>2.6.0</apache-commons-pool2.version>
